@@ -430,3 +430,11 @@ section{padding:84px 0}
 .prose-narrow{max-width:720px;margin:0 auto}
 
 @media(max-width:900px){.bookpage,.featured{grid-template-columns:1fr}.tgrid,.parts,.about-grid{grid-template-columns:1fr}.bookpage .cov img{margin:0 auto}.featured .fthumb{min-height:200px}}
+
+.article-hero-img{display:block;max-width:820px;width:100%;margin:6px auto 4px;border-radius:16px;box-shadow:var(--sh)}
+
+/* KVKK açık rıza */
+form[data-lead], form[onsubmit]{flex-wrap:wrap}
+.consent{flex-basis:100%;width:100%;display:flex;gap:9px;align-items:flex-start;font-size:.8rem;line-height:1.45;color:var(--muted);margin-top:10px;text-align:left}
+.consent input[type=checkbox]{width:16px;height:16px;min-width:16px;margin-top:2px;flex:0 0 auto;accent-color:var(--accent)}
+.consent a{color:var(--accent);text-decoration:underline}

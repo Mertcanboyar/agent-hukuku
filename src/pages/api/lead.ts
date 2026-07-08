@@ -38,17 +38,32 @@ function buildEmail(type: string, meta: any) {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { email, type = "bulten", meta } = await request.json();
+    const { email, type = "bulten", meta, consent } = await request.json();
     if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
       return json({ ok: false, error: "Geçerli bir e-posta girin." }, 400);
+    if (consent !== true)
+      return json({ ok: false, error: "KVKK Aydınlatma Metni kapsamında açık rıza gerekli." }, 400);
+
+    // KVKK: açık rıza kaydı (kanıt için)
+    const consentText =
+      "KVKK kapsamında e-postamın işlenmesine ve bilgilendirme/pazarlama iletisi gönderilmesine Aydınlatma Metni uyarınca açık rıza veriyorum.";
+    const consentRecord = {
+      consent: true,
+      consentText,
+      at: new Date().toISOString(),
+      ip: request.headers.get("x-forwarded-for") || request.headers.get("x-real-ip") || "",
+      ua: request.headers.get("user-agent") || "",
+    };
 
     const { subject, html } = buildEmail(type, meta);
     await resend.emails.send({ from: FROM, to: email, subject, html });
 
-    // (opsiyonel) kendine bildirim
+    // (opsiyonel) kendine bildirim — açık rıza kanıtıyla birlikte
     if (import.meta.env.NOTIFY_TO)
       await resend.emails.send({ from: FROM, to: import.meta.env.NOTIFY_TO,
-        subject: `Yeni kayıt: ${type}`, html: `<p>${email}</p><pre>${JSON.stringify(meta || {}, null, 2)}</pre>` });
+        subject: `Yeni kayıt: ${type}`,
+        html: `<p><b>${email}</b></p><p>Açık rıza: ✔ ${consentRecord.at}</p>
+        <pre>${JSON.stringify({ meta: meta || {}, consent: consentRecord }, null, 2)}</pre>` });
 
     // (opsiyonel) bülten listesine ekle
     if (import.meta.env.RESEND_AUDIENCE_ID)

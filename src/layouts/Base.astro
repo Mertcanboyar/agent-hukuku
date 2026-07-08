@@ -21,12 +21,14 @@ const { title = "Agent Hukuku — Yapay zeka ajanları için hukuk ve yönetişi
     var input = f.querySelector('input[type=email]');
     var email = input && input.value;
     var type = f.getAttribute('data-lead');
+    var box = f.querySelector('input.cbox');
+    if(box && !box.checked){ box.focus(); alert('Devam etmek için KVKK Aydınlatma Metni kapsamında açık rıza vermeniz gerekir.'); return; }
     var btn = f.querySelector('button[type=submit]');
     var old = btn ? btn.textContent : '';
     if(btn){ btn.disabled = true; btn.textContent = 'Gönderiliyor…'; }
     try {
       var meta = (window.__leadMeta ? window.__leadMeta() : undefined);
-      var r = await fetch('/api/lead', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email: email, type: type, meta: meta }) });
+      var r = await fetch('/api/lead', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ email: email, type: type, meta: meta, consent: box ? box.checked : true }) });
       var d = await r.json();
       if(d && d.ok){ f.innerHTML = '<p style="color:#2f6b60;font-weight:600;margin:0">Teşekkürler! E-postanıza gönderdik.</p>'; }
       else { if(btn){ btn.disabled=false; btn.textContent=old; } alert((d && d.error) || 'Bir hata oluştu.'); }
