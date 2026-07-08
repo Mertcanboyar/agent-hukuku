@@ -1,0 +1,57 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Ajanınızın sunucusu nerede? Yurt dışına veri aktarımı",
+  description: "“Sunucumuz Türkiye'de” neden yetersiz bir güvence? Model çıkarımının yeri, KVKK m.9 aktarım rejimi ve tedarikçiye sorulacak beş “veri nerede?” sorusu.",
+  image: "https://agenthukuku.com/makaleler/img/yurtdisi.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-04-01",
+  dateModified: "2026-04-01",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/yurt-disi-veri-aktarimi",
+};
+---
+<Base type="article" title="Ajanınızın Sunucusu Nerede? Yurt Dışına Veri Aktarımı | Agent Hukuku" description="“Sunucumuz Türkiye'de” neden yetersiz bir güvence? Model çıkarımının yeri, KVKK m.9 aktarım rejimi ve tedarikçiye sorulacak beş “veri nerede?” sorusu.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Hukuk &amp; Uyum</div><span class="tag">Hukuk &amp; Uyum</span>
+    <h1>Ajanınızın sunucusu nerede?</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Nisan 2026 · 6 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/yurtdisi.png" alt=""></div>
+  <div class="prose">
+    <p>Bir banka ihalesinde bilgi güvenliği ekibi tek bir soru sordu: “Ürününüzdeki yapay zeka asistanı müşteri verilerini hangi ülkede işliyor?” Teknik lider cevabı bildiğini sanıyordu: “Sunucularımız İstanbul’da.” Ama derine inildi: “Asistanın <em>modeli</em> de İstanbul’da mı?” Sözleşmenin kimsenin okumadığı ekinde cevap yazıyordu: <em>“Model çıkarımı, hizmet sağlayıcının ABD ve İrlanda’daki veri merkezlerinde gerçekleştirilir.”</em> Yani her müşteri mesajı, içindeki tüm kişisel verilerle, aylardır yurt dışına gidiyordu. Kimsenin haberi yoktu.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>“Sunucumuz Türkiye’de” cümlesi, ajan çağında yetersiz bir güvencedir. Doğru soru: <strong>müşteri mesajı ajana ulaştığı andan itibaren o metin hangi ülkelerde, hangi şirketlerin elinden geçiyor?</strong> Cevabı bilmiyorsanız, muhtemelen veri ihraç ediyorsunuz.</div>
+    <h2>Ajanlar neden bu riski büyütür?</h2>
+    <p>Klasik yazılımda “verimiz nerede?” sorusunun cevabı sabitti. Ajanlar bunu üç sebeple bozar:</p>
+    <ul>
+      <li><strong>Modelin yeri ≠ sunucunuzun yeri:</strong> ajanın altındaki büyük dil modeli çoğu zaman yurt dışı bulut altyapısında çalışır. Uygulama sunucunuz Türkiye’de olsa bile, ajana giden her istem sınırı geçebilir.</li>
+      <li><strong>Görünmezlik:</strong> bu aktarım bir “veri gönderiyoruz” ekranı olmadan, arka planda, sürekli olur.</li>
+      <li><strong>Zincir uzun:</strong> ajan → model sağlayıcı → alt bulut sağlayıcı → belki başka bir bölge. Verinin gerçek yolculuğu tek bir sözleşmenin ötesine geçebilir.</li>
+    </ul>
+    <h2>m.9: yurt dışına aktarımın üç kapısı</h2>
+    <p>KVKK, yurt dışına aktarımı yasaklamaz — şartlara bağlar. Amaç, veri sınırı geçtiğinde koruma seviyesinin düşmemesidir. Pratikte üç kapıdan biri kullanılır: (1) Kurulun <strong>yeterlilik kararı</strong> verdiği ülkeler; (2) yeterlilik yoksa <strong>uygun güvenceler</strong> — KOBİ’lerin en sık kullandığı <strong>standart sözleşme</strong>; (3) açık rıza gibi dar ve kırılgan <strong>istisnai hâller</strong> (sürekli/sistematik aktarım için bel bağlanmaz). Hukuki metni yazmak avukatınızın işi; sizin işiniz <strong>hangi ajanın hangi veriyi nereye aktardığını bilmek</strong>.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Yurt dışı aktarım yalnızca m.9’un değil, m.10 aydınlatmanın da konusudur: kişiye verisinin yurt dışına aktarılabileceğini <strong>söylemeniz</strong> gerekir. Aktarımı kurup aydınlatmayı unutmak, işi yarım bırakmaktır.</div>
+    <h2>Tedarikçiye soracağınız beş “veri nerede?” sorusu</h2>
+    <ul>
+      <li>Müşteri/çalışan verisi ajana ulaştığında <strong>model çıkarımı hangi ülkede</strong> yapılıyor?</li>
+      <li>Bu veriyi işleyen <strong>alt yükleniciler</strong> kim, nerede?</li>
+      <li>Veri işlem sonrası <strong>saklanıyor mu</strong> — ve <em>modeli eğitmek</em> için kullanılıyor mu?</li>
+      <li><strong>Veriyi yurt içinde tutan</strong> bir kurulum seçeneği var mı?</li>
+      <li>Aktarım için gereken <strong>standart sözleşmeyi</strong> imzalamaya hazır mısınız?</li>
+    </ul>
+    <p>Üçüncü sorunun parantezine dikkat: “Verileriniz modelimizi geliştirmek için kullanılabilir” cümlesi birçok standart sözleşmede gizlidir — ve müşterinizin verisi için bunu kabul etmek, veri işleyen sıfatınızla bağdaşmayabilir.</p>
+    <p><strong>Nereden başlamalı?</strong> İşleme şartı haritanıza bir “aktarım” sütunu ekleyin: hangi ajan, hangi veriyi, hangi ülkeye, hangi mekanizmayla. En hassas veriler için “yurt içinde tut” seçeneğini değerlendirin — ya hep ya hiç değil, risk seviyesine göre. Aktarımını haritalamış şirket, değişen mevzuata hazır girer.</p>
+  </div>
+  <div class="article-cta"><div><h3>Şirketiniz yurt dışı aktarımda nerede?</h3><p>15 soruda olgunluk karnenizi alın; “Uyumlu” ilkesinde aktarım ve aydınlatma boşluklarınızı görün.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>
