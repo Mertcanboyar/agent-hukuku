@@ -1,0 +1,57 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "40 bin dolarlık sessiz gece: onaysız otonom ajan",
+  description: "Onay eşiği olmayan bir satın alma ajanı bir gecede ne yapabilir? Human-in-the-loop, onay yorgunluğu ve KVKK'nın üç aşamalı insan gözetimi.",
+  image: "https://agenthukuku.com/makaleler/img/40bin.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-03-11",
+  dateModified: "2026-03-11",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/otonom-ajan-insan-onayi",
+};
+---
+<Base type="article" title="40 Bin Dolarlık Sessiz Gece: Onaysız Otonom Ajan | Agent Hukuku" description="Onay eşiği olmayan bir satın alma ajanı bir gecede ne yapabilir? Human-in-the-loop, onay yorgunluğu ve KVKK'nın üç aşamalı insan gözetimi modeli.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Vaka</div><span class="tag">Vaka</span>
+    <h1>40 bin dolarlık sessiz gece</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Mart 2026 · 6 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/40bin.png" alt=""></div>
+  <div class="prose">
+    <p>Satın alma ajanının görevi netti: yazılım aboneliklerini takip et, süresi dolanları kesintisiz yenile, faturaları muhasebeye işle. Kimse abonelik bitti diye sistemsiz kalmıyordu. Sonra bir gecelik SaaS harcaması geldi: <strong>40.000 dolar</strong>. Ajan, aynı gece süresi dolan on yedi aboneliği yenilemişti — üçü aylardır kullanılmayan araçlara aitti, biri fiyatını %60 artırmıştı, en pahalısı ise kendini “kurumsal plan”a yükselten bir analitik aracıydı. Yükseltmeyi öneren de o aracın kendi satış ajanıydı. <em>Bir ajan, başka bir ajana satış yapmıştı.</em></p>
+    <p>Kritik soru şuydu: on yedi işlemin birini bile bir insan görseydi, kaçı yine de onaylanırdı? Kimse “on yedi” diyemedi.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Doğru soru “insan mı, ajan mı?” değil; <strong>“hangi karar kimin?”</strong>dır. Amaç insanı her döngüye koymak değil, insanı <em>geri alınamaz</em> döngülere koymaktır.</div>
+    <h2>İki mod: döngüde insan, döngü üstünde insan</h2>
+    <p><strong>Human-in-the-loop (döngüde insan):</strong> işlem, insan onayı gelmeden yürümez. Ajan hazırlar, insan karar verir. <strong>Human-on-the-loop (döngü üstünde insan):</strong> işlem yürür; insan izler ve gerekirse müdahale eder. İkisi rakip değil, tamamlayıcıdır. Tek soru: hangi işlem hangi moda ait? Cevap için tek ölçüt yeterli — <strong>geri alınabilirlik × etki</strong>.</p>
+    <ul>
+      <li><strong>Geri alınabilir + küçük etki:</strong> ajan yapar, kayda düşer.</li>
+      <li><strong>Geri alınabilir + büyük etki:</strong> ajan yapar, anında bildirim.</li>
+      <li><strong>Geri alınamaz + küçük etki:</strong> ajan yapar, günlük özet.</li>
+      <li><strong>Geri alınamaz + büyük etki:</strong> mutlaka insan onayı.</li>
+    </ul>
+    <p>Sağ alt köşenin klasikleri her şirkette aynıdır: para transferi ve taahhüt, işe alım/çıkarma, hukuki sonuç doğuran beyanlar, veri silme, kamuya açıklama, sözleşme imzası ve yenilemesi.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Onay eşiği tasarlarken iki düşman var: her şeyi onaya bağlarsanız <strong>onay yorgunluğu</strong> (kuyruk dolar, insan okumadan tıklar), hiçbir şeyi bağlamazsanız <strong>sessiz felaket</strong> (vakanın kendisi). İyi eşik, insan dikkatini nadir ve değerli bir bütçe gibi harcar.</div>
+    <h2>KVKK’nın üç aşamalı insan gözetimi</h2>
+    <p>Kişisel veri işleyen ajanlarda insan gözetimi yalnızca iyi yönetim değil, Kurumun açık beklentisidir. Etken YZ Rehberi “anlamlı insan katılımı”nı üç aşamaya yayar:</p>
+    <ul>
+      <li><strong>Geliştirme (önleyici):</strong> ajanın hangi veriye erişebileceği ve ne tür kararlar verebileceği baştan, insanlar tarafından tanımlanır ve test edilir.</li>
+      <li><strong>Kullanıma alma (eşikli):</strong> yüksek riskli kararlar için ilave insan incelemesi devreye girer. Kişi hakkında sonuç doğuran her işlem — başvuru reddi, fiyat farklılaştırma, profil bazlı karar — tutardan bağımsız insana aittir.</li>
+      <li><strong>Kullanım sonrası (izleyen):</strong> ajanın davranışları izlenir, eşikler ajan değiştikçe gözden geçirilir.</li>
+    </ul>
+    <p>“Anlamlı” kelimesi süs değil: okumadan tıklanan onay, hukuken de pratikte de onay değildir. Bir denetimde “insan gözetimi vardı” diyebilmek için gözetimin <strong>gerçekten karar değiştirebildiğini</strong> gösterebilmelisiniz — reddedilen işlemler, düzeltilen kararlar, eskalasyon kayıtları. Hiç “hayır” dememiş bir onay mekanizması, mekanizma değil dekordur.</p>
+    <p><strong>Nereden başlamalı?</strong> Her ajanın eylemlerini geri alınabilirlik × etki matrisine yerleştirin, sağ alt köşeye insan onayı koyun ve bir ay sonra “reddedilen işlem” sayısına bakın. Sıfırsa eşikleriniz yanlıştır.</p>
+  </div>
+  <div class="article-cta"><div><h3>Ajanlarınız hangi kararı kime bırakıyor?</h3><p>15 soruda olgunluk karnenizi alın; insan onayı ve gözetim başlığında nerede durduğunuzu görün.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>
