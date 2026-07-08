@@ -1,0 +1,54 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Gölge ajanlar: şirketinizde kaç tane var?",
+  description: "Envanter çıkaran şirketler neredeyse her zaman tahmininin katını buluyor. Gölge ajan nedir, neden bu kadar hızlı çoğalır ve görünürlük nasıl kurulur?",
+  image: "https://agenthukuku.com/makaleler/img/golge.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-03-04",
+  dateModified: "2026-03-04",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/golge-ajanlar-envanter",
+};
+---
+<Base type="article" title="Gölge Ajanlar: Şirketinizde Kaç Tane Var? | Agent Hukuku" description="Envanter çıkaran şirketler neredeyse her zaman tahmininin katını buluyor. Gölge ajan nedir, neden bu kadar hızlı çoğalır ve yapay zeka ajanı envanteri nasıl kurulur?">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Yönetişim</div><span class="tag">Yönetişim</span>
+    <h1>Gölge ajanlar: şirketinizde kaç tane var?</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Mart 2026 · 6 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/golge.png" alt=""></div>
+  <div class="prose">
+    <p>Bir teknoloji ekibi lideri, “tüm ajanların listesini çıkar” talimatını hafife almıştı: “Destek botu var, satışta denediğimiz asistan var, bir de benim DevOps betiğim. Üç tane. Yarım günlük iş.” Ekiplere cezasız bir çağrı yaptı: “Ne kurduysanız bildirin, merak ediyoruz.” Cuma günü listede <strong>on dört</strong> kalem vardı — ve kaçının neye eriştiğini kimse bilmiyordu.</p>
+    <p>Bu tablo abartı değil, ortalamadır. Envanter çalışması yapan şirketlerin neredeyse tamamı, tahmininin en az iki-üç katı ajan bulur. Yani sorulacak soru “bizde gölge ajan var mı?” değil, <strong>“kaç tane var?”</strong>dır.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Gölge ajan, “gölge BT”nin (shadow IT) daha tehlikeli halidir. Çünkü eski gölge yazılım veriyi <em>tutardı</em>; gölge ajan veriyle <strong>eylem yapar</strong> — sizin adınıza e-posta gönderir, kayıt değiştirir, veri aktarır.</div>
+    <h2>Gölge ajan neden bu kadar hızlı çoğalıyor?</h2>
+    <p>İki nedenle. Birincisi, <strong>kurulumu çok kolay</strong>: ücretsiz bir hesap ve bir e-posta bağlantısıyla beş dakikada çalışan bir ajan kurulur. Satın alma süreci yok, BT onayı yok, iz yok. İkincisi, <strong>etkisi çok büyük</strong>: pazarlamanın “kişiselleştirme aracı”, satıştaki tarayıcı eklentisi, İK’daki özgeçmiş özetleyicisi — hepsi masum bir amaçla kurulur ama gerçek verilere dokunur ve şirket adına iş yapar.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>En tehlikeli gölge ajan, en masum görünenidir. “E-posta kişiselleştirme aracı” kulağa zararsız gelir — ta ki müşteri listenizi aylardır yurt dışına kopyaladığını öğrenene kadar. Riski belirleyen ajanın <strong>adı değil, erişimidir</strong>.</div>
+    <h2>Envanter: tek tablo, dokuz sütun</h2>
+    <p>Ajan envanteri karmaşık bir yazılım değil; bir tablodur. Başlangıç için dokuz sütun yeter: (1) ad, (2) amaç, (3) iş sahibi, (4) teknik sahip, (5) eriştiği veriler, (6) yapabildiği eylemler, (7) tedarikçi/model, (8) verinin işlendiği yer ve (9) durum + son gözden geçirme tarihi. İlk doldurma her ajan için 15–20 dakika sürer.</p>
+    <p>Kritik ayrıntı 5. ve 6. sütunlarda: “neye erişebilir?” sorusunun cevabı tedarikçinin broşüründe değil, <strong>yönetim panelindeki gerçek yetkilerdedir</strong>. Broşürle ayarlar ekranı arasındaki fark, çoğu zaman krizin de kaynağıdır.</p>
+    <h2>Görünürlüğü nasıl kurarsınız?</h2>
+    <p>Önce dürüstlüğün önünü açın. Cezasız bir <strong>“gölge affı”</strong> ilan edin: “Bildirin, birlikte düzeltelim; bildirmeyip sonra ortaya çıkanın hesabı farklı olur.” Dürüstlüğü cezalandıran şirket, körlüğü ödüllendirir. Sonra envanteri canlı tutmak için üç alışkanlık yeter:</p>
+    <ul>
+      <li><strong>Giriş kapısı:</strong> Yeni ajan = önce envanter kaydı, sonra kurulum. İstisnasız — “envantere girmeyen ajan çalışmaz.”</li>
+      <li><strong>Çeyreklik yoklama:</strong> Üç ayda bir her satırın sahibine tek soru: “Bu hâlâ doğru mu?” Kullanılmayan ajan emekliye ayrılır.</li>
+      <li><strong>Yıllık af:</strong> Görünürlüğü tazelemek için yılda bir gölge affını tekrarlayın.</li>
+    </ul>
+    <h2>Ajan envanteri ile KVKK envanteri</h2>
+    <p>Türkiye’de veri sorumlularının zaten kişisel veri işleme envanteri ve (kapsamdaysa) VERBİS yükümlülüğü var. Ajan envanteri bunlarla yarışmaz, <strong>onları besler</strong>. Pratik kural: envantere giren her satır için sorun — “Bu, veri işleme envanterimde görünüyor mu?” Cevap hayırsa iki belgeden biri eksiktir, ve Kurum ikisine de bakar. KVKK’nın Etken YZ Rehberi de tam bu bütüncül bakışı ister: değerlendirme tek tek işlemler üzerinden değil, sistemin bütünü üzerinden yapılmalı — bunun ön koşulu da bütünü görebilmek, yani envanterdir.</p>
+    <p><strong>Nereden başlamalı?</strong> Bu hafta bir “ajan yoklaması” duyurun ve dokuz sütunlu tabloyu kurun. Görünürlük, tüm yönetişimin ilk taşıdır: göremediğinizi yönetemezsiniz.</p>
+  </div>
+  <div class="article-cta"><div><h3>Envanteri boş sayfadan kurmayın</h3><p>Dokuz sütunlu ajan envanteri şablonunu ve beş hazır yönetişim şablonunu ücretsiz indirin.</p></div><a class="btn btn-primary" href="/sablonlar">Şablonları al →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>

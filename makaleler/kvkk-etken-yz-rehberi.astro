@@ -1,0 +1,64 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "KVKK Etken Yapay Zeka Rehberi Şirketinizden Ne Bekliyor?",
+  description: "KVKK'nın Şubat 2026 Etken Yapay Zeka (Agentic AI) rehberini şirketler için yapılacaklar listesine çevirdik.",
+  image: "https://agenthukuku.com/makaleler/img/kvkk.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-02-15",
+  dateModified: "2026-02-15",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/kvkk-etken-yz-rehberi",
+};
+---
+<Base type="article" title="KVKK Etken Yapay Zeka Rehberi Şirketinizden Ne Bekliyor? | Agent Hukuku" description="KVKK'nın Şubat 2026 Etken Yapay Zeka (Agentic AI) rehberini şirketler için yapılacaklar listesine çevirdik: riskler, beklenen tedbirler ve nereden başlanacağı.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Hukuk &amp; Uyum</div><span class="tag">Hukuk &amp; Uyum</span>
+    <h1>KVKK Etken YZ Rehberi şirketinizden ne bekliyor?</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Şubat 2026 · 8 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/kvkk.png" alt=""></div>
+  <div class="prose">
+    <p>Kişisel Verileri Koruma Kurumu, Şubat 2026'da doğrudan yapay zeka ajanlarını ele alan <strong>“Etken Yapay Zeka (Agentic AI)”</strong> rehberini yayımladı. Bu, Türkiye'de ajan kullanan her şirket için bir dönüm noktası: artık “bu alan düzenlenmemiş” denemez. İyi haber, rehber bir ceza aracı değil — bir yol haritası. Altı bölümünü, doğrudan yapılabilecek işlere çevirelim.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Rehberin en kritik ilkesi: etken sistemlerin yapısal karmaşıklığı, veri koruma kurallarının uygulanabilirliğini <strong>ortadan kaldırmaz</strong>. “Sistem karmaşıktı” bir savunma değildir.</div>
+    <h2>Rehber neyi kapsıyor?</h2>
+    <p>Altı bölüm: (1) Etken YZ sistemleri nedir, (2) YZ Aracıları, (3) kullanım durumları, (4) genel riskler, (5) kişisel veri riskleri ve (6) alınabilecek tedbirler. Kurum ayrıca “Etken YZ = sistem (baş şef)”, “YZ Aracısı = bileşen (aşçı)” ayrımını ve dört karakteristik unsuru (otonomi, uyarlanabilirlik, öğrenme, orkestrasyon) tanımlıyor.</p>
+    <h2>Kurumun işaret ettiği riskler</h2>
+    <p>Beşinci bölüm, ajanlara özgü kişisel veri risklerini sıralıyor. Şirket diline çevrildiğinde:</p>
+    <ul>
+      <li><strong>Öngörülemeyen kapsam genişlemesi</strong> — ajan, amacını aşan veriye uzanır.</li>
+      <li><strong>İşleme şartının geçerliliğini yitirmesi</strong> — kapsam kayınca hukuki dayanak kopar.</li>
+      <li><strong>Profilleme ve çıkarım</strong> — masum veriler birleşip hassas sonuçlar üretir.</li>
+      <li><strong>Kara kutu</strong> — hangi ajanın neyi neden yaptığı izlenemez.</li>
+      <li><strong>Halüsinasyon</strong> — uydurma çıktı, zincirde yayılarak veri doğruluğunu bozar.</li>
+      <li><strong>Genişleyen saldırı yüzeyi</strong> — girdi manipülasyonuyla veri ifşası.</li>
+    </ul>
+    <h2>Kurumun beklediği tedbirler</h2>
+    <p>Altıncı bölüm, somut beklentileri veriyor. Her biri sahada bir uygulamaya denk geliyor:</p>
+    <ul>
+      <li><strong>İnsan merkezli yaklaşım + üç aşamalı insan gözetimi</strong> (geliştirme / kullanıma alma / kullanım sonrası).</li>
+      <li><strong>Şeffaflık ve açıklanabilirlik</strong> — uygun düzeyde.</li>
+      <li><strong>Veri doğruluğunun sürekli gözetimi.</strong></li>
+      <li><strong>Aktör rollerinin netleştirilmesi</strong> (geliştirici / yerleştirici).</li>
+      <li><strong>Tasarımdan itibaren + varsayılan mahremiyet, PET.</strong></li>
+      <li><strong>Risk temelli yaklaşım + veri koruma etki değerlendirmesi (VKED).</strong></li>
+      <li><strong>Personel bilinçlendirme ve eğitim.</strong></li>
+    </ul>
+    <div class="callout warning"><div class="cl">Dikkat</div>En sık boş kalan kutu <strong>veri koruma etki değerlendirmesi</strong>. KOBİ ölçeğinde bir VKED, doktora tezi değil — yüksek riskli bir ajanı kurmadan önce bir sayfalık dürüst düşünme egzersizidir.</div>
+    <h2>“Bağlayıcı değil” tuzağı</h2>
+    <p>Rehber teknik anlamda bir kanun değil. Ama Kurum, yürürlükteki KVKK'yı bu rehber ışığında yorumluyor; müfettiş de aynı metni açıyor. Üstelik ilkelerin çoğu zaten m.4, m.5, m.6, m.10 ve m.12'nin ajanlara uygulanmış hâli. Bugün rehbere gönüllü uyan şirket, yarın kanuna bedavaya uyumlu çıkar.</p>
+    <p><strong>Nereden başlamalı?</strong> Görünürlükten. Önce envanter, sonra yetki daraltma, sonra insan onayı ve kayıt, en son belge katmanı. Rehberi bir öz denetim tablosuna çevirin: her risk ve tedbir için “bizde var mı?” — ve her “var” için “kanıtı nerede?”</p>
+  </div>
+  <div class="article-cta"><div><h3>Şirketiniz nerede duruyor?</h3><p>15 soruda olgunluk karnenizi alın; rehberdeki tedbirlerle eşleşen öncelik planınızı görün.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>

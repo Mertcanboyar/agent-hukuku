@@ -1,0 +1,49 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Ajan kullanmak sorumluluğu devretmez: veri sorumlusu kimdir?",
+  description: "“Yazılım firmasının hatası” neden bir savunma değil? Veri sorumlusu ve veri işleyen ayrımı, zincirdeki aktörler ve KVKK'da hesap verebilirlik.",
+  image: "https://agenthukuku.com/makaleler/img/sorumluluk.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-03-18",
+  dateModified: "2026-03-18",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/veri-sorumlusu-kimdir",
+};
+---
+<Base type="article" title="Ajan Kullanmak Sorumluluğu Devretmez: Veri Sorumlusu Kimdir? | Agent Hukuku" description="“Yazılım firmasının hatası” neden bir savunma değil? Veri sorumlusu ve veri işleyen ayrımı, zincirdeki aktörler ve KVKK'da hesap verebilirlik.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Hukuk &amp; Uyum</div><span class="tag">Hukuk &amp; Uyum</span>
+    <h1>Ajan kullanmak sorumluluğu devretmez</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Mart 2026 · 6 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/sorumluluk.png" alt=""></div>
+  <div class="prose">
+    <p>Bir destek ajanı, “geçen ayın bordro raporunu gönderir misiniz?” talebini cevaplarken isim benzerliği yüzünden <strong>başka bir müşterinin</strong> bordro raporunu ekledi: dört yüz kişinin kimlik numarası ve maaşı. İki ayrı şirket, iki ayrı veri kasası; ajan ikisine de erişebiliyordu. Şirketin ilk tepkisi tanıdıktı: “Yazılım firmasını arayın, onların ajanı, onların hatası. Biz sadece kullanıcıyız.”</p>
+    <p>Avukatın cevabı bu refleksi bitirdi: “Kimin ajanı olduğunun önemi yok. O verileri işleme kararını <em>siz</em> verdiniz. Kuruma karşı masada oturacak olan yazılım firması değil — sizsiniz.”</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Ajanı kiralarsınız, modeli kiralarsınız, entegratörü kiralarsınız. Kiralayamayacağınız tek şey <strong>sorumluluktur</strong>. “Biz sadece kullanıcıyız” cümlesi KVKK sözlüğünde yoktur.</div>
+    <h2>Veri sorumlusu kimdir, neden sizsiniz?</h2>
+    <p>KVKK iki temel rol tanır. <strong>Veri sorumlusu</strong>, kişisel verinin <em>neden</em> ve <em>nasıl</em> işleneceğine karar verendir — amaçları ve araçları belirler. <strong>Veri işleyen</strong> ise onun adına, verdiği yetkiye dayanarak veriyi işleyendir. Basit benzetme: veri sorumlusu ev sahibi, veri işleyen temizlik şirketidir. Temizlikçi vazoyu kırarsa aranızdaki sözleşmeye göre ondan tazmin edersiniz — ama komşunun tavanına akan su için muhatap ev sahibidir.</p>
+    <p>Ajanı hangi amaçla ve hangi veriyle çalıştıracağınıza siz karar verdiğiniz an, veri sorumlusu olursunuz. Ajanın kodunu kimin yazdığı, modelin kime ait olduğu bu sıfatı değiştirmez.</p>
+    <h2>Zincirde kim var? Etkileyen çok, sorumlu tek</h2>
+    <p>Bir ajanın arkasında tipik olarak üç aktör durur: modelin “beynini” üreten <strong>model sağlayıcı</strong>, ürünün teknik sınırlarını çizen <strong>platform/ürün tedarikçisi</strong> ve sistemi araçlarınıza bağlayan <strong>entegratör</strong>. Üçü de sistemin davranışını etkiler; ama birincil hesap verebilirlik, ajanı işine konuşlandıran şirkettedir — çünkü yetkileri o tanımlar, amaçları o onaylar, ne kadar otorite verileceğine o karar verir.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>KVKK’nın Etken YZ Rehberindeki kritik ilke: etken sistemlerin yapısal karmaşıklığı — kara kutu, çok aracılı mimari, dağıtık karar zinciri — veri koruma kurallarının <strong>uygulanabilirliğini ortadan kaldırmaz</strong>. “Sistem o kadar karmaşık ki kimin ne yaptığı belli değil” bir savunma değil, yönetişimsizliğin itirafıdır.</div>
+    <h2>İkili şapka: SaaS ve hizmet firmalarının özel durumu</h2>
+    <p>Müşterileriniz adına veri tutuyorsanız (SaaS, muhasebe bürosu, ajans, İK firması...), iki şapkanız olur: kendi müşteri ve çalışan verileriniz için <strong>veri sorumlusu</strong>, müşterinizin sisteminize yüklediği veriler için ise onun adına işlem yapan <strong>veri işleyen</strong>. Ajanınızı bu ikinci gruptaki veriye dokundurduğunuz an, işleyen sıfatının yükümlülükleri de (güvenlik tedbirleri, talimat dışına çıkmama, yazılı sözleşme) devreye girer.</p>
+    <h2>Sorumluluğun üç sahibi: isim yazın, unvan değil</h2>
+    <p>“Şirket sorumludur” cümlesi doğru ama işlevsizdir — şirket gece yarısı telefona bakmaz. Olgun yönetişimde her ajan için üç sahiplik <strong>isimle</strong> atanır: davranışı kim takip ediyor (<strong>izleme</strong>), yüksek etkili işlemleri kim onaylıyor (<strong>onay</strong>), ters giderse kim durdurup araştırıyor (<strong>müdahale</strong>). Bu tabloyu doldurmak on dakika sürer; doldurulmamış hâli kriz günü saatlere ve suçlaşmaya dönüşür.</p>
+    <p><strong>Nereden başlamalı?</strong> Her ajanınız için tek cümleyi tamamlayın: “Bu ajan hata yaparsa Kuruma karşı muhatap ...dır.” Doğru cevap her seferinde şirketinizin adıdır. Cümleyi kuramıyorsanız, sorun ajanda değil, sahiplik boşluğundadır.</p>
+  </div>
+  <div class="article-cta"><div><h3>Konuyu vakalarla derinleştirin</h3><p>“Yapay Zeka Ajanları &amp; KVKK” kitabı, veri sorumluluğunu gerçek vakalarla adım adım anlatıyor. Ücretsiz.</p></div><a class="btn btn-primary" href="/kitap">Kitabı ücretsiz indir →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>
