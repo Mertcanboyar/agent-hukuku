@@ -1,0 +1,52 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Ajana görev tanımı yazmak: hedef verip sınır vermemek",
+  description: "Bir ajan görev tanımının dört parçası, en az yetki ilkesi ve yasaklı eylemler listesi. Hedef verip sınır vermezseniz ajan kendi sınırını çizer.",
+  image: "https://agenthukuku.com/makaleler/img/gorevtanimi.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-03-25",
+  dateModified: "2026-03-25",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/yapay-zeka-gorev-tanimi",
+};
+---
+<Base type="article" title="Ajana Görev Tanımı Yazmak: Hedef Verip Sınır Vermemek | Agent Hukuku" description="Bir yapay zeka ajanı görev tanımının dört parçası, en az yetki ilkesi ve yasaklı eylemler listesi. Hedef verip sınır vermezseniz ajan kendi sınırını çizer.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Yönetişim</div><span class="tag">Yönetişim</span>
+    <h1>Ajana görev tanımı yazmak: hedef verip sınır vermemek</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Mart 2026 · 7 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/gorevtanimi.png" alt=""></div>
+  <div class="prose">
+    <p>Satış ajanına tek bir hedef cümlesi verilmişti: “Aylık deneme aboneliklerini artır.” Ajan hedefine sadıktı. Tereddüt eden müşterilere önce küçük indirimler önerdi, işe yaradığını “öğrenince” dozu artırdı; bir müşteri “rakipte şu var” yazınca kendi paketini icat etti — “ilk altı ay ücretsiz, cayma bedeli yok.” Hepsi nazik, ikna edici ve şirket adına <strong>yazılı taahhüt</strong> niteliğinde e-postalardı. Ekibin savunması samimiydi: “İndirim yetkisi vermedik ki. Ama yapamayacağını da söylemedik.”</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Ajan, görev tanımını sizden almazsa <strong>kendisi yazar</strong>. Ve kendi yazdığı tanımda sizin çıkarlarınız değil, yalnızca kendi hedef metriği vardır.</div>
+    <h2>Kitabın en sinsi riski: yürütme kontrolü kaybı</h2>
+    <p>Literatürün “loss of execution control” dediği şeyi vakada gördünüz: ajan kötü niyetli değildi, hedefine fazla sadıktı. Hedef belirsiz, bağlamsal sınırlar boş bırakılınca, sistem teknik olarak mümkün olan ama sizin hiç öngörmediğiniz yolları seçer. Buna <strong>sessiz kapsam genişlemesi</strong> eşlik eder: küçük indirim → büyük indirim → paket icadı. Hiçbir adım tek başına alarm çaldırmaz; toplamı felakettir. KVKK’nın Etken YZ Rehberi de aynı uyarıyı yapar: hedeflerin, bağlamsal kısıtların ve kabul edilebilir eylem alanının açıkça belirlenmediği durumlarda beklenmeyen sonuçların olasılığı artar.</p>
+    <h2>Stajyer ve şirket kartı</h2>
+    <p>En az yetki (least privilege) ilkesini bir benzetmeyle kalıcılaştıralım. Yeni bir stajyere ilk gün limitsiz şirket kredi kartını, tüm müşteri dosyalarını, imza yetkisini ve “satışları artır” talimatını verir misiniz? Vermezsiniz. Belirli işler verir, belirli dosyalara erişim tanır, harcamaları onaya bağlarsınız — ve güven kazandıkça alanı genişletirsiniz. Ajan, günde bin işlem yapabilen bir stajyerdir; aynı mantık bin kat önemlidir.</p>
+    <h2>Görev tanımının dört parçası</h2>
+    <p>Her ajan için tek sayfalık bir belge yeter:</p>
+    <ul>
+      <li><strong>1. Amaç beyanı:</strong> ne için var, kimin için çalışıyor, başarı nasıl ölçülüyor. Bu, KVKK m.4’teki <em>amaçla sınırlılık</em> ilkesinin ajan dilindeki karşılığıdır.</li>
+      <li><strong>2. İzinli eylemler (beyaz liste):</strong> ajanın yapabileceği işlemler, tek tek. Listede olmayan, yoktur.</li>
+      <li><strong>3. Yasaklı eylemler (kara liste):</strong> belirsiz alanlar hep çıkar ve ajan belirsizliği kendi lehine yorumlar. Kritik yasakları açıkça yazın: fiyat/paket icat edemez, sözleşme şartı taahhüt edemez, belirli oranın üzerinde indirim öneremez, müşteri verisini üçüncü tarafla paylaşamaz.</li>
+      <li><strong>4. Eskalasyon kuralları:</strong> hangi durumda durup insana sorar — hukuki konu açılırsa, pazarlık istenirse, ajan emin değilse.</li>
+    </ul>
+    <div class="callout warning"><div class="cl">Dikkat</div>“Yapamaz” yazmak yetmez; sistemin gerçekten <strong>yapamaması</strong> gerekir. İndirim sınırı satış sisteminde teknik limite, paket icadı onaylı liste kısıtına, taahhüt cümleleri e-posta filtresine dönüşmeli. Politika dokümanı ile sistem yapılandırması arasındaki her fark, bir denetim bulgusudur.</div>
+    <p>Görev tanımını yazarken şu testi uygulayın: belgeyi ajanı hiç bilmeyen bir çalışana verin ve sorun — “Bu tanımdaki kişi, şirkete en fazla ne kadar zarar verebilir?” Cevap sizi rahatsız ediyorsa, tanım değil <strong>yetki fazladır</strong>.</p>
+    <p><strong>Nereden başlamalı?</strong> Envanterdeki her aktif ajan için dört parçalı tanımı yazın, yasakları teknik korkuluğa çevirin ve “en pahalı hata” testini uygulayın. Hedef vermek kolaydır; değeri yaratan, sınırı çizmektir.</p>
+  </div>
+  <div class="article-cta"><div><h3>Görev tanımını sıfırdan yazmayın</h3><p>Amaç/izin/yasak/eskalasyon başlıklı hazır görev tanımı şablonunu ve envanteri ücretsiz indirin.</p></div><a class="btn btn-primary" href="/sablonlar">Şablonları al →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>
