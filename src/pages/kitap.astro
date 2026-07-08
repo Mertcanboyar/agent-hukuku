@@ -2,8 +2,22 @@
 import Base from "../layouts/Base.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+const bookLd = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: "Yapay Zeka Ajanları ve KVKK",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  inLanguage: "tr-TR",
+  numberOfPages: 145,
+  bookFormat: "https://schema.org/EBook",
+  publisher: { "@type": "Organization", name: "Agent Hukuku" },
+  url: "https://agenthukuku.com/kitap",
+  image: "https://agenthukuku.com/kitap-kapak.png",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "TRY", availability: "https://schema.org/InStock", url: "https://agenthukuku.com/kitap" },
+};
 ---
-<Base>
+<Base type="book" title="Ücretsiz E-Kitap — Yapay Zeka Ajanları ve KVKK | Agent Hukuku" description="145 sayfalık pratik rehber: yapay zeka ajanlarını KVKK'ya uyumlu, güvenli ve şeffaf yönetmenin vaka temelli yol haritası. Ücretsiz indirin.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(bookLd)} /></Fragment>
 <Header />
 <main>
 <section class="page-hero"><div class="wrap"><div class="bookpage">

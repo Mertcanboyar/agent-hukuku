@@ -1,7 +1,40 @@
 ---
 import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
-const { title = "Agent Hukuku — Yapay zeka ajanları için hukuk ve yönetişim", description = "Türkiye'de yapay zeka ajanlarının hukuku ve yönetişimi. KVKK uyumu, vaka temelli rehberler, şablonlar ve olgunluk testi." } = Astro.props;
+const {
+  title = "Agent Hukuku — Yapay zeka ajanları için hukuk ve yönetişim",
+  description = "Türkiye'de yapay zeka ajanlarının hukuku ve yönetişimi. KVKK uyumu, vaka temelli rehberler, şablonlar ve olgunluk testi.",
+  image = "/og/agent-hukuku-og.png",
+  type = "website",
+} = Astro.props;
+
+const site = Astro.site ?? new URL("https://agenthukuku.com");
+const canonical = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL(image, site).href;
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${site.origin}/#org`,
+      name: "Agent Hukuku",
+      url: site.origin,
+      logo: `${site.origin}/og/agent-hukuku-og.png`,
+      description: "Yapay zeka ajanları için hukuk ve yönetişim. KVKK uyumu, vaka temelli rehberler ve şablonlar.",
+      founder: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+      sameAs: ["https://mertcanboyar.com"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${site.origin}/#website`,
+      url: site.origin,
+      name: "Agent Hukuku",
+      inLanguage: "tr-TR",
+      publisher: { "@id": `${site.origin}/#org` },
+    },
+  ],
+};
 ---
 <!DOCTYPE html>
 <html lang="tr">
@@ -10,7 +43,29 @@ const { title = "Agent Hukuku — Yapay zeka ajanları için hukuk ve yönetişi
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Mert Can Boyar" />
+  <meta name="theme-color" content="#1B2A41" />
+
+  <meta property="og:type" content={type} />
+  <meta property="og:site_name" content="Agent Hukuku" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  <slot name="head" />
   <Analytics />
 </head>
 <body>

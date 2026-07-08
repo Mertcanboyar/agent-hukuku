@@ -2,8 +2,22 @@
 import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "KVKK Etken Yapay Zeka Rehberi Şirketinizden Ne Bekliyor?",
+  description: "KVKK'nın Şubat 2026 Etken Yapay Zeka (Agentic AI) rehberini şirketler için yapılacaklar listesine çevirdik.",
+  image: "https://agenthukuku.com/makaleler/img/kvkk.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-02-15",
+  dateModified: "2026-02-15",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/kvkk-etken-yz-rehberi",
+};
 ---
-<Base>
+<Base type="article" title="KVKK Etken Yapay Zeka Rehberi Şirketinizden Ne Bekliyor? | Agent Hukuku" description="KVKK'nın Şubat 2026 Etken Yapay Zeka (Agentic AI) rehberini şirketler için yapılacaklar listesine çevirdik: riskler, beklenen tedbirler ve nereden başlanacağı.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
 <Header />
 <main>
 <article>
