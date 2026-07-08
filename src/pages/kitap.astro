@@ -1,0 +1,49 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+const bookLd = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: "Yapay Zeka Ajanları ve KVKK",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  inLanguage: "tr-TR",
+  numberOfPages: 145,
+  bookFormat: "https://schema.org/EBook",
+  publisher: { "@type": "Organization", name: "Agent Hukuku" },
+  url: "https://agenthukuku.com/kitap",
+  image: "https://agenthukuku.com/kitap-kapak.png",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "TRY", availability: "https://schema.org/InStock", url: "https://agenthukuku.com/kitap" },
+};
+---
+<Base type="book" title="Ücretsiz E-Kitap — Yapay Zeka Ajanları ve KVKK | Agent Hukuku" description="145 sayfalık pratik rehber: yapay zeka ajanlarını KVKK'ya uyumlu, güvenli ve şeffaf yönetmenin vaka temelli yol haritası. Ücretsiz indirin.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(bookLd)} /></Fragment>
+<Header />
+<main>
+<section class="page-hero"><div class="wrap"><div class="bookpage">
+  <div class="reveal"><div class="breadcrumb"><a href="/">Ana sayfa</a> · Kitap</div>
+    <span class="kicker">Ücretsiz e-kitap · ~200 sayfa</span>
+    <h1>Yapay Zeka Ajanları &amp; KVKK</h1>
+    <div class="meta">20 bölüm · vaka temelli · Mert Can Boyar</div>
+    <p class="lead">Türk şirketleri için sade dilde uygulama rehberi. Kurgu şirket TeknoVadi üzerinden, her bölümde bir kriz, bir karar ve KVKK bağlantısı. Envanterden veri ihlaline, ajan yönetişiminin tamamı.</p>
+    <form class="gate2" data-lead="kitap"><input type="email" placeholder="Çalışma e-postanız" required><button class="btn btn-primary" type="submit">PDF'i gönder</button><label class="consent"><input type="checkbox" class="cbox" required><span>KVKK kapsamında e-postamın işlenmesine ve tarafıma bilgilendirme/pazarlama iletisi gönderilmesine <a href="/aydinlatma" target="_blank">Aydınlatma Metni</a> uyarınca açık rıza veriyorum.</span></label></form>
+    <p class="hint">E-postanızı yalnızca kitabı ve Agent Hukuku bültenini göndermek için kullanırız.</p>
+    <div class="hero-trust" style="margin-top:1rem"><span class="chip">KVKK Etken YZ Rehberi uyumlu</span><span class="chip">Şablonlar dahil</span></div>
+  </div>
+  <div class="cov reveal"><img src="/kitap-kapak.png" alt="Yapay Zeka Ajanları ve KVKK kapağı"></div>
+</div></div></section>
+<section class="book-inside"><div class="wrap">
+  <div class="sec-head reveal"><span class="kicker">İçinde ne var?</span><h2>Beş kısım, yirmi bölüm</h2><p>Sıkı bir çerçeve: her kısım, ajan yönetişiminin bir katmanını kuruyor.</p></div>
+  <div class="parts">
+    <div class="part-card reveal"><div class="pn">Kısım I</div><h3>Yeni Dijital Çalışanınızla Tanışın</h3><p>Ajan nedir, ne değildir; sorumluluk neden devredilemez; beş ilke.</p></div>
+    <div class="part-card reveal"><div class="pn">Kısım II</div><h3>Ajanları Sorumlu Şekilde Kurmak</h3><p>Envanter, görev tanımı, kimlik ve erişim, insan onayı, acil durdurma.</p></div>
+    <div class="part-card reveal"><div class="pn">Kısım III</div><h3>Güvenli ve Şeffaf Tutmak</h3><p>Veri erişimi, kayıt düzeni, aydınlatma, saldırılar, izleme.</p></div>
+    <div class="part-card reveal"><div class="pn">Kısım IV</div><h3>KVKK Uyumu: Kitabın Kalbi</h3><p>İşleme şartları, Kurum rehberleri, yurt dışı aktarım, VERBİS, veri ihlali.</p></div>
+    <div class="part-card reveal"><div class="pn">Kısım V</div><h3>Onlar Listesi</h3><p>On altın kural, on yaygın hata ve teknik ekibe on korkuluk.</p></div>
+    <div class="part-card reveal"><div class="pn">Ekler</div><h3>Sözlük &amp; Şablonlar</h3><p>Doldurulabilir envanter, görev tanımı, aydınlatma ve olay planı şablonları.</p></div>
+  </div>
+</div></section>
+<section><div class="wrap"><div class="author reveal"><div class="ava">MB</div><div><span class="kicker">Yazar</span><h3>Mert Can Boyar</h3><p>Agent Hukuku'nun kurucusu. Türkiye'de yapay zeka ajanlarının hukuku ve yönetişimini sade dille anlatır.</p><div class="links"><a href="https://mertcanboyar.com" target="_blank" rel="noopener">mertcanboyar.com ↗</a></div></div></div></div></section>
+</main>
+<Footer />
+</Base>
