@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
 const { title = "Agent Hukuku — Yapay zeka ajanları için hukuk ve yönetişim", description = "Türkiye'de yapay zeka ajanlarının hukuku ve yönetişimi. KVKK uyumu, vaka temelli rehberler, şablonlar ve olgunluk testi." } = Astro.props;
 ---
 <!DOCTYPE html>
@@ -10,6 +11,7 @@ const { title = "Agent Hukuku — Yapay zeka ajanları için hukuk ve yönetişi
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <Analytics />
 </head>
 <body>
   <slot />
