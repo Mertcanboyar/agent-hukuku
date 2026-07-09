@@ -28,7 +28,27 @@ import Footer from "../components/Footer.astro";
 </div></section><div class="frameworks"><div class="wrap"><div class="row">
   <span class="lbl">Türkiye ve dünyadan çerçevelerle uyumlu</span>
   <span class="fw"><span class="b"></span>KVKK</span><span class="fw"><span class="b"></span>Etken YZ Rehberi</span><span class="fw"><span class="b"></span>EU AI Act</span><span class="fw"><span class="b"></span>NIST AI RMF</span><span class="fw"><span class="b"></span>ISO 42001</span><span class="fw"><span class="b"></span>GDPR</span>
-</div></div></div><section class="problem"><div class="wrap">
+</div></div></div><section class="explain"><div class="wrap">
+  <div class="sec-head reveal"><span class="kicker">Temel</span><h2>Önce şunu netleştirelim: ajan nedir?</h2><p>Çünkü chatbot ile ajanı karıştırmak, bu alandaki en pahalı ilk hatadır — ve bu site tam da bu farkı yönetmek için hazırlandı.</p></div>
+  <div class="explain-grid">
+    <div class="ex-col reveal">
+      <h3>Chatbot konuşur, ajan <em>yapar</em>.</h3>
+      <p>Chatbot bir çıktı üretir — “Kargonuz dağıtımda” — ve o çıktıyla ne yapılacağına insan karar verir. Ajan ise hedef alır ve dört ayrı sistemde dört ayrı <strong>eylem</strong> yapar: kargo oluşturur, özür e-postası gönderir, CRM'e not düşer — araya insan girmeden.</p>
+      <p>Klasik yapay zekada yönettiğiniz şey <strong>çıktı riskidir</strong> (“cevap doğru mu?”). Ajanda buna bir kat daha eklenir: <strong>eylem riski</strong> (“ne yapabilir ve yaptığında kim hesap verir?”). Cevabı yanlış bir chatbot sizi utandırır; eylemi yanlış bir ajan paranızı gönderir.</p>
+    </div>
+    <div class="ex-litmus reveal">
+      <div class="lit-l">Turnusol sorusu</div>
+      <div class="lit-q">“Bu sistem, benim onayım olmadan, dış dünyada sonuç doğuran bir işlem başlatabilir mi?”</div>
+      <div class="lit-n">Cevap <b>evet</b>se, elinizde bir ajan var — ve buradan itibaren her şey sizi ilgilendiriyor.</div>
+    </div>
+  </div>
+  <div class="traits reveal">
+    <div class="trait"><b>Otonomi</b><span>Adım adım talimat beklemeden görev yürütür.</span></div>
+    <div class="trait"><b>Uyarlanabilirlik</b><span>Koşul değişince davranışını anında değiştirir.</span></div>
+    <div class="trait"><b>Öğrenme</b><span>Geçmiş etkileşimlerden ders çıkarır.</span></div>
+    <div class="trait"><b>Orkestrasyon</b><span>Birden çok aracıyı ve adımı koordine eder.</span></div>
+  </div>
+</div></section><section class="problem"><div class="wrap">
   <div class="sec-head reveal"><span class="kicker" style="color:#7fb6e0">Neden şimdi?</span><h2>Ajan yönetişimindeki her boşluk bir risktir</h2><p>Ajanlar haftalar içinde yayılıyor; yönetişim ise aylar sürüyor. Bu hız farkı görünmeden birikir ve er ya da geç üç yerde faturaya dönüşür — üçü de öngörülebilir, üçü de önlenebilir.</p></div>
   <div class="pgrid">
     <div class="pcard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Düzenleyici baskı</h3><p>KVKK Etken YZ Rehberi yayımlandı; denetçi aynı rehberi açıyor. "Sistem karmaşıktı" bir savunma değil.</p></div>
@@ -44,11 +64,27 @@ import Footer from "../components/Footer.astro";
   </div>
 </div></section><section class="life"><div class="wrap">
   <div class="sec-head center reveal"><span class="kicker">Yönetişim döngüsü</span><h2>Dört adımda ajan yönetişimi</h2><p>Envanterden kurtarmaya — kitabın ve sahadaki uygulamanın omurgası.</p></div>
-  <div class="steps4">
-    <div class="step reveal"><div class="n">01</div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg></div><h3>Envanter</h3><p>Hangi ajanlar var, kim sahibi, neye erişiyor?</p></div>
-    <div class="step reveal"><div class="n">02</div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>İzle</h3><p>Her eylemi kimlik, araç ve veri bağlamıyla kaydet.</p></div>
-    <div class="step reveal"><div class="n">03</div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/><path d="M12 9v3M12 15h.01"/></svg></div><h3>Korkuluk</h3><p>Riskli işlemleri çalışma zamanında sınırla ve onaya bağla.</p></div>
-    <div class="step reveal"><div class="n">04</div><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 4v4h4"/></svg></div><h3>Kurtar</h3><p>Sorunu hızla durdur, yapılanı geri al, olayı yönet.</p></div>
+  <div class="acc reveal">
+    <details class="acc-item" open>
+      <summary><span class="acc-n">01</span><span class="acc-h"><b>Envanter</b><i>Hangi ajanlar var, kim sahibi, neye erişiyor?</i></span><span class="acc-ic"></span></summary>
+      <div class="acc-body"><p>Görünürlük her şeyin başıdır: göremediğinizi yönetemezsiniz. Her ajanı tek bir tabloya alın — amacı, sahibi, eriştiği veri, tedarikçisi. Kural basit: envantere girmeyen ajan çalışmaz.</p>
+        <div class="acc-ex"><span>Kitaptan vaka</span>Bir ekip “üç ajanımız var” sanıyordu. Cezasız bir “gölge affı” ilan edip sorduklarında liste <b>on dörde</b> çıktı — biri aylardır müşteri listesini yurt dışına kopyalıyordu.</div></div>
+    </details>
+    <details class="acc-item">
+      <summary><span class="acc-n">02</span><span class="acc-h"><b>İzle</b><i>Her eylemi kimlik, araç ve veri bağlamıyla kaydet.</i></span><span class="acc-ic"></span></summary>
+      <div class="acc-body"><p>Denetim günü inanılan şey, hatırladığınız değil kaydettiğinizdir. Üstelik ajanlar patlayarak değil, solarak bozulur (drift); erken sinyalleri ancak izlerseniz yakalarsınız.</p>
+        <div class="acc-ex"><span>Kitaptan vaka</span>TeknoVadi’nin destek asistanı altı ay boyunca sessizce bozuldu. En ucuz erken uyarı, “<b>temsilciye bağla</b>” oranındaki yavaş artıştı — kimse bakmadığı için aylarca görülmedi.</div></div>
+    </details>
+    <details class="acc-item">
+      <summary><span class="acc-n">03</span><span class="acc-h"><b>Korkuluk</b><i>Riskli işlemleri çalışma zamanında sınırla ve onaya bağla.</i></span><span class="acc-ic"></span></summary>
+      <div class="acc-body"><p>Hedef verip sınır vermemek, stajyere şirket kartı verip “satışları artır” demektir. Geri alınamaz işlemleri insana, rutini ajana bırakın; yasağı kâğıtta değil, eylem kapısında uygulayın.</p>
+        <div class="acc-ex"><span>Kitaptan vaka</span>Tek bir hedef verilen satış ajanı (“denemeleri artır”) indirim icat etti, “ilk altı ay ücretsiz” paketi uydurdu — hepsi şirketi bağlayan e-postalardı. Onaylı liste ve kelime filtresi bunu daha gönderilmeden durdururdu.</div></div>
+    </details>
+    <details class="acc-item">
+      <summary><span class="acc-n">04</span><span class="acc-h"><b>Kurtar</b><i>Sorunu hızla durdur, yapılanı geri al, olayı yönet.</i></span><span class="acc-ic"></span></summary>
+      <div class="acc-body"><p>“Durdur düğmemiz var” cümlesi, test edilmemişse boştur. Kim durduracak, kaç saniyede, sonra ne olacak? Prosedür kriz gecesi değil, sıkıcı bir salı günü yazılır ve tatbik edilir.</p>
+        <div class="acc-ex"><span>Kitaptan vaka</span>Kampanya ajanı gece yarısı hatalı fiyatla ürünleri <b>%90 indirimle</b> satmaya başladı — ve o gece kimse ajanı nasıl durduracağını bilmiyordu. Doğru refleks: önce durdur, sonra öğren, belgele, dürüstçe bildir.</div></div>
+    </details>
   </div>
 </div></section><section id="kitap"><div class="wrap"><div class="book reveal">
   <div class="cov"><img src="/kitap-kapak.png" alt="Yapay Zeka Ajanları ve KVKK kitabı kapağı"></div>
@@ -73,7 +109,12 @@ import Footer from "../components/Footer.astro";
     <div class="bar"><span style="width:90px">Uyum</span><div class="track"><div class="fill" style="width:48%"></div></div><span class="pc">48</span></div>
   </div>
 </div></div></section><section id="sablonlar"><div class="wrap">
-  <div class="sec-head reveal"><span class="kicker">Hazır araçlar</span><h2>Şablonlar</h2><p>Kitaptaki belgelerin doldurulabilir sürümleri — bugün kullanmaya başlayın.</p></div>
+  <div class="sec-head reveal"><span class="kicker">Hazır araçlar</span><h2>Şablonlar</h2><p>Kitaptaki belgelerin doldurulabilir Word sürümleri. Boş sayfayla değil, kanıtlanmış bir iskeletle başlayın.</p></div>
+  <div class="tmpl-how reveal">
+    <div><span>1</span><div><b>İndir</b><p>İhtiyacınız olan şablonu Word olarak indirin.</p></div></div>
+    <div><span>2</span><div><b>Doldur</b><p>Kitaptaki vakaları rehber alıp kendi ajanlarınıza göre uyarlayın.</p></div></div>
+    <div><span>3</span><div><b>Uygula</b><p>Kâğıttaki kuralı sisteme taşıyın ve envanteri canlı tutun.</p></div></div>
+  </div>
   <div class="tmpl">
     <a href="/sablonlar" class="reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg></div><div class="t">Ajan Envanteri</div><div class="d">Dokuz sütunlu takip tablosu</div><div class="dl">İndir →</div></a>
     <a href="/sablonlar" class="reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg></div><div class="t">Görev Tanımı</div><div class="d">Amaç, izin, yasak, eskalasyon</div><div class="dl">İndir →</div></a>
@@ -103,4 +144,41 @@ window.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('#navlinks a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('navlinks').classList.remove('open');});});
 });
 </script>
+<style>
+  .explain-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;margin-top:8px}
+  .ex-col h3{font-family:var(--serif);font-size:1.35rem;color:var(--ink);margin:0 0 .6rem}
+  .ex-col p{color:var(--slate);margin:0 0 1rem;line-height:1.65}
+  .ex-litmus{background:var(--dark);color:#dbe7f5;border-radius:var(--r);padding:26px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--sh)}
+  .ex-litmus .lit-l{font:700 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#7fb6e0;margin-bottom:10px}
+  .ex-litmus .lit-q{font-family:var(--serif);font-size:1.22rem;line-height:1.42;color:#fff}
+  .ex-litmus .lit-n{margin-top:14px;font-size:.92rem;color:#9db4d0}
+  .ex-litmus .lit-n b{color:#fff}
+  .traits{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+  .trait{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px}
+  .trait b{display:block;font-family:var(--serif);color:var(--ink);margin-bottom:4px}
+  .trait span{font-size:.9rem;color:var(--muted);line-height:1.5}
+  .acc{max-width:860px;margin:8px auto 0;display:flex;flex-direction:column;gap:12px}
+  .acc-item{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh-sm);overflow:hidden}
+  .acc-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:16px;padding:18px 20px}
+  .acc-item summary::-webkit-details-marker{display:none}
+  .acc-n{font-family:var(--serif);font-weight:700;color:var(--accent);font-size:1.05rem;min-width:26px}
+  .acc-h{flex:1;display:flex;flex-direction:column;gap:2px;text-align:left}
+  .acc-h b{font-family:var(--serif);font-size:1.12rem;color:var(--ink)}
+  .acc-h i{font-style:normal;color:var(--muted);font-size:.92rem}
+  .acc-ic{position:relative;width:18px;height:18px;flex:0 0 18px}
+  .acc-ic::before,.acc-ic::after{content:"";position:absolute;background:var(--accent);border-radius:2px;transition:transform .2s}
+  .acc-ic::before{top:8px;left:2px;width:14px;height:2px}
+  .acc-ic::after{top:2px;left:8px;width:2px;height:14px}
+  .acc-item[open] .acc-ic::after{transform:scaleY(0)}
+  .acc-body{padding:0 20px 20px 62px}
+  .acc-body p{color:var(--slate);margin:0 0 14px;line-height:1.65}
+  .acc-ex{background:var(--bg-2);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:12px 16px;font-size:.94rem;color:var(--ink-2);line-height:1.62}
+  .acc-ex span{display:block;font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:5px}
+  .tmpl-how{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:0 0 26px}
+  .tmpl-how>div{display:flex;gap:13px;align-items:flex-start}
+  .tmpl-how>div>span{flex:0 0 32px;height:32px;border-radius:9px;background:var(--grad);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .tmpl-how b{display:block;color:var(--ink);margin-bottom:2px}
+  .tmpl-how p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.5}
+  @media(max-width:760px){.explain-grid{grid-template-columns:1fr}.traits{grid-template-columns:repeat(2,1fr)}.tmpl-how{grid-template-columns:1fr}.acc-body{padding-left:20px}}
+</style>
 </Base>
