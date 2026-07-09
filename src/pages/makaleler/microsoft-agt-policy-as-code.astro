@@ -1,0 +1,89 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Microsoft Agent Governance Toolkit (AGT): Policy-as-Code ile ajan güvenliği",
+  description: "Microsoft'un açık kaynaklı AGT projesi, ajan güvenliğini LLM'in inisiyatifinden alıp deterministik bir ara katmana taşıyor. Confused deputy, policy-as-code ve denetim izleri.",
+  image: "https://agenthukuku.com/makaleler/img/agt.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-07-09",
+  dateModified: "2026-07-09",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/microsoft-agt-policy-as-code",
+};
+const yamlCode = `policy_id: "kvkk_strict_compliance_v1"
+description: "Müşteri verisine erişimi ve dışa aktarımı kısıtlayan ana politika"
+rules:
+  # KURAL 1: Veritabanı sorgularında PII (kişisel veri) çıkarımını engelle
+  - tool_name: "query_customer_db"
+    parameters_schema:
+      allow_pii_extraction: false
+    action: "deny"
+    log_level: "critical"
+  # KURAL 2: Sadece yerel sunuculara API isteğine izin ver
+  - tool_name: "send_data_to_endpoint"
+    allowed_domains:
+      - "*.sirket-ici-domain.com.tr"
+    action: "allow"`;
+const pyCode = `from agt import GovernanceEngine, GovernanceException
+
+# Yönetişim motorunu başlat ve KVKK politikasını yükle
+engine = GovernanceEngine(config_path="compliance_policy.yaml")
+
+# Ajanın kullanacağı aracı AGT ile sarmala
+@engine.secure_tool(tool_id="query_customer_db")
+def query_customer_db(customer_id: str, extract_pii: bool = False):
+    if extract_pii:
+        return db.get_full_profile(customer_id)
+    return db.get_basic_status(customer_id)
+
+# Ajan, halüsinasyon sebebiyle PII verisini de çekmeye çalışıyor!
+try:
+    result = query_customer_db(customer_id="12345", extract_pii=True)
+except GovernanceException as e:
+    # AGT araya girer ve işlemi çalışma zamanında reddeder.
+    print("GÜVENLİK İHLALİ ENGELLENDİ:", e.violation_details)`;
+---
+<Base type="article" title="Microsoft Agent Governance Toolkit (AGT): Policy-as-Code ile Ajan Güvenliği | Agent Hukuku" description="Microsoft'un açık kaynaklı AGT projesi ajan güvenliğini LLM'in inisiyatifinden alıp deterministik bir ara katmana taşıyor. Confused deputy, policy-as-code ve denetim izleri.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Yönetişim</div><span class="tag">Yönetişim</span>
+    <h1>Microsoft AGT: Policy-as-Code ile ajan güvenliği</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Temmuz 2026 · 7 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/agt.png" alt=""></div>
+  <div class="prose">
+    <p>Yapay zeka ekosisteminde büyük bir paradigma değişimi yaşıyoruz: metin veya kod üreten “Üretken YZ”den, bizim adımıza aksiyon alan, dış sistemlerle etkileşen ve otonom karar veren <strong>Ajan Tabanlı YZ</strong>ye geçtik. Ama bu otonomi, beraberinde bir yönetişim krizi getiriyor: bir ajanın hatası artık ekranda yanlış bir cümle değil, yetkisiz bir veritabanı sorgusu ya da bir KVKK/GDPR ihlali olabilir. Microsoft’un açık kaynaklı <strong>Agent Governance Toolkit (AGT)</strong> tam da bu noktada, “tasarım gereği yönetişim” sunuyor.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Sistem promptlarına “Asla kişisel veri paylaşma” yazmak bir <em>kural</em> değil, güçlü bir <em>tavsiye</em>dir. LLM’ler olasılıksal motorlardır; güvenliği modelin anlama kapasitesine bırakmak, kitaptaki deyişle politikayı kâğıtta bırakıp sisteme yazmamaktır.</div>
+    <h2>Çözülmesi gereken üç yapısal problem</h2>
+    <ul>
+      <li><strong>Yetki aşımı (confused deputy):</strong> yalnızca sipariş durumu sorgulamaya yetkili bir destek ajanı, bir jailbreak veya halüsinasyon sonucu CRM’deki tüm müşteri verisini dışa aktarma aracını tetikleyebilir.</li>
+      <li><strong>Deterministik olmayan güvenlik:</strong> güvenliği prompt’a bırakmak hukuki bir zayıflıktır; kural, modelin inisiyatifinde değil eylem kapısında uygulanmalıdır.</li>
+      <li><strong>Hesap verebilirlik eksikliği:</strong> ISO 42001 ve KVKK, kararların denetlenebilirliğini şart koşar — hangi eylemin hangi yetkiyle, ne zaman, hangi veriyle yapıldığı kaydedilmelidir.</li>
+    </ul>
+    <h2>AGT’nin çözüm mimarisi</h2>
+    <p>AGT, güvenliği prompt’lardan alıp <strong>deterministik bir ara katmana (middleware)</strong> taşır. Ajanın <em>düşünme (reasoning)</em> ile <em>eyleme geçme (execution)</em> süreci arasına girer: ajan bir aracı çağırmaya karar verdiğinde istek AGT’nin politika motoruna düşer; kural uygunsa izin verilir, değilse işlem durdurulup ajana “yetkisiz erişim” hatası döner. Bu, kitaptaki <strong>çalışma zamanı korkuluğu (runtime guardrail)</strong> kavramının birebir uygulamasıdır.</p>
+    <h2>1. Adım: Policy-as-Code</h2>
+    <p>Uyum kurallarını — veri minimizasyonu, sınır ötesi aktarım yasağı — bir YAML dosyasında tanımlarız:</p>
+    <span class="code-label">compliance_policy.yaml</span>
+    <pre><code>{yamlCode}</code></pre>
+    <h2>2. Adım: Araçların AGT ile sarmalanması</h2>
+    <p>Ajanın kullanacağı Python fonksiyonlarını motorla sarmalarız; böylece fonksiyon çağrıldığında kontrol otomatik olarak AGT’ye geçer:</p>
+    <span class="code-label">Python</span>
+    <pre><code>{pyCode}</code></pre>
+    <div class="callout warning"><div class="cl">Dikkat</div>Kural, ajanın niyetinde değil <strong>eylem kapısında</strong> uygulanır. Ajan PII’yi çekmeye “karar” etse bile, çalışma zamanı katmanı işlemi reddeder. Politika dokümanı ile sistem yapılandırması arasındaki her fark bir denetim bulgusudur — burada fark sıfırdır.</div>
+    <h2>3. Adım: Değiştirilemez denetim izi</h2>
+    <p>Engelleme yaşandığında AGT’nin denetim bileşeni devreye girer ve ihlal girişimini, ajanın kriptografik kimliğiyle birlikte <strong>değiştirilemez (immutable)</strong> bir log olarak kaydeder. Bir regülatör denetiminde “Sisteminizin güvenlik sınırları nedir ve nasıl çalıştığını ispatlayabilir misiniz?” sorusunun teknik cevabı tam olarak budur.</p>
+    <p><strong>Nereden başlamalı?</strong> AGT’yi kullanmasanız bile mimari ders evrensel: kritik yasakları prompt’tan alıp araç çağrısı sınırına, tablo/kural biçiminde taşıyın ve her engellemeyi değiştirilemez şekilde loglayın.</p>
+  </div>
+  <div class="article-cta"><div><h3>Korkuluklarınız kâğıtta mı, sistemde mi?</h3><p>15 soruda olgunluk karnenizi alın; “Güvenli” ve “Hesap Verebilir” ilkelerinde nerede olduğunuzu görün.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>

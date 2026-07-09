@@ -1,0 +1,47 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "EDPS perspektifinden otonom ajan yönetişimi: dört ilke",
+  description: "Avrupa Veri Koruma Denetçisi'nin (EDPS) üretken yapay zeka rehberi, otonom ajanları devreye alan kurumlar için ne diyor? İnsan müdahalesi, RAG riskleri, controllership ve DPIA.",
+  image: "https://agenthukuku.com/makaleler/img/edps.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-07-09",
+  dateModified: "2026-07-09",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/edps-otonom-ajan-veri-koruma",
+};
+---
+<Base type="article" title="EDPS Perspektifinden Otonom Ajan Yönetişimi: Dört İlke | Agent Hukuku" description="Avrupa Veri Koruma Denetçisi'nin (EDPS) üretken yapay zeka rehberi otonom ajanları devreye alan kurumlar için ne diyor? İnsan müdahalesi, RAG riskleri, controllership ve DPIA.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Hukuk &amp; Uyum</div><span class="tag">Hukuk &amp; Uyum</span>
+    <h1>EDPS perspektifinden otonom ajan yönetişimi: dört ilke</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Temmuz 2026 · 6 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/edps.png" alt=""></div>
+  <div class="prose">
+    <p>Yapay zeka sistemleri artık sadece metin üretmiyor; kurumlar adına karar alıyor, süreçleri tetikliyor ve dış sistemlerle otonom biçimde etkileşime giriyor. Bu sistemleri canlıya alırken sorulması gereken kritik soru şu: insan denetimi olmadan çalışan bu ajanlar veri koruma regülasyonlarına nasıl uyum sağlayacak? Avrupa Veri Koruma Denetçisi’nin (EDPS) üretken yapay zeka rehberi, AB kurumları ve bu standartlara uymak isteyen global şirketler için net bir çerçeve çiziyor — ve ilkeleri, KVKK’nın Etken YZ Rehberiyle şaşırtıcı ölçüde örtüşüyor.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>EDPS’in en çok tekrarladığı ilke, KVKK’nınkiyle aynı: yapay zeka sistemini bir amaç doğrultusunda kendi verinizle kullanmaya karar verdiğinizde, hesap verebilirlik <strong>sizde</strong>dir — LLM sağlayıcısında değil.</div>
+    <h2>1. Otonom karar alma ve insan müdahalesi şartı</h2>
+    <p>EDPS, insan müdahalesi ya da rehberliği olmadan görev yürüten otonom ajanlar söz konusu olduğunda, <strong>insan müdahalesi hakkının</strong> düzgün uygulanmasının hayati (paramount) olduğunu vurguluyor. Ajanınız otomatik yollarla — profilleme veya bireysel değerlendirmeler dahil — bir karar süreci yürütüyorsa, otomatik karar alma kurallarının kapsamına girebilir. Bu durumda kurum, bireylere karara itiraz etme, kendi görüşünü ifade etme ve bir <strong>insan müdahalesi (human intervention)</strong> talep etme hakkını kesinlikle sunmalıdır.</p>
+    <h2>2. Güvenlik açıkları ve RAG riskleri</h2>
+    <p>Geleneksel yazılımın aksine ajanlar dış dünyaya açıktır ve yeni nesil saldırı vektörlerine karşı savunmasız olabilir. EDPS, veri sorumlularının klasik BT güvenlik kontrollerine ek olarak bu sistemlere özel kontroller entegre etmesini bekliyor: yönetişim süreçleri <strong>prompt injection</strong> (istem enjeksiyonu), <strong>jailbreak</strong> ve <strong>model inversion</strong> saldırılarına karşı sistemi sürekli izlemeli ve korumalı.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Kritik RAG uyarısı: ajanların kurum içi veri tabanlarınızla (knowledge base) çalışmasını sağlayan RAG mimarisi kullanıldığında, sistemin bu kişisel verileri <strong>sızdırmadığından</strong> emin olmak için özel testler yapılmalıdır.</div>
+    <h2>3. Sorumluluk kimde? Suçu sadece sağlayıcıya atamazsınız</h2>
+    <p>Şirketler çoğu zaman sorumluluğun LLM sağlayıcısında (OpenAI, Anthropic vb.) olduğu yanılgısına düşer. EDPS bu rolleri net ayırır: bir kurum yapay zeka sistemini belirli bir amaç doğrultusunda kendi verisiyle — örneğin İK’da özgeçmiş incelemek için — kullanmaya karar veriyorsa, verinin nasıl ve neden işleneceğine o karar verdiği için <strong>veri sorumlusu (controller)</strong> olur. Arka plandaki LLM’i geliştiren üçüncü taraf, yalnızca aracı sağladığı ölçüde <strong>veri işleyen (processor)</strong> ya da ayrı bir sorumlu konumunda kalır. Tüm hesap verebilirlik ve uyum yükü, sistemi kullanan kurumdadır.</p>
+    <h2>4. Tasarım gereği veri koruma ve DPIA zorunluluğu</h2>
+    <p>Otonom ajanların riskleri göz önüne alındığında yönetişim “olay olduktan sonra” değil, sistem henüz <strong>tasarım aşamasındayken (by design)</strong> başlamalı. EDPS, bireylerin temel hak ve özgürlükleri üzerinde yüksek risk oluşturma ihtimali olan her işlemden önce bir <strong>Veri Koruma Etki Değerlendirmesi (DPIA / VKED)</strong> yapılmasını şart koşuyor. Özellikle daha önce hiç değerlendirilmemiş “yeni bir teknoloji” söz konusu olduğunda bu zorunluluk pekişir — ve riskler hızla değiştiği için değerlendirmeler düzenli olarak güncellenmelidir.</p>
+    <p><strong>Nereden başlamalı?</strong> EDPS’in dört ilkesi, KVKK diline birebir çevrilebilir: insan müdahalesi hakkı (m.11 + otomatik karar), güvenlik tedbirleri (m.12), veri sorumlusu netliği ve VKED. Rehberi bir öz denetim tablosuna çevirin ve her ilke için sorun: “bizde var mı, kanıtı nerede?”</p>
+  </div>
+  <div class="article-cta"><div><h3>Şirketiniz bu ilkelerin neresinde?</h3><p>15 soruda olgunluk karnenizi alın; insan gözetimi, güvenlik ve uyum başlıklarında nerede durduğunuzu görün.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>

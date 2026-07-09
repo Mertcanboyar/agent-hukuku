@@ -1,0 +1,92 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "CISO'lar için yapay zeka ajan yönetişimi: runtime guardrails",
+  description: "Üretim ortamındaki otonom ajanların kontrolü kimde? Gartner, OWASP ve NIST ışığında runtime guardrails, decision provenance ve CISO'lar için 5 adımlık eylem planı.",
+  image: "https://agenthukuku.com/makaleler/img/ciso.png",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-07-09",
+  dateModified: "2026-07-09",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/ciso-ajan-yonetisim-rehberi",
+};
+const pyCode = `from enterprise_governance_layer import AgentRuntimeOS, SecurityException
+
+# Kurumsal yönetişim motoru (platform bağımsız)
+gov_engine = AgentRuntimeOS(policy_config="enterprise_policies.yaml")
+
+@gov_engine.secure_action(
+    action_type="financial_transaction",
+    requires_identity_trace=True
+)
+def execute_refund(agent_id, customer_data, amount):
+    # KONTROL 1: Girdi & bağlam (zehirli veri var mı?)
+    if gov_engine.detect_prompt_injection(customer_data.complaint_text):
+        raise SecurityException("Ihlal: zararli girdi, islem durduruldu.")
+
+    # KONTROL 2: Deterministik sinir (guardrail)
+    if amount > 500.00:
+        # 500$ ustu iadelerde insan onayi (human-in-the-loop) sart
+        gov_engine.escalate_to_human(agent_id, context=customer_data)
+        return "Islem onaya gonderildi."
+
+    # KONTROL 3: Guven skoru
+    if gov_engine.evaluate_decision_confidence(agent_id) < 0.95:
+        raise SecurityException("Ihlal: karar guven esiginin altinda.")
+
+    # KONTROL 4: Degistirilemez denetim kaydi
+    gov_engine.audit_log.record(
+        agent_identity=agent_id,
+        action="refund_executed",
+        data_accessed=["transaction_history", "user_profile"],
+        policy_applied="EU_AI_Act_Finance_Rule_V2"
+    )
+    return payment_gateway.process_refund(customer_data.id, amount)`;
+---
+<Base type="article" title="CISO'lar İçin Yapay Zeka Ajan Yönetişimi: Runtime Guardrails | Agent Hukuku" description="Üretim ortamındaki otonom ajanların kontrolü kimde? Gartner, OWASP ve NIST ışığında runtime guardrails, decision provenance ve CISO'lar için 5 adımlık eylem planı.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Yönetişim</div><span class="tag">Yönetişim</span>
+    <h1>CISO’lar için ajan yönetişimi: runtime guardrails</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Temmuz 2026 · 7 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/ciso.png" alt=""></div>
+  <div class="prose">
+    <p>Bir bankanın müşteri destek sistemini düşünün: sadece soruları yanıtlamıyor; arka planda işlemleri izliyor, mobil para yatırmadaki bir hatayı kimse fark etmeden tespit edip sessizce çözüyor ve yalnızca kritik bir durumda insana haber veriyor. Bu bilim kurgu değil. Kendi başına karar alan, sistemler arası işlem yürüten ve dijital bir çalışan gibi hareket eden <strong>yapay zeka ajanları</strong> dönemindeyiz. Kritik soru: milisaniyeler içinde karar alıp uygulayan bu sistemlerin kontrolü kimde?</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Geleneksel YZ yönetişimi basitti — modeli eğit, test et, canlıya al; çünkü nihai kararı hep bir insan verirdi. Ajan tabanlı YZ’de ise ajanlar <strong>okuma, yazma ve çalıştırma</strong> yetkilerine sahip; kararı ve eylemi kendileri üretir.</div>
+    <h2>Neden yeni bir modele ihtiyaç var?</h2>
+    <ul>
+      <li><strong>Öngörülemez otonomi ve hız:</strong> ajan, hedefine ulaşmak için test etmediğiniz yolları seçebilir; küçük bir halüsinasyon, makine hızıyla birleşince devasa bir sızıntıya dönüşebilir.</li>
+      <li><strong>Genişleyen saldırı yüzeyi:</strong> ajan dış sistemlere bağlandıkça prompt injection tehlikelenir — zararsız görünen bir veri içindeki gizli talimat, ajanı yetkisi dışına zorlayabilir.</li>
+      <li><strong>Çoklu ajan karmaşası:</strong> birbiriyle etkileşen ajanlar, öngörülemeyen zincirleme hatalar (cascading failures) üretebilir.</li>
+    </ul>
+    <h2>Etkili yönetişimin üç direği</h2>
+    <p>Başarılı bir mimari, güvenliği sonradan eklenen bir yama değil merkez olarak kurar: <strong>risk yönetimi</strong> (ihlalleri sonradan tespit etmek yerine çalışma zamanında engellemek), <strong>güven ve izlenebilirlik</strong> (karar kökenini — decision provenance — kaydetmek: ajan hangi veriyi inceledi, hangi alternatifi eledi, neden bu kararı verdi) ve <strong>uyum</strong> (EU AI Act gibi katı regülasyonlara teknik düzeyde kanıt sunabilmek).</p>
+    <h2>Kod seviyesinde: runtime guardrails</h2>
+    <p>Raporların en çok vurguladığı nokta, yönetişimin kâğıttaki politikalarla değil <strong>çalışma zamanı koruma bariyerleriyle</strong> sağlanmasıdır. Sistem, ajanın düşünme ile eyleme geçme aşamaları arasına kimlik, niyet ve eylem kontrolü yapan bir denetim katmanı koyar. Örneğin otonom bir para iadesi kararında:</p>
+    <span class="code-label">Python</span>
+    <pre><code>{pyCode}</code></pre>
+    <div class="callout warning"><div class="cl">Dikkat</div>Bu yapıda yönetişim modelin “iyi niyetine” bırakılmaz. Kod seviyesindeki dayatma ile ajan, kuralların dışına <strong>istese bile çıkamaz</strong> — 500$ eşiği insan onayına, güven skoru eşiği ise işlemi reddetmeye bağlıdır.</div>
+    <h2>CISO’lar için 5 adımlık eylem planı</h2>
+    <p>Ajanlar “Shadow AI” olarak ağınıza çoktan sızmaya başladı. Kontrolü geri almak için:</p>
+    <ul>
+      <li><strong>Ajan envanterini çıkarın:</strong> tüm ajanları, eriştikleri veriyi ve kullandıkları API/entegrasyonları haritalandırın.</li>
+      <li><strong>Ajanlara özel kimlik atayın:</strong> geniş yetkili servis hesapları değil; her ajana kriptografik, kısıtlı yetkili (least-privilege) benzersiz bir kimlik.</li>
+      <li><strong>Platform bağımsız ara katman kurun:</strong> yönetişim tek bir satıcının paneline değil, tüm sistemleri kapsayan merkezi bir control plane’e bağlı olmalı.</li>
+      <li><strong>Sürüklenme ve yanlılık monitörleri:</strong> konsept sürüklenmesi tespit edilince yetkiyi otomatik kısıtlayan devre kesiciler (circuit breakers) tasarlayın.</li>
+      <li><strong>Hesap verebilirliği otomatize edin:</strong> karar logları, ihlal kayıtları ve adillik metrikleri, denetim anında elle değil sistemce sunulabilmeli.</li>
+    </ul>
+    <p><strong>Sonuç: yönetişim bir fren değil, emniyet kemeridir.</strong> “Süreçlerimizi yavaşlatır” yanılgısının aksine, güçlü yönetişim otonom sistemleri güvenle ve hızla ölçeklendirmenin tek yoludur. Sınırları net çizilmiş, tasarım gereği güvenli bir altyapıda, birinci değil yüzüncü ajanı çok daha hızlı canlıya alırsınız.</p>
+  </div>
+  <div class="article-cta"><div><h3>Ajan güvenliğinizin olgunluğunu ölçün</h3><p>15 soruda beş ilkede karnenizi alın; güvenlik, izlenebilirlik ve uyum boşluklarınızı görün.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>

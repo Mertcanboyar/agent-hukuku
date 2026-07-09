@@ -438,3 +438,9 @@ form[data-lead], form[onsubmit]{flex-wrap:wrap}
 .consent{flex-basis:100%;width:100%;display:flex;gap:9px;align-items:flex-start;font-size:.8rem;line-height:1.45;color:var(--muted);margin-top:10px;text-align:left}
 .consent input[type=checkbox]{width:16px;height:16px;min-width:16px;margin-top:2px;flex:0 0 auto;accent-color:var(--accent)}
 .consent a{color:var(--accent);text-decoration:underline}
+
+/* Makale kod blokları */
+.prose pre{background:#0e1a2d;color:#dbe7f5;border:1px solid #1d2f4a;border-radius:12px;padding:16px 18px;overflow-x:auto;margin:0 0 1.3rem;font-size:.86rem;line-height:1.55;box-shadow:var(--sh-sm)}
+.prose pre code{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;color:inherit;background:none;padding:0;font-size:inherit;white-space:pre}
+.prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:var(--bg-2);color:var(--accent-dk);padding:.12em .4em;border-radius:6px;font-size:.88em}
+.prose .code-label{display:inline-block;font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
