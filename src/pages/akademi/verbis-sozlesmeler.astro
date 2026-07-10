@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 3.4 · KVKK & Uyum", t: "VERBİS, sözleşmeler ve standartlar", h: "<p class='big'>Ajanlar eski yükümlülükleri değiştirmez, <strong>büyütür</strong>.</p>" },
+  { t: "Vaka: durum tespiti günü", h: "<p>Bir yatırım turu incelemesinde dört boşluk çıktı: tedarikçiyle <strong>veri işleme sözleşmesi yok</strong>, VERBİS 14 aydır eski, İK ajanı adayları <strong>eliyor</strong> (profilleme), EU AI Act hiç değerlendirilmemiş.</p>" },
+  { t: "VERBİS & envanter: yeni satırlar", h: "<p>Her yeni ajan getirir: yeni işleme faaliyetleri, yeni alıcı grupları (tedarikçi, model sağlayıcı, alt bulut), yeni yurt dışı aktarımlar, belki yeni veri kategorileri. Envanter yoklamasına bir soru daha: “Bu, VERBİS'te doğru yansıyor mu?”</p>" },
+  { t: "“Ürünü aldık” yetmez", h: "<p>Bir ajan ürünü almak, o ürünle <strong>veri işleme ilişkisi</strong> kurmaktır — ve bu ilişki sözleşme ister. “Kullanım koşullarını kabul ettik” çoğu zaman yetmez: o metin tedarikçiyi korur, sizi değil.</p>" },
+  { t: "Gizli tehlike: otomatik karar & profilleme", h: "<p>İK ajanı “sadece sıralıyordu” — ama düşük puanlıları kimse bakmadan eliyordu. Bu, bir insan hakkında önemli sonuç doğuran <strong>otomatik bir karardır</strong>. Kural: kişi hakkında sonuç doğuran her otomatik karar, insan gözetimine ve itiraz kanalına bağlanır.</p>" },
+  { t: "Tedarikçi due diligence formu", h: "<p>İmzadan <strong>önce</strong> doldurulacak tek sayfa: <strong>kimlik</strong> (Ders 2.3) + <strong>durdurma</strong> (2.5) + <strong>veri yeri</strong> (3.3) + güvenlik + sözleşme. Bu formu dolduramayan tedarikçi, satmaya değil ikna etmeye çalışıyordur.</p>" },
+  { t: "Standartlar & mevzuat radarı", h: "<ul><li>Çerçeveler: <strong>NIST AI RMF</strong>, <strong>ISO/IEC 42001</strong>, RAISE.</li><li>Radar: TBMM YZ teklifleri, KVKK-GDPR yakınlaşması, <strong>EU AI Act</strong> (AB müşteriniz varsa öncelikli).</li></ul>" },
+  { d: true, t: "Özet", h: "<p>Yatırımcı, denetçi ve büyük müşteri aynı yere bakar: söylediğinizle yaptığınız aynı mı?</p><p class='big'>Makyaj yakalanır; yapı kalır.</p>" },
+];
+---
+<Base title="Ders 3.4 — VERBİS, Sözleşmeler ve Standartlar | Agent Hukuku Akademi" description="Ajanların VERBİS ve veri işleme sözleşmesi yükümlülüklerine etkisi, otomatik karar/profilleme riski, tedarikçi due diligence formu ve mevzuat radarı.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 3 — KVKK &amp; Uyum</div><span class="tag">Ders 3.4</span>
+    <h1>VERBİS, sözleşmeler ve standartlar</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~8 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Ajanlar eski KVKK yükümlülüklerinizi silmez; her birine yeni satırlar ekler. Bu derste VERBİS ve sözleşme etkisini, en sık atlanan “otomatik karar” riskini, tedarikçi due diligence formunu ve mevzuat radarını öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>VERBİS, envanter ve veri işleme sözleşmesi</h2>
+    <p>Ajan kullanmaya başladığınızda VERBİS ve kişisel veri işleme envanteri yükümlülükleriniz kaybolmaz, genişler: yeni faaliyetler, alıcı grupları ve aktarımlar bildirimlerinize yansımalı. En sık atlanan adım ise sözleşmedir: tedarikçi sizin adınıza veri işliyorsa (ki genelde işler), aranızda KVKK'nın aradığı unsurları taşıyan yazılı bir <strong>veri işleme sözleşmesi</strong> olmalı — talimatla işleme, güvenlik, alt yüklenici, aktarım, sürе sonu akıbeti, denetim hakkı.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Kişi hakkında önemli sonuç doğuran her <strong>otomatik karar</strong> — İK taraması, kredi değerlendirmesi, fiyat farklılaştırma, içerik moderasyonu — insan gözetimine ve itiraz kanalına bağlanmalı. “Sadece öneri veriyor” savunmasını iki kez kontrol edin: öneriye kimse bakmadan uyuluyorsa, o bir karardır.</div>
+    <h2>Due diligence formu ve radar</h2>
+    <p>Kitap boyunca tedarikçiye sorulacak soruları biriktirdik; yeni bir ajan almadan <strong>önce</strong> doldurulacak tek bir sayfada toplayın: kimlik, durdurma/geri alma, veri yeri, güvenlik ve sözleşme. İmzadan sonra pazarlık gücünüz sıfırdır. Ayrıca “hangi çerçeveye uyuyorsunuz?” sorusuna hazır olun (NIST AI RMF, ISO 42001, RAISE) ve mevzuat radarını çeyreklik gündeme koyun: TBMM YZ teklifleri, KVKK-GDPR yakınlaşması ve — AB müşteriniz varsa öncelikli — EU AI Act.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>“Temeliniz sağlam” cümlesine yaslanıp boşlukları ertelemeyin. Ertelenen uyum, kapanış sözleşmesinde “90 gün içinde giderilmezse yatırımcının hakları doğar” maddesine — yani faizli bir borca — dönüşebilir.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Ajanlar VERBİS ve envantere yeni satırlar ekler.</li>
+        <li>“Kullanım koşulları” değil, veri işleme sözleşmesi gerekir.</li>
+        <li>Otomatik kararı insan gözetimi + itiraz kanalına bağlayın.</li>
+        <li>Due diligence formunu imzadan önce doldurun; radarı canlı tutun.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/yurt-disi-aktarim">← Önceki: Yurt dışına veri aktarımı</a>
+    <a class="ln-next" href="/akademi/kurum-rehberleri">Sonraki ders: Kurumun YZ rehberleri →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

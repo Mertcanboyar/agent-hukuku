@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 3.2 · KVKK & Uyum", t: "Aydınlatma: ajan kullandığınızı söylemek", h: "<p class='big'>Müşteriniz botla konuşmaya razı; razı olmadığı şey <strong>kandırılmak</strong>.</p>" },
+  { t: "Vaka: Elif diye biri yok", h: "<p>Bir destek asistanı sekiz ay boyunca “Elif Hanım” zannedildi — profil fotoğrafı bile vardı. Bir hata mesajı sızınca gerçek ortaya çıktı ve müşteri “kandırıldım” diyerek olayı kamuya taşıdı. Mesele bot olması değil, <strong>saklanmasıydı</strong>.</p>" },
+  { t: "m.10: 60 saniyelik özet", h: "<p>Verisini işlediğiniz herkese, en geç toplama anında söyleyeceksiniz: kim olduğunuzu, amacı, aktarımı, hukuki sebebi, kişinin haklarını.</p><p>Ajan çağında bir soru daha: <strong>verinin bir yapay zeka tarafından işlendiği, aydınlatmanın neresinde?</strong></p>" },
+  { t: "“İnsan ismi güven verir” tuzağı", h: "<p>İnsan taklidi dönüşümü artırır — <em>yakalanana kadar</em>. Asimetriye dikkat: getiri <strong>küçük ve sürekli</strong>, kayıp <strong>büyük ve ani</strong> (tek ekran görüntüsü, aylarca birikmiş güvenin tasfiyesi + hukuki dosya).</p>" },
+  { t: "Şeffaflık beklentiyi yönetir", h: "<p>Açık etiket, beklentiyi doğru kurar: müşteri “yapay zeka asistanı”ndan <strong>hız</strong> bekler, insan inceliği beklemez. Taklit ise beklentiyi insan seviyesine kurar — her botun eninde sonunda kaybedeceği bir kıyas.</p>" },
+  { t: "Üç kanal, tek formül", h: "<ol><li><strong>Ne olduğunu söyle</strong> (yapay zeka).</li><li><strong>Çıkış kapısı göster</strong> (“temsilci” ile insana ulaşma).</li><li><strong>Veri işlemeye bağla</strong> (aydınlatma metni).</li></ol><p>E-posta, sohbet ve telefon için aynı iskelet.</p>" },
+  { t: "İçerideki muhataplar: çalışanlar", h: "<ul><li>Ajanların işlediği <strong>çalışan verileri</strong>: aydınlatma metniniz bunları kapsıyor mu?</li><li>Çalışanların <strong>ajan kullanımı</strong>: onaylı araçlar, yasak veriler, onay mercii — tek sayfalık iş yeri YZ politikası.</li></ul>" },
+  { d: true, t: "Özet", h: "<p>Şeffaflık hem etik hem <em>matematiksel</em> bir tercihtir.</p><p class='big'>Şeffaflık müşteri kaybettirmez — yakalanmak kaybettirir.</p>" },
+];
+---
+<Base title="Ders 3.2 — Aydınlatma: Ajan Kullandığınızı Söylemek | Agent Hukuku Akademi" description="KVKK m.10 aydınlatma yükümlülüğünü ajan çağına uyarlamak: insan taklidi tuzağı, üç kanal için şeffaflık formülü ve çalışan aydınlatması.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 3 — KVKK &amp; Uyum</div><span class="tag">Ders 3.2</span>
+    <h1>Aydınlatma: ajan kullandığınızı söylemek</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Ajanı kurdunuz ve hukuki dayanağını belirlediniz; peki insanlara bir yapay zekayla konuştuklarını söylüyor musunuz? Bu derste m.10 aydınlatma yükümlülüğünü, insan taklidinin gizli matematiğini ve üç kanal için şeffaflık formülünü öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Söylemek zorundasınız — ve söylemek işe yarar</h2>
+    <p>KVKK m.10, verisini işlediğiniz herkese en geç toplama anında kim olduğunuzu, amacı, aktarımı, hukuki sebebi ve haklarını söylemenizi emreder. Ajan çağında buna pratik bir soru eklenir: verinin bir yapay zeka tarafından işlendiği bilgisi. “Elif” maskesi yalnızca aydınlatmayı değil, dürüstlük ilkesini de (m.4) zedeler — veri işleme, kişiyi yanıltarak yapılmaz.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>İnsan taklidinin getirisi küçük ve sürekli, kaybı büyük ve anidir. Tek bir hata mesajı, aylarca birikmiş güvenin tamamını bir gecede tasfiye edebilir. Şeffaflık, etik tercih olduğu kadar <strong>matematiksel</strong> bir tercihtir.</div>
+    <h2>Üç kanal için tek formül</h2>
+    <p>E-posta imzası, sohbet penceresi ve telefon karşılaması — üçünün de ortak iskeleti şudur: (1) ne olduğunu söyle (yapay zeka), (2) çıkış kapısı göster (“temsilci” yazarak/diyerek insana ulaşma), (3) veri işlemeye bağla (aydınlatma metni bağlantısı). Birinci madde dürüstlük, ikincisi insan merkezlilik, üçüncüsü m.10'dur. “Temsilci” çıkış kapısı aynı zamanda bir yönetişim aracıdır: müşterinin “temsilci” deme oranı aniden yükseliyorsa, ajanınızın kalitesi düşüyor demektir.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Aydınlatma dış dünyayla bitmez. Ajanların işlediği <strong>çalışan verileri</strong> için metninizi güncelleyin; ayrıca çalışanların kişisel YZ araçlarına müşteri verisi yapıştırmasını önleyen tek sayfalık bir <strong>iş yeri YZ politikası</strong> yayımlayın — yoksa gölge ajan sorununuz yakında gölge veri sızıntısına döner.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Muhatap ilk temasta bir yapay zekayla konuştuğunu anlamalı.</li>
+        <li>İnsan ismi/fotoğrafı taşıyan ajanı değiştirin; asimetriyi hatırlayın.</li>
+        <li>Üç kanal formülü: ne olduğu + çıkış kapısı + aydınlatma.</li>
+        <li>Çalışan aydınlatmasını ve iş yeri YZ politikasını unutmayın.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/kvkk-temelleri">← Önceki: KVKK temelleri</a>
+    <a class="ln-next" href="/akademi/yurt-disi-aktarim">Sonraki ders: Yurt dışına veri aktarımı →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

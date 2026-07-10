@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 3.3 · KVKK & Uyum", t: "Yurt dışına veri aktarımı", h: "<p class='big'>“Sunucumuz Türkiye'de” ajan çağında <strong>yetersiz</strong> bir güvencedir.</p>" },
+  { t: "Vaka: dipnottaki sunucu", h: "<p>Bir banka ihalesinde soruldu: “Asistanın modeli nerede?” Sözleşmenin dipnotunda cevap yazıyordu: model çıkarımı ABD ve İrlanda'da. Yani her müşteri mesajı, aylardır sınır geçiyordu — kimsenin haberi yoktu.</p>" },
+  { t: "Ajanlar neden bu riski büyütür?", h: "<ul><li><strong>Modelin yeri ≠ sunucunuzun yeri:</strong> istem, model yurt dışındaysa sınırı geçer.</li><li><strong>Görünmezlik:</strong> aktarım arka planda, sürekli olur.</li><li><strong>Zincir uzun:</strong> ajan → model → alt bulut → belki başka bölge.</li></ul>" },
+  { t: "m.9: yurt dışına aktarımın üç kapısı", h: "<ul><li><strong>Yeterlilik kararı</strong> olan ülkeler.</li><li><strong>Uygun güvenceler</strong> — KOBİ'lerin en sık kullandığı standart sözleşme.</li><li><strong>İstisnai hâller</strong> — dar ve kırılgan; sürekli aktarıma bel bağlanmaz.</li></ul>" },
+  { t: "Sizin işiniz", h: "<p>Hukuki metni yazmak avukatınızın işi; sizin işiniz <strong>hangi ajanın hangi veriyi nereye aktardığını bilmek</strong> ve haritalamak. Bu bilgi olmadan avukat da bir şey yapamaz — yine envanter ve harita her şeyin önünde.</p>" },
+  { t: "Aktarım aydınlatmanın da konusudur", h: "<p>Yurt dışı aktarım yalnızca m.9'un değil, m.10'un da konusudur: kişiye verisinin yurt dışına aktarılabileceğini <strong>söylemeniz</strong> gerekir. Aktarımı kurup aydınlatmayı unutmak, işi yarım bırakmaktır.</p>" },
+  { t: "Tedarikçiye beş “veri nerede?” sorusu", h: "<ul><li>Model çıkarımı hangi ülkede?</li><li>Alt yükleniciler kim, nerede?</li><li>Veri saklanıyor mu — <strong>modeli eğitmek</strong> için kullanılıyor mu?</li><li>Yurt içinde tutan bir kurulum var mı?</li><li>Standart sözleşmeyi imzalamaya hazır mı?</li></ul>" },
+  { d: true, t: "Özet", h: "<p>Doğru soru: müşteri mesajı ajana ulaştığı andan itibaren o metin hangi ülkelerden geçiyor?</p><p class='big'>Cevabını bilmeyen şirket, o cevabı bir gün Kurumdan ya da müşteriden öğrenir — ve o gün öğrenmek pahalıdır.</p>" },
+];
+---
+<Base title="Ders 3.3 — Yurt Dışına Veri Aktarımı | Agent Hukuku Akademi" description="Ajanlar neden “sessiz veri ihracatçısı”dır? Model çıkarımının yeri, KVKK m.9 aktarım rejimi ve tedarikçiye sorulacak beş “veri nerede?” sorusu.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 3 — KVKK &amp; Uyum</div><span class="tag">Ders 3.3</span>
+    <h1>Yurt dışına veri aktarımı</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Uygulama sunucunuz İstanbul'da olabilir — ama ajanın modeli nerede? Bu derste ajanların neden “sessiz veri ihracatçısı” olduğunu, KVKK m.9 aktarım rejimini ve tedarikçiye soracağınız beş kritik soruyu öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Ajanlar sessiz veri ihracatçısıdır</h2>
+    <p>Klasik yazılımda “verimiz nerede?” sorusunun cevabı sabitti. Ajanlar bunu üç sebeple bozar: modelin yeri sizin sunucunuzun yeri değildir (ajana giden her istem, model yurt dışındaysa sınırı geçer); aktarım bir “veri gönderiyoruz” ekranı olmadan arka planda sürekli olur; ve zincir uzundur (ajan → model sağlayıcı → alt bulut → belki başka bölge).</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>“Sunucumuz Türkiye'de” cümlesi, ajan çağında yetersiz bir güvencedir. Doğru soru: <strong>müşteri mesajı ajana ulaştığı andan itibaren o metin hangi ülkelerde, hangi şirketlerin elinden geçiyor?</strong> Cevabı bilmiyorsanız, muhtemelen veri ihraç ediyorsunuz.</div>
+    <h2>m.9 ve aydınlatma</h2>
+    <p>KVKK yurt dışına aktarımı yasaklamaz, şartlara bağlar. Pratikte üç kapıdan biri kullanılır: yeterlilik kararı olan ülkeler; uygun güvenceler (KOBİ'lerin en sık kullandığı <strong>standart sözleşme</strong>); ve dar-kırılgan istisnai hâller. Hukuki metin avukatınızın işi; sizin işiniz hangi ajanın hangi veriyi nereye aktardığını bilmek. Ayrıca aktarım m.10'un da konusudur — aydınlatma metninize “yurt dışına aktarılabilir” satırını eklemeyi unutmayın.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Tedarikçiye soracağınız beşinci soruya dikkat: “Verileriniz modelimizi <strong>geliştirmek</strong> için kullanılabilir” cümlesi birçok standart sözleşmede gizlidir — ve müşterinizin verisi için bunu kabul etmek, veri işleyen sıfatınızla bağdaşmayabilir.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Modelin yeri sunucunuzun yeri değildir; ajanlar veri ihraç eder.</li>
+        <li>m.9 üç kapı: yeterlilik, uygun güvenceler, istisnai hâller.</li>
+        <li>İşleme şartı haritanıza bir “aktarım” sütunu ekleyin.</li>
+        <li>Aktarımı kurun, aydınlatmayı da güncelleyin.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/aydinlatma">← Önceki: Aydınlatma</a>
+    <a class="ln-next" href="/akademi/verbis-sozlesmeler">Sonraki ders: VERBİS, sözleşmeler ve standartlar →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

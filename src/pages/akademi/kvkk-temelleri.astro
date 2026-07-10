@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 3.1 · KVKK & Uyum", t: "KVKK'yı bir derste anlamak", h: "<p class='big'>Doğru soru “rıza aldık mı?” değildir.</p>" },
+  { t: "Vaka: beyaz tahtadaki çöküş", h: "<p>“Herkesten açık rıza alıyoruz” dendi. Ama çalışan verisinde rıza <strong>özgür</strong> sayılmaz; tedarikçi verisinde dayanak sözleşmedir; her ajan farklı bir şarta oturur. Tahtada düzgün gerekçelendirilmiş ajan sayısı: <strong>sıfır</strong>.</p>" },
+  { t: "İki sıfat, iki dünya", h: "<ul><li><strong>Veri sorumlusu:</strong> amaç ve araçları siz belirliyorsanız — tüm yükümlülükler sizde.</li><li><strong>Veri işleyen:</strong> başkasının amacı için, onun talimatıyla — yükümlülükleriniz farklı ama gerçek.</li></ul><p>Aynı ajan iki müşteride iki farklı sıfat taşıyabilir.</p>" },
+  { t: "m.5: açık rıza son çaredir", h: "<ul><li><strong>Sözleşmenin ifası</strong> — destek talebi, tedarikçi ödemesi.</li><li><strong>Hukuki yükümlülük</strong> — muhasebe/vergi.</li><li><strong>Meşru menfaat</strong> — güvenlik/log, sınırlı analitik.</li><li><strong>Açık rıza</strong> — diğerleri uymuyorsa; pazarlama.</li></ul>" },
+  { t: "Üç pratik kural", h: "<ul><li>Açık rızaya <strong>ancak</strong> diğer şartların hiçbiri uymuyorsa gidin.</li><li>Çalışan verilerinde açık rızaya güvenmeyin.</li><li>Meşru menfaate dayanıyorsanız, <strong>denge testini yazılı</strong> yapın.</li></ul>" },
+  { t: "Rızanın gizli maliyeti", h: "<p>Açık rıza her an <strong>geri alınabilir</strong>. İşinizin bel kemiğini rızaya kurarsanız, kişi rızayı geri aldığında ajanı durdurmanız gerekir. Sözleşmenin ifası ve meşru menfaat bu kırılganlığı taşımaz.</p>" },
+  { d: true, t: "En sert uyarı: işleme şartı donmuş değildir", h: "<p>Etken ajan hedefe giderken ihtiyaç duyduğu veriyi <em>süreç içinde</em> yeniden belirler; kapsam kayınca dayanağın hukuki sebeple bağı <strong>kopabilir</strong>.</p><p class='big'>İşleme şartını bir kez değil, ajanın kapsamı değiştikçe izleyin.</p>" },
+  { t: "Özet: iki soru", h: "<ol><li>Bu veride hangi sıfattayım? (sorumlu / işleyen)</li><li>Hangi işleme şartına dayanıyorum — ve ajan hâlâ o sınırın içinde mi?</li></ol><p>Bu iki soru, KVKK'nın onlarca maddesini pratiğe çeviren anahtardır.</p>" },
+];
+---
+<Base title="Ders 3.1 — KVKK'yı Bir Derste Anlamak | Agent Hukuku Akademi" description="Veri sorumlusu/işleyen ayrımı, m.5 işleme şartları (açık rıza neden son çaredir) ve rehberin en sert uyarısı: işleme şartı statik değildir.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 3 — KVKK &amp; Uyum</div><span class="tag">Ders 3.1</span>
+    <h1>KVKK'yı bir derste anlamak</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~8 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Seviye 3, ajanları KVKK'ya uyumlu yürütmenin hukuki çatısını kuruyor. Bu ilk derste “KVKK = açık rıza” yanılgısını yıkacak, veri sorumlusu/işleyen ayrımını ve işleme şartının neden bir kez belirlenip unutulamayacağını öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>İki sıfat, iki dünya</h2>
+    <p>Her ajan faaliyeti için önce şu soruyu cevaplayın: bu veride hangi sıfattayım? <strong>Veri sorumlusu</strong> iseniz (amaç ve araçları siz belirliyorsunuz) tüm KVKK yükümlülükleri sizdedir; <strong>veri işleyen</strong> iseniz (başkasının amacı için, onun talimatıyla) yükümlülükleriniz farklıdır ama gerçektir — talimat dışına çıkmama, güvenlik, sorumluya yardım. Aynı ajan, iki farklı müşterinin verisinde iki farklı sıfat taşıyabilir; işleme şartı haritanızın ilk sütunu bu olmalı.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>En yaygın ve en pahalı yanılgı “KVKK = açık rıza” denklemidir. Gerçek tersine yakındır: açık rıza, işleme şartları arasında çoğu zaman <strong>en zayıf ve en son</strong> başvurulacak olandır — çünkü her an geri alınabilir ve çalışan verisinde özgür irade tartışmalıdır.</div>
+    <h2>Doğru işleme şartını seçmek</h2>
+    <p>m.5 birden çok yol sunar: sözleşmenin ifası (destek talebi, tedarikçi ödemesi), hukuki yükümlülük (muhasebe/vergi), meşru menfaat (güvenlik/log, sınırlı analitik) ve açık rıza (pazarlama). Üç pratik kural: açık rızaya ancak diğerleri uymuyorsa gidin; çalışan verisinde rızadan uzak durun; meşru menfaate dayanıyorsanız denge testini <strong>yazılı</strong> yapın — bu yazı, denetimde altın değerindedir.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Rehberin en sert uyarısı: <strong>ajanlarda işleme şartı statik değildir; kayabilir</strong>. Başta hukuka uygun bir işleme, ajan kapsamını genişletince farklı amaçlarla ilişkilenir ve dayanağın hukuki sebeple bağı kopabilir. Bunu yönetmenin en pratik yolu Ders 2.2'ye bağlanır: görev tanımı ne kadar dar ve netse, kapsam kayması o kadar zordur.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Her ajan için sıfatınızı belirleyin: sorumlu mu, işleyen mi?</li>
+        <li>Açık rıza son çaredir; doğru m.5 şartını seçin.</li>
+        <li>Meşru menfaatte yazılı denge testi yapın.</li>
+        <li>İşleme şartını izleyin: ajan hâlâ dayanağının sınırında mı?</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/acil-durdurma">← Önceki: Acil durdurma</a>
+    <a class="ln-next" href="/akademi/aydinlatma">Sonraki ders: Aydınlatma →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

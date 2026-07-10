@@ -1,0 +1,61 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 3.5 · KVKK & Uyum", t: "Kurumun YZ rehberleri ne bekliyor?", h: "<p class='big'>Rehber, sınavın <strong>çıkmış sorularıdır</strong>.</p>" },
+  { t: "Vaka: rakibin cezası", h: "<p>Bir rakip, KVKK incelemesinde ceza aldı: YZ destekli sistemlerinde şeffaflığı ve insan gözetimini belgeleyememişlerdi. “Rehber bağlayıcı değildi” savunması onları cezadan kurtardı mı?</p>" },
+  { t: "Rehber neyi kapsıyor?", h: "<p>Etken YZ Rehberi (Şubat 2026) altı bölüm: tanım, YZ aracıları, kullanım durumları, genel riskler, <strong>kişisel veri riskleri</strong> (5. bölüm) ve <strong>alınabilecek tedbirler</strong> (6. bölüm).</p>" },
+  { t: "Riskler → sizde karşılığı", h: "<ul><li>Kapsam genişlemesi · dayanağın kopması</li><li>Profilleme / çıkarım · kara kutu</li><li>Halüsinasyon · genişleyen saldırı yüzeyi</li><li>Sorumluluğun dağılması</li></ul><p>Her satır için: “bizde var mı — kanıtı nerede?”</p>" },
+  { t: "Beklenen tedbirler", h: "<ul><li>İnsan merkezli + <strong>üç aşamalı insan gözetimi</strong></li><li>Şeffaflık ve açıklanabilirlik</li><li>Veri doğruluğunun sürekli gözetimi</li><li>Aktör rollerinin netleştirilmesi</li><li>Tasarımdan itibaren mahremiyet, PET</li><li>Risk temelli yaklaşım + <strong>VKED</strong></li><li>Personel eğitimi</li></ul>" },
+  { t: "Eksik halka: VKED / DPIA", h: "<p>Öz denetimde en sık boş kalan kutu. KOBİ ölçeğinde bir <strong>veri koruma etki değerlendirmesi</strong> doktora tezi değil, bir sayfalık dürüst düşünme egzersizidir — yüksek riskli bir ajanı kurmadan <em>önce</em>.</p>" },
+  { d: true, t: "“Bağlayıcı değil” tuzağı", h: "<p>Kurum, kanunu bu rehber ışığında yorumlar; ilkelerin çoğu zaten yürürlükteki KVKK'nın ajanlara uygulanmış hâli.</p><p class='big'>Bugün rehbere gönüllü uyan şirket, yarın kanuna bedavaya uyumlu çıkar.</p>" },
+  { t: "Özet", h: "<p>İki tabloyu doldurun (riskler + tedbirler), boş kutuları eylem planına bağlayın.</p><p>Öz denetim, sınavdan önce cevap anahtarına bakmaktır — ve bu sınavda buna izin var.</p>" },
+];
+---
+<Base title="Ders 3.5 — Kurumun YZ Rehberleri Ne Bekliyor? | Agent Hukuku Akademi" description="KVKK'nın Etken YZ Rehberini bir öz denetim aracına çevirmek: kişisel veri riskleri, beklenen tedbirler, VKED/DPIA ve “bağlayıcı değil” tuzağı.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 3 — KVKK &amp; Uyum</div><span class="tag">Ders 3.5</span>
+    <h1>Kurumun YZ rehberleri ne bekliyor?</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Seviye 3'ü, tüm bu bilgiyi Kurumun beklentisiyle hizalayarak kapatıyoruz. Bu derste KVKK'nın Etken YZ Rehberini iki tabloya indirgeyip bir öz denetim aracına çevirecek, en sık atlanan halkayı (VKED) ve “bağlayıcı değil” tuzağını öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Rehberi bir kontrol listesine çevirmek</h2>
+    <p>KVKK'nın Şubat 2026 tarihli Etken YZ Rehberi altı bölümden oluşur; kalbi son iki bölümdedir: <strong>kişisel veri riskleri</strong> ve <strong>alınabilecek tedbirler</strong>. İyi haber şu: bu öğrenme yolunu buraya kadar takip ettiyseniz, rehberi zaten uyguluyorsunuz. Yapılacak iş, iki tabloyu yazıcıdan çıkarıp “sizde var mı?” sütununu doldurmak ve boş kalan kutuları isimli sahiplerle bir eylem planına bağlamaktır. Her “var” için sorun: kanıtı nerede?</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Öz denetimde en sık boş kalan kutu <strong>veri koruma etki değerlendirmesidir (VKED)</strong>. KOBİ ölçeğinde bir VKED, doktora tezi değil; yüksek riskli bir ajanı kurmadan önce bir sayfalık dürüst düşünme egzersizidir — ve görev tanımı + veri haritası + onay eşikleri zaten bunun %80'idir.</div>
+    <h2>“Bağlayıcı değil” tuzağı</h2>
+    <p>Rehber teknik anlamda bir kanun değildir; ama üç şey doğrudur: Kurum kanunu bu rehber ışığında yorumlar; ilkelerin çoğu zaten yürürlükteki KVKK'nın (m.4, m.5, m.6, m.10, m.12) ajanlara uygulanmış hâlidir; ve TBMM'deki YZ teklifleri bu ilkelerin bir bölümünü zorunlu kılma yolundadır. Bugün gönüllü uyan, yarın mevzuata bedavaya uyumlu çıkar. Rehberin yanında iki metin daha ajanlarınızı ilgilendirir: Üretken YZ Rehberi (15 Soruda) ve iş yerinde YZ değerlendirmesi.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Dışarıdan yazılan uyum, içeride yaşamıyorsa kâğıttır. Danışman “insan gözetimi kurulmalı” yazabilir; kurmak yine sizin işinizdir. Uyumu danışman değil, siz yaşarsınız — ve rehber güncellenir, ajanlarınız değişir; öz denetimi yılda bir tekrarlayın.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Rehberin kalbi iki tablodur: riskler + tedbirler.</li>
+        <li>“Var” dediğiniz her yerde kanıtın yerini gösterin.</li>
+        <li>Yüksek riskli ajanlar için bir sayfalık VKED başlatın.</li>
+        <li>“Bağlayıcı değil” bir erteleme değil, zamanlama fırsatıdır.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="article-cta"><div><h3>Seviye 3'ü tamamladınız</h3><p>Sıfat, işleme şartı, aydınlatma, aktarım, sözleşme ve rehber uyumu — KVKK çatısı tamam. Şimdi öz denetiminizi bir karneye dökün.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/verbis-sozlesmeler">← Önceki: VERBİS ve sözleşmeler</a>
+    <a class="ln-next" href="/akademi">Seviye 4 yakında — Akademiye dön →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>
