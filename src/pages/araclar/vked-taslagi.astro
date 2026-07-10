@@ -1,0 +1,118 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+---
+<Base title="VKED (DPIA) Taslağı Üretici — Yapay Zeka Ajanı | Agent Hukuku" description="Yüksek riskli bir ajanı kurmadan önce bir sayfalık veri koruma etki değerlendirmesi (VKED / DPIA) taslağını hızlıca oluşturun. Ücretsiz, tarayıcıda çalışır.">
+<Header />
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/araclar">Araçlar</a> · VKED taslağı</div>
+  <span class="kicker">Araç</span>
+  <h1>VKED (DPIA) taslağı üretici</h1>
+  <p class="lead">Yüksek riskli bir ajanı kurmadan önce bir sayfalık veri koruma etki değerlendirmesi çıkarın. VKED bir doktora tezi değil; kurmadan önce yapılan dürüst bir düşünme egzersizidir.</p>
+</div></section>
+<section style="padding-top:6px"><div class="wrap">
+  <div class="tool-grid">
+    <form class="tool-form" id="f" autocomplete="off">
+      <div class="field"><label for="ajan">Ajan adı</label><input type="text" id="ajan" placeholder="Örn. İK Özgeçmiş Tarama Asistanı"></div>
+      <div class="field"><label for="amac">Amaç ve kapsam</label><textarea id="amac" placeholder="Bu ajan ne yapıyor, kimin için, hangi süreçte?"></textarea></div>
+
+      <div class="field"><label>İşlenen kişisel veriler</label><div class="chk" id="veriler">
+        <label><input type="checkbox" value="ad-soyad ve iletişim" checked>İletişim</label>
+        <label><input type="checkbox" value="hesap ve işlem verileri" checked>Hesap/işlem</label>
+        <label><input type="checkbox" value="talep/mesaj içerikleri">Mesaj içeriği</label>
+        <label><input type="checkbox" value="çalışan/aday verileri">Çalışan/aday</label>
+        <label><input type="checkbox" value="konum/kullanım verileri">Konum/kullanım</label>
+      </div></div>
+      <div class="field"><div class="chk"><label style="border-color:#C0492F55"><input type="checkbox" id="ozel">Özel nitelikli veri (m.6) işleniyor (sağlık, biyometrik, din vb.)</label></div></div>
+
+      <div class="field"><label for="otonomi">Otonomi düzeyi</label><select id="otonomi">
+        <option value="taslak-onay modunda (her işlem insan onayına düşer)">Taslak-onay (her işlem onaya)</option>
+        <option value="eşikli (riskli işlemler onaya, rutin işlemler otonom)">Eşikli (riskli işlemler onaya)</option>
+        <option value="tam otonom (insan onayı olmadan işlem başlatır)">Tam otonom</option>
+      </select></div>
+      <div class="field"><label for="otomatik">Otomatik karar / profilleme var mı?</label><select id="otomatik"><option value="hayir">Hayır</option><option value="evet">Evet</option></select></div>
+
+      <div class="field"><label>İnsan gözetimi nerede?</label><div class="chk" id="gozetim">
+        <label><input type="checkbox" value="Geliştirme: erişim ve karar sınırları baştan tanımlandı ve test edildi" checked>Geliştirmede sınır</label>
+        <label><input type="checkbox" value="Kullanıma alma: yüksek riskli işlemler insan onayına bağlı" checked>Eşikli onay</label>
+        <label><input type="checkbox" value="Kullanım sonrası: düzenli örnekleme ve sinyal izleme">İzleme</label>
+        <label><input type="checkbox" value="İtiraz kanalı: kişi karara itiraz edip insan incelemesi isteyebilir">İtiraz kanalı</label>
+      </div></div>
+
+      <div class="field"><label for="senaryo">En kötü senaryo</label><textarea id="senaryo" placeholder="Bu ajan tam otonom modda yapabileceği en pahalı hatayı yapsa ne olur?"></textarea></div>
+      <div class="field"><label for="onlem">Alınan / alınacak önlemler</label><textarea id="onlem" placeholder="En az yetki, maskeleme, döngü kesici, onay eşiği, kayıt düzeni..."></textarea></div>
+      <div class="field"><label for="degerlendiren">Değerlendiren · Tarih</label><input type="text" id="degerlendiren" placeholder="Örn. Ada Yılmaz · 10.07.2026"></div>
+    </form>
+
+    <div class="tool-out">
+      <div class="tool-out-head"><span class="t">VKED taslağı</span><div class="acts"><button type="button" class="tool-btn" id="copy">Kopyala</button><button type="button" class="tool-btn" id="dl">İndir</button></div></div>
+      <div class="tool-doc" id="out"></div>
+    </div>
+  </div>
+  <p class="tool-note" style="max-width:820px">Tarayıcınızda çalışır; hiçbir bilgi sunucuya gönderilmez. Üretilen belge bir taslaktır ve hukuki tavsiye niteliği taşımaz.</p>
+</div></section>
+</main>
+<Footer />
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const checked = (id) => [...$(id).querySelectorAll('input:checked')].map(i => i.value);
+  const list = (arr, b="  • ") => arr.length ? arr.map(x => b + x).join("\n") : b + "—";
+
+  function build(){
+    const ajan = ($('ajan').value || "[Ajan adı]").trim();
+    const amac = ($('amac').value || "[Ajanın amacı ve kapsamı]").trim();
+    const veriler = checked('veriler');
+    const ozel = $('ozel').checked;
+    const otonomi = $('otonomi').value;
+    const otomatik = $('otomatik').value === "evet";
+    const gozetim = checked('gozetim');
+    const senaryo = ($('senaryo').value || "[En kötü senaryo]").trim();
+    const onlem = ($('onlem').value || "[Alınan/alınacak önlemler]").trim();
+    const deg = ($('degerlendiren').value || "[Değerlendiren · Tarih]").trim();
+
+    const riskler = [
+      "Öngörülemeyen kapsam genişlemesi — ajan, amacını aşan veriye uzanabilir.",
+      "İşleme şartının geçerliliğini yitirmesi — kapsam kayınca hukuki dayanak kopabilir.",
+      "Kara kutu / izlenemezlik — hangi kararın neden verildiği görünmeyebilir.",
+      "Halüsinasyon → veri doğruluğu ihlali — uydurma çıktı zincirde yayılabilir.",
+      "Genişleyen saldırı yüzeyi — istem enjeksiyonuyla veri ifşası riski.",
+    ];
+    if (otomatik || veriler.includes("çalışan/aday verileri"))
+      riskler.push("Profilleme ve ayrımcılık — otomatik değerlendirme, geçmiş önyargıları tekrar üretebilir.");
+    if (ozel)
+      riskler.push("ÖZEL NİTELİKLİ VERİ (m.6) — daha dar işleme şartı, daha yüksek güvenlik ve açık gerekçe gerekir.");
+
+    let t = "";
+    t += "VERİ KORUMA ETKİ DEĞERLENDİRMESİ (VKED / DPIA) — TASLAK\n";
+    t += "Ajan: " + ajan + "\n";
+    t += "Değerlendiren · Tarih: " + deg + "\n";
+    t += "════════════════════════════════════\n\n";
+    t += "1) AMAÇ VE KAPSAM\n" + amac + "\n\n";
+    t += "2) İŞLENEN KİŞİSEL VERİLER\n" + list(veriler) + "\n  • Özel nitelikli veri (m.6): " + (ozel ? "EVET — ek koruma gerekir" : "Hayır") + "\n\n";
+    t += "3) OTONOMİ VE EN KÖTÜ SENARYO\n  • Otonomi düzeyi: " + otonomi + "\n  • Otomatik karar/profilleme: " + (otomatik ? "Evet" : "Hayır") + "\n  • En kötü senaryo: " + senaryo + "\n\n";
+    t += "4) İNSAN GÖZETİMİ (üç aşamalı)\n" + list(gozetim) + "\n\n";
+    t += "5) TESPİT EDİLEN RİSKLER\n" + list(riskler, "  • ") + "\n\n";
+    t += "6) ALINAN / ALINACAK ÖNLEMLER\n" + onlem + "\n";
+    t += "  (Asgari: en az yetki, ayrı kimlik, kayıt düzeni, riskli işlemde insan onayı, izleme.)\n\n";
+    t += "7) SONUÇ\n  • Kalan risk kabul edilebilir mi? → [Evet / Hayır — önlem sonrası]\n  • Karar: [Devam / Önlemler sonrası devam / Kurma / Durdur]\n";
+    t += "  • Yeniden değerlendirme: ajanın kapsamı ciddi değişince veya en az yılda bir.\n\n";
+    t += "════════════════════════════════════\n";
+    t += "Bu taslak genel bilgilendirme amaçlıdır ve hukuki tavsiye niteliği taşımaz.";
+    return t;
+  }
+
+  function render(){ $('out').textContent = build(); }
+  $('f').addEventListener('input', render);
+  $('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(build()); $('copy').textContent = "Kopyalandı ✓"; setTimeout(()=>$('copy').textContent="Kopyala",1500); } catch(e){}
+  });
+  $('dl').addEventListener('click', () => {
+    const blob = new Blob([build()], {type:"text/plain;charset=utf-8"});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = "vked-taslagi.txt"; a.click(); URL.revokeObjectURL(a.href);
+  });
+  render();
+</script>
+</Base>

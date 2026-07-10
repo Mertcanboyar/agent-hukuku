@@ -1,0 +1,92 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+---
+<Base title="İşleme Şartı Seçici — KVKK m.5 Karar Aracı | Agent Hukuku" description="Birkaç soruda ajanınızın işlediği kişisel veri için doğru KVKK m.5 hukuki sebebini bulun: sözleşmenin ifası, hukuki yükümlülük, meşru menfaat veya açık rıza.">
+<Header />
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/araclar">Araçlar</a> · İşleme şartı seçici</div>
+  <span class="kicker">Araç</span>
+  <h1>İşleme şartı seçici</h1>
+  <p class="lead">“KVKK = açık rıza” değildir. Birkaç soruyla, ajanınızın işlediği veri için doğru m.5 dayanağını bulun — ve açık rıza tuzağına düşmeyin. Her ayrı işleme faaliyeti için ayrı çalıştırın.</p>
+</div></section>
+<section style="padding-top:6px"><div class="wrap">
+  <div class="wiz">
+    <div class="wiz-card">
+      <div class="wiz-prog"><span id="prog"></span></div>
+      <div id="body"></div>
+    </div>
+  </div>
+  <p class="tool-note" style="max-width:680px;margin-left:auto;margin-right:auto">Bu araç genel bir yönlendirme sunar; hukuki tavsiye değildir. Özellikle özel nitelikli veri (m.6) ve karmaşık durumlar için bir hukukçuya danışın.</p>
+</div></section>
+</main>
+<Footer />
+
+<script>
+  const nodes = {
+    q1: { step:"Adım 1", q:"Bu veri, kişiyle kurduğunuz/kuracağınız bir sözleşme için gerekli mi?", help:"Ör. destek talebini çözmek, siparişi işlemek, ödemeyi yürütmek — sözleşmenin kurulması ya da ifası için doğrudan gerekliyse.", yes:"r_sozlesme", no:"q2" },
+    q2: { step:"Adım 2", q:"Bir kanun, bu veriyi işlemenizi doğrudan zorunlu kılıyor mu?", help:"Ör. muhasebe, vergi, saklama yükümlülükleri gibi mevzuattan doğan zorunluluklar.", yes:"r_hukuki", no:"q3" },
+    q3: { step:"Adım 3", q:"Veri sahibi sizin çalışanınız mı?", help:"Ajan, çalışanların verilerini (sistem kayıtları, özgeçmiş, performans vb.) işliyorsa ‘Evet’ seçin.", yesFlag:true, yes:"q4", no:"q4" },
+    q4: { step:"Adım 4", q:"Amacınız pazarlama / bilgilendirme iletisi göndermek mi?", help:"Bülten, kampanya, ticari elektronik ileti gibi.", yes:"r_riza_pazarlama", no:"q5" },
+    q5: { step:"Adım 5", q:"Dengeli, öngörülebilir ve kişiyi ezmeyen bir meşru menfaatiniz var mı?", help:"Ör. güvenlik/log izleme, dolandırıcılık önleme, sınırlı iç analitik. Kişinin makul beklentisini aşmayan bir menfaat.", yes:"r_mesru", no:"r_riza_soncare" },
+  };
+  const results = {
+    r_sozlesme: { title:"Sözleşmenin ifası", body:"Bu veri, kişiyle olan sözleşmenin kurulması/ifası için gerekli olduğundan KVKK m.5/2-(c) uyarınca açık rıza aranmadan işlenebilir. Ajanın görev tanımını bu amaçla sınırlı tutun; kapsam genişlerse dayanağı yeniden değerlendirin." },
+    r_hukuki: { title:"Hukuki yükümlülük", body:"Bir kanun sizi zorunlu kıldığından KVKK m.5/2-(ç) uyarınca işleyebilirsiniz. Yalnızca yükümlülüğün gerektirdiği veriyle sınırlı kalın; fazlasını bu dayanağa yaslamayın." },
+    r_riza_pazarlama: { title:"Açık rıza", body:"Pazarlama/ticari elektronik ileti için genellikle açık rıza gerekir; ayrıca İleti Yönetim Sistemi (İYS) yükümlülüklerini kontrol edin. Rıza özgür, bilgilendirilmiş ve geri alınabilir olmalı — her iletide tek tıkla çıkış (abonelikten ayrılma) sunun." },
+    r_mesru: { title:"Meşru menfaat", body:"KVKK m.5/2-(f) uyarınca meşru menfaatinize dayanabilirsiniz — ama önce yazılı bir DENGE TESTİ yapın: menfaatiniz ne, kişinin hak ve özgürlüğü ne, denge neden sizin lehinize? Bu yazı denetimde altın değerindedir. Ajan kapsam genişletirse dengeyi yeniden değerlendirin." },
+    r_riza_soncare: { title:"Açık rıza (son çare)", body:"Diğer şartların hiçbiri uymuyorsa açık rızaya başvurabilirsiniz — ama bu en kırılgan dayanaktır; her an geri alınabilir. İşinizin bel kemiğini geri alınabilir bir rızaya kurmadan önce sözleşme / hukuki yükümlülük / meşru menfaat seçeneklerini bir kez daha gözden geçirin." },
+  };
+  const EMP_WARN = "Veri sahibi çalışanınız: işveren-çalışan ilişkisinde açık rıza ‘özgür irade’ye dayanmadığı için çoğu zaman geçersiz sayılır. Çalışan verilerinde açık rıza yerine sözleşme / hukuki yükümlülük / meşru menfaat dayanaklarını değerlendirin.";
+
+  const $ = (id) => document.getElementById(id);
+  let cur = "q1", emp = false, hist = [];
+  const order = ["q1","q2","q3","q4","q5"];
+
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+  function render(){
+    const prog = $('prog');
+    if (nodes[cur]) {
+      const n = nodes[cur];
+      prog.style.width = ((order.indexOf(cur)) / order.length * 100) + "%";
+      $('body').innerHTML =
+        '<div class="wiz-step">'+n.step+'</div>'+
+        '<h2 class="wiz-q">'+esc(n.q)+'</h2>'+
+        '<p class="wiz-help">'+esc(n.help)+'</p>'+
+        '<div class="wiz-btns"><button class="btn btn-primary" data-a="yes">Evet</button><button class="btn btn-ghost" data-a="no">Hayır</button></div>'+
+        (hist.length ? '<button class="wiz-back" id="back">← Geri</button>' : '');
+      $('body').querySelectorAll('[data-a]').forEach(b => b.addEventListener('click', () => answer(b.dataset.a)));
+      if (hist.length) $('back').addEventListener('click', back);
+    } else {
+      const r = results[cur];
+      prog.style.width = "100%";
+      let cautions = "";
+      if (emp && (cur === "r_mesru" || cur === "r_riza_soncare" || cur === "r_riza_pazarlama"))
+        cautions = '<div class="callout warning" style="margin-top:16px"><div class="cl">Dikkat</div>'+esc(EMP_WARN)+'</div>';
+      $('body').innerHTML =
+        '<div class="wiz-result">'+
+        '<div class="wiz-step">Önerilen dayanak</div>'+
+        '<span class="wiz-badge">'+esc(r.title)+'</span>'+
+        '<p style="color:var(--slate);line-height:1.65;margin:0">'+esc(r.body)+'</p>'+
+        cautions+
+        '<div class="callout" style="background:var(--bg-2);border:1px solid var(--line);margin-top:16px"><div class="cl">Sonraki adım</div>Seçtiğiniz dayanağı aydınlatma metninize yazın ve işleme şartı haritanıza işleyin. <a href="/araclar/aydinlatma-olusturucu" style="color:var(--accent)">Aydınlatma metni oluşturucu →</a></div>'+
+        '<button class="wiz-again" id="again">↺ Baştan başla</button>'+
+        '</div>';
+      $('again').addEventListener('click', reset);
+    }
+  }
+  function answer(a){
+    const n = nodes[cur];
+    if (a === "yes" && n.yesFlag) emp = true;
+    hist.push({cur, emp});
+    cur = a === "yes" ? n.yes : n.no;
+    render();
+  }
+  function back(){ const p = hist.pop(); if (p){ cur = p.cur; emp = p.emp; render(); } }
+  function reset(){ cur="q1"; emp=false; hist=[]; render(); }
+  render();
+</script>
+</Base>

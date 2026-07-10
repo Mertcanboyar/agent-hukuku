@@ -1,0 +1,123 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+---
+<Base title="Aydınlatma Metni Oluşturucu (Yapay Zeka Ajanı) | Agent Hukuku" description="Ajan kullandığınızı söyleyen, KVKK m.10'a uygun bir aydınlatma metnini birkaç seçimle üretin. E-posta, sohbet ve telefon için kısa bildirimlerle. Ücretsiz.">
+<Header />
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/araclar">Araçlar</a> · Aydınlatma metni oluşturucu</div>
+  <span class="kicker">Araç</span>
+  <h1>Aydınlatma metni oluşturucu</h1>
+  <p class="lead">Ajanınız için m.10'a uygun bir aydınlatma metni ve üç kanal (e-posta, sohbet, telefon) için kısa bildirimler üretin. Seçim yaptıkça sağdaki metin güncellenir.</p>
+</div></section>
+<section style="padding-top:6px"><div class="wrap">
+  <div class="tool-grid">
+    <form class="tool-form" id="f" autocomplete="off">
+      <div class="field"><label for="sirket">Veri sorumlusu (şirket/kişi)</label><input type="text" id="sirket" placeholder="Örn. TeknoVadi Yazılım A.Ş."></div>
+      <div class="field"><label for="iletisim">Başvuru / iletişim adresi</label><input type="text" id="iletisim" placeholder="Örn. kvkk@sirketiniz.com"></div>
+      <div class="field"><label for="ajan">Asistan/ajan adı</label><input type="text" id="ajan" placeholder="Örn. Destek Asistanı"></div>
+
+      <div class="field"><label>Kanallar</label><div class="chk" id="kanallar">
+        <label><input type="checkbox" value="e-posta" checked>E-posta</label>
+        <label><input type="checkbox" value="canlı sohbet" checked>Canlı sohbet</label>
+        <label><input type="checkbox" value="telefon/sesli asistan">Telefon (sesli)</label>
+        <label><input type="checkbox" value="web sitesi">Web sitesi</label>
+      </div></div>
+
+      <div class="field"><label>İşlenen kişisel veriler</label><div class="chk" id="veriler">
+        <label><input type="checkbox" value="ad-soyad ve iletişim bilgileri" checked>İletişim bilgileri</label>
+        <label><input type="checkbox" value="hesap ve işlem bilgileri" checked>Hesap/işlem bilgileri</label>
+        <label><input type="checkbox" value="talep ve mesaj içerikleri" checked>Talep/mesaj içeriği</label>
+        <label><input type="checkbox" value="ses kayıtları">Ses kaydı</label>
+        <label><input type="checkbox" value="kullanım ve log verileri">Kullanım/log verileri</label>
+      </div></div>
+
+      <div class="field"><label>İşleme amaçları</label><div class="chk" id="amaclar">
+        <label><input type="checkbox" value="destek taleplerinizi çözmek" checked>Destek</label>
+        <label><input type="checkbox" value="ürün ve hizmetlerimizi sunmak" checked>Hizmet sunumu</label>
+        <label><input type="checkbox" value="işlemlerinizi yürütmek">İşlem yürütme</label>
+        <label><input type="checkbox" value="pazarlama ve bilgilendirme iletileri göndermek">Pazarlama</label>
+        <label><input type="checkbox" value="hizmet kalitesi ve güvenliğini sağlamak" checked>Kalite/güvenlik</label>
+      </div></div>
+
+      <div class="field"><label>Hukuki sebep (KVKK m.5)</label><div class="chk" id="sebep">
+        <label><input type="checkbox" value="sözleşmenin kurulması veya ifası" checked>Sözleşmenin ifası</label>
+        <label><input type="checkbox" value="meşru menfaat">Meşru menfaat</label>
+        <label><input type="checkbox" value="hukuki yükümlülük">Hukuki yükümlülük</label>
+        <label><input type="checkbox" value="açık rıza">Açık rıza</label>
+      </div><div class="hint">İpucu: Açık rıza son çaredir; çalışan verilerinde rızaya güvenmeyin.</div></div>
+
+      <div class="field"><label for="yurtdisi">Yurt dışına aktarım var mı?</label><select id="yurtdisi"><option value="hayir">Hayır</option><option value="evet">Evet (ör. model çıkarımı yurt dışında)</option></select></div>
+      <div class="field"><label for="otomatik">Otomatik karar / profilleme var mı?</label><select id="otomatik"><option value="hayir">Hayır</option><option value="evet">Evet</option></select></div>
+    </form>
+
+    <div class="tool-out">
+      <div class="tool-out-head"><span class="t">Oluşturulan metin</span><div class="acts"><button type="button" class="tool-btn" id="copy">Kopyala</button><button type="button" class="tool-btn" id="dl">İndir</button></div></div>
+      <div class="tool-doc" id="out"></div>
+    </div>
+  </div>
+  <p class="tool-note" style="max-width:820px">Bu araç, tarayıcınızda çalışır; girdiğiniz hiçbir bilgi sunucuya gönderilmez. Üretilen metin bir taslaktır ve hukuki tavsiye niteliği taşımaz — kendi durumunuza göre uyarlayın.</p>
+</div></section>
+</main>
+<Footer />
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const checked = (id) => [...$(id).querySelectorAll('input:checked')].map(i => i.value);
+  const list = (arr) => arr.length ? arr.map(x => "  • " + x.charAt(0).toUpperCase() + x.slice(1)).join("\n") : "  • —";
+
+  function build(){
+    const sirket = ($('sirket').value || "[Şirket adı]").trim();
+    const iletisim = ($('iletisim').value || "[iletişim adresi]").trim();
+    const ajan = ($('ajan').value || "Yapay Zeka Asistanı").trim();
+    const kanallar = checked('kanallar');
+    const kanalStr = kanallar.length ? kanallar.join(", ") : "dijital kanallarımız";
+    const veriler = checked('veriler');
+    const amaclar = checked('amaclar');
+    const sebep = checked('sebep');
+    const yurtdisi = $('yurtdisi').value === "evet";
+    const otomatik = $('otomatik').value === "evet";
+
+    let t = "";
+    t += sirket.toUpperCase() + " — KİŞİSEL VERİLERİN İŞLENMESİNE İLİŞKİN AYDINLATMA METNİ\n";
+    t += "(Yapay Zeka Asistanı Kullanımı Hakkında)\n\n";
+    t += "Veri sorumlusu sıfatıyla " + sirket + " olarak, " + kanalStr + " üzerinden sunduğumuz “" + ajan + "” aracılığıyla kişisel verilerinizi 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında işliyoruz. Bu asistan bir yapay zeka sistemidir; dilediğiniz an “temsilci” yazarak/diyerek ekibimizden bir kişiye bağlanabilirsiniz.\n\n";
+    t += "1) İŞLENEN KİŞİSEL VERİLER\n" + list(veriler) + "\n\n";
+    t += "2) İŞLEME AMAÇLARI\n" + list(amaclar) + "\n\n";
+    t += "3) HUKUKİ SEBEP (KVKK m.5)\nVerileriniz, aşağıdaki hukuki sebeplere dayanılarak işlenmektedir:\n" + list(sebep) + "\n\n";
+    t += "4) AKTARIM\n";
+    t += yurtdisi
+      ? "Verileriniz, hizmetin sağlanması amacıyla (ör. yapay zeka modelinin çalıştırılması) yurt dışındaki hizmet sağlayıcılarımıza, KVKK m.9 kapsamında uygun güvencelerle aktarılabilir.\n\n"
+      : "Verileriniz yalnızca hizmetin gereği ve yasal yükümlülükler kapsamında paylaşılır; bunun dışında üçüncü kişilere aktarılmaz.\n\n";
+    if (otomatik) {
+      t += "5) OTOMATİK KARAR VE PROFİLLEME\nVerileriniz, hakkınızda sonuç doğuran otomatik değerlendirmeler içeren süreçlerde işlenebilir. Böyle bir karara itiraz etme, görüşünüzü ifade etme ve kararın bir insan tarafından gözden geçirilmesini talep etme hakkına sahipsiniz.\n\n";
+    }
+    const n = otomatik ? "6" : "5";
+    t += n + ") HAKLARINIZ (KVKK m.11)\nKişisel verilerinizle ilgili KVKK m.11'de sayılan haklarınızı (işlenip işlenmediğini öğrenme, bilgi talep etme, düzeltme, silme/yok etme, itiraz etme ve zararın giderilmesini isteme) " + iletisim + " adresine başvurarak kullanabilirsiniz. Başvurunuz en geç 30 gün içinde sonuçlandırılır.\n\n";
+    t += "————————————————————\n";
+    t += "KANAL BİLDİRİMLERİ (kopyalayıp kullanın)\n\n";
+    if (kanallar.includes("e-posta"))
+      t += "• E-posta imzası:\n“Bu yanıt " + sirket + " " + ajan + "'ı (yapay zeka) tarafından hazırlanmıştır. Bir insanla görüşmek için bu e-postaya ‘temsilci’ yazmanız yeterli. Aydınlatma metni: [bağlantı].”\n\n";
+    if (kanallar.includes("canlı sohbet"))
+      t += "• Sohbet ilk mesajı:\n“Merhaba! Ben " + sirket + "'in yapay zeka destek asistanıyım. Dilediğiniz an ‘temsilci’ yazarak bir kişiye bağlanabilirsiniz. Yazışmalarımız hizmet kalitesi ve destek amacıyla kaydedilir — ayrıntılar: [aydınlatma metni].”\n\n";
+    if (kanallar.includes("telefon/sesli asistan"))
+      t += "• Telefon karşılaması:\n“" + sirket + "'e hoş geldiniz. Şu anda yapay zeka asistanımızla görüşüyorsunuz; görüşmemiz kayıt altına alınmaktadır. Dilediğiniz an ‘temsilci’ diyerek müşteri temsilcimize bağlanabilirsiniz.”\n\n";
+    t += "————————————————————\n";
+    t += "Bu metin genel bilgilendirme amaçlıdır ve hukuki tavsiye niteliği taşımaz.";
+    return t;
+  }
+
+  function render(){ $('out').textContent = build(); }
+  $('f').addEventListener('input', render);
+  $('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(build()); $('copy').textContent = "Kopyalandı ✓"; setTimeout(()=>$('copy').textContent="Kopyala",1500); } catch(e){}
+  });
+  $('dl').addEventListener('click', () => {
+    const blob = new Blob([build()], {type:"text/plain;charset=utf-8"});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = "aydinlatma-metni.txt"; a.click(); URL.revokeObjectURL(a.href);
+  });
+  render();
+</script>
+</Base>
