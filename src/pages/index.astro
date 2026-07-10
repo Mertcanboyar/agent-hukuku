@@ -55,6 +55,15 @@ import Footer from "../components/Footer.astro";
     <div class="pcard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></div><h3>Görünürlük boşlukları</h3><p>Ekiplerin kurduğu "gölge ajanlar" envanter dışı çalışıyor; kimse hangisinin neye eriştiğini bilmiyor.</p></div>
     <div class="pcard reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></div><h3>Geri alınamaz hatalar</h3><p>Onay eşiği olmayan bir ajan bir gecede para gönderebilir, veri sızdırabilir — hem de sizin adınıza.</p></div>
   </div>
+</div></section><section class="incidents-teaser"><div class="wrap">
+  <div class="sec-head reveal"><span class="kicker" style="color:#7fb6e0">Gerçek olaylar</span><h2>Bunlar kurgu değil</h2><p>Onaysız sipariş veren sesli asistanlar, polisin önünden kaçan sürücüsüz araçlar, bir botla işten çıkarılan çalışanlar... Ajanların dünyada gerçekten yol açtığı olayları derledik.</p></div>
+  <div class="inc-teaser-grid reveal">
+    <a href="/vakalar" class="inc-mini"><span class="y">2017</span><b>TV haberi, Echo'lara oyuncak ev sipariş ettirdi</b><span class="t" style="--c:#2F6D9E">Onay &amp; korkuluk</span></a>
+    <a href="/vakalar" class="inc-mini"><span class="y">2022</span><b>Sürücüsüz araç, polis durdurunca kaçtı</b><span class="t" style="--c:#C0492F">Acil durdurma</span></a>
+    <a href="/vakalar" class="inc-mini"><span class="y">2021</span><b>Amazon'da bir bot tarafından işten çıkarıldı</b><span class="t" style="--c:#3A8074">Otomatik karar</span></a>
+    <a href="/vakalar" class="inc-mini"><span class="y">2016</span><b>Sohbet botu Tay 24 saatte ırkçılığa sürüklendi</b><span class="t" style="--c:#4C9BD6">İzleme &amp; drift</span></a>
+  </div>
+  <div class="reveal" style="text-align:center;margin-top:2rem"><a class="btn btn-primary" href="/vakalar">Vaka kütüphanesini gör →</a></div>
 </div></section><section id="pillars"><div class="wrap">
   <div class="sec-head reveal"><span class="kicker">Üç sütun</span><h2>Bir konu değil, bir alan</h2><p>Agent Hukuku üç başlıkta derinleşir — hukuk, yönetişim ve vaka. Amaç dağınık ipuçları değil, envanterden olay müdahalesine uçtan uca bir çerçeve vermek; kitap da bu omurga üzerine kuruludur.</p></div>
   <div class="cards">
@@ -179,6 +188,14 @@ window.addEventListener('DOMContentLoaded',function(){
   .tmpl-how>div>span{flex:0 0 32px;height:32px;border-radius:9px;background:var(--grad);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
   .tmpl-how b{display:block;color:var(--ink);margin-bottom:2px}
   .tmpl-how p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.5}
+  .inc-teaser-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .inc-mini{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--sh-sm);text-decoration:none;transition:transform .15s,box-shadow .15s}
+  .inc-mini:hover{transform:translateY(-3px);box-shadow:var(--sh)}
+  .inc-mini .y{font-family:var(--serif);font-weight:700;color:var(--accent)}
+  .inc-mini b{color:var(--ink);font-family:var(--serif);font-size:1.02rem;line-height:1.3;flex:1}
+  .inc-mini .t{font:600 10px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--c);align-self:flex-start;border:1px solid color-mix(in srgb,var(--c) 35%,transparent);padding:3px 9px;border-radius:20px}
+  @media(max-width:900px){.inc-teaser-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:760px){.explain-grid{grid-template-columns:1fr}.traits{grid-template-columns:repeat(2,1fr)}.tmpl-how{grid-template-columns:1fr}.acc-body{padding-left:20px}}
+  @media(max-width:520px){.inc-teaser-grid{grid-template-columns:1fr}}
 </style>
 </Base>

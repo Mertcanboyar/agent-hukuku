@@ -1,0 +1,123 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const CAT = {
+  onay:   { l: "Onay & korkuluk",     c: "#2F6D9E" },
+  durdur: { l: "Acil durdurma",        c: "#C0492F" },
+  otokarar:{ l: "Otomatik karar",      c: "#3A8074" },
+  hesap:  { l: "Hesap verebilirlik",   c: "#C77D2E" },
+  izleme: { l: "İzleme & drift",       c: "#4C9BD6" },
+  fiziksel:{ l: "Fiziksel güvenlik",   c: "#C0492F" },
+  hiz:    { l: "Otonomi & hız",        c: "#234F73" },
+};
+
+const incidents = [
+  { y:"2017", cat:"onay", title:"TV haberi, izleyicilerin Echo'larına oyuncak ev sipariş ettirdi",
+    s:"Bir televizyon sunucusunun ekranda söylediği “Alexa, bana oyuncak ev sipariş et” cümlesi, izleyicilerin evindeki Amazon Echo cihazlarını tetikledi ve onaysız siparişler oluştu. Sesli ajan, kimin konuştuğunu ve bunun gerçek bir talep olup olmadığını ayırt edemedi.",
+    d:"Onay eşiği olmayan bir satın alma ajanı, ortamdaki her sesi komut sanar. Geri alınamaz işlemler insan onayına bağlanmalı — bu, bir istem enjeksiyonunun (prompt injection) en erken örneklerinden.",
+    src:"foxnews.com", url:"https://www.foxnews.com/tech/tv-news-report-prompts-viewers-amazon-echo-devices-to-order-unwanted-dollhouses" },
+  { y:"2022", cat:"durdur", title:"Sürücüsüz araç, polis durdurduktan sonra kaçmaya başladı",
+    s:"San Francisco'da polisin durdurduğu sürücüsüz bir araç, memurlar uzaklaşınca kendi kendine hareket edip kavşağın ötesinde tekrar durdu. O an aracı kimin, nasıl durduracağı belirsizdi.",
+    d:"Bir ajanı durdurmanın net, test edilmiş bir yolu yoksa “durdurma” diye bir şey yoktur. Acil durdurma, kriz anında değil önceden tasarlanır ve tatbik edilir.",
+    src:"news.sky.com", url:"https://news.sky.com/story/driverless-car-starts-to-pull-away-after-being-stopped-by-police-12588083" },
+  { y:"2022", cat:"fiziksel", title:"Satranç robotu, yedi yaşındaki oyuncunun parmağını kırdı",
+    s:"Moskova'daki bir turnuvada satranç oynayan robot kol, çocuğun hamlesini beklemeden hareket etti ve parmağını kırdı. Robot, insanın alandaki varlığını hesaba katmamıştı.",
+    d:"Fiziksel dünyada eylem yapan ajanlarda güvenlik sınırları ve insan varlığı algısı hayatidir; makine hızı, geri alınamaz bir zarara dönüşebilir.",
+    src:"newsweek.com", url:"https://www.newsweek.com/chess-robot-goes-rogue-breaks-seven-year-old-player-child-finger-1727104" },
+  { y:"2021", cat:"otokarar", title:"Amazon'da bir bot tarafından işten çıkarıldı",
+    s:"Amazon'un otomatik performans yönetim sistemleri, bazı çalışanları neredeyse hiç insan incelemesi olmadan işten çıkardı. Çalışanlar itiraz edecek gerçek bir muhatap bulmakta zorlandı.",
+    d:"Kişi hakkında sonuç doğuran otomatik kararlar insan gözetimine ve işleyen bir itiraz kanalına bağlanmalı — KVKK m.22'nin (otomatik karar) tam da ele aldığı durum.",
+    src:"bloomberg.com", url:"https://www.bloomberg.com/news/features/2021-06-28/fired-by-bot-amazon-turns-to-machine-managers-and-workers-are-losing-out" },
+  { y:"2017", cat:"hesap", title:"Centrelink “robo-debt”: otomatik borç sistemi hatalı ve hukuka aykırı bulundu",
+    s:"Avustralya'nın otomatik borç hesaplama sistemi, yüz binlerce kişiye hatalı borç bildirimleri gönderdi. Sistem sonradan hukuka aykırı bulundu ve devlet büyük bir tazminat ödemek zorunda kaldı.",
+    d:"Ölçekte çalışan otomatik bir karar, hatalıysa ölçekte zarar verir. Doğruluğun sürekli denetimi ve net hesap verebilirlik olmadan otomasyon, sistematik bir riske dönüşür.",
+    src:"theguardian.com", url:"https://www.theguardian.com/australia-news/2017/apr/11/centrelink-robo-debt-abject-failure-and-arguably-unlawful-victoria-legal-aid-says" },
+  { y:"2010", cat:"hiz", title:"“Flash Crash”: algoritmik işlemler dakikalar içinde piyasayı çökertti",
+    s:"Otomatik alım-satım algoritmaları, 2010'da dakikalar içinde ABD borsasında büyük bir değer buharlaşmasına yol açtı. Hız ve otomasyon, küçük bir tetikleyiciyi zincirleme bir çöküşe çevirdi.",
+    d:"Makine hızında çalışan ajanlar küçük hataları saniyeler içinde felakete dönüştürebilir. Devre kesiciler ve eşikler, hızın kendisini bir riske dönüşmeden kesmek içindir.",
+    src:"usatoday.com", url:"https://www.usatoday.com/story/money/business/2015/04/22/flash-crash-sarao-arrest-spooks-investors/26191173/" },
+  { y:"2018", cat:"otokarar", title:"Trafik kamerası, otobüs reklamındaki yüzü “yaya” sanıp bir CEO'yu teşhir etti",
+    s:"Çin'de otomatik trafik ihlali sistemi, bir otobüsün üzerindeki reklamdaki tanınmış bir iş insanının fotoğrafını gerçek bir yaya sanarak “karşıdan karşıya geçme ihlali” işledi ve kişiyi ekranlarda teşhir etti.",
+    d:"Otomatik eylem + yanlış algı = yanlış kişinin cezalandırılması. İnsan denetimi olmadan verilen teşhir ya da ceza kararları, hatayı doğrudan bireye yükler.",
+    src:"boingboing.net", url:"https://boingboing.net/2018/11/26/just-dont-have-a-face.html" },
+  { y:"2016", cat:"izleme", title:"Microsoft'un sohbet botu Tay, 24 saatte ırkçılığa sürüklendi",
+    s:"Twitter'da öğrenerek gelişen Tay botu, kötü niyetli kullanıcıların yönlendirmesiyle bir gün içinde nefret söylemi paylaşmaya başladı ve kapatıldı. Otonom paylaşım yetkisi, izleme ve durdurma olmadan riske dönüştü.",
+    d:"Öğrenen bir ajan izlenmezse hızla sapar (drift). Paylaşım yetkisi; izleme, sinyal takibi ve hızlı bir kapatma mekanizmasıyla birlikte gelmeli.",
+    src:"en.wikipedia.org", url:"https://en.wikipedia.org/wiki/Tay_(bot)" },
+  { y:"2020", cat:"hesap", title:"Yapay zeka yüz tanımaya dayalı hatalı tutuklamalar",
+    s:"Yüz tanıma eşleşmelerine dayanılarak yapılan hatalı tutuklamalar, suçsuz kişilerin gözaltına alınmasına ve hayatlarının altüst olmasına yol açtı. Otomatik eşleşme, yeterli insan doğrulaması olmadan gerçek bir karara dönüştü.",
+    d:"Otomatik bir çıktı, insan doğrulaması olmadan uygulanırsa özgürlüğü etkileyen bir karara dönüşür. “Sadece öneri” sanılan çıktı, kimse sorgulamıyorsa bir karardır.",
+    src:"wired.com", url:"https://www.wired.com/story/wrongful-arrests-ai-derailed-3-mens-lives/" },
+  { y:"2020", cat:"otokarar", title:"TikTok, otomatik moderasyonla bir kullanıcının hesabını sildi",
+    s:"Otomatik içerik moderasyon sistemi, bir kullanıcının hesabını açık bir gerekçe ve etkili bir itiraz yolu sunmadan kapattı. Otomatik karar, kişinin görünürlüğünü ve geçimini doğrudan etkiledi.",
+    d:"Otomatik moderasyon kararları, şeffaf bir gerekçe ve gerçekten işleyen bir itiraz kanalıyla dengelenmeli; aksi hâlde “kara kutu” bireyin aleyhine çalışır.",
+    src:"losangelesblade.com", url:"https://www.losangelesblade.com/2020/12/15/tiktok-deleted-my-account-because-im-a-latina-trans-woman/" },
+  { y:"2017", cat:"izleme", title:"Güvenlik robotu ofis havuzuna “daldı”",
+    s:"Bir ofis kompleksinde devriye gezen otonom güvenlik robotu, yol bulma hatası sonucu süs havuzuna girip devre dışı kaldı. Zararsız ama otonom sistemlerin öngörülemezliğinin simgesi oldu.",
+    d:"Otonomi, denetimsiz bırakıldığında en basit ortamda bile beklenmedik biçimde başarısız olabilir. İzleme, arızayı komik olmadan önce yakalamak içindir.",
+    src:"telegraph.co.uk", url:"https://www.telegraph.co.uk/technology/2017/07/18/security-robot-drowns-office-fountain/" },
+];
+---
+<Base title="Vaka Kütüphanesi — Ajanların Yol Açtığı Gerçek Olaylar | Agent Hukuku" description="Yapay zeka ajanlarının gerçek dünyada yol açtığı olaylar: onaysız siparişler, kendi kendine hareket eden araçlar, botla işten çıkarmalar. Her vaka bir dersle.">
+<Header />
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/">Ana sayfa</a> · Vakalar</div>
+  <span class="kicker">Vaka Kütüphanesi</span>
+  <h1>Ajanlar hata yaptığında</h1>
+  <p class="lead">TeknoVadi kurgu bir şirket — ama başına gelenler gerçek. Aşağıdaki olaylar dünyada gerçekten yaşandı: onaysız siparişler veren sesli asistanlar, polisin önünden kaçan sürücüsüz araçlar, bir botla işten çıkarılan çalışanlar. Her birini bir dersle derledik.</p>
+  <p class="src-note">Kaynak: Olaylar, bağımsız <a href="https://incidentdatabase.ai" target="_blank" rel="noopener">AI Incident Database</a> kayıtlarından derlenip Türkçeye uyarlanmıştır. Her karttaki bağlantı orijinal habere gider.</p>
+</div></section>
+
+<section class="inc-sec"><div class="wrap">
+  <div class="inc-grid">
+    {incidents.map((i) => (
+      <article class="inc reveal">
+        <div class="inc-top"><span class="inc-year">{i.y}</span><span class="inc-tag" style={`--c:${CAT[i.cat].c}`}>{CAT[i.cat].l}</span></div>
+        <h3>{i.title}</h3>
+        <p class="inc-s">{i.s}</p>
+        <div class="inc-lesson"><span>Ders</span>{i.d}</div>
+        <a class="inc-src" href={i.url} target="_blank" rel="noopener">Kaynak: {i.src} ↗</a>
+      </article>
+    ))}
+  </div>
+</div></section>
+
+<section class="about-cta"><div class="wrap"><div class="cta reveal">
+  <span class="kicker" style="color:#7fb6e0">Sizde yaşanmadan</span>
+  <h2>Bu olayların ortak dersi: yönetişim</h2>
+  <p>Envanter, insan onayı, korkuluk, izleme ve durdurma — bu vakaların her biri, bu beş şeyden birinin eksikliğini anlatıyor. Kitap ve olgunluk testi, sizi aynı gecelerden korumak için var.</p>
+  <div class="hero-cta" style="justify-content:center"><a class="btn btn-primary" href="/kitap">Ücretsiz kitabı indir</a><a class="btn btn-ghost" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+</div></div></section>
+</main>
+<Footer />
+
+<script>
+document.documentElement.classList.add('js');
+window.addEventListener('DOMContentLoaded',function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+});
+</script>
+
+<style>
+  .src-note{font-size:.9rem;color:var(--muted);margin-top:14px;max-width:640px}
+  .src-note a{color:var(--accent)}
+  .inc-sec{padding-top:10px}
+  .inc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .inc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 22px 18px;box-shadow:var(--sh-sm);display:flex;flex-direction:column}
+  .inc-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .inc-year{font-family:var(--serif);font-weight:700;color:var(--ink);font-size:1.1rem}
+  .inc-tag{font:600 11px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--c);border:1px solid color-mix(in srgb,var(--c) 35%,transparent);background:color-mix(in srgb,var(--c) 9%,transparent);padding:4px 10px;border-radius:20px}
+  .inc h3{font-family:var(--serif);font-size:1.18rem;line-height:1.28;color:var(--ink);margin:0 0 .5rem}
+  .inc-s{color:var(--slate);line-height:1.6;font-size:.96rem;margin:0 0 14px}
+  .inc-lesson{background:var(--bg-2);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:11px 15px;font-size:.92rem;color:var(--ink-2);line-height:1.55;margin-bottom:14px}
+  .inc-lesson span{display:block;font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+  .inc-src{margin-top:auto;font-size:.86rem;color:var(--muted);text-decoration:none;border-top:1px solid var(--line);padding-top:12px}
+  .inc-src:hover{color:var(--accent)}
+  .about-cta{margin-top:10px}
+  @media(max-width:760px){.inc-grid{grid-template-columns:1fr}}
+</style>
+</Base>
