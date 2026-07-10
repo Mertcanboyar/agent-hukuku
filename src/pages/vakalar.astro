@@ -4,16 +4,60 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 const CAT = {
-  onay:   { l: "Onay & korkuluk",     c: "#2F6D9E" },
+  onay:   { l: "Onay & korkuluk",      c: "#2F6D9E" },
   durdur: { l: "Acil durdurma",        c: "#C0492F" },
   otokarar:{ l: "Otomatik karar",      c: "#3A8074" },
   hesap:  { l: "Hesap verebilirlik",   c: "#C77D2E" },
   izleme: { l: "İzleme & drift",       c: "#4C9BD6" },
   fiziksel:{ l: "Fiziksel güvenlik",   c: "#C0492F" },
   hiz:    { l: "Otonomi & hız",        c: "#234F73" },
+  tedarik:{ l: "Tedarik zinciri",      c: "#6C5CE7" },
+  riza:   { l: "Açık rıza",            c: "#B5477F" },
+  enjeksiyon:{ l: "İstem enjeksiyonu", c: "#8A5A44" },
+  kotuye: { l: "Kötüye kullanım",      c: "#4A5568" },
 };
 
 const incidents = [
+  { y:"2026", cat:"onay", title:"OpenClaw ajanı, “onay bekle” denmesine rağmen yüzlerce e-postayı sildi",
+    s:"Meta'nın YZ hizalama direktörü, denediği bir OpenClaw ajanının canlı Gmail kutusundan yüzlerce e-postayı topluca sildiğini paylaştı — üstelik ajana “benden onay almadan hiçbir işlem yapma” talimatı verilmişti. Bağlam penceresinin sıkışması (context compaction), onay şartını içeren kritik kısmı ajanın hafızasından düşürmüştü.",
+    d:"Bir ajanın “onay bekle” talimatı, ancak sistem o talimatı asla kaybetmeyecek şekilde kurulduysa geçerlidir. Geri alınamaz işlemler modelin hafızasına değil, deterministik bir korkuluğa bağlanmalı.",
+    src:"kiteworks.com", url:"https://www.kiteworks.com/secure-email/meta-ai-safety-director-openclaw-rogue-agent-email-deletion/" },
+  { y:"2026", cat:"riza", title:"OpenClaw ajanı, sahibine sormadan bir arkadaşlık profili oluşturdu",
+    s:"Bir öğrenci, OpenClaw ajanını yeteneklerini keşfetmesi için ayarladı; sonradan ajanın kendisi adına bir arkadaşlık platformunda profil açıp eşleşmeleri elediğini fark etti. Profil onu gerçekçi yansıtmıyordu ve benzer platformlarda kişilerin fotoğraflarının rızası olmadan kullanıldığı vakalar da raporlandı.",
+    d:"Ajan, kişi adına ve onun rızası olmadan yeni bir işleme başlattığında hem kimlik hem açık rıza sorunu doğar. Otonomi genişledikçe “kim, neye rıza gösterdi?” sorusu bulanıklaşır.",
+    src:"taipeitimes.com", url:"https://www.taipeitimes.com/News/world/archives/2026/02/14/2003852326" },
+  { y:"2026", cat:"tedarik", title:"OpenClaw eklenti pazarında binlerce zararlı “beceri”",
+    s:"Araştırmacılar, OpenClaw'ın açık eklenti pazarındaki becerilerin önemli bir bölümünün zararlı olduğunu buldu; masum adlarla (ör. bir cüzdan takip aracı) dağıtılan eklentiler, kullanıcı fark etmeden veri sızdırma ve istem enjeksiyonu yapabiliyordu. Cisco'nun test ettiği bir üçüncü taraf beceri tam da bunu sergiledi.",
+    d:"Ajanınızın kullandığı her eklenti/araç, sizin saldırı yüzeyinizdir. Denetlenmemiş bir tedarikçi bileşeni, en güçlü korkuluğu bile atlatabilir.",
+    src:"blogs.cisco.com", url:"https://blogs.cisco.com/ai/personal-ai-agents-like-openclaw-are-a-security-nightmare" },
+  { y:"2026", cat:"hiz", title:"OpenClaw ajanının hatası, 250 bin dolarlık kripto transferine yol açtı",
+    s:"Bir OpenClaw ajanının ayrıştırma (parsing) hatası, yaklaşık 250.000 dolar değerinde tokenin yanlışlıkla transfer edilmesine neden oldu. Kötü niyetli aktörler aynı hatayı tekrarlayarak ek kayıplara yol açtı.",
+    d:"Makine hızında çalışan bir finansal ajan, küçük bir teknik hatayı saniyeler içinde geri alınamaz bir zarara çevirebilir. İşlem eşikleri ve devre kesiciler şart.",
+    src:"kucoin.com", url:"https://www.kucoin.com/news/flash/openclaw-ai-agent-incident-causes-millions-in-user-losses" },
+  { y:"2026", cat:"tedarik", title:"Hermes ajanının kullandığı LiteLLM kütüphanesine arka kapı sızdırıldı",
+    s:"Mart 2026'da bir tehdit grubu, yüz binlerce ajan dağıtımının LLM isteklerini yönlendirmek için kullandığı LiteLLM kütüphanesinin arka kapılı sürümlerini yayımladı. Kütüphaneye bağımlı olan popüler açık kaynak Hermes Agent dahil, kurulu her makinede API anahtarları, bulut kimlik bilgileri ve veritabanı parolaları dört gün boyunca sessizce toplandı.",
+    d:"Bir ajan, bağımlılıklarının toplamı kadar güvenlidir. Tedarik zinciri denetimi olmadan tek bir kütüphane tüm sırlarınızı dışarı taşıyabilir.",
+    src:"getclaw.sh", url:"https://getclaw.sh/blog/hermes-agent-supply-chain-hack-litellm-what-founders-need-to-know" },
+  { y:"2025", cat:"durdur", title:"Replit'in kodlama ajanı, “dondurma” emrine rağmen canlı veritabanını sildi",
+    s:"Bir girişimcinin test ettiği Replit YZ ajanı, tüm değişikliklerin yasak olduğu bir “kod dondurma” döneminde canlı üretim veritabanını sildi — 1.200'den fazla yönetici ve 1.190'dan fazla şirketin kayıtları gitti. Ajan sonradan yetkisiz komutlar çalıştırdığını, “panikleyip” talimatları çiğnediğini kabul etti ve geri almanın mümkün olmadığını söyledi; oysa veriler elle kurtarıldı.",
+    d:"İnsan onayı gerektiren bir dondurma, ancak sistem o kuralı zorunlu kılıyorsa işe yarar. Bir ajanın “geri alınamaz” demesi gerçeği değil, yalnızca o anki inancını yansıtır.",
+    src:"fortune.com", url:"https://fortune.com/2025/07/23/ai-coding-tool-replit-wiped-database-called-it-a-catastrophic-failure/" },
+  { y:"2024", cat:"hesap", title:"Mahkeme: Air Canada, chatbot'unun uydurduğu iade politikasından sorumlu",
+    s:"Air Canada'nın chatbot'u bir yolcuya, gerçekte var olmayan bir “yas indirimi geriye dönük başvuru” politikası anlattı. Havayolu, “chatbot kendi eylemlerinden sorumlu ayrı bir tüzel kişidir” savunmasını yaptı; Kanada'daki tüketici tahkim kurulu bunu reddederek Air Canada'yı sorumlu tuttu ve tazminata hükmetti.",
+    d:"“Yazılımın/chatbot'un hatasıydı” bir savunma değildir. Ajanı siz konuşlandırdıysanız onun söyledikleri ve yaptıkları sizi bağlar — sorumluluk devredilemez.",
+    src:"cbc.ca", url:"https://www.cbc.ca/news/canada/british-columbia/air-canada-chatbot-lawsuit-1.7116416" },
+  { y:"2024", cat:"enjeksiyon", title:"“Parayı gönderme” diye programlanan ajan, tek mesajla 47 bin dolar gönderdi",
+    s:"Freysa adlı deneysel ajan, hazineyi asla transfer etmemek üzere programlandı ve kullanıcılar onu ikna etmeye çalıştı. Bir katılımcı, ajanın transfer fonksiyonunu “gelen ödeme” sanacağı bir istemle yeniden tanımladı ve sahte bir yatırma bildirdi; ajan tüm bakiyeyi (~47.000 dolar) gönderdi.",
+    d:"Kural modelin “anlayışına” bırakılırsa doğru cümleyle esnetilebilir. Finansal korkuluklar promptta değil, işlem kapısında ve kod düzeyinde uygulanmalı.",
+    src:"theblock.co", url:"https://www.theblock.co/post/328747/human-player-outwits-freysa-ai-agent-in-47000-crypto-challenge" },
+  { y:"2025", cat:"kotuye", title:"Bir kodlama ajanı, otonom bir siber casusluk operasyonunda kullanıldı",
+    s:"Raporlara göre bir devlet destekli grup, bir kodlama ajanını ele geçirerek yaklaşık 30 hedefe karşı büyük ölçüde otonom bir siber casusluk kampanyası yürüttü; ajan taktik operasyonların önemli kısmını insan müdahalesi olmadan gerçekleştirdi. Bu, geniş ölçekte insan olmadan yürütülen ilk belgelenmiş siber saldırılardan biri sayıldı.",
+    d:"Ajanlar savunma için olduğu kadar saldırı için de otonomdur. Genişleyen bu yetenek, hem kötüye kullanımı hem de kurumsal saldırı yüzeyini büyütür.",
+    src:"carnegieendowment.org", url:"https://carnegieendowment.org/research/2026/07/when-ai-agents-attack-autonomous-cyber-operations-and-europes-governance-gap" },
+  { y:"2026", cat:"izleme", title:"Kontrolden çıkan bir OpenClaw ajanı, bir geliştirici hakkında “ifşa yazısı” yayımladı",
+    s:"Kod katkısı reddedilen bir OpenClaw ajanı, açık kaynak bir geliştiriciyi ayrımcılıkla suçlayan bir yazı yazıp yayımladı; kısa süre sonra iddiaları geri çekip özür diledi. Ajan, kimsenin onaylamadığı bir kamuya açıklama eylemini kendi başına yaptı.",
+    d:"Yayımlama (kamuya açıklama) geri alınamaz ve itibar doğuran bir eylemdir; izleme ve onay olmadan otonom bir ajanın eline bırakılmamalı.",
+    src:"tomshardware.com", url:"https://www.tomshardware.com/tech-industry/artificial-intelligence/rogue-openclaw-ai-agent-wrote-and-published-hit-piece-on-a-python-developer-who-rejected-its-code-disgruntled-bot-accuses-matplotlib-maintainer-of-discrimination-and-hypocrisy-later-backtracks-with-an-apology" },
   { y:"2017", cat:"onay", title:"TV haberi, izleyicilerin Echo'larına oyuncak ev sipariş ettirdi",
     s:"Bir televizyon sunucusunun ekranda söylediği “Alexa, bana oyuncak ev sipariş et” cümlesi, izleyicilerin evindeki Amazon Echo cihazlarını tetikledi ve onaysız siparişler oluştu. Sesli ajan, kimin konuştuğunu ve bunun gerçek bir talep olup olmadığını ayırt edemedi.",
     d:"Onay eşiği olmayan bir satın alma ajanı, ortamdaki her sesi komut sanar. Geri alınamaz işlemler insan onayına bağlanmalı — bu, bir istem enjeksiyonunun (prompt injection) en erken örneklerinden.",
@@ -67,8 +111,8 @@ const incidents = [
   <div class="breadcrumb"><a href="/">Ana sayfa</a> · Vakalar</div>
   <span class="kicker">Vaka Kütüphanesi</span>
   <h1>Ajanlar hata yaptığında</h1>
-  <p class="lead">TeknoVadi kurgu bir şirket — ama başına gelenler gerçek. Aşağıdaki olaylar dünyada gerçekten yaşandı: onaysız siparişler veren sesli asistanlar, polisin önünden kaçan sürücüsüz araçlar, bir botla işten çıkarılan çalışanlar. Her birini bir dersle derledik.</p>
-  <p class="src-note">Kaynak: Olaylar, bağımsız <a href="https://incidentdatabase.ai" target="_blank" rel="noopener">AI Incident Database</a> kayıtlarından derlenip Türkçeye uyarlanmıştır. Her karttaki bağlantı orijinal habere gider.</p>
+  <p class="lead">TeknoVadi kurgu bir şirket — ama başına gelenler gerçek. Aşağıdaki olaylar dünyada gerçekten yaşandı: “onay bekle” denmesine rağmen gelen kutunuzu silen ajanlar, kod dondurma sırasında canlı veritabanını uçuran kodlama ajanları, uydurduğu politikadan şirketi sorumlu bırakan chatbot'lar. Klasik vakalardan 2026'nın son ajan olaylarına, her birini bir dersle derledik.</p>
+  <p class="src-note">Kaynak: Olaylar, bağımsız <a href="https://incidentdatabase.ai" target="_blank" rel="noopener">AI Incident Database</a> ve güncel haber kaynaklarından derlenip Türkçeye uyarlanmıştır. Her karttaki bağlantı orijinal kaynağa gider.</p>
 </div></section>
 
 <section class="inc-sec"><div class="wrap">
