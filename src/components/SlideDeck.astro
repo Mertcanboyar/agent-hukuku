@@ -1,0 +1,77 @@
+---
+// slides: [{ t: "Başlık", h: "<p>gövde HTML</p>", k?: "üst etiket", d?: true(dark) }]
+const { slides = [], label = "Slayt" } = Astro.props;
+---
+<div class="deck" data-deck>
+  <div class="deck-stage">
+    <div class="deck-track" data-track>
+      {slides.map((s, i) => (
+        <section class={`slide${s.d ? " dark" : ""}`}>
+          <div class="slide-card">
+            <div class="slide-top"><span class="slide-kick">{s.k ?? label}</span><span class="slide-no">{String(i + 1).padStart(2, "0")} / {String(slides.length).padStart(2, "0")}</span></div>
+            <h3 set:html={s.t}></h3>
+            <div class="slide-body" set:html={s.h}></div>
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+  <div class="deck-nav">
+    <button class="deck-btn" data-prev aria-label="Önceki slayt">←</button>
+    <div class="deck-dots">{slides.map((_, i) => <button class={`dot${i === 0 ? " on" : ""}`} data-go={i} aria-label={`Slayt ${i + 1}`}></button>)}</div>
+    <button class="deck-btn" data-next aria-label="Sonraki slayt">→</button>
+    <span class="deck-count"><b data-cur>1</b> / {slides.length}</span>
+  </div>
+</div>
+
+<style>
+  .deck{margin:22px 0 6px}
+  .deck-stage{border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--sh)}
+  .deck-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+  .deck-track::-webkit-scrollbar{display:none}
+  .slide{min-width:100%;scroll-snap-align:start;box-sizing:border-box}
+  .slide-card{aspect-ratio:16/9;min-height:340px;max-height:560px;overflow:auto;padding:40px 46px;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(158deg,#ffffff 0%,var(--bg-2) 100%)}
+  .slide.dark .slide-card{background:linear-gradient(152deg,#15294a 0%,#0c1526 100%);color:#eaf1f9}
+  .slide-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .slide-kick{font:700 11px var(--sans);letter-spacing:.09em;text-transform:uppercase;color:var(--accent)}
+  .slide.dark .slide-kick{color:#7fb6e0}
+  .slide-no{font:700 12px var(--sans);color:var(--muted)}
+  .slide.dark .slide-no{color:#7f95b3}
+  .slide-card h3{font-family:var(--serif);font-size:1.72rem;line-height:1.18;color:var(--ink);margin:0 0 14px;letter-spacing:-.01em}
+  .slide.dark .slide-card h3{color:#fff}
+  .slide-body{font-size:1.03rem;line-height:1.62;color:var(--slate)}
+  .slide.dark .slide-body{color:#c7d6e8}
+  .slide-body :global(p){margin:0 0 .7rem}
+  .slide-body :global(ul){margin:.2rem 0 0;padding-left:1.15em}
+  .slide-body :global(li){margin:.34em 0}
+  .slide-body :global(strong){color:var(--ink)}
+  .slide.dark .slide-body :global(strong){color:#fff}
+  .slide-body :global(.big){font-family:var(--serif);font-size:1.35rem;line-height:1.35;color:var(--ink)}
+  .slide.dark .slide-body :global(.big){color:#eaf1f9}
+  .deck-nav{display:flex;align-items:center;gap:14px;margin-top:14px}
+  .deck-btn{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--accent);font-size:1.15rem;cursor:pointer;box-shadow:var(--sh-sm);transition:background .15s}
+  .deck-btn:hover{background:var(--bg-2)}
+  .deck-dots{display:flex;gap:7px;flex:1;justify-content:center;flex-wrap:wrap}
+  .dot{width:8px;height:8px;border-radius:50%;border:0;background:var(--line-2);cursor:pointer;padding:0;transition:width .2s,background .2s}
+  .dot.on{background:var(--accent);width:22px;border-radius:4px}
+  .deck-count{font:600 13px var(--sans);color:var(--muted);white-space:nowrap}
+  .deck-count b{color:var(--ink)}
+  @media(max-width:640px){.slide-card{padding:26px 24px;aspect-ratio:auto;min-height:0}.slide-card h3{font-size:1.35rem}.slide-body{font-size:.96rem}}
+</style>
+
+<script>
+  function initDeck(deck){
+    const track = deck.querySelector('[data-track]');
+    const dots = [...deck.querySelectorAll('.dot')];
+    const cur = deck.querySelector('[data-cur]');
+    const n = dots.length;
+    const at = () => Math.round(track.scrollLeft / track.clientWidth);
+    const update = () => { const i = Math.min(Math.max(at(),0),n-1); dots.forEach((d,j)=>d.classList.toggle('on', j===i)); if(cur) cur.textContent = String(i+1); };
+    deck.querySelector('[data-prev]').addEventListener('click', ()=> track.scrollBy({left:-track.clientWidth, behavior:'smooth'}));
+    deck.querySelector('[data-next]').addEventListener('click', ()=> track.scrollBy({left: track.clientWidth, behavior:'smooth'}));
+    dots.forEach((d,j)=> d.addEventListener('click', ()=> track.scrollTo({left: j*track.clientWidth, behavior:'smooth'})));
+    let raf; track.addEventListener('scroll', ()=>{ cancelAnimationFrame(raf); raf = requestAnimationFrame(update); });
+    update();
+  }
+  document.querySelectorAll('[data-deck]').forEach(initDeck);
+</script>

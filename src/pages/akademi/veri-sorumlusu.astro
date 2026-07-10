@@ -1,0 +1,63 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 1.2 · Temeller", t: "Veri sorumlusu sizsiniz", h: "<p class='big'>Ajan kullanmak sorumluluğu <strong>devretmez</strong>.</p>" },
+  { t: "Vaka: yanlış kutuya giden hayat", h: "<p>Bir destek ajanı, isim benzerliği yüzünden bir talebe <strong>başka bir müşterinin</strong> bordro raporunu ekledi: dört yüz kişinin kimlik numarası ve maaşı. Şirketin ilk tepkisi tanıdıktı: “Yazılım firmasının hatası.”</p>" },
+  { t: "“Kullanıcıyız” diye bir savunma yok", h: "<p class='big'>“Kimin ajanı olduğunun önemi yok. O verileri işleme kararını <strong>siz</strong> verdiniz. Kuruma karşı masada oturacak olan yazılım firması değil — sizsiniz.”</p>" },
+  { t: "İki temel rol", h: "<ul><li><strong>Veri sorumlusu:</strong> verinin <em>neden</em> ve <em>nasıl</em> işleneceğine karar veren — ev sahibi.</li><li><strong>Veri işleyen:</strong> onun adına, verdiği yetkiyle işleyen — temizlik şirketi.</li></ul><p>Ajanı hangi amaçla ve hangi veriyle çalıştıracağınıza siz karar verdiğiniz an, veri sorumlusu olursunuz.</p>" },
+  { t: "Zincirde kim var? Etkileyen çok, sorumlu tek", h: "<ul><li><strong>Model sağlayıcı</strong> — “beyni” üretir.</li><li><strong>Platform / ürün tedarikçisi</strong> — teknik sınırları çizer.</li><li><strong>Entegratör</strong> — sistemi araçlarınıza bağlar.</li></ul><p>Üçü de etkiler; ama birincil hesap verebilirlik, ajanı <strong>işine konuşlandıran</strong> şirkettedir.</p>" },
+  { d: true, t: "“Sistem karmaşıktı” bir savunma değildir", h: "<p>KVKK'nın kritik ilkesi: etken sistemlerin yapısal karmaşıklığı — kara kutu, çok aracılı mimari — veri koruma kurallarının <strong>uygulanabilirliğini ortadan kaldırmaz</strong>. “Kimin ne yaptığı belli değil” bir savunma değil, yönetişimsizliğin itirafıdır.</p>" },
+  { t: "İkili şapka: SaaS ve hizmet firmaları", h: "<p>Müşterileriniz adına veri tutuyorsanız iki şapkanız olur:</p><ul><li>Kendi müşteri ve çalışan verinizde → <strong>veri sorumlusu</strong>.</li><li>Müşterinizin size yüklediği veride → onun adına işleyen <strong>veri işleyen</strong>.</li></ul>" },
+  { t: "Özet: sorumluluğun üç sahibi", h: "<p>Her ajan için üç sahiplik <strong>isimle</strong> atanır: <strong>izleme</strong>, <strong>onay</strong>, <strong>müdahale</strong>. Ve unutmayın:</p><p class='big'>Ajanı, modeli, entegratörü kiralarsın. Kiralayamayacağın tek şey <strong>sorumluluktur</strong>.</p>" },
+];
+---
+<Base title="Ders 1.2 — Veri Sorumlusu Sizsiniz | Agent Hukuku Akademi" description="Ajan hata yaptığında sorumluluk kimde? Veri sorumlusu ve veri işleyen ayrımı, zincirdeki aktörler ve “yazılım firmasının hatası” neden bir savunma değildir.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 1 — Temeller</div><span class="tag">Ders 1.2</span>
+    <h1>Veri sorumlusu sizsiniz</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Bir ajan hata yaptığında ilk refleks “tedarikçinin sorunu” demektir. Bu ders, o refleksi bitirir: KVKK'da sorumluluğun kimde olduğunu, veri sorumlusu ile veri işleyen ayrımını ve ajanı konuşlandıran şirketin neden birincil muhatap olduğunu öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>“Kullanıcıyız” diye bir savunma yok</h2>
+    <p>Pilot programın altıncı haftasında bir destek ajanı, “geçen ayın bordro raporunu gönderir misiniz?” talebini cevaplarken isim benzerliği yüzünden başka bir müşterinin bordro raporunu ekledi — dört yüz kişinin kimlik numarası ve maaşı. Şirketin ilk tepkisi kararlıydı: “Yazılım firmasını arayın, onların ajanı, onların hatası.” Avukatın cevabı bu refleksi bitirdi: “Kimin ajanı olduğunun önemi yok. O verileri işleme kararını <strong>siz</strong> verdiniz. Kuruma karşı masada oturacak olan sizsiniz.”</p>
+    <h2>Veri sorumlusu kimdir, neden sizsiniz?</h2>
+    <p>KVKK iki temel rol tanır. <strong>Veri sorumlusu</strong>, kişisel verinin neden ve nasıl işleneceğine karar verendir. <strong>Veri işleyen</strong>, onun adına, verdiği yetkiye dayanarak işleyendir. Benzetme: veri sorumlusu ev sahibi, veri işleyen temizlik şirketidir. Temizlikçi vazoyu kırarsa aranızdaki sözleşmeye göre tazmin edersiniz — ama komşunun tavanına akan su için muhatap ev sahibidir. Ajanı hangi amaçla ve hangi veriyle çalıştıracağınıza siz karar verdiğiniz an, veri sorumlusu olursunuz; ajanın kodunu kimin yazdığı bu sıfatı değiştirmez.</p>
+    <h2>Zincirde kim var? Etkileyen çok, sorumlu tek</h2>
+    <p>Bir ajanın arkasında tipik olarak üç aktör durur: modelin beynini üreten <strong>model sağlayıcı</strong>, ürünün teknik sınırlarını çizen <strong>platform tedarikçisi</strong> ve sistemi araçlarınıza bağlayan <strong>entegratör</strong>. Üçü de davranışı etkiler; ama birincil hesap verebilirlik, ajanı işine konuşlandıran şirkettedir — çünkü yetkileri o tanımlar, amaçları o onaylar.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>KVKK rehberinin kritik ilkesi: etken sistemlerin yapısal karmaşıklığı, veri koruma kurallarının <strong>uygulanabilirliğini ortadan kaldırmaz</strong>. “Sistem o kadar karmaşık ki kimin ne yaptığı belli değil” bir savunma değil, yönetişimsizliğin itirafıdır.</div>
+    <h2>İkili şapka ve üç sahiplik</h2>
+    <p>Müşterileriniz adına veri tutuyorsanız (SaaS, muhasebe bürosu, ajans...), kendi verinizde <strong>veri sorumlusu</strong>, müşterinizin verisinde onun adına işlem yapan <strong>veri işleyen</strong> olursunuz. Ve “şirket sorumludur” cümlesi doğru ama işlevsizdir; olgun yönetişimde her ajan için üç sahiplik isimle atanır: davranışı kim izliyor, yüksek etkili işlemleri kim onaylıyor, ters giderse kim durdurup araştırıyor.</p>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Ajanı konuşlandıran şirket veri sorumlusudur; sorumluluk devredilemez.</li>
+        <li>Zincirde çok aktör vardır ama birincil muhatap sizsiniz.</li>
+        <li>“Sistem karmaşıktı” bir savunma değil, bir itiraftır.</li>
+        <li>Her ajan için üç sahip atayın: izleme, onay, müdahale.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/ajan-nedir">← Önceki: Ajan nedir?</a>
+    <a class="ln-next" href="/akademi/bes-ilke">Sonraki ders: Beş ilke →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

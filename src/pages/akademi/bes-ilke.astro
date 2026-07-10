@@ -1,0 +1,64 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 1.3 · Temeller", t: "Beş İlke", h: "<p class='big'>Sorumlu · Güvenli · Şeffaf · Uyumlu · Hesap Verebilir</p><p>Kitabın ve yönetişimin omurgası.</p>" },
+  { t: "Vaka: karne günü", h: "<p>Bir yatırım turu öncesi avukat, şirkete beş satırlık bir karne çıkardı: <strong>Sorumlu (D)</strong>, Güvenli (E), <strong>Şeffaf (C)</strong>, Uyumlu (D), Hesap Verebilir (E). “İki zayıf, iki geçer, bir orta. Fonun avukatları bu tabloyu benden hızlı çıkarır.”</p>" },
+  { t: "1. Sorumlu", h: "<p>Her ajanın bir <strong>amacı</strong>, bir <strong>görev tanımı</strong> ve isimle atanmış bir <strong>sahibi</strong> vardır. Kimsenin ajanı “öylesine” çalışmaz.</p>" },
+  { t: "2. Güvenli", h: "<p>Ajan yalnızca işi için <strong>gerekli veriye, gerekli yetkiyle, gerekli süre</strong> boyunca erişir; saldırıya ve hataya karşı korkulukları vardır.</p>" },
+  { t: "3. Şeffaf", h: "<p>Ajanla muhatap olan herkes — müşteri, çalışan, ortak — bunu <strong>bilir</strong>. Sistemin ne yaptığı izlenebilir, kararı açıklanabilir.</p>" },
+  { t: "4. Uyumlu", h: "<p>İşleme şartları, aydınlatma metinleri, aktarım rejimi, VERBİS, sözleşmeler: hukukun istediği ne varsa <strong>kâğıtta değil işleyişte</strong> yerindedir.</p>" },
+  { t: "5. Hesap Verebilir", h: "<p>“Ne oldu, neden oldu, kimin adına oldu?” sorusuna <strong>kayıtla, kanıtla, dakikasıyla</strong> cevap verilebilir.</p>" },
+  { t: "KVKK m.4 zaten bunu söylüyor", h: "<p>Beş ilke gökten inmedi. KVKK'nın 4. maddesi her işleme için genel ilkeleri zaten sayar.</p><p class='big'>Ajan yönetişimi, m.4'ün <strong>makine hızına uyarlanmasıdır</strong>. Yeni bir hukuk icat etmiyoruz.</p>" },
+  { d: true, t: "Zincir, menü değil", h: "<p class='big'>Dördü tam, biri sıfırsa zincir orada kopar. Karnedeki <strong>en düşük notunuz, gerçek notunuzdur</strong>.</p><p>Uygulama sırası hep aynı: envanter → yetki → onay → kayıt → belge. Çünkü temelsiz duvar olmaz.</p>" },
+];
+---
+<Base title="Ders 1.3 — Beş İlke: Yönetişimin Omurgası | Agent Hukuku Akademi" description="Sorumlu, güvenli, şeffaf, uyumlu, hesap verebilir: ajan yönetişiminin beş ilkesi, KVKK m.4 ile eşleşmesi ve doğru uygulama sırası.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 1 — Temeller</div><span class="tag">Ders 1.3</span>
+    <h1>Beş ilke: yönetişimin omurgası</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~8 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Yönetişim çerçevesi çoktur; bu ders hepsinin kesişimindeki beş kavramı Türkçe iş hayatının diline çevirir. Beş ilkeyi, bunların KVKK m.4 karşılıklarını ve neden bir “menü” değil bir “zincir” olduklarını öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Neden bu beş?</h2>
+    <p>Beş ilke şu sorulara indirgenebilir: <strong>Sorumlu</strong> — her ajanın amacı, görev tanımı ve isimli sahibi var mı? <strong>Güvenli</strong> — ajan yalnızca gerekli veriye, gerekli yetkiyle mi erişiyor? <strong>Şeffaf</strong> — muhatap olan herkes ajanla konuştuğunu biliyor mu, kararlar izlenebilir mi? <strong>Uyumlu</strong> — işleme şartı, aydınlatma, aktarım rejimi ve sözleşmeler işleyişte yerinde mi? <strong>Hesap Verebilir</strong> — “ne oldu, neden oldu, kim adına oldu?” sorusuna kayıtla cevap verebiliyor musunuz?</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Beş ilke bir menü değil, bir <strong>zincirdir</strong>. Dördü tam, biri sıfırsa zincir orada kopar. Karnedeki en düşük notunuz, gerçek notunuzdur.</div>
+    <h2>KVKK zaten bunu söylüyor: m.4 eşleştirmesi</h2>
+    <p>Bu ilkeler gökten inmedi. KVKK'nın 4. maddesi her kişisel veri işleme faaliyeti için genel ilkeleri zaten sayar: hukuka ve dürüstlüğe uygunluk, doğruluk ve güncellik, belirli-açık-meşru amaç, amaçla sınırlılık ve ölçülülük, gerektiği süre kadar saklama. Ajan diline çevrildiğinde bunlar sırasıyla işleme şartı ve dürüstlük, halüsinasyon yönetimi, yazılı görev tanımı, en az yetki ve saklama sürelerine karşılık gelir. Yani <strong>ajan yönetişimi, m.4'ün makine hızına uyarlanmasıdır</strong> — yeni bir hukuk icat etmiyoruz.</p>
+    <h2>Nereden başlamalı: görünürlük önce gelir</h2>
+    <p>Beş ilkenin uygulama sırası hep aynıdır, çünkü <strong>göremediğinizi yönetemezsiniz</strong>: önce <strong>envanter</strong> (neyim var), sonra <strong>görev tanımı ve yetki</strong> (ne yapmalı, neye erişmeli), sonra <strong>insan onayı ve durdurma</strong> (nerede insan devrede), sonra <strong>kayıt, şeffaflık, izleme</strong> (olanı görüyor muyum) ve en son <strong>belge ve sözleşme katmanı</strong> (hukuki çatı). “En son” demek “önemsiz” demek değil; “temelsiz duvar olmaz” demektir.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Öz değerlendirmede “5 puan”ın tanımına dikkat: “<strong>kanıtlayabilirim</strong>.” Yönetişimde var olmakla kanıtlanabilir olmak arasındaki fark, denetim günü ortaya çıkar. Kanıtsız “var”, denetçi dilinde “yok” demektir.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Beş ilke: sorumlu, güvenli, şeffaf, uyumlu, hesap verebilir.</li>
+        <li>Hepsi KVKK m.4'ün ajanlara uyarlanmış hâlidir.</li>
+        <li>Zincir kuralı: en düşük notunuz gerçek notunuzdur.</li>
+        <li>Uygulama sırası: envanter → yetki → onay → kayıt → belge.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="article-cta"><div><h3>Kendi karnenizi çıkarın</h3><p>15 soruda beş ilkede şirketinizin olgunluk karnesini ve öncelik planınızı alın.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/veri-sorumlusu">← Önceki: Veri sorumlusu sizsiniz</a>
+    <a class="ln-next" href="/akademi">Seviye 2 yakında — Akademiye dön →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

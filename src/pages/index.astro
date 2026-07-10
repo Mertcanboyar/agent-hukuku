@@ -95,7 +95,20 @@ import Footer from "../components/Footer.astro";
         <div class="acc-ex"><span>Kitaptan vaka</span>Kampanya ajanı gece yarısı hatalı fiyatla ürünleri <b>%90 indirimle</b> satmaya başladı — ve o gece kimse ajanı nasıl durduracağını bilmiyordu. Doğru refleks: önce durdur, sonra öğren, belgele, dürüstçe bildir.</div></div>
     </details>
   </div>
-</div></section><section id="kitap"><div class="wrap"><div class="book reveal">
+</div></section><section class="aca-teaser"><div class="wrap"><div class="aca-band reveal">
+  <div class="aca-band-txt">
+    <span class="kicker" style="color:#7fb6e0">Akademi</span>
+    <h2>Sıfırdan ileri seviyeye: ajan hukuku eğitimi</h2>
+    <p>Temellerden KVKK uyumuna ve ileri yönetişime uzanan bir öğrenme yolu. Her ders slaytlı, sade ve ücretsiz — video dersler yakında.</p>
+    <a class="btn btn-primary" href="/akademi">Öğrenmeye başla →</a>
+  </div>
+  <div class="aca-band-steps">
+    <div><span>01</span>Temeller</div>
+    <div><span>02</span>Ajanı güvenli kurmak</div>
+    <div><span>03</span>KVKK &amp; uyum</div>
+    <div><span>04</span>İleri konular</div>
+  </div>
+</div></div></section><section id="kitap"><div class="wrap"><div class="book reveal">
   <div class="cov"><img src="/kitap-kapak.png" alt="Yapay Zeka Ajanları ve KVKK kitabı kapağı"></div>
   <div><span class="kicker">Ücretsiz e-kitap · ~200 sayfa</span>
     <h2>Yapay Zeka Ajanları &amp; KVKK</h2>
@@ -197,5 +210,12 @@ window.addEventListener('DOMContentLoaded',function(){
   @media(max-width:900px){.inc-teaser-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:760px){.explain-grid{grid-template-columns:1fr}.traits{grid-template-columns:repeat(2,1fr)}.tmpl-how{grid-template-columns:1fr}.acc-body{padding-left:20px}}
   @media(max-width:520px){.inc-teaser-grid{grid-template-columns:1fr}}
+  .aca-band{display:grid;grid-template-columns:1.5fr 1fr;gap:32px;background:linear-gradient(150deg,#15294a 0%,#0c1526 100%);border-radius:22px;padding:38px 40px;box-shadow:var(--sh-lg)}
+  .aca-band-txt h2{color:#fff;font-family:var(--serif);font-size:1.7rem;line-height:1.2;margin:.4rem 0 .7rem}
+  .aca-band-txt p{color:#c7d6e8;line-height:1.6;margin:0 0 1.3rem;max-width:440px}
+  .aca-band-steps{display:flex;flex-direction:column;gap:10px;justify-content:center}
+  .aca-band-steps div{display:flex;align-items:center;gap:14px;color:#eaf1f9;font-family:var(--serif);font-size:1.05rem;padding:11px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:12px}
+  .aca-band-steps span{font:700 13px var(--sans);color:#7fb6e0;min-width:22px}
+  @media(max-width:760px){.aca-band{grid-template-columns:1fr;padding:28px 24px}}
 </style>
 </Base>

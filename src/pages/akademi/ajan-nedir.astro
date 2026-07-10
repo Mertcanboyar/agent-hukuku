@@ -1,0 +1,66 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 1.1 · Temeller", t: "Ajan nedir?", h: "<p class='big'>Chatbot'tan ajana: konuşan yazılımdan <strong>yapan</strong> yazılıma.</p>" },
+  { t: "Chatbot mu, ajan mı?", h: "<ul><li><strong>Chatbot:</strong> soru gelir, cevap gider. Bir <em>çıktı</em> üretir; o çıktıyla ne yapılacağına insan karar verir.</li><li><strong>Ajan:</strong> hedef alır ve dört ayrı sistemde dört ayrı <em>eylem</em> yapar — kargo oluşturur, e-posta gönderir, CRM'e not düşer. Araya insan girmeden.</li></ul>" },
+  { t: "Fark tek kelimede: <em>eylem</em>", h: "<p>Klasik yapay zekada <strong>çıktı riskini</strong> yönetirsiniz: “cevap doğru mu?” Ajanda buna bir kat eklenir: <strong>eylem riski</strong> — “ne yapabilir, yaptığında kim hesap verir?”</p><p class='big'>Cevabı yanlış chatbot sizi utandırır; eylemi yanlış ajan paranızı gönderir.</p>" },
+  { t: "Resmî sözlük", h: "<p>KVKK, Şubat 2026 rehberinde iki terimi benimsedi:</p><ul><li><strong>Etken YZ</strong> = sistem (baş şef): hedefi ve iş bölümünü yönetir.</li><li><strong>YZ Aracısı</strong> = bileşen (aşçı): dar, tanımlı bir görevi icra eder.</li></ul><p>Günlük dilde herkes “ajan” der; sözleşmede ve denetimde bu resmî terimleri görürsünüz.</p>" },
+  { t: "Bir ajanı ajan yapan dört özellik", h: "<ul><li><strong>Otonomi</strong> — adım adım talimat beklemeden görev yürütür.</li><li><strong>Uyarlanabilirlik</strong> — koşul değişince davranışını anında değiştirir.</li><li><strong>Öğrenme</strong> — geçmiş etkileşimlerden ders çıkarır.</li><li><strong>Orkestrasyon</strong> — birden çok aracıyı ve adımı koordine eder.</li></ul>" },
+  { d: true, t: "Turnusol sorusu", h: "<p class='big'>“Bu sistem, benim onayım olmadan, dış dünyada sonuç doğuran bir işlem başlatabilir mi?”</p><p>Cevap <strong>evet</strong>se, elinizde bir ajan var — ve gerisi sizi ilgilendiriyor. Aynı ürün, “taslak-onay” modunda ajan sayılmayabilir; “tam otonom” düğmesine basıldığı an tablo değişir.</p>" },
+  { t: "Ne sihir, ne balon", h: "<ul><li>Kısa ve tanımlı görevlerde insana yakın, hatta üstün.</li><li>Uzun, açık uçlu görevlerde hâlâ zayıf.</li><li>Maliyet farkı büyük → rakiplerin denemesi kaçınılmaz.</li></ul><p>Doğru okuma: bu teknoloji dar görevlerde bugün işe yarar; o hâlde <strong>bugünden, kontrollü biçimde</strong> öğrenmeye başlayın.</p>" },
+  { t: "Özet", h: "<p>Chatbot konuşur, ajan <strong>yapar</strong>. Ve bir şey <em>yapabilen</em> her şeyin — insan ya da yazılım — bir görev tanımına, bir amirine ve bir kayıt defterine ihtiyacı vardır.</p>" },
+];
+---
+<Base title="Ders 1.1 — Ajan Nedir? Chatbot'tan Ajana | Agent Hukuku Akademi" description="Chatbot ile yapay zeka ajanı arasındaki fark, KVKK'nın resmî terimleri ve bir sistemin gerçekten ajan olup olmadığını anlamanın turnusol testi.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 1 — Temeller</div><span class="tag">Ders 1.1</span>
+    <h1>Ajan nedir? Chatbot'tan ajana</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~8 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Bu alandaki en pahalı ilk hata, chatbot ile ajanı aynı sanmaktır. Bu derste ikisini kesin biçimde ayıracak, KVKK'nın resmî terimlerini öğrenecek ve elinizdeki sistemin gerçekten “ajan” olup olmadığını beş dakikada test edeceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Konuşan yazılımdan yapan yazılıma</h2>
+    <p>İki yazılımı yan yana koyalım. <strong>Sohbet robotu</strong>: “Kargom nerede?” — “Kargonuz dağıtımda.” İşlem biter; robot bir çıktı üretmiştir, o çıktıyla ne yapılacağına insan karar verir. <strong>Ajan</strong>: “Bu müşterinin sorununu çöz” hedefini alır, kargo sistemine bakar, gecikmeyi görür, yeni kargo oluşturur, özür e-postası yazıp gönderir, CRM'e not düşer. Dört ayrı sistemde dört ayrı <strong>eylem</strong> — araya insan girmeden. Bütün mesele bu farkta: chatbot konuşur, ajan yapar.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Klasik yapay zekada yönettiğiniz şey <strong>çıktı riskidir</strong>. Ajanlarda buna <strong>eylem riski</strong> eklenir: “Bu sistem ne yapabilir ve yaptığında kim hesap verir?” Cevabı yanlış chatbot sizi utandırır; eylemi yanlış ajan paranızı gönderir.</div>
+    <h2>Resmî sözlük: Etken YZ ve YZ Aracısı</h2>
+    <p>Kişisel Verileri Koruma Kurumu, Şubat 2026 rehberinde “Agentic AI” için <strong>Etken Yapay Zekâ</strong>, “AI Agent” için <strong>YZ Aracısı</strong> karşılıklarını benimsedi. Kurumun benzetmesi akılda kalıcı: bir restoranda <strong>baş şef</strong> menüyü ve iş bölümünü yönetir — Etken YZ sistemi budur; <strong>aşçılar</strong> ise her biri kendi tezgâhında tanımlı işi yapar — YZ Aracıları da öyle. Günlük dilde herkes “ajan” der, ama sözleşmelerde ve denetimlerde resmî terimlerle karşılaşırsınız.</p>
+    <h2>Bir ajanı ajan yapan dört özellik</h2>
+    <p>Rehber, etken sistemleri dört unsurla tanımlar: <strong>otonomi</strong> (adım adım talimat beklemeden görev yürütme), <strong>uyarlanabilirlik</strong> (koşul değişince davranışı gerçek zamanlı değiştirme), <strong>öğrenme</strong> (geçmiş etkileşimlerden ders çıkarma) ve <strong>orkestrasyon</strong> (çok adımlı iş akışlarını ve birden çok aracıyı koordine etme).</p>
+    <h2>“Bizimki ajan mı?” — beş dakikalık test</h2>
+    <p>Turnusol sorusu tek cümledir: <strong>“Bu sistem, benim onayım olmadan, dış dünyada sonuç doğuran bir işlem başlatabilir mi?”</strong> Cevap evetse, elinizde bir ajan var. Adayları puanlayıp sıralayan bir tarama aracı ya da eşik aşılınca “şunu yapmalısınız” diyen bir bildirim etken değildir — öneri, eylem değildir. Ama dikkat: aynı ürün, kurulum tercihine göre etken de olabilir olmayan da. Soru ürüne değil, <strong>yapılandırmaya</strong> sorulur.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Tedarikçi sunumunda tek soru sihirlidir: “Tam otonom modda, sistemin yapabileceği <strong>en pahalı hata</strong> nedir?” Cevabın netliği, ürünün olgunluğu hakkında broşürün tamamından fazlasını söyler.</div>
+    <h2>Ne sihir, ne balon</h2>
+    <p>Gerçek, fuar heyecanı ile umursamazlık arasında bir yerde: ajanlar kısa ve tanımlı görevlerde bugün işe yarar, uzun ve açık uçlu görevlerde henüz zayıftır; ama maliyet farkı o kadar büyük ki denenmesi kaçınılmazdır. Doğru tutum, bu teknolojiyi bugünden <strong>kontrollü biçimde</strong> öğrenmeye başlamaktır.</p>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Chatbot çıktı üretir; ajan eylem yapar — fark eylemdedir.</li>
+        <li>Etken YZ = sistem (baş şef), YZ Aracısı = bileşen (aşçı).</li>
+        <li>Ajanı ajan yapan dört unsur: otonomi, uyarlanabilirlik, öğrenme, orkestrasyon.</li>
+        <li>Turnusol testi: onayım olmadan sonuç doğuran işlem başlatabilir mi?</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi">← Akademi</a>
+    <a class="ln-next" href="/akademi/veri-sorumlusu">Sonraki ders: Veri sorumlusu sizsiniz →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>
