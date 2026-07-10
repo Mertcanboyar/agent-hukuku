@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 4.1 · İleri Konular", t: "Kayıt ve denetim izi", h: "<p class='big'>Hesap verebilirlik = <strong>hatırlayabilirlik</strong>.</p>" },
+  { t: "Vaka: “verilerime kim baktı?”", h: "<p>Bir m.11 talebi geldi: “son bir yılda verilerime kim erişti, YZ işledi mi, aktarıldı mı?” Kayıtlar 30 gün geriye gidiyordu ve <strong>kimin</strong> verisine dokunulduğunu göstermiyordu. “Cevap verecek bilgimiz yok değil — cevap verecek <em>kaydımız</em> yok.”</p>" },
+  { t: "Neyi kaydetmeli: üçlü soru", h: "<ul><li><strong>Ne oldu?</strong> Hangi araç, hangi veri, hangi sonuç.</li><li><strong>Neden oldu?</strong> Hangi görev, kural, girdi — karar zinciri.</li><li><strong>Kimin adına oldu?</strong> Hangi ajan (kendi kimliğiyle), kimin işlemi, hangi yetkiyle.</li></ul>" },
+  { t: "Beş dakika testi", h: "<p class='big'>“Bu ajan, dün 14:00–15:00 arasında kimlerin verisine dokundu?”</p><p>Bu soruya beş dakikada cevap veremiyorsanız, kayıtlarınız var ama <strong>kaydınız</strong> yok.</p>" },
+  { t: "Onay ve retler: altın kayıtlar", h: "<p>Her onaya düşen işlem için: kim onayladı/reddetti, ne zaman, hangi gerekçeyle. Bu, insan gözetiminin hem <strong>var</strong> hem <strong>anlamlı</strong> olduğunun tek inandırıcı kanıtıdır (reddedilen işlem = karar değiştiren gözetim).</p>" },
+  { t: "Kayıtların kendisi de kişisel veridir", h: "<p>“Destek-1, 14:32'de Ayşe Yılmaz'ın kaydını okudu” satırı, Ayşe Yılmaz hakkında bir veridir. Yani kayıtlarınızın da bir <strong>erişim politikası</strong>, <strong>saklama süresi</strong> ve <strong>maskelemesi</strong> olmalı.</p>" },
+  { t: "Ne kadar saklamalı?", h: "<p>Her kayıt türü için: amaç + makul ömür + mevzuat. Süre dolunca silme <strong>otomatik</strong>, kayıt deposu mümkünse <strong>yalnızca ekle</strong> (append-only) ve değiştirilemez olmalı.</p>" },
+  { d: true, t: "Özet", h: "<p>Kayıt, geçmişe dönük sigortadır; primi bugün ödenir.</p><p class='big'>Denetim günü inanılan şey, hatırladığınız değil <strong>kaydettiğinizdir</strong>.</p>" },
+];
+---
+<Base title="Ders 4.1 — Kayıt ve Denetim İzi | Agent Hukuku Akademi" description="“Ne oldu, neden oldu, kimin adına oldu” üçlüsünü kaydetmek, onay/ret kayıtları, kayıtların kendisini KVKK'ya uydurmak ve saklama süreleri.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 4 — İleri Konular</div><span class="tag">Ders 4.1</span>
+    <h1>Kayıt ve denetim izi</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Seviye 4, olgun yönetişimin ileri katmanını kuruyor — ve temeli kayıttır. Bu derste “ne oldu, neden oldu, kimin adına oldu” üçlüsünü, onay kayıtlarının değerini ve kayıtların kendisinin neden KVKK'ya tabi olduğunu öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Hesap verebilirlik = hatırlayabilirlik</h2>
+    <p>İyi kayıt düzeninin ölçüsü tektir: bir olaydan altı ay sonra üç soruya dakikasıyla cevap verebilmek — ne oldu, neden oldu, kimin adına oldu. “Giriş yapıldı, sorgu çalıştı” düzeyi yetmez; kimin verisine dokunulduğu görünmüyorsa m.11 talebine cevap yoktur. Ajanın kendi kimliği (Ders 2.3) burada meyvesini verir: çok aracılı yapılarda hangi kararın hangi aracıya ait olduğu sonradan tespit edilemeyebilir — bu yüzden anında kaydedilir.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Onay ve ret kayıtları, kayıt düzeninizin en değerli parçasıdır: insan gözetiminin hem var olduğunu hem anlamlı olduğunu birlikte kanıtlar. Denetimde “insan gözetimi vardı” cümlesinin tek inandırıcı dayanağı, gerekçesiyle kaydedilmiş retlerdir.</div>
+    <h2>Kayıtların kendisi de kişisel veridir</h2>
+    <p>Erişim kayıtlarınız kişisel veri doludur; yani onların da bir erişim politikası, saklama süresi ve maskelemesi olmalı. İyi tasarımda log satırı “MÜŞTERİ-4521'in kaydı okundu” der; gerçek kimlik, çok daha dar erişimli ayrı bir kasada durur. Saklama için her kayıt türüne amaç + makul ömür + mevzuat sorusunu sorun; süre dolunca silme otomatik olsun. Ve kayıt deposu mümkünse “yalnızca ekle” çalışsın — kanıtları koruyamayan sistem hiçbir şeyi kanıtlayamaz.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>“Her şeyi sonsuza kadar kaydedelim” refleksi, veri minimizasyonunun kayıt katmanındaki ihlalidir. Kayıt düzeni de m.4'e tabidir: amaçla bağlantılı, sınırlı, ölçülü — ve süreli. Ayrıca kayıtlara <strong>yazma</strong> yetkisini ajanlardan ayırın.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Üçlü soru: ne oldu / neden oldu / kimin adına oldu.</li>
+        <li>“Beş dakika testi” ile kayıt düzeninizi sınayın.</li>
+        <li>Onay/ret kayıtları insan gözetiminin kanıtıdır.</li>
+        <li>Kayıtlara kayıt muamelesi yapın: politika, süre, maskeleme.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/kurum-rehberleri">← Önceki: Kurumun YZ rehberleri</a>
+    <a class="ln-next" href="/akademi/izleme-drift">Sonraki ders: İzleme ve sapma →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

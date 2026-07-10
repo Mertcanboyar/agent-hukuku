@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 4.2 · İleri Konular", t: "İzleme ve sapma (drift)", h: "<p class='big'>Ajanlar patlayarak değil, <strong>solarak</strong> ölür.</p>" },
+  { t: "Vaka: yavaşça bozulan asistan", h: "<p>Altı ay önce mükemmel olan asistanın memnuniyeti ayda 0,1 düştü — kimse tek ayın düşüşünü fark etmedi. Sonra asistan, <strong>olmayan bir KVKK taahhüdünü</strong> emin bir dille uydurdu ve haftalarca müşterilere tekrarladı.</p>" },
+  { t: "Drift: üç kaynak", h: "<ul><li><strong>Dünya değişti, ajan değişmedi</strong> — yeni ürün/fiyat/mevzuat.</li><li><strong>Yetki sessizce genişledi.</strong></li><li><strong>Girdiler değişti.</strong></li></ul><p>Model hiç değişmese bile, operasyonel bağlam değişince ajan yanlışa kayar.</p>" },
+  { t: "Halüsinasyonun çığ etkisi", h: "<p>Üretken modeller <strong>makul ama gerçek olmayan</strong> çıktılar üretir. Çok adımlı akışta erken bir hata sonraki adıma girdi olur, büyür, çıktıyı zehirler. m.4: veri doğru ve güncel olmalı.</p>" },
+  { t: "En değerli kural", h: "<p class='big'>“Emin olmadığında uydurma — ‘bilmiyorum’ de ve insana devret.”</p><p>Bir ajanın “bilmiyorum” diyebilmesi, verebileceğiniz en değerli yetenektir.</p>" },
+  { t: "Dört izleme rutini", h: "<ul><li><strong>Haftalık örnekleme</strong> (yarım gün, insan okuması).</li><li><strong>Sinyal grafikleri</strong> (eğriye bak, tek aya değil).</li><li><strong>Değişiklik tetikleyicileri</strong> (ürün/fiyat/mevzuat/sürüm).</li><li><strong>Çeyreklik derin bakış.</strong></li></ul>" },
+  { t: "En ucuz metrik", h: "<p><strong>“Temsilci” (insana bağlan) deme oranı.</strong> Sessizce yükseliyorsa, müşterileriniz anket size söylemeden ayaklarıyla oy veriyor: ajandan umudu kesip insana kaçıyorlar. Ölçmesi bedava, haber değeri paha biçilmez.</p>" },
+  { d: true, t: "Özet: üçüncü gözetim aşaması", h: "<p>KVKK'nın üç aşamalı gözetiminin sonuncusu: kullanım sonrası izleme.</p><p class='big'>Kurmak yetmez, bakmak gerekir. Gözetim bir kurulum anı değil, bir alışkanlıktır.</p>" },
+];
+---
+<Base title="Ders 4.2 — İzleme ve Sapma (Drift) | Agent Hukuku Akademi" description="Drift nedir, ajanlar neden sessizce bozulur, halüsinasyonun çığ etkisi ve tam zamanlı BT ekibi olmadan işleyen dört izleme rutini.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 4 — İleri Konular</div><span class="tag">Ders 4.2</span>
+    <h1>İzleme ve sapma (drift)</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Kurdunuz, kaydettiniz — ama bakıyor musunuz? Bu derste ajan performansının sessizce bozulmasını (drift), halüsinasyonun çok adımlı akışta nasıl büyüdüğünü ve tam zamanlı bir ekip olmadan işleyen dört izleme rutinini öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Ajanlar sessizce bozulur</h2>
+    <p>Drift'in sinsiliği aniliğinin olmamasındadır: bir sistem bir gecede çökerse herkes görür; ayda %2 bozulursa kimse görmez — ta ki toplam kayıp bir krize dönüşene kadar. Üç kaynağının hiçbiri “model bozuldu” değildir: dünya değişip ajan aynı kalır, yetki sessizce genişler, girdiler evrilir. KVKK'nın rehberi de bunu vurgular: davranış sapması, model hiç değişmese bile operasyonel bağlamın değişmesinden doğabilir.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Halüsinasyonun en tehlikeli özelliği <strong>kendinden emin</strong> olmasıdır: ajan “bilmiyorum” demez, makul bir cevap uydurur. Bu yüzden en kritik görev tanımı kuralı şudur: “Emin olmadığında uydurma — ‘bilmiyorum’ de ve insana devret.”</div>
+    <h2>Dört rutin ve en ucuz metrik</h2>
+    <p>İzleme, dört mütevazı alışkanlıkla kurulur: haftalık örnekleme (otomasyonun göremediği “anlam” hatalarını yalnızca insan okuması yakalar), sinyal grafikleri (tek ayın düşüşü görünmez, eğri görünür), değişiklik tetikleyicileri (yeni ürün/fiyat/mevzuat/sürüm → ilgili ajanı gözden geçir) ve çeyreklik derin bakış. En ucuz ve güçlü tek metrik ise “temsilci” deme oranıdır — sessizce yükseliyorsa kalite düşüyor demektir.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Otomatik kalite skoru kuruyorsanız, insan örneklemesinin <strong>yanına</strong> koyun, yerine değil. Otomatik skor ölçülebilir şeyleri görür; “asistan olmayan bir taahhüt mü uydurdu?” gibi anlam gerektiren hataları çoğu zaman göremez — çünkü uydurma cevap da akıcı ve kendinden emindir.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Drift üç kaynaktan gelir; model değişmese bile ajan sapar.</li>
+        <li>Halüsinasyon kendinden emindir ve zincirde büyür.</li>
+        <li>Dört rutin: örnekleme, sinyal grafiği, tetikleyici, derin bakış.</li>
+        <li>En ucuz erken uyarı: “temsilci” deme oranı.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/kayit-denetim-izi">← Önceki: Kayıt ve denetim izi</a>
+    <a class="ln-next" href="/akademi/saldirilar-savunmalar">Sonraki ders: Saldırılar ve savunmalar →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

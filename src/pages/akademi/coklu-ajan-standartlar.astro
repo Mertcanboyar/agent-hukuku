@@ -1,0 +1,61 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 4.5 · İleri Konular", t: "Çok-ajanlı sistemler & standartlar", h: "<p class='big'>Her ajan tek tek iyi olabilir; hepsi birlikte <strong>kötü</strong> olabilir.</p>" },
+  { t: "Vaka: iki ajanın sarmalı", h: "<p>İki ajan birbirinin çıktısını girdi olarak kullanıp bir döngüye girdi: biri “kampanya gönder”, diğeri “destek kaydı aç”, ilki “bilgilendirme gönder”... Kimsenin istemediği bir sarmalda yüzlerce gereksiz e-posta üretildi. Her ajan kendi görevine sadıktı.</p>" },
+  { t: "Baş şef & aşçı", h: "<p><strong>Etken YZ</strong> baş şeftir (sistem, orkestrasyon); <strong>YZ Aracıları</strong> aşçılardır (bileşen, dar görev). Aşçılar tek başına da iş görür — ama asıl güç ve asıl karmaşa, mutfağın tamamı birlikte çalışınca ortaya çıkar.</p>" },
+  { t: "Sistemik risk", h: "<p>Sistem düzeyindeki davranış, hiçbir tek ajanın niyetini yansıtmayabilir. Küçük sapmalar birleşip büyük sonuçlar (zincirleme hatalar) doğurur — ve suçlu yoktur: ne saldırgan, ne bariz bir arıza.</p>" },
+  { t: "Panzehir", h: "<ul><li><strong>Döngü kesici:</strong> aynı zincir N kez dönerse dur, insana haber ver.</li><li><strong>Orkestrasyon sınırı:</strong> ajanlar arası mesajları da denetim kapısından geçir.</li><li>Ajan sayısı arttıkça izleme ve kayıt kritikleşir.</li></ul>" },
+  { t: "Standartlar: tekerleği icat etmeyin", h: "<ul><li><strong>NIST AI RMF</strong> — risk yönetimi fonksiyonları.</li><li><strong>ISO/IEC 42001</strong> — YZ yönetim sistemi.</li><li><strong>RAISE</strong> — Envanter → İzle → Korkuluk → Kurtar döngüsü.</li></ul>" },
+  { t: "EU AI Act", h: "<p>Yapay zekayı risk seviyesine göre sınıflandırır; şeffaflık yükümlülükleri yürürlükte. Türkiye'de kurulu olmanız kapsam dışı bırakmaz — kapsamı belirleyen, <strong>müşterinizin/kullanıcınızın nerede olduğudur</strong>.</p>" },
+  { d: true, t: "Tebrikler — akademiyi tamamladınız", h: "<p>Envanterden çok-ajanlı orkestrasyona: dört seviye, ajan hukuku ve yönetişiminin tamamı.</p><p class='big'>Şimdi öğrendiklerinizi bir karneye dökme zamanı.</p>" },
+];
+---
+<Base title="Ders 4.5 — Çok-Ajanlı Sistemler & Standartlar | Agent Hukuku Akademi" description="Çok-ajanlı sistemlerin sistemik riski, döngü kesici ve orkestrasyon sınırı, NIST AI RMF / ISO 42001 / RAISE ve EU AI Act.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 4 — İleri Konular</div><span class="tag">Ders 4.5</span>
+    <h1>Çok-ajanlı sistemler &amp; standartlar</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Akademiyi, tek ajanı aşıp birden çok ajanın birlikte çalıştığı dünyaya ve uluslararası çerçevelere bakarak kapatıyoruz. Bu derste çok-ajanlı sistemlerin sistemik riskini, panzehirlerini ve yaslanabileceğiniz standartları öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>İki “doğru” ajan, yanlış bir sistem</h2>
+    <p>Çoklu-ajan etkileşimi dört tehdit ailesinin en sinsisidir çünkü suçlu yoktur: her ajan kendi görevine sadıkken, etkileşimleri kimsenin tasarlamadığı bir sonuç üretebilir. KVKK'nın rehberi de baş şef/aşçı benzetmesiyle bu inceliği vurgular — asıl güç ve asıl karmaşa, mutfağın tamamı birlikte çalışınca doğar. Panzehir, ajanlar arası mesajlaşmaya bir <strong>döngü kesici</strong> (tekrar sayacı + insana eskalasyon) koymak ve bu mesajları da denetim kapısından (Ders 4.4) geçirmektir. Ajan sayınız arttıkça bu riskin ağırlığı artar.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Sistem düzeyindeki davranış, hiçbir tek ajanın niyetini yansıtmayabilir. “Her ajan tek tek iyi” demek, “hepsi birlikte iyi” demek değildir; küçük sapmalar birleşip büyük sonuçlar doğurur.</div>
+    <h2>Standartlar ve mevzuat radarı</h2>
+    <p>Tekerleği yeniden icat etmeyin: bu akademinin beş ilkesi uluslararası çerçevelerle uyumludur. Bir kurumsal müşteri “hangi çerçeveye uyuyorsunuz?” diye sorduğunda (soracaktır), <strong>NIST AI RMF</strong>, <strong>ISO/IEC 42001</strong> veya <strong>RAISE</strong> döngüsünden birine bağlanabilmek olgunluk işaretidir. Ve <strong>EU AI Act</strong>: AB'ye hizmet veriyorsanız kapsamı sizi belirler — Türkiye'de kurulu olmanız kapsam dışı bırakmaz, çünkü kapsamı belirleyen müşterinizin nerede olduğudur.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Bugün gönüllü kurduğunuz yönetişim, yarının mevzuatına hazırlığınızdır. TBMM'deki YZ teklifleri, KVKK'nın GDPR'a yakınlaşması ve EU AI Act — üçünü de çeyreklik yönetim gündeminize sabit bir madde olarak koyun.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Çoklu-ajan riski sistemiktir; suçlu tek bir ajan değildir.</li>
+        <li>Panzehir: döngü kesici + orkestrasyon denetimi.</li>
+        <li>Standartlar: NIST AI RMF, ISO 42001, RAISE.</li>
+        <li>EU AI Act kapsamını müşterinizin yeri belirler.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="article-cta"><div><h3>Akademiyi tamamladınız 🎓</h3><p>Dört seviye boyunca ajan hukuku ve yönetişiminin tamamını gördünüz. Şimdi şirketinizin olgunluk karnesini çıkarın.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/runtime-guardrails">← Önceki: Runtime guardrails</a>
+    <a class="ln-next" href="/akademi">Akademiye dön →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

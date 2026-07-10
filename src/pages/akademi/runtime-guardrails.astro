@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 4.4 · İleri Konular", t: "Runtime guardrails & policy-as-code", h: "<p class='big'>Güvenlik, modelin IQ'suna değil <strong>korkuluğa</strong> dayanır.</p>" },
+  { t: "Ajanı değil, kapıyı izleyin", h: "<p>Ajan yalnızca bir şey <em>yaptığında</em> tehlikelidir. Modelin “beynini” dinlemeye çalışmayın; ajan ile araçları (API, veritabanı, e-posta) arasındaki sınıra bir <strong>denetim noktası</strong> koyun. Tüm korkuluklar burada kurulur.</p>" },
+  { t: "Araya bir kapı koyun", h: "<p>Ajan gerçek sistemlerinize doğrudan bağlanmasın; araya kendini araç sunucusu gibi tanıtan bir <strong>kapı</strong> koyun. Ajan çağrıyı yaptığını sanır; aslında kapıyı çağırır — kapı kaydeder, kuralı değerlendirir, sonra iletir, engeller ya da onaya park eder.</p>" },
+  { t: "Kurallar kod değil, tablo olsun", h: "<p>“Kim, neyi, hangi koşulda yapabilir, sonuç ne (izin/beklet/engelle)” — yazılımcının kodu değil, <strong>uyum sorumlusunun düzenleyebildiği bir tablo</strong>. Hazır motorlar (OPA, Cedar) kullanın; kendi kural motorunuzu yazmayın.</p>" },
+  { t: "“Beklet” düğmesi", h: "<p>Riskli işlem anında yürümesin: kapı işlemi bir <strong>onay nesnesine</strong> çevirir, ajana “incelemeye alındı” der, ajan işini park edip devam eder. İnsan onaylarsa işlem kaldığı yerden yürür. Kulağa karmaşık gelir ama bir iş kuyruğudur — çalışanlardan biri insandır.</p>" },
+  { t: "Otonomi kazanılır: güven merdiveni", h: "<p>Yeni ajan en alt basamakta başlar: her şeyi onaya düşürür (taslak modu). Hatasız geçen haftalar sonunda basamak basamak terfi eder. Teknik karşılığı: kural tablosunda farklı bir satırın okunması.</p>" },
+  { t: "Defter + gerçek araçları sakla", h: "<ul><li><strong>Kurcalanamaz defter:</strong> append-only, her kayıt bir öncekine zincirli; kayıtları KVKK'ya uydurun (maskeleme).</li><li><strong>Gerçek araçları kapının arkasına saklayın:</strong> ağ düzeyinde yalnızca kapı erişsin.</li></ul>" },
+  { d: true, t: "Özet", h: "<p>Bu, “policy-as-code”un ta kendisi: politika kâğıtta değil, eylem kapısında ve kod düzeyinde uygulanır.</p><p class='big'>Sıkıcı kurun; güvenlik incelemesinden sıkıcı olan geçer.</p>" },
+];
+---
+<Base title="Ders 4.4 — Runtime Guardrails & Policy-as-Code | Agent Hukuku Akademi" description="Ajan yönetişimini eylem kapısına taşımak: denetim noktası, kural tablosu (policy-as-code), beklet düğmesi, güven merdiveni ve kurcalanamaz defter.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 4 — İleri Konular</div><span class="tag">Ders 4.4</span>
+    <h1>Runtime guardrails &amp; policy-as-code</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~8 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Şimdiye kadar “ne yapmalı”yı öğrendik; bu ders “nasıl uygulanır”ı kuruyor. Kitaptaki tüm ilkeleri kâğıttan sisteme taşıyan mimariyi — çalışma zamanı korkuluklarını ve kural-olarak-politika (policy-as-code) yaklaşımını — KOBİ ölçeğinde göreceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Ajanı değil, kapıyı izleyin</h2>
+    <p>Konuşan ajan zarar vermez, eyleme geçen ajan verir; o hâlde denetim, ajanın niyetinde değil <strong>eylem kapısında</strong> olur. Ajan ile gerçek araçları arasına, kendini araç sunucusu gibi tanıtan bir kapı (bir tür MCP sargısı) koyarsınız. Ajan bir aracı çağırdığını sanır; aslında kapıyı çağırır — kapı isteği kaydeder, önceden tanımlı kuralı değerlendirir, sonra ya iletir, ya engeller, ya da onaya park eder. Ajan kodunda tek satır değişiklik gerekmez.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Kurallar yazılımcının kodu değil, <strong>uyum sorumlusunun düzenleyebildiği bir tablo</strong> olmalı: kim, neyi, hangi koşulda yapabilir, sonuç ne? Hazır açık kaynak motorlar (OPA, Cedar) bunun için vardır — kendi kural motorunuzu yazmayın. Bu, politikayı kâğıtta bırakmayıp sisteme yazmaktır.</div>
+    <h2>Beklet, terfi ettir, kaydet</h2>
+    <p>Riskli işlem anında yürümesin; kapı onu bir onay nesnesine çevirsin ve ajan işini park edip devam etsin (Ders 2.4'ün “beklet” düğmesi). Otonomi verilmez, kazanılır: yeni ajan taslak modunda başlar ve hatasız haftalarla basamak basamak terfi eder (güven merdiveni). Son olarak her olay, kurcalanamaz (append-only, zincirli) bir deftere yazılır ve gerçek araçlar ağ düzeyinde yalnızca kapının erişebileceği şekilde saklanır — ajan kapıyı atlayıp doğrudan bağlanabiliyorsa, kapınız kural değil tavsiyedir.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Kayıt defterinin kendisi kişisel veri içerir: kimlikleri maskeleyin, çözüm anahtarlarını ayrı kasada tutun, saklama sürelerine uyun. Kendi loglarında KVKK ihlal eden bir yönetişim düzeni acı bir ironidir.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Denetim eylem kapısında; araya bir kapı koyun.</li>
+        <li>Kurallar tablo olsun (policy-as-code); hazır motor kullanın.</li>
+        <li>Beklet düğmesi + güven merdiveni ile otonomiyi kademelendirin.</li>
+        <li>Kurcalanamaz defter tutun; gerçek araçları kapının arkasına saklayın.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/saldirilar-savunmalar">← Önceki: Saldırılar ve savunmalar</a>
+    <a class="ln-next" href="/akademi/coklu-ajan-standartlar">Sonraki ders: Çok-ajanlı sistemler &amp; standartlar →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>
