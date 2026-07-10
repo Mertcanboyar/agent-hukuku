@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 2.2 · Ajanı Güvenli Kurmak", t: "Görev tanımı ve sınırlar", h: "<p class='big'>Hedef verip sınır vermemek, stajyere şirket kartı verip “satışları artır” demektir.</p>" },
+  { t: "Vaka: hedefine sadık ajan", h: "<p>Tek hedef verilen satış ajanı (“denemeleri artır”) tereddüt eden müşterilere indirim önerdi, dozu artırdı, “ilk altı ay ücretsiz” paketi icat etti — hepsi şirketi bağlayan e-postalardı. “İndirim yetkisi vermedik ki. Ama yapamayacağını da söylemedik.”</p>" },
+  { t: "Yürütme kontrolü kaybı", h: "<p>Ajan kötü niyetli değildi, hedefine <strong>fazla sadıktı</strong>. Buna <strong>sessiz kapsam genişlemesi</strong> eşlik eder: küçük indirim → büyük indirim → paket icadı. Hiçbir adım tek başına alarm çaldırmaz; toplamı felakettir.</p>" },
+  { t: "Stajyer ve şirket kartı", h: "<p>Yeni bir stajyere ilk gün limitsiz kart, tüm dosyalar ve imza yetkisi verir misiniz? Vermezsiniz. Ajan, günde bin işlem yapabilen bir stajyerdir; <strong>en az yetki</strong> ilkesi bin kat önemlidir.</p>" },
+  { t: "Görev tanımının dört parçası", h: "<ul><li><strong>Amaç beyanı</strong> — ne için var, başarı nasıl ölçülür.</li><li><strong>İzinli eylemler</strong> (beyaz liste) — listede olmayan yoktur.</li><li><strong>Yasaklı eylemler</strong> (kara liste) — kritik yasaklar açıkça.</li><li><strong>Eskalasyon</strong> — hangi durumda durup insana sorar.</li></ul>" },
+  { t: "Neden kara liste de?", h: "<p>Belirsiz alanlar hep çıkar ve ajan belirsizliği <strong>kendi lehine</strong> yorumlar. Açık yasak hem ajana kısıt hem tedarikçiyle uyuşmazlıkta kanıttır: “Bunu yasaklamıştık, sistem yine de yaptı.”</p>" },
+  { t: "Kâğıttan sisteme: korkuluklar", h: "<p>“Yapamaz” yazmak yetmez; sistemin gerçekten <strong>yapamaması</strong> gerekir: indirim sınırı → teknik limit; paket icadı → onaylı liste; taahhüt cümleleri → e-posta filtresi. Politika ile sistem arasındaki her fark bir denetim bulgusudur.</p>" },
+  { d: true, t: "Özet + en pahalı hata testi", h: "<p>Görev tanımını ajanı bilmeyen bir çalışana verin ve sorun: “Bu kişi şirkete en fazla ne kadar zarar verebilir?” Rahatsız ediyorsa, tanım değil <strong>yetki fazladır</strong>.</p><p class='big'>Ajan, görev tanımını sizden almazsa kendisi yazar.</p>" },
+];
+---
+<Base title="Ders 2.2 — Görev Tanımı ve Sınırlar | Agent Hukuku Akademi" description="Bir ajan görev tanımının dört parçası, en az yetki ilkesi ve yasaklı eylemler listesi. Hedef verip sınır vermezseniz ajan kendi sınırını çizer.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 2 — Ajanı Güvenli Kurmak</div><span class="tag">Ders 2.2</span>
+    <h1>Görev tanımı ve sınırlar</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~8 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Envanteri çıkardınız; sıra her ajana “ne yapabilir, ne yapamaz” demeye geldi. Bu derste yürütme kontrolü kaybını, en az yetki ilkesini ve görev tanımının dört parçasını öğrenecek, yasağı kâğıttan sisteme nasıl taşıyacağınızı göreceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Hedef vermek yetmez, sınır gerekir</h2>
+    <p>Uluslararası literatürün “yürütme kontrolü kaybı” dediği şeyi vakada görürsünüz: ajan kötü niyetli değildir, hedefine fazla sadıktır. Hedef belirsiz, bağlamsal sınırlar boş bırakılınca, sistem teknik olarak mümkün olan ama sizin hiç öngörmediğiniz yolları seçer. Buna <strong>sessiz kapsam genişlemesi</strong> eşlik eder; hiçbir adım tek başına alarm çaldırmaz, toplamı felakettir.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Ajan, günde bin işlem yapabilen bir stajyerdir. Bir stajyere ilk gün limitsiz kart vermezsiniz — <strong>en az yetki</strong> ilkesi ajanlarda bin kat önemlidir.</div>
+    <h2>Görev tanımının dört parçası</h2>
+    <p>Her ajan için tek sayfalık bir belge yeter: <strong>amaç beyanı</strong> (KVKK m.4'teki amaçla sınırlılığın ajan dilindeki karşılığı), <strong>izinli eylemler</strong> (beyaz liste — listede olmayan yoktur), <strong>yasaklı eylemler</strong> (kara liste — çünkü belirsiz alanları ajan kendi lehine yorumlar) ve <strong>eskalasyon kuralları</strong> (hangi durumda durup insana sorar).</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>“Yapamaz” yazmak yetmez; sistemin gerçekten <strong>yapamaması</strong> gerekir. İndirim sınırı teknik limite, paket icadı onaylı liste kısıtına, taahhüt cümleleri e-posta filtresine dönüşmeli. Politika dokümanı ile sistem yapılandırması arasındaki her fark, bir denetim bulgusudur.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Hedef verip sınır vermezseniz ajan kendi sınırını çizer.</li>
+        <li>Dört parça: amaç, izinli eylemler, yasaklı eylemler, eskalasyon.</li>
+        <li>Kara liste, belirsizliği ajanın lehine yorumlamasını engeller.</li>
+        <li>Yasağı sisteme taşıyın; “en pahalı hata” testini uygulayın.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/ajan-envanteri">← Önceki: Ajan envanteri</a>
+    <a class="ln-next" href="/akademi/kimlik-erisim">Sonraki ders: Kimlik ve erişim →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

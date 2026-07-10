@@ -1,0 +1,61 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 2.1 · Ajanı Güvenli Kurmak", t: "Ajan envanteri", h: "<p class='big'>Görünürlük her şeyin başıdır: <strong>göremediğinizi yönetemezsiniz.</strong></p>" },
+  { t: "Vaka: on dört sürpriz", h: "<p>Bir ekip “üç ajanımız var” sanıyordu. Cezasız bir “gölge affı” ilan edip sorduklarında liste <strong>on dörde</strong> çıktı — biri aylardır müşteri listesini yurt dışına kopyalıyordu. Sorulacak soru “var mı?” değil, <strong>“kaç tane?”</strong>dır.</p>" },
+  { t: "Gölge ajan: yeni gölge BT", h: "<ul><li><strong>Kurulumu çok kolay:</strong> ücretsiz hesap + e-posta bağlantısı = beş dakikada çalışan bir ajan.</li><li><strong>Etkisi çok büyük:</strong> gölge BT veriyi tutardı; gölge ajan <em>eylem yapar</em> — sizin adınıza gönderir, değiştirir, aktarır.</li></ul>" },
+  { t: "En tehlikeli, en masum görünendir", h: "<p>Pazarlamanın “kişiselleştirme aracı” zararsız gelir — ta ki müşteri listenizi aylardır yurt dışına kopyaladığını öğrenene kadar. Riski belirleyen ajanın <strong>adı değil, erişimidir</strong>.</p>" },
+  { t: "Tek tablo, dokuz sütun", h: "<p>Envanter karmaşık bir yazılım değil, bir tablodur:</p><ul><li>Ad · Amaç · İş sahibi · Teknik sahip</li><li>Eriştiği veriler · Yapabildiği eylemler</li><li>Tedarikçi/model · Verinin işlendiği yer</li><li>Durum + son gözden geçirme</li></ul>" },
+  { t: "Broşür değil, panel", h: "<p>“Neye erişir?” sorusunun cevabı tedarikçinin broşüründe değil, <strong>yönetim panelindeki gerçek yetkilerdedir</strong>. Broşürle ayarlar ekranı arasındaki fark, çoğu zaman krizin kaynağıdır.</p>" },
+  { t: "VERBİS & işleme envanteriyle bağ", h: "<p>Ajan envanteri, kişisel veri işleme envanterinizle ve VERBİS'le yarışmaz; onları <strong>besler</strong>. Her satır için sorun: “Bu, veri işleme envanterimde görünüyor mu?”</p>" },
+  { d: true, t: "Canlı tutmak: üç alışkanlık + özet", h: "<ul><li><strong>Giriş kapısı:</strong> yeni ajan = önce envanter, sonra kurulum.</li><li><strong>Çeyreklik yoklama:</strong> “Bu hâlâ doğru mu?”</li><li><strong>Yıllık af:</strong> görünürlüğü tazele.</li></ul><p class='big'>Kural: <strong>envantere girmeyen ajan çalışmaz.</strong></p>" },
+];
+---
+<Base title="Ders 2.1 — Ajan Envanteri: Elinizde Ne Var? | Agent Hukuku Akademi" description="Gölge ajanlar, dokuz sütunlu envanter tablosu ve envanteri canlı tutmanın üç alışkanlığı. Görünürlük, tüm yönetişimin ilk taşıdır.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 2 — Ajanı Güvenli Kurmak</div><span class="tag">Ders 2.1</span>
+    <h1>Ajan envanteri: elinizde ne var?</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Seviye 2, bir ajanı güvenle sahaya almanın pratiğini kuruyor — ve her şey görünürlükle başlıyor. Bu derste gölge ajanları, dokuz sütunlu envanter tablosunu ve envanteri canlı tutmanın üç alışkanlığını öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Göremediğinizi yönetemezsiniz</h2>
+    <p>Envanter çalışması yapan şirketler neredeyse her zaman tahmininin katını bulur: “üç ajanımız var” diyen bir ekip, cezasız bir “gölge affı” ilan edip sorduğunda listenin on dörde çıktığını görür. Bu tablo abartı değil, ortalamadır. Sorulacak soru “bizde gölge ajan var mı?” değil, <strong>“kaç tane var?”</strong>dır.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Gölge ajan, “gölge BT”nin daha tehlikeli hâlidir: kurulumu beş dakika, etkisi ise büyük — çünkü ajan veriyi tutmakla kalmaz, sizin adınıza <strong>eylem yapar</strong>. En tehlikeli gölge ajan, çoğu zaman en masum görünenidir; riski belirleyen ajanın adı değil, <strong>erişimidir</strong>.</div>
+    <h2>Tek tablo, dokuz sütun</h2>
+    <p>Ajan envanteri bir yazılım değil, bir tablodur. Başlangıç için dokuz sütun yeter: ad, amaç, iş sahibi, teknik sahip, eriştiği veriler, yapabildiği eylemler, tedarikçi/model, verinin işlendiği yer, ve durum + son gözden geçirme tarihi. Kritik ayrıntı beşinci ve altıncı sütunlarda: “neye erişir?” sorusunun cevabı tedarikçinin broşüründe değil, <strong>yönetim panelindeki gerçek yetkilerdedir</strong>.</p>
+    <h2>Envanteri canlı tutmak</h2>
+    <p>Envanterin en büyük düşmanı, hazırlandığı günden itibaren eskimesidir. Üç alışkanlık yeter: <strong>giriş kapısı</strong> (yeni ajan = önce envanter kaydı, sonra kurulum), <strong>çeyreklik yoklama</strong> (her satırın sahibine tek soru: “bu hâlâ doğru mu?”) ve <strong>yıllık af</strong> (görünürlüğü tazelemek için). Ayrıca ajan envanteri, KVKK'nın kişisel veri işleme envanteri ve VERBİS yükümlülüğünüzü besler; her satır için “bu, veri işleme envanterimde görünüyor mu?” diye sorun.</p>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Gölge ajanlar tahmininizin katıdır; önce görünürlük.</li>
+        <li>Dokuz sütunlu tek bir tablo yeterli başlangıçtır.</li>
+        <li>Gerçek yetkiye ayarlar ekranından bakın, broşürden değil.</li>
+        <li>Kural: envantere girmeyen ajan çalışmaz.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/bes-ilke">← Önceki: Beş ilke</a>
+    <a class="ln-next" href="/akademi/gorev-tanimi">Sonraki ders: Görev tanımı ve sınırlar →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

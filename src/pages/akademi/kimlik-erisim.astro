@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 2.3 · Ajanı Güvenli Kurmak", t: "Kimlik ve erişim", h: "<p class='big'>Ajanınıza <strong>vermediğiniz yetki</strong>, sizi koruyan yetkidir.</p>" },
+  { t: "Vaka: gece temizliği", h: "<p>Bir DevOps ajanı, kurucusunun <strong>admin hesabıyla</strong> çalışıyordu. Disk dolunca “temizlik” yaptı ve “eski” görünen bir klasörü sildi: müşteri yedekleri. Admin her şeyi silebildiği için ajan da her şeyi silebiliyordu. Yedek yoktu.</p>" },
+  { t: "Üç günah", h: "<ul><li><strong>Kişisel hesap</strong> — sahibinin tüm yetkilerini devralır; kaderi bir insana bağlanır.</li><li><strong>Ortak “robot” hesabı</strong> — kayıt tutar, kimlik ayırt etmez.</li><li><strong>Sınırsız hesap</strong> — yetki görevden değil, kolaylıktan türer.</li></ul>" },
+  { t: "Ortak hesabın çıkmazı", h: "<p>Üç ajan da aynı <code>otomasyon@</code> hesabını kullanırsa, bir gece açıklanamayan bir değişiklikte fail bellidir ama <strong>hangi ajan?</strong> belirsizdir. Ortak hesap, “kim yaptı?”yı “hanginiz yaptınız?”a çevirir — cevabını vermez.</p>" },
+  { t: "Doğru model", h: "<ul><li><strong>Ayrı kimlik</strong> — her ajanın kendi servis hesabı.</li><li><strong>Görevden türetilmiş asgari yetki</strong> — izinli eylemler listesi kadar.</li><li><strong>İptal edilebilir ve süreli erişim.</strong></li><li><strong>Periyodik yetki denetimi.</strong></li></ul>" },
+  { t: "İnsan mı, ölçek mi?", h: "<p>İnsan bir gecede bir klasör siler; ajan bir gecede <strong>bulabildiği her</strong> klasörü siler. Ölçek, yetki hatalarının maliyetini katlar — kimlik disiplini ajanlarda insanlardan bile önemlidir.</p>" },
+  { t: "Tedarikçiye beş kimlik sorusu", h: "<ul><li>Kendi kimliğiyle mi bağlanıyor, bir kullanıcının hesabını mı devralıyor?</li><li>Yetkileri biz mi belirliyoruz (dizin/tablo/işlem bazında)?</li><li>Erişimi tek hamlede iptal edebilir miyiz, kaç saniyede?</li><li>Her eylem, ajanın kimliğiyle mi loglanıyor?</li><li>Erişim anahtarları süreli mi?</li></ul>" },
+  { d: true, t: "Özet", h: "<p>“Kim yaptı?” sorusuna cevap veremeyen sistem hesap veremez. Kimlik, hesap verebilirliğin ilk tuğlasıdır.</p><p class='big'>En ucuz güvenlik önlemi, hiç verilmemiş anahtardır.</p>" },
+];
+---
+<Base title="Ders 2.3 — Kimlik ve Erişim: En Az Yetki | Agent Hukuku Akademi" description="Ajanların neden kendi kimliğine ihtiyacı vardır, yetki tırmanması nasıl gerçekleşir ve tedarikçinize soracağınız beş kimlik sorusu.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 2 — Ajanı Güvenli Kurmak</div><span class="tag">Ders 2.3</span>
+    <h1>Kimlik ve erişim: en az yetki</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~7 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Görev tanımı ne kadar iyi olursa olsun, ajan patronun şifresiyle geziyorsa tanımın hükmü yoktur. Bu derste ajanların neden kendi kimliğine ihtiyacı olduğunu, yetki tırmanmasının nasıl gerçekleştiğini ve doğru kimlik modelini öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Ajan da bir “çalışan”dır — kimliksiz çalışan olmaz</h2>
+    <p>Bir DevOps ajanının kurucusunun admin hesabıyla çalıştırılması üç yaygın hatayı üst üste bindirir: <strong>kişisel hesap</strong> (ajan sahibinin tüm yetkilerini devralır ve kaderi bir insanın hesabına bağlanır), <strong>ortak servis hesabı</strong> (kayıt tutar ama kimlik ayırt etmez) ve <strong>görevden değil kolaylıktan türeyen yetki</strong> — literatürün “yetki tırmanması” dediği durum. Ajan ihtiyacından fazla yetkiyle doğar ve o yetkiyi bir gün, kötü niyetle değil hedefine sadakatle kullanır.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Ajanınıza vermediğiniz yetki, sizi koruyan yetkidir. Ajan riskli klasöre <em>erişemeseydi</em>, hiçbir disiplin, talimat ya da iyi niyet gerekmezdi. En ucuz güvenlik önlemi, hiç verilmemiş anahtardır.</div>
+    <h2>Doğru model: ajan başına kimlik, görev başına yetki</h2>
+    <p>Olgun kurulumun dört özelliği vardır: her ajanın <strong>ayrı servis kimliği</strong>; görev tanımından satır satır türetilmiş <strong>asgari yetki</strong>; tek hamlede iptal edilebilen <strong>süreli erişim</strong> (Ders 2.5'teki acil durdurma buna dayanır); ve üç ayda bir yapılan <strong>yetki denetimi</strong>. Bu, “derinlemesine savunma”nın ajan katmanıdır: korkuluk bir gün atlatılsa bile, ajanın kendi anahtarları zaten izin vermediği yere dokunamaz.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>İnsan bir gecede bir klasör siler; ajan bir gecede bulabildiği her klasörü siler. Ölçek, yetki hatalarının maliyetini katlar — kimlik disiplininin ajanlarda insanlardan bile önemli olmasının sebebi budur.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Üç günah: kişisel hesap, ortak hesap, sınırsız hesap.</li>
+        <li>Doğru model: ajan başına kimlik, görev başına yetki.</li>
+        <li>Erişim iptal edilebilir ve süreli olmalı; periyodik denetlenmeli.</li>
+        <li>Tedarikçiye beş kimlik sorusunu sorun.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/gorev-tanimi">← Önceki: Görev tanımı</a>
+    <a class="ln-next" href="/akademi/insan-onayi">Sonraki ders: Döngüde insan →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

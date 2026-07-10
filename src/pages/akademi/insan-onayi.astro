@@ -1,0 +1,60 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 2.4 · Ajanı Güvenli Kurmak", t: "Döngüde insan: onay eşikleri", h: "<p class='big'>Amaç insanı her döngüye koymak değil; insanı <strong>geri alınamaz</strong> döngülere koymaktır.</p>" },
+  { t: "Vaka: 40 bin dolarlık gece", h: "<p>Onay eşiği olmayan bir satın alma ajanı, bir gecede on yedi aboneliği yeniledi: kullanılmayan araçlar, %60 zamlı bir tedarikçi ve kendini “kurumsal plan”a yükselten bir araç. Bir gecelik harcama: <strong>40.000 dolar</strong>.</p>" },
+  { t: "İki mod", h: "<ul><li><strong>Döngüde insan (in-the-loop):</strong> işlem, insan onayı gelmeden yürümez.</li><li><strong>Döngü üstünde insan (on-the-loop):</strong> işlem yürür; insan izler ve gerekirse müdahale eder.</li></ul><p>İkisi rakip değil, tamamlayıcıdır.</p>" },
+  { t: "Ölçüt: geri alınabilirlik × etki", h: "<ul><li>Geri alınabilir + küçük → ajan yapar, kayda düşer.</li><li>Geri alınabilir + büyük → ajan yapar, anında bildirim.</li><li>Geri alınamaz + küçük → ajan yapar, günlük özet.</li><li><strong>Geri alınamaz + büyük → mutlaka insan onayı.</strong></li></ul>" },
+  { t: "Sağ alt köşe", h: "<p>Her şirkette aynıdır: para transferi ve taahhüt, işe alım/çıkarma, hukuki beyan, veri silme, kamuya açıklama, sözleşme imzası ve yenilemesi.</p>" },
+  { t: "İki düşman", h: "<p>Her şeyi onaya bağlarsanız <strong>onay yorgunluğu</strong> (kuyruk dolar, insan okumadan tıklar); hiçbir şeyi bağlamazsanız <strong>sessiz felaket</strong>. İyi eşik, insan dikkatini nadir ve değerli bir bütçe gibi harcar.</p>" },
+  { t: "KVKK: üç aşamalı insan gözetimi", h: "<ul><li><strong>Geliştirme</strong> (önleyici): sınırlar baştan tanımlanır.</li><li><strong>Kullanıma alma</strong> (eşikli): yüksek riskli kararlara ek inceleme.</li><li><strong>Kullanım sonrası</strong> (izleyen): davranış izlenir, eşikler gözden geçirilir.</li></ul><p>“Anlamlı” olması şart: okumadan tıklanan onay, onay değildir.</p>" },
+  { d: true, t: "Özet", h: "<p>Doğru soru “insan mı, ajan mı?” değil; <strong>“hangi karar kimin?”</strong>dır.</p><p class='big'>Bir ay sonra “reddedilen işlem” sayısı sıfırsa, onay mekanizmanız mekanizma değil dekordur.</p>" },
+];
+---
+<Base title="Ders 2.4 — Döngüde İnsan: Onay Eşikleri | Agent Hukuku Akademi" description="Human-in-the-loop ile human-on-the-loop farkı, geri alınabilirlik × etki matrisi ve KVKK'nın üç aşamalı insan gözetimi modeli.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 2 — Ajanı Güvenli Kurmak</div><span class="tag">Ders 2.4</span>
+    <h1>Döngüde insan: onay eşikleri</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~8 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Ajanı kurdunuz, kimliğini verdiniz — peki hangi kararı size sorsun, hangisini kendi versin? Bu derste iki gözetim modelini, geri alınabilirlik × etki matrisini ve onay eşiklerini verimliliği öldürmeden tasarlamayı öğreneceksiniz.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>İnsanı doğru yere koymak</h2>
+    <p>İki mod vardır: <strong>döngüde insan</strong> (işlem onay gelmeden yürümez) ve <strong>döngü üstünde insan</strong> (işlem yürür, insan izler). İkisi tamamlayıcıdır; asıl soru şudur: hangi işlem hangi moda ait? Cevap için tek ölçüt yeterlidir — <strong>geri alınabilirlik × etki</strong>. Geri alınamaz ve etkisi büyük olan her şey (para, taahhüt, işe alım, veri silme, kamuya açıklama, sözleşme yenilemesi) mutlaka insan onayına aittir.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>Onay eşiği tasarlarken iki düşman var: her şeyi onaya bağlarsanız <strong>onay yorgunluğu</strong>, hiçbir şeyi bağlamazsanız <strong>sessiz felaket</strong>. İyi eşik, insan dikkatini nadir ve değerli bir bütçe gibi harcar.</div>
+    <h2>KVKK'nın üç aşamalı modeli</h2>
+    <p>Kişisel veri işleyen ajanlarda insan gözetimi Kurumun açık beklentisidir ve üç aşamaya yayılır: <strong>geliştirme</strong> (sınırlar baştan tanımlanır), <strong>kullanıma alma</strong> (yüksek riskli kararlara ek inceleme; kişi hakkında sonuç doğuran her işlem tutardan bağımsız insana) ve <strong>kullanım sonrası</strong> (davranış izlenir, eşikler gözden geçirilir). “Anlamlı” kelimesi süs değil: okumadan tıklanan onay, hukuken de pratikte de onay değildir.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Bir denetimde “insan gözetimi vardı” diyebilmek için gözetimin <strong>gerçekten karar değiştirebildiğini</strong> gösterebilmelisiniz. Hiç “hayır” dememiş bir onay mekanizması, mekanizma değil dekordur; bir ay sonra “reddedilen işlem” sayısına bakın.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>İki mod: döngüde insan / döngü üstünde insan.</li>
+        <li>Ölçüt: geri alınabilirlik × etki; sağ alt köşe insana.</li>
+        <li>İki düşman: onay yorgunluğu ve sessiz felaket.</li>
+        <li>KVKK: üç aşamalı, “anlamlı” insan gözetimi.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/kimlik-erisim">← Önceki: Kimlik ve erişim</a>
+    <a class="ln-next" href="/akademi/acil-durdurma">Sonraki ders: Acil durdurma →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>
