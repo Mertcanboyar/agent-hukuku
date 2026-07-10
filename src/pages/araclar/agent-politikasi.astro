@@ -1,0 +1,174 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+---
+<Base title="Ajan Politikası Oluşturucu — Yapay Zeka Ajanı Kullanım Politikası | Agent Hukuku" description="Şirketiniz için yapay zeka ajanı kullanım ve yönetişim politikası taslağını dakikalar içinde oluşturun: envanter, görev tanımı, kimlik, insan onayı, kayıt, aydınlatma ve daha fazlası. Ücretsiz.">
+<Header />
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/araclar">Araçlar</a> · Ajan politikası oluşturucu</div>
+  <span class="kicker">Araç</span>
+  <h1>Ajan politikası oluşturucu</h1>
+  <p class="lead">Şirketiniz için kapsamlı bir “Yapay Zeka Ajanı Kullanım ve Yönetişim Politikası” taslağı üretin — kitabın beş ilkesine ve KVKK'ya dayalı. Alanları doldurun, politika anında oluşsun; kopyalayın ya da indirin.</p>
+</div></section>
+<section style="padding-top:6px"><div class="wrap">
+  <div class="tool-grid">
+    <form class="tool-form" id="f" autocomplete="off">
+      <div class="field"><label for="sirket">Şirket adı</label><input type="text" id="sirket" placeholder="Örn. TeknoVadi Yazılım A.Ş."></div>
+      <div class="field"><label for="sahip">Politika sahibi (isim · unvan)</label><input type="text" id="sahip" placeholder="Örn. Ada Yılmaz · Uyum Sorumlusu"></div>
+      <div class="field"><label for="tarih">Yürürlük tarihi</label><input type="text" id="tarih" placeholder="Örn. 10.07.2026"></div>
+
+      <div class="field"><label>İnsan onayı eşiği (harcama/işlem)</label>
+        <div style="display:flex;gap:10px">
+          <input type="text" id="esik" placeholder="Örn. 5.000" style="flex:1">
+          <select id="parabirimi" style="max-width:110px"><option>TL</option><option>USD</option><option>EUR</option></select>
+        </div>
+        <div class="hint">Bu tutarın üzerindeki işlemler insan onayına bağlanır.</div>
+      </div>
+
+      <div class="field"><label>Kullanılan ajan tipleri (örneklemek için)</label><div class="chk" id="tipler">
+        <label><input type="checkbox" value="müşteri destek" checked>Müşteri destek</label>
+        <label><input type="checkbox" value="satış">Satış</label>
+        <label><input type="checkbox" value="finans/satın alma">Finans/satın alma</label>
+        <label><input type="checkbox" value="İK">İK</label>
+        <label><input type="checkbox" value="pazarlama">Pazarlama</label>
+        <label><input type="checkbox" value="DevOps/BT">DevOps/BT</label>
+      </div></div>
+
+      <div class="field"><label>Ek bölümler</label><div class="chk" id="ekler">
+        <label><input type="checkbox" id="e_oto" value="oto" checked>Otomatik karar &amp; profilleme</label>
+        <label><input type="checkbox" id="e_calisan" value="calisan" checked>Çalışanların YZ kullanımı</label>
+        <label><input type="checkbox" id="e_yurtdisi" value="yurtdisi">Yurt dışı aktarım</label>
+      </div></div>
+    </form>
+
+    <div class="tool-out">
+      <div class="tool-out-head"><span class="t">Politika taslağı</span><div class="acts"><button type="button" class="tool-btn" id="copy">Kopyala</button><button type="button" class="tool-btn" id="dl">İndir</button></div></div>
+      <div class="tool-doc" id="out"></div>
+    </div>
+  </div>
+  <p class="tool-note" style="max-width:820px">Tarayıcınızda çalışır; hiçbir bilgi sunucuya gönderilmez. Üretilen politika bir taslaktır ve hukuki tavsiye niteliği taşımaz — şirketinizin süreçlerine göre uyarlayın ve gerektiğinde bir hukukçuya danışın.</p>
+</div></section>
+</main>
+<Footer />
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  function build(){
+    const sirket = ($('sirket').value || "[Şirket adı]").trim();
+    const sahip = ($('sahip').value || "[Politika sahibi]").trim();
+    const tarih = ($('tarih').value || "[tarih]").trim();
+    const esik = ($('esik').value || "[eşik]").trim();
+    const pb = $('parabirimi').value;
+    const tipler = [...$('tipler').querySelectorAll('input:checked')].map(i => i.value);
+    const oto = $('e_oto').checked, calisan = $('e_calisan').checked, yurtdisi = $('e_yurtdisi').checked;
+    const tipStr = tipler.length ? tipler.join(", ") + " alanlarında" : "farklı departmanlarda";
+
+    let n = 0; const S = (baslik, govde) => (++n) + ". " + baslik + "\n" + govde + "\n\n";
+    let t = "";
+    t += sirket.toUpperCase() + " — YAPAY ZEKA AJANI KULLANIM VE YÖNETİŞİM POLİTİKASI\n";
+    t += "Sürüm 1.0  ·  Yürürlük: " + tarih + "  ·  Politika sahibi: " + sahip + "\n";
+    t += "══════════════════════════════════════\n\n";
+
+    t += "AMAÇ VE KAPSAM\n";
+    t += sirket + " bünyesinde " + tipStr + " kullanılan tüm yapay zeka ajanlarının (kendi başına karar alan / eylem yapan sistemler) sorumlu, güvenli, şeffaf ve KVKK'ya uyumlu biçimde kurulması ve yönetilmesini düzenler. Resmî, deneme ve “gölge” dahil tüm ajanları ve tüm departmanları kapsar.\n\n";
+
+    t += "TEMEL İLKE\n";
+    t += "Ajan kullanmak, KVKK sorumluluğunu ortadan kaldırmaz. " + sirket + " veri sorumlusudur ve her ajanın davranışından hesap verir. “Yazılımın/tedarikçinin hatası” bir savunma değildir.\n\n";
+
+    t += "──────────  MADDELER  ──────────\n\n";
+
+    t += S("Envanter ve görünürlük",
+      "• Her ajan, kullanıma alınmadan önce merkezi ajan envanterine kaydedilir; envantere girmeyen ajan çalıştırılamaz.\n" +
+      "• Envanter en az şu bilgileri içerir: ad, amaç, iş sahibi, teknik sahip, eriştiği veriler, yapabildiği eylemler, tedarikçi/model, verinin işlendiği yer, durum.\n" +
+      "• Yeni ajanların bildirilmesi için düzenli, cezasız bir “gölge affı” işletilir; envanter çeyreklik gözden geçirilir.");
+
+    t += S("Görev tanımı ve sınırlar",
+      "• Her ajanın dört parçalı yazılı görev tanımı olur: amaç, izinli eylemler, yasaklı eylemler, eskalasyon kuralları.\n" +
+      "• Yasaklı eylemler yalnızca kâğıtta değil, sistemde (teknik limit, onaylı liste, kelime filtresi) uygulanır.");
+
+    t += S("Kimlik ve erişim — en az yetki",
+      "• Her ajan kendi servis kimliğiyle çalışır; kişisel hesap veya ortak “robot” hesabı kullanımı yasaktır.\n" +
+      "• Yetkiler görev tanımından türetilir; erişim süreli ve tek hamlede iptal edilebilir olmalıdır.\n" +
+      "• Ajan yetkileri çeyreklik denetlenir.");
+
+    t += S("İnsan onayı — döngüde insan",
+      "• Geri alınamaz ve yüksek etkili işlemler insan onayına bağlanır: " + esik + " " + pb + " üzeri harcama/ödeme, sözleşme taahhüdü, işe alım/çıkarma, veri silme, kamuya açıklama.\n" +
+      "• Her onay ve ret, gerekçesiyle birlikte kaydedilir.\n" +
+      "• Rutin ve geri alınabilir işlemler onaya bağlanmaz; amaç, insan dikkatini nadir ve değerli bir kaynak gibi harcamaktır.");
+
+    t += S("Acil durdurma ve geri alma",
+      "• Her ajan 60–90 saniye içinde durdurulabilir olmalıdır; durdurma yetkisi cömert, açma yetkisi sınırlı dağıtılır.\n" +
+      "• Ajanın son işlemleri toplu olarak geri alınabilmelidir; çeyreklik durdurma tatbikatı yapılır.\n" +
+      "• Kullanılmayan ajan emekliye ayrılır: yetki iptal → entegrasyon söküm → kayıt arşiv → envanter güncelleme.");
+
+    t += S("Kayıt ve denetim izi",
+      "• Her ajan eylemi kaydedilir: ne oldu, neden oldu, kimin adına oldu.\n" +
+      "• Kayıtların kendisi kişisel veridir: maskeleme/tokenlaştırma, saklama süresi ve erişim politikası uygulanır.\n" +
+      "• Kayıtlara yazma yetkisi ajanlardan ayrılır; mümkünse değiştirilemez (yalnızca ekle) düzen kullanılır.");
+
+    t += S("Şeffaflık ve aydınlatma",
+      "• Muhatap, ilk temasta bir yapay zeka ile konuştuğunu açıkça anlar; insan taklidi (sahte isim/fotoğraf) yasaktır.\n" +
+      "• Her kanalda insana ulaşma (“temsilci”) kapısı sunulur.\n" +
+      "• Müşteri ve çalışan aydınlatma metinleri, ajan gerçeğine göre güncel tutulur (KVKK m.10).");
+
+    t += S("Veri minimizasyonu",
+      "• Yeni ajan sıfır veri erişimiyle doğar; her erişim tek tek, yazılı gerekçeyle açılır.\n" +
+      "• Özel nitelikli veriye (KVKK m.6) varsayılan erişim yoktur; istisna, açık gerekçe ve hukuki değerlendirme gerektirir.\n" +
+      "• Mümkün olan yerde bireysel kayıt yerine özet/agregat veri kullanılır.");
+
+    t += S("Tedarikçi yönetimi",
+      "• Yeni bir ajan alınmadan önce tek sayfalık tedarikçi due diligence formu doldurulur (kimlik, durdurma, veri yeri, güvenlik, sözleşme).\n" +
+      "• Sizin adınıza veri işleyen her tedarikçiyle yazılı veri işleme sözleşmesi imzalanır; “kullanım koşulları” yeterli sayılmaz.\n" +
+      "• VERBİS bildirimi ve veri işleme envanteri, ajanların getirdiği yeni faaliyet/aktarımlara göre güncellenir.");
+
+    t += S("İzleme",
+      "• Her ajan için düzenli örnekleme (insan okuması), sinyal grafikleri ve “temsilci” deme oranı izlenir.\n" +
+      "• Değişiklik tetikleyicileri tanımlanır: yeni ürün/fiyat/mevzuat/model sürümü/entegrasyon → ilgili ajan gözden geçirilir.\n" +
+      "• Görev tanımına “emin değilsen uydurma, insana devret” kuralı eklenir.");
+
+    if (oto)
+      t += S("Otomatik karar ve profilleme",
+        "• Kişi hakkında önemli sonuç doğuran otomatik kararlar (İK taraması, kredi/başvuru değerlendirmesi, fiyat farklılaştırma, içerik moderasyonu) insan gözetimine ve işleyen bir itiraz kanalına bağlanır.\n" +
+        "• İlgili kişiler, otomatik değerlendirmeye tabi tutulduklarından aydınlatma yoluyla haberdar edilir.");
+
+    if (yurtdisi)
+      t += S("Yurt dışına veri aktarımı",
+        "• Her ajan için “model çıkarımı ve veri işleme hangi ülkede?” sorusu yanıtlanır; aktarım işleme şartı haritasına işlenir.\n" +
+        "• Yurt dışına aktaran her ajan için KVKK m.9 kapsamında uygun mekanizma (genelde standart sözleşme) kurulur ve aydınlatma metnine aktarım satırı eklenir.");
+
+    t += S("Olay müdahalesi",
+      "• Bir olay/ihlal durumunda sıra: önce durdur, sonra öğren, sonra belgele, sonra dürüstçe bildir.\n" +
+      "• Olay defteri tutulur (tarih, ne oldu, kim ne yaptı); ihlal bildirim yükümlülüğü gecikmeden değerlendirilir.");
+
+    if (calisan)
+      t += S("Çalışanların yapay zeka kullanımı",
+        "• Onaylı YZ araçları listelenir; hangi verilerin asla harici araçlara girilemeyeceği net tanımlanır.\n" +
+        "• Yeni araç/kullanım için onay mercii belirlenir; amaç, gölge veri sızıntısını önlemektir.");
+
+    t += "ROL VE SORUMLULUKLAR\n";
+    t += "• Politika sahibi: " + sahip + ".\n";
+    t += "• Her ajan için üç sahiplik isimle atanır: izleme sahibi, onay sahibi, müdahale sahibi.\n\n";
+
+    t += "GÖZDEN GEÇİRME\n";
+    t += "Bu politika en az yılda bir kez ve ilgili mevzuat (KVKK rehberleri, TBMM YZ düzenlemeleri, EU AI Act) değiştikçe gözden geçirilir.\n\n";
+
+    t += "══════════════════════════════════════\n";
+    t += "Bu politika bir taslaktır ve hukuki tavsiye niteliği taşımaz.";
+    return t;
+  }
+
+  function render(){ $('out').textContent = build(); }
+  $('f').addEventListener('input', render);
+  $('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(build()); $('copy').textContent = "Kopyalandı ✓"; setTimeout(()=>$('copy').textContent="Kopyala",1500); } catch(e){}
+  });
+  $('dl').addEventListener('click', () => {
+    const blob = new Blob([build()], {type:"text/plain;charset=utf-8"});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = "ajan-yonetisim-politikasi.txt"; a.click(); URL.revokeObjectURL(a.href);
+  });
+  render();
+</script>
+</Base>
