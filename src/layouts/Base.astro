@@ -6,6 +6,7 @@ const {
   description = "Türkiye'de yapay zeka ajanlarının hukuku ve yönetişimi. KVKK uyumu, vaka temelli rehberler, şablonlar ve olgunluk testi.",
   image = "/og/agent-hukuku-og.png",
   type = "website",
+  breadcrumb = undefined,
 } = Astro.props;
 
 const site = Astro.site ?? new URL("https://agenthukuku.com");
@@ -21,7 +22,9 @@ const crumbMap = {
   "aydinlatma-olusturucu": "Aydınlatma oluşturucu", "isleme-sarti-secici": "İşleme şartı seçici",
   "vked-taslagi": "VKED taslağı", "agent-politikasi": "Ajan politikası",
 };
-const leafName = title.split("|")[0].trim();
+const leafFull = title.split("|")[0].trim();
+let leafName = (breadcrumb || leafFull).replace(/^Ders\s+[\d.]+\s*[—–-]\s*/, "");
+if (!breadcrumb && leafName.includes(":")) leafName = leafName.split(":")[0].trim();
 const breadcrumbSchema = segs.length ? {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -41,7 +44,7 @@ const isLesson = segs[0] === "akademi" && segs.length === 2;
 const lessonSchema = isLesson ? {
   "@context": "https://schema.org",
   "@type": "LearningResource",
-  name: leafName,
+  name: leafFull,
   description,
   url: canonical,
   inLanguage: "tr-TR",

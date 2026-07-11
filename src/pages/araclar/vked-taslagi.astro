@@ -2,8 +2,17 @@
 import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+
+const faq = [
+  { q: "VKED (DPIA) nedir ve ne zaman gerekir?", a: "Veri Koruma Etki Değerlendirmesi (DPIA), yüksek riskli işleme faaliyetlerinin risklerini önceden değerlendiren bir belgedir. Geniş kapsamlı veya yüksek etkili bir ajanı devreye almadan önce hazırlanması önerilir." },
+  { q: "Bu araç eksiksiz bir VKED belgesi mi üretir?", a: "Bir sayfalık başlangıç taslağı üretir; kapsamlı bir değerlendirmenin iskeletini verir. Riskleri ve alınacak önlemleri detaylandırmak size aittir." },
+  { q: "Girdiğim bilgiler güvende mi?", a: "Evet. Araç tarayıcınızda çalışır; girdiğiniz hiçbir bilgi sunucuya gönderilmez." },
+  { q: "Ürettiği taslak hukuki tavsiye midir?", a: "Hayır. Taslak genel bilgilendirme amaçlıdır ve hukuki tavsiye yerine geçmez; gerektiğinde bir hukukçuya danışın." },
+];
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) };
 ---
 <Base title="VKED (DPIA) Taslağı Üretici — Yapay Zeka Ajanı | Agent Hukuku" description="Yüksek riskli bir ajanı kurmadan önce bir sayfalık veri koruma etki değerlendirmesi (VKED / DPIA) taslağını hızlıca oluşturun. Ücretsiz, tarayıcıda çalışır.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
 <Header />
 <main>
 <section class="page-hero"><div class="wrap">
@@ -52,6 +61,14 @@ import Footer from "../../components/Footer.astro";
     </div>
   </div>
   <p class="tool-note" style="max-width:820px">Tarayıcınızda çalışır; hiçbir bilgi sunucuya gönderilmez. Üretilen belge bir taslaktır ve hukuki tavsiye niteliği taşımaz.</p>
+</div></section>
+<section class="faq-sec"><div class="wrap">
+  <h2 class="faq-h">Sıkça sorulan sorular</h2>
+  <div class="faq-list">
+    {faq.map((f) => (
+      <details class="faq-item"><summary>{f.q}</summary><div class="faq-a">{f.a}</div></details>
+    ))}
+  </div>
 </div></section>
 </main>
 <Footer />

@@ -2,8 +2,17 @@
 import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+
+const faq = [
+  { q: "Bu araç KVKK m.10'a uygun bir aydınlatma metni mi üretir?", a: "Seçimlerinize göre m.10'daki temel unsurları — veri sorumlusunun kimliği, işleme amacı, aktarım ve ilgili kişinin hakları — içeren bir taslak üretir. Taslağı kendi sürecinize göre uyarlamanız gerekir." },
+  { q: "Ajan kullandığımı aydınlatma metninde belirtmem gerekir mi?", a: "Şeffaflık ilkesi gereği, kişisel veriyi bir yapay zeka ajanıyla işliyorsanız ilgili kişiyi bunun hakkında bilgilendirmeniz beklenir. Bu araç tam da bunu açıkça söyleyen bir bildirim üretir." },
+  { q: "Girdiğim bilgiler bir sunucuya gönderiliyor mu?", a: "Hayır. Araç tamamen tarayıcınızda çalışır; girdiğiniz hiçbir bilgi sunucuya gönderilmez veya saklanmaz." },
+  { q: "Üretilen metin hukuki tavsiye yerine geçer mi?", a: "Hayır. Üretilen metin genel bilgilendirme amaçlı bir taslaktır ve hukuki tavsiye niteliği taşımaz; gerektiğinde bir hukukçuya danışın." },
+];
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) };
 ---
 <Base title="Aydınlatma Metni Oluşturucu (Yapay Zeka Ajanı) | Agent Hukuku" description="Ajan kullandığınızı söyleyen, KVKK m.10'a uygun bir aydınlatma metnini birkaç seçimle üretin. E-posta, sohbet ve telefon için kısa bildirimlerle. Ücretsiz.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
 <Header />
 <main>
 <section class="page-hero"><div class="wrap">
@@ -59,6 +68,14 @@ import Footer from "../../components/Footer.astro";
     </div>
   </div>
   <p class="tool-note" style="max-width:820px">Bu araç, tarayıcınızda çalışır; girdiğiniz hiçbir bilgi sunucuya gönderilmez. Üretilen metin bir taslaktır ve hukuki tavsiye niteliği taşımaz — kendi durumunuza göre uyarlayın.</p>
+</div></section>
+<section class="faq-sec"><div class="wrap">
+  <h2 class="faq-h">Sıkça sorulan sorular</h2>
+  <div class="faq-list">
+    {faq.map((f) => (
+      <details class="faq-item"><summary>{f.q}</summary><div class="faq-a">{f.a}</div></details>
+    ))}
+  </div>
 </div></section>
 </main>
 <Footer />

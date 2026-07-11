@@ -2,8 +2,17 @@
 import Base from "../../layouts/Base.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+
+const faq = [
+  { q: "Bu araç hangi soruya yanıt verir?", a: "Ajanınızın işlediği kişisel veri için KVKK m.5'teki uygun hukuki sebebi — sözleşmenin ifası, hukuki yükümlülük, meşru menfaat veya açık rıza gibi — belirlemenize yardımcı olur." },
+  { q: "Neden her şey için açık rıza almak doğru değildir?", a: "Açık rıza her an geri alınabilir; başka bir işleme şartı varken rızaya dayanmak süreci kırılgan hale getirir. Araç, bu 'açık rıza tuzağı'na düşmemeniz için önce diğer şartları değerlendirir." },
+  { q: "Özel nitelikli veriler için de kullanılabilir mi?", a: "Özel nitelikli kişisel veriler (m.6) ayrı ve daha katı kurallara tabidir. Bu tür durumlarda aracın sonucuyla yetinmeyip bir hukukçuya danışın." },
+  { q: "Sonuç bağlayıcı mıdır?", a: "Hayır. Araç genel bir yönlendirme sunar; hukuki tavsiye değildir ve nihai değerlendirme size aittir." },
+];
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) };
 ---
 <Base title="İşleme Şartı Seçici — KVKK m.5 Karar Aracı | Agent Hukuku" description="Birkaç soruda ajanınızın işlediği kişisel veri için doğru KVKK m.5 hukuki sebebini bulun: sözleşmenin ifası, hukuki yükümlülük, meşru menfaat veya açık rıza.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
 <Header />
 <main>
 <section class="page-hero"><div class="wrap">
@@ -20,6 +29,14 @@ import Footer from "../../components/Footer.astro";
     </div>
   </div>
   <p class="tool-note" style="max-width:680px;margin-left:auto;margin-right:auto">Bu araç genel bir yönlendirme sunar; hukuki tavsiye değildir. Özellikle özel nitelikli veri (m.6) ve karmaşık durumlar için bir hukukçuya danışın.</p>
+</div></section>
+<section class="faq-sec"><div class="wrap">
+  <h2 class="faq-h">Sıkça sorulan sorular</h2>
+  <div class="faq-list">
+    {faq.map((f) => (
+      <details class="faq-item"><summary>{f.q}</summary><div class="faq-a">{f.a}</div></details>
+    ))}
+  </div>
 </div></section>
 </main>
 <Footer />
