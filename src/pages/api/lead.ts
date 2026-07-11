@@ -179,6 +179,17 @@ function buildEmail(type: string, meta: any) {
       html: shell(`Olgunluk skorunuz ${Math.round(Number(meta?.total ?? 0))}/100. İşte ilke ilke analiz ve aksiyon planınız.`, dashboard(meta)),
     };
 
+  if (type === "envanter")
+    return {
+      subject: "🗂️ Ajan Envanteri üreteciniz — Agent Hukuku",
+      html: shell("Ajan envanterinizi tarayıcıda oluşturup Word olarak indirin.",
+        eyebrow("ARAÇ")
+        + h1("Ajan Envanteri üreteciniz hazır 🗂️")
+        + p("Tarayıcınızda doldurup Word belgesi olarak indirebileceğiniz <b>Ajan Envanteri üreteci</b> kullanımınıza açık. Girdiğiniz hiçbir bilgi sunucuya gönderilmez — belge tamamen tarayıcınızda oluşturulur.")
+        + `<div style="margin:18px 0">${btn(`${SITE}/sablonlar/ajan-envanteri-ureteci`, "Üreteci aç")}</div>`
+        + p(`Envanteri neden ve nasıl doldurmanız gerektiğini kitaptaki vakalarla görün: <a href="${PDF}" style="color:${C.accent}">e-kitabı indirin</a>. Diğer belgeler <a href="${SITE}/sablonlar" style="color:${C.accent}">şablonlar</a> sayfasında.`)),
+    };
+
   return {
     subject: "👋 Agent Hukuku bültenine hoş geldiniz",
     html: shell("İki haftada bir; yeni düzenlemeler, gerçek vakalar ve pratik şablonlar.",

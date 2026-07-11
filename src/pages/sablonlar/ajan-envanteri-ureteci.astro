@@ -1,0 +1,268 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+---
+<Base title="Ajan Envanteri Üreteci — Word Belgesi | Agent Hukuku" description="Yapay zeka ajanı envanterinizi tarayıcıda doldurun, tek tıkla Word belgesi olarak indirin. Verileriniz tarayıcınızdan çıkmaz; her şey istemci tarafında çalışır. Ücretsiz.">
+<Header />
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/">Ana sayfa</a> · <a href="/sablonlar">Şablonlar</a> · Ajan Envanteri Üreteci</div>
+  <span class="kicker">Belge üreteci</span>
+  <h1>Ajan envanterinizi dakikalar içinde çıkarın</h1>
+  <p class="lead">Ajanlarınızı tek tek ekleyin, sağdaki belge canlı oluşsun, hazır olduğunda Word olarak indirin. Yönetişimin ilk adımı görünürlüktür — göremediğinizi yönetemezsiniz.</p>
+  <div class="gen-chips">
+    <span class="gen-chip gen-chip-ok"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Verileriniz tarayıcınızdan çıkmaz</span>
+    <span class="gen-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg> Word (.doc) çıktısı</span>
+    <span class="gen-chip">Ücretsiz · kayıt yok</span>
+  </div>
+</div></section>
+
+<section class="gen-sec"><div class="wrap">
+  <div class="gen-wrap">
+    <!-- SOL: oluşturucu -->
+    <div class="gen-build">
+      <div class="gen-card">
+        <h2>1 · Belge bilgileri</h2>
+        <div class="gf"><label for="f_sirket">Şirket / kurum adı</label><input id="f_sirket" type="text" placeholder="Örn. TeknoVadi A.Ş." autocomplete="organization"></div>
+        <div class="gf"><label for="f_hazirlayan">Hazırlayan</label><input id="f_hazirlayan" type="text" placeholder="Ad Soyad · Ünvan"></div>
+      </div>
+
+      <div class="gen-card">
+        <div class="gen-card-head"><h2>2 · Ajan ekle</h2><button type="button" class="gen-sample" id="btnSample">Örnek doldur</button></div>
+        <div class="gf"><label for="f_ad">Ajan adı</label><input id="f_ad" type="text" placeholder="Örn. Destek Yanıt Ajanı"></div>
+        <div class="gf"><label for="f_amac">Amaç / görev</label><input id="f_amac" type="text" placeholder="Örn. Gelen destek e-postalarını yanıtlar"></div>
+        <div class="gf-row">
+          <div class="gf"><label for="f_sahip">Sahibi (isimli)</label><input id="f_sahip" type="text" placeholder="Örn. A. Yılmaz"></div>
+          <div class="gf"><label for="f_dept">Departman</label><input id="f_dept" type="text" placeholder="Örn. Müşteri Hizmetleri"></div>
+        </div>
+        <div class="gf"><label for="f_veri">Eriştiği kişisel veri türleri</label><input id="f_veri" type="text" placeholder="Örn. Ad, e-posta, sipariş geçmişi"></div>
+        <div class="gf"><label for="f_ted">Tedarikçi / model</label><input id="f_ted" type="text" placeholder="Örn. OpenAI GPT-4 · Zendesk"></div>
+        <div class="gf-row">
+          <div class="gf"><label for="f_konum">Veri konumu</label><select id="f_konum"><option value="Yurt içi">Yurt içi</option><option value="Yurt dışı">Yurt dışı</option><option value="Karma">Karma</option><option value="Bilinmiyor">Bilinmiyor</option></select></div>
+          <div class="gf"><label for="f_onay">İnsan onayı</label><select id="f_onay"><option value="Her işlemde">Her işlemde</option><option value="Eşik üstü işlemde">Eşik üstü işlemde</option><option value="Yok">Yok</option></select></div>
+        </div>
+        <div class="gf"><label for="f_durum">Durum</label><select id="f_durum"><option value="Aktif">Aktif</option><option value="Pilot">Pilot</option><option value="Planlanıyor">Planlanıyor</option><option value="Emekli">Emekliye ayrıldı</option></select></div>
+        <button type="button" class="btn btn-primary gen-add" id="btnAdd">+ Listeye ekle</button>
+      </div>
+
+      <div class="gen-card">
+        <div class="gen-card-head"><h2>Eklenen ajanlar (<span id="agCount">0</span>)</h2></div>
+        <div id="agList" class="ag-list"><p class="ag-empty">Henüz ajan eklemediniz. Yukarıdan ilk ajanınızı ekleyin ya da “Örnek doldur”u deneyin.</p></div>
+      </div>
+    </div>
+
+    <!-- SAĞ: önizleme + indirme -->
+    <div class="gen-side">
+      <div class="gen-actions">
+        <button type="button" class="btn btn-primary" id="btnDownload">Word olarak indir</button>
+        <a class="gen-blank" href="/sablonlar/ajan-envanteri.docx" download>Boş şablonu indir</a>
+        <p class="gen-note">Belge tamamen tarayıcınızda oluşturulur; girdiğiniz ajan bilgileri sunucuya gönderilmez.</p>
+      </div>
+
+      <div class="doc-scroll"><div class="doc-preview" id="preview"></div></div>
+
+      <!-- E-posta kapısı -->
+      <div class="gen-gate" id="gate" hidden>
+        <h3>Word belgenizi indirin</h3>
+        <p>Belgeyi indirmek ve güncellemelerden haberdar olmak için e-postanızı bırakın. (Ajan bilgileriniz gönderilmez — yalnızca e-postanız.)</p>
+        <form id="gateForm" novalidate>
+          <input type="email" id="gateEmail" placeholder="Çalışma e-postanız" required>
+          <label class="consent"><input type="checkbox" class="cbox" id="gateConsent" required><span>KVKK kapsamında e-postamın işlenmesine ve tarafıma bilgilendirme/pazarlama iletisi gönderilmesine <a href="/aydinlatma" target="_blank">Aydınlatma Metni</a> uyarınca açık rıza veriyorum.</span></label>
+          <button type="submit" class="btn btn-primary" id="gateSubmit">Gönder ve indir</button>
+          <p class="gate-msg" id="gateMsg" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <p class="tool-note" style="max-width:900px;margin-top:26px">Bu araç genel bilgilendirme amaçlı bir belge üretir ve hukuki tavsiye niteliği taşımaz. Üretilen envanteri şirketinizin gerçek durumuna göre doldurun, düzenli olarak güncelleyin ve gerektiğinde bir hukukçuya danışın. Belge, Kasım 2025 tarihli KVKK Üretken Yapay Zekâ Rehberi çerçevesinde hazırlanmıştır (sürüm v1.0).</p>
+</div></section>
+</main>
+<Footer />
+
+<script is:inline>
+(function () {
+  var AG = [];
+  var unlocked = false;
+  var TODAY = new Date().toLocaleDateString("tr-TR");
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c]; }); }
+  function v(id){ var e = $(id); return e ? e.value.trim() : ""; }
+
+  var COLS = ["#","Ajan","Amaç / görev","Sahip","Departman","Eriştiği veriler","Tedarikçi / model","Veri konumu","İnsan onayı","Durum"];
+
+  function docHtml(){
+    var sirket = v("f_sirket") || "[Şirket adı]";
+    var haz = v("f_hazirlayan") || "—";
+    var head = "<tr>" + COLS.map(function(c){ return '<th style="border:1px solid #b9c2cf;padding:6px 8px;text-align:left;background:#1B2A41;color:#fff;font-size:10px;font-family:Arial,sans-serif">'+esc(c)+'</th>'; }).join("") + "</tr>";
+    var body;
+    if (AG.length) {
+      body = AG.map(function(a, i){
+        var cells = [String(i+1), a.ad, a.amac, a.sahip, a.dept, a.veri, a.ted, a.konum, a.onay, a.durum];
+        return "<tr>" + cells.map(function(x, j){
+          var strong = j === 1 ? "font-weight:bold;" : "";
+          return '<td style="border:1px solid #b9c2cf;padding:6px 8px;text-align:left;vertical-align:top;font-size:10px;font-family:Arial,sans-serif;color:#26313f;'+strong+'">'+esc(x || "—")+'</td>';
+        }).join("") + "</tr>";
+      }).join("");
+    } else {
+      body = '<tr><td colspan="10" style="border:1px solid #b9c2cf;padding:16px;text-align:center;color:#8592a6;font-family:Arial,sans-serif;font-size:11px">Henüz ajan eklenmedi.</td></tr>';
+    }
+    return ''
+      + '<h1 style="font-family:Georgia,serif;font-size:19px;color:#1B2A41;margin:0 0 6px">'+esc(sirket)+' — Yapay Zeka Ajanı Envanteri</h1>'
+      + '<p style="font-family:Arial,sans-serif;font-size:11px;color:#8592a6;margin:0 0 16px">Hazırlayan: '+esc(haz)+' &nbsp;·&nbsp; Tarih: '+TODAY+' &nbsp;·&nbsp; Toplam ajan: '+AG.length+'</p>'
+      + '<table style="width:100%;border-collapse:collapse">'+head+body+'</table>'
+      + '<p style="font-family:Arial,sans-serif;font-size:9.5px;color:#8592a6;margin:16px 0 0;line-height:1.5">Bu envanter, Kasım 2025 tarihli KVKK Üretken Yapay Zekâ Rehberi çerçevesinde hazırlanmıştır · Sürüm v1.0 · '+TODAY+'. Genel bilgilendirme amaçlıdır; hukuki tavsiye değildir.</p>';
+  }
+
+  function renderPreview(){ $("preview").innerHTML = docHtml(); }
+
+  function renderList(){
+    $("agCount").textContent = AG.length;
+    var box = $("agList");
+    if (!AG.length){ box.innerHTML = '<p class="ag-empty">Henüz ajan eklemediniz. Yukarıdan ilk ajanınızı ekleyin ya da “Örnek doldur”u deneyin.</p>'; return; }
+    box.innerHTML = AG.map(function(a, i){
+      return '<div class="ag-item"><div class="ag-main"><span class="ag-name">'+esc(a.ad)+'</span><span class="ag-meta">'+esc(a.sahip || "—")+' · '+esc(a.durum)+'</span></div><button type="button" class="ag-del" data-i="'+i+'" aria-label="Sil">✕</button></div>';
+    }).join("");
+    Array.prototype.forEach.call(box.querySelectorAll(".ag-del"), function(btn){
+      btn.addEventListener("click", function(){ AG.splice(+btn.getAttribute("data-i"), 1); render(); });
+    });
+  }
+
+  function render(){ renderList(); renderPreview(); }
+
+  function addAgent(){
+    var ad = v("f_ad");
+    if (!ad){ $("f_ad").focus(); $("f_ad").classList.add("gf-err"); setTimeout(function(){ $("f_ad").classList.remove("gf-err"); }, 1200); return; }
+    AG.push({ ad: ad, amac: v("f_amac"), sahip: v("f_sahip"), dept: v("f_dept"), veri: v("f_veri"), ted: v("f_ted"), konum: v("f_konum"), onay: v("f_onay"), durum: v("f_durum") });
+    ["f_ad","f_amac","f_sahip","f_dept","f_veri","f_ted"].forEach(function(id){ $(id).value = ""; });
+    $("f_ad").focus();
+    render();
+  }
+
+  function fillSample(){
+    $("f_ad").value = "Destek Yanıt Ajanı";
+    $("f_amac").value = "Gelen destek e-postalarını sınıflar ve taslak yanıt üretir";
+    $("f_sahip").value = "A. Yılmaz";
+    $("f_dept").value = "Müşteri Hizmetleri";
+    $("f_veri").value = "Ad-soyad, e-posta, sipariş geçmişi";
+    $("f_ted").value = "OpenAI GPT-4 · Zendesk";
+    $("f_konum").value = "Yurt dışı";
+    $("f_onay").value = "Eşik üstü işlemde";
+    $("f_durum").value = "Aktif";
+    if (!v("f_sirket")) $("f_sirket").value = "TeknoVadi A.Ş.";
+    renderPreview();
+  }
+
+  function downloadWord(){
+    var html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">'
+      + '<head><meta charset="utf-8"><title>Ajan Envanteri</title>'
+      + '<xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml>'
+      + '<style>@page{size:A4 landscape;margin:1.4cm} body{font-family:Arial,sans-serif}</style></head>'
+      + '<body>' + docHtml() + '</body></html>';
+    var blob = new Blob(["﻿", html], { type: "application/msword" });
+    var name = (v("f_sirket") || "ajan").replace(/[^a-z0-9ğüşiöç._-]+/gi, "-").toLowerCase() + "-envanteri.doc";
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  }
+
+  function requestDownload(){
+    if (!AG.length){ alert("Önce en az bir ajan ekleyin."); return; }
+    if (unlocked){ downloadWord(); return; }
+    var g = $("gate"); g.hidden = false; g.scrollIntoView({ behavior: "smooth", block: "center" }); $("gateEmail").focus();
+  }
+
+  function onGate(e){
+    e.preventDefault();
+    var email = $("gateEmail").value.trim();
+    var ok = /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
+    var msg = $("gateMsg");
+    if (!ok){ $("gateEmail").focus(); return; }
+    if (!$("gateConsent").checked){ $("gateConsent").focus(); return; }
+    var btn = $("gateSubmit"); btn.disabled = true; var old = btn.textContent; btn.textContent = "Hazırlanıyor…";
+    // E-posta arka planda gönderilir; belge her hâlükârda indirilir (değeri rehin tutmayız).
+    try {
+      fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: email, type: "envanter", consent: true }) }).catch(function(){});
+    } catch (err) {}
+    unlocked = true;
+    $("gate").hidden = true;
+    btn.disabled = false; btn.textContent = old;
+    downloadWord();
+    if (msg){ msg.hidden = false; msg.textContent = "İndiriliyor… Bir kopyasını da e-postanıza gönderdik."; }
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    $("btnAdd").addEventListener("click", addAgent);
+    $("btnSample").addEventListener("click", fillSample);
+    $("btnDownload").addEventListener("click", requestDownload);
+    $("gateForm").addEventListener("submit", onGate);
+    ["f_sirket","f_hazirlayan"].forEach(function(id){ $(id).addEventListener("input", renderPreview); });
+    $("f_ad").addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); addAgent(); } });
+    render();
+  });
+})();
+</script>
+
+<style>
+  .gen-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .gen-chip{display:inline-flex;align-items:center;gap:7px;font:600 .82rem var(--sans);color:var(--slate);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 13px}
+  .gen-chip-ok{color:#2E7D5B;border-color:#bfe0cd;background:#f2f9f5}
+  .gen-chip svg{flex:0 0 auto}
+
+  .gen-sec{padding-top:8px}
+  .gen-wrap{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+  .gen-build{display:flex;flex-direction:column;gap:18px}
+  .gen-card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh-sm);padding:20px 20px 22px}
+  .gen-card h2{font-family:var(--serif);font-size:1.12rem;color:var(--ink);margin:0 0 14px}
+  .gen-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .gen-card-head h2{margin:0}
+  .gen-sample{background:none;border:1px solid var(--line);border-radius:8px;color:var(--accent);font:600 .82rem var(--sans);padding:5px 11px;cursor:pointer}
+  .gen-sample:hover{border-color:var(--accent);background:var(--bg-2)}
+
+  .gf{margin-bottom:12px}
+  .gf:last-child{margin-bottom:0}
+  .gf label{display:block;font:600 .8rem var(--sans);color:var(--ink-2);margin-bottom:5px}
+  .gf input,.gf select{width:100%;font:400 .95rem var(--sans);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+  .gf input:focus,.gf select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 15%,transparent)}
+  .gf-err{border-color:var(--risk,#C0492F)!important;box-shadow:0 0 0 3px color-mix(in srgb,#C0492F 15%,transparent)!important}
+  .gf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .gen-add{width:100%;margin-top:16px}
+
+  .ag-list{display:flex;flex-direction:column;gap:8px}
+  .ag-empty{color:var(--muted);font-size:.92rem;margin:0;line-height:1.5}
+  .ag-item{display:flex;align-items:center;gap:12px;background:var(--bg-2);border:1px solid var(--line);border-radius:11px;padding:10px 12px}
+  .ag-main{flex:1;min-width:0}
+  .ag-name{display:block;font-weight:600;color:var(--ink);font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ag-meta{display:block;font-size:.8rem;color:var(--muted);margin-top:1px}
+  .ag-del{flex:0 0 auto;width:28px;height:28px;border:1px solid var(--line);background:var(--card);border-radius:8px;color:var(--muted);cursor:pointer;font-size:.85rem;line-height:1}
+  .ag-del:hover{border-color:#C0492F;color:#C0492F}
+
+  .gen-side{position:sticky;top:88px;display:flex;flex-direction:column;gap:16px}
+  .gen-actions{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh-sm);padding:16px 18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .gen-actions .btn{flex:0 0 auto}
+  .gen-blank{font-size:.86rem;font-weight:600;color:var(--accent);text-decoration:none}
+  .gen-blank:hover{text-decoration:underline}
+  .gen-note{flex-basis:100%;margin:0;font-size:.82rem;color:var(--muted)}
+
+  .doc-scroll{background:var(--bg-2);border:1px solid var(--line);border-radius:16px;padding:18px;max-height:620px;overflow:auto}
+  .doc-preview{background:#fff;border:1px solid #e6edf5;box-shadow:0 4px 18px rgba(27,42,65,.08);border-radius:6px;padding:26px 24px;min-height:200px}
+  .doc-preview table{overflow-wrap:anywhere}
+
+  .gen-gate{background:var(--card);border:1px solid var(--accent);border-radius:16px;box-shadow:var(--sh-sm);padding:20px}
+  .gen-gate h3{font-family:var(--serif);font-size:1.15rem;color:var(--ink);margin:0 0 6px}
+  .gen-gate p{font-size:.9rem;color:var(--slate);margin:0 0 14px;line-height:1.55}
+  .gen-gate input[type=email]{width:100%;font:400 .95rem var(--sans);border:1px solid var(--line);border-radius:9px;padding:11px 12px;margin-bottom:12px}
+  .gen-gate .consent{display:flex;gap:9px;font-size:.82rem;color:var(--slate);line-height:1.45;margin-bottom:14px}
+  .gen-gate .consent a{color:var(--accent)}
+  .gen-gate .btn{width:100%}
+  .gate-msg{margin:12px 0 0;font-size:.86rem;color:#2E7D5B;font-weight:600}
+
+  @media(max-width:900px){
+    .gen-wrap{grid-template-columns:1fr}
+    .gen-side{position:static}
+  }
+</style>
+</Base>
