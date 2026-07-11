@@ -12,6 +12,47 @@ const site = Astro.site ?? new URL("https://agenthukuku.com");
 const canonical = new URL(Astro.url.pathname, site).href;
 const ogImage = new URL(image, site).href;
 
+// --- Otomatik BreadcrumbList (tüm sayfalar) ---
+const segs = Astro.url.pathname.split("/").filter(Boolean);
+const crumbMap = {
+  akademi: "Akademi", makaleler: "Makaleler", vakalar: "Vakalar", radar: "Mevzuat Radarı",
+  araclar: "Araçlar", degerlendirme: "Değerlendirme", sablonlar: "Şablonlar", kitap: "Kitap",
+  hakkinda: "Hakkında", aydinlatma: "Aydınlatma Metni", iletisim: "İletişim", api: "API",
+  "aydinlatma-olusturucu": "Aydınlatma oluşturucu", "isleme-sarti-secici": "İşleme şartı seçici",
+  "vked-taslagi": "VKED taslağı", "agent-politikasi": "Ajan politikası",
+};
+const leafName = title.split("|")[0].trim();
+const breadcrumbSchema = segs.length ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Ana sayfa", item: `${site.origin}/` },
+    ...segs.map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 2,
+      name: crumbMap[s] || (i === segs.length - 1 ? leafName : decodeURIComponent(s)),
+      item: new URL("/" + segs.slice(0, i + 1).join("/"), site).href,
+    })),
+  ],
+} : null;
+
+// --- Akademi dersleri için otomatik LearningResource (Course'a bağlı) ---
+const isLesson = segs[0] === "akademi" && segs.length === 2;
+const lessonSchema = isLesson ? {
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  name: leafName,
+  description,
+  url: canonical,
+  inLanguage: "tr-TR",
+  learningResourceType: "Slaytlı ders",
+  isAccessibleForFree: true,
+  isPartOf: { "@type": "Course", "@id": `${site.origin}/akademi#course`, name: "Ajan Hukuku ve Yönetişimi Akademisi", url: `${site.origin}/akademi` },
+  provider: { "@id": `${site.origin}/#org` },
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@id": `${site.origin}/#org` },
+} : null;
+
 const orgSchema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -68,6 +109,8 @@ const orgSchema = {
 
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+  {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />}
+  {lessonSchema && <script type="application/ld+json" set:html={JSON.stringify(lessonSchema)} />}
   <slot name="head" />
   <Analytics />
 </head>
