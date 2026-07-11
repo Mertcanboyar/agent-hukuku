@@ -1,0 +1,303 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const REG = {
+  TR:  { l: "Türkiye",         c: "#C0492F" },
+  AB:  { l: "Avrupa Birliği",  c: "#2F6D9E" },
+  ABD: { l: "ABD",             c: "#4A5568" },
+};
+
+const ST = {
+  yururlukte: { l: "Yürürlükte",         c: "#3A8074" },
+  yaklasan:   { l: "Yaklaşan",           c: "#2F6D9E" },
+  taslak:     { l: "Taslak / komisyonda", c: "#C77D2E" },
+  revize:     { l: "Ertelendi / revize",  c: "#6C5CE7" },
+};
+
+// k: sıralama anahtarı (YYYYMMDD). Zaman tüneli k'ye göre azalan sıralanır (gelecek üstte).
+const TL = [
+  { d:"2 Ağu 2028", k:20280802, reg:"AB", st:"yaklasan",
+    t:"AI Act — gömülü ürünlerde yüksek riskli YZ uyumu (Annex I)",
+    s:"Tıbbi cihaz, makine ve araç gibi düzenlenmiş ürünlere gömülü yüksek riskli YZ sistemleri için uyum yükümlülükleri bu tarihte başlıyor.",
+    a:"Ajanınız fiziksel bir ürünün parçasıysa ya da onu kontrol ediyorsa (robotik, tıbbi karar desteği), en geç bu tarihte yüksek riskli rejime hazır olmalı.",
+    rel:"İlgili vaka: Satranç robotu parmak kırdı", relUrl:"/vakalar",
+    src:"ec.europa.eu", url:"https://ai-act-service-desk.ec.europa.eu/en/ai-act/timeline/timeline-implementation-eu-ai-act" },
+
+  { d:"2 Ara 2027", k:20271202, reg:"AB", st:"revize",
+    t:"AI Act — yüksek riskli sistemlerde (Annex III) tam uyum",
+    s:"İşe alım, kredi skorlama, eğitim ve kolluk gibi alanlardaki bağımsız yüksek riskli YZ için tam uyum tarihi; 'Digital Omnibus' uzlaşısıyla 2 Ağustos 2026'dan bu tarihe ertelendi (resmi kabul bekleniyor).",
+    a:"İşe alım eleyen, kredi/başvuru değerlendiren veya not veren ajanlar bu kapsamda. Süre uzadı ama kapsam ve yükümlülükler (risk yönetimi, insan gözetimi, kayıt) yerinde duruyor.",
+    rel:"İlgili vaka: Botla işten çıkarma", relUrl:"/vakalar",
+    src:"gibsondunn.com", url:"https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/" },
+
+  { d:"1 Oca 2027", k:20270101, reg:"ABD", st:"revize",
+    t:"Colorado AI Act (SB 26-189) yürürlüğe giriyor",
+    s:"Colorado, 2024 tarihli ilk kapsamlı AI yasasını (SB 24-205) yürürlüğe girmeden değiştirdi; yerine şeffaflık ve 'önemli kararlar'da açıklama odaklı SB 26-189 geçti. Yürürlük 1 Ocak 2027.",
+    a:"ABD pazarına 'önemli karar' (istihdam, kredi, sağlık vb.) veren otomatik karar ajanları sunuyorsanız, şeffaflık ve açıklama yükümlülükleri bu tarihte devreye girer.",
+    rel:"İlgili vaka: Otomatik karar vakaları", relUrl:"/vakalar",
+    src:"consumerfinancemonitor.com", url:"https://www.consumerfinancemonitor.com/2026/05/12/colorado-rewrites-its-landmark-ai-law-unpacking-sb-26-189-and-what-it-means-for-businesses/" },
+
+  { d:"2 Ara 2026", k:20261202, reg:"AB", st:"yaklasan",
+    t:"AI Act — rıza olmadan cinsel içerikli deepfake yasağı (m.5)",
+    s:"AI Act'in 5. maddesine eklenen yasak, kişinin açık rızası olmadan onu cinsel içerikte gösteren gerçekçi sentetik görüntülerin üretilmesini ve piyasaya sürülmesini yasaklıyor.",
+    a:"Görsel/video üreten ajanlarda içerik filtreleri ve rıza kontrolü zorunlu hale gelir; bu tür kötüye kullanım artık doğrudan yasak kapsamında.",
+    rel:"İlgili vaka: İzinsiz arkadaşlık profili", relUrl:"/vakalar",
+    src:"insideglobaltech.com", url:"https://www.insideglobaltech.com/2026/05/28/eu-ai-act-update-timeline-relief-targeted-simplification-and-new-prohibitions/" },
+
+  { d:"2 Ağu 2026", k:20260802, reg:"AB", st:"yaklasan",
+    t:"AI Act — yönetişim ve GPAI yaptırım hükümleri devrede",
+    s:"AI Act'in yönetişim yapısı ve genel amaçlı YZ (GPAI) modellerine ilişkin yaptırım hükümleri bu tarihte işlerlik kazanıyor; yüksek riskli takvimin bir kısmı Omnibus ile ileri alındı.",
+    a:"Ajanınızın altında bir GPAI temel model varsa (çoğu ajan öyle), sağlayıcının şeffaflık ve teknik dokümantasyon yükümlülükleri artık yaptırıma bağlı.",
+    rel:"", relUrl:"",
+    src:"artificialintelligenceact.eu", url:"https://artificialintelligenceact.eu/implementation-timeline/" },
+
+  { d:"14 May 2026", k:20260514, reg:"ABD", st:"revize",
+    t:"Colorado, ilk AI yasasını imzayla değiştirdi (SB 26-189)",
+    s:"Vali, SB 26-189'u imzalayarak eyaletin AB modeline yakın ilk 'yüksek riskli YZ' çerçevesini yürürlüğe girmeden değiştirdi; yeni yasa açıklama ve şeffaflık odaklı.",
+    a:"ABD'de eyalet düzeyinde düzenleme hızla değişiyor; ajan uyum stratejinizi tek bir metne değil, izlenen bir tabloya bağlayın.",
+    rel:"", relUrl:"",
+    src:"troutmanprivacy.com", url:"https://www.troutmanprivacy.com/2026/05/colorado-legislature-passes-bill-to-repeal-and-replace-colorado-ai-act/" },
+
+  { d:"7 May 2026", k:20260507, reg:"AB", st:"revize",
+    t:"AI Act 'Digital Omnibus' — yüksek riskli takvim ertelendi",
+    s:"7 Mayıs 2026 geçici uzlaşısıyla Annex III yüksek riskli yükümlülükler 2 Ağustos 2026'dan 2 Aralık 2027'ye ertelendi; bazı hükümler sadeleştirildi. Resmi kabul ve Resmî Gazete yayımı bekleniyor.",
+    a:"Erteleme uyum için nefes alanı açıyor ama iptal değil; yüksek riskli ajan projelerinde takvimi gevşetin, hazırlığı durdurmayın.",
+    rel:"", relUrl:"",
+    src:"gibsondunn.com", url:"https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/" },
+
+  { d:"Şub 2026", k:20260215, reg:"ABD", st:"yururlukte",
+    t:"Illinois — YZ destekli video mülakatlarda bildirim ve rıza",
+    s:"Illinois düzenlemesi, işverenlerin adaylara YZ'nin video mülakatı analiz ettiğini bildirmesini, değerlendirmeden önce rıza almasını ve veri saklama kurallarına uymasını zorunlu kılıyor.",
+    a:"İşe alımda aday değerlendiren bir ajan kullanıyorsanız, bildirim + rıza + saklama üçlüsü teknik olarak akışın içine gömülmeli.",
+    rel:"İlgili vaka: Botla işten çıkarma", relUrl:"/vakalar",
+    src:"seyfarth.com", url:"https://www.seyfarth.com/news-insights/artificial-intelligence-legal-roundup-colorado-postpones-implementation-of-ai-law-as-california-finalizes-new-employment-discrimination-regulations-and-illinois-disclosure-law-set-to-take-effect.html" },
+
+  { d:"8 Oca 2026", k:20260108, reg:"TR", st:"taslak",
+    t:"KVKK m.18 değişiklik teklifi — sentetik içerikte ciro %5 ceza",
+    s:"TBMM'ye sunulan teklif; YZ ile üretilmiş ses, yazı veya görsel içeriğin ilgili kişinin izni olmadan paylaşılmasına imkân veren platformlara, her ileti için bir önceki yıl cirosunun %5'i oranında idari para cezası öngörüyor.",
+    a:"Sentetik içerik üreten veya dağıtan ajan/platformlarda rıza ve etiketleme, yasalaşırsa ciroya bağlı ceza riski taşır.",
+    rel:"İlgili vaka: İzinsiz ifşa yazısı", relUrl:"/vakalar",
+    src:"mondaq.com", url:"https://www.mondaq.com/turkey/data-protection/1740012/ki%C5%9Fisel-verilerin-korunmas%C4%B1-hukukunda-g%C3%BCncel-geli%C5%9Fmeler" },
+
+  { d:"1 Oca 2026", k:20260101, reg:"ABD", st:"yururlukte",
+    t:"California SB 53 (Frontier AI Şeffaflık Yasası) yürürlükte",
+    s:"Büyük 'frontier' model geliştiricilerine risk çerçevesi yayımlama, güvenlik olaylarını raporlama ve ihbarcı koruması getiren SB 53, 1 Ocak 2026'da yürürlüğe girdi.",
+    a:"Kendi büyük modelinizi eğitmiyorsanız doğrudan muhatap değilsiniz; ama kullandığınız sağlayıcının olay raporlama disiplini tedarik riskinizi doğrudan etkiler.",
+    rel:"İlgili vaka: Tedarik zinciri vakaları", relUrl:"/vakalar",
+    src:"kslaw.com", url:"https://www.kslaw.com/news-and-insights/new-state-ai-laws-are-effective-on-january-1-2026-but-a-new-executive-order-signals-disruption" },
+
+  { d:"1 Oca 2026", k:20260101, reg:"ABD", st:"yururlukte",
+    t:"Texas Sorumlu YZ Yönetişim Yasası (TRAIGA) yürürlükte",
+    s:"1 Ocak 2026'da yürürlüğe giren TRAIGA; davranışsal manipülasyon, ayrımcılık ve yasa dışı deepfake amaçlı YZ geliştirilmesini veya kullanılmasını yasaklıyor ve bir düzenleyici 'sandbox' kuruyor.",
+    a:"Texas'ta faaliyet gösteren ajanlarda manipülatif tasarım ve ayrımcı çıktı yasak; niyet temelli sınırlar tasarıma gömülmeli.",
+    rel:"İlgili vaka: Freysa — ikna edilen ajan", relUrl:"/vakalar",
+    src:"nortonrosefulbright.com", url:"https://www.nortonrosefulbright.com/en/knowledge/publications/c6c60e0c/the-texas-responsible-ai-governance-act" },
+
+  { d:"Kas 2025", k:20251115, reg:"TR", st:"yururlukte",
+    t:"KVKK — 'Üretken YZ ve Kişisel Verilerin Korunması Rehberi (15 Soruda)'",
+    s:"KVKK, Kasım 2025'te üretken YZ'nin yaşam döngüsü, kullanım alanları ve veri koruma risklerini ele alan resmi bir rehber yayımladı. Bağlayıcı bir yönetmelik değil ama Kurul'un beklentisini gösteriyor.",
+    a:"Üretken YZ ajanlarında veri minimizasyonu, aydınlatma ve saklama beklentisinin resmi çerçevesi; uyum argümanınızda dayanak noktası.",
+    rel:"", relUrl:"",
+    src:"kvkk.gov.tr", url:"https://www.kvkk.gov.tr/Icerik/8547/uretken-yapay-zeka-ve-kisisel-verilerin-korunmasi-rehberi-15-soruda" },
+
+  { d:"Eyl–Kas 2025", k:20251110, reg:"TR", st:"taslak",
+    t:"Yapay Zekâ Kanun Teklifi(leri) TBMM'de",
+    s:"2025'te TBMM'ye birden çok YZ kanun teklifi sunuldu. Öne çıkan hükümler: geliştirici/kullanıcı sorumluluk ayrımı, deepfake içerikte 6 saat içinde müdahale ve kalıcı etiketleme, ayrımcı veri setlerinin yasaklanması, erişim engeli ve idari para cezası yetkileri.",
+    a:"Yasalaşırsa Türkiye'de ajan geliştiren ve kullanan taraflar için ayrı yükümlülükler doğar; deepfake ve şeffaflık kuralları tasarımı bugünden etkiler.",
+    rel:"", relUrl:"",
+    src:"pekin.com.tr", url:"https://pekin.com.tr/2025/11/25/yapay-zeka-sistemlerine-iliskin-kanun-teklifi-turkiye-buyuk-millet-meclisinde-tbmm/" },
+
+  { d:"2 Ağu 2025", k:20250802, reg:"AB", st:"yururlukte",
+    t:"AI Act — GPAI şeffaflık yükümlülükleri + Uygulama Kuralları",
+    s:"Genel amaçlı YZ (GPAI) modellerine ilişkin şeffaflık, telif ve teknik dokümantasyon yükümlülükleri ile gönüllü Uygulama Kuralları (Code of Practice) bu tarihte devreye girdi.",
+    a:"Ajanınızın temel modeli bir GPAI ise, sağlayıcı zincirinde şeffaflık belgeleri artık beklenen standart — tedarikçi seçiminde bunu sorun.",
+    rel:"İlgili vaka: LiteLLM arka kapısı", relUrl:"/vakalar",
+    src:"artificialintelligenceact.eu", url:"https://artificialintelligenceact.eu/implementation-timeline/" },
+
+  { d:"2 Şub 2025", k:20250202, reg:"AB", st:"yururlukte",
+    t:"AI Act — yasak uygulamalar (m.5) ve YZ okuryazarlığı",
+    s:"Kabul edilemez riskli YZ uygulamaları (bilinçaltı manipülasyon, sosyal skorlama, belirli biyometrik kullanımlar) yasaklandı; kuruluşlara personel için YZ okuryazarlığı yükümlülüğü geldi.",
+    a:"Manipülatif veya sosyal-skorlama tarzı ajan kullanımları AB'de yasak; ekibinizin ajan riskleri konusunda eğitimli olması artık bir yükümlülük.",
+    rel:"İlgili vaka: Freysa — ikna edilen ajan", relUrl:"/vakalar",
+    src:"artificialintelligenceact.eu", url:"https://artificialintelligenceact.eu/implementation-timeline/" },
+
+  { d:"1 Ağu 2024", k:20240801, reg:"AB", st:"yururlukte",
+    t:"AI Act yürürlüğe girdi (kademeli uygulama başladı)",
+    s:"Dünyanın ilk kapsamlı yapay zeka yasası AB'de yürürlüğe girdi; yükümlülükler risk seviyesine göre 2025–2028 arasında kademeli olarak uygulanıyor.",
+    a:"Ajan projeleriniz için risk sınıflandırması (yasak / yüksek / sınırlı / minimal) artık uyum planlamasının başlangıç noktası.",
+    rel:"", relUrl:"",
+    src:"artificialintelligenceact.eu", url:"https://artificialintelligenceact.eu/implementation-timeline/" },
+
+  { d:"1 Haz 2024", k:20240601, reg:"TR", st:"yururlukte",
+    t:"KVKK değişikliği (7499) — özel nitelikli veri ve yurt dışı aktarım",
+    s:"6698 sayılı Kanun'da yapılan değişiklikle özel nitelikli kişisel verilerin işlenme şartları (m.6) genişletildi ve yurt dışına veri aktarımı (m.9) standart sözleşme, BCR ve uygun ülke mekanizmalarıyla yeniden düzenlendi. Yürürlük: 1 Haziran 2024.",
+    a:"Ajanınız yurt dışındaki bir LLM API'sine (OpenAI, Anthropic vb.) kişisel veri gönderiyorsa, artık geçerli bir aktarım mekanizması ve gerektiğinde Kurul'a bildirim şart.",
+    rel:"İlgili vaka: MCP çapraz-kiracı sızıntıları", relUrl:"/vakalar",
+    src:"mondaq.com", url:"https://www.mondaq.com/turkey/data-protection/1740012/ki%C5%9Fisel-verilerin-korunmas%C4%B1-hukukunda-g%C3%BCncel-geli%C5%9Fmeler" },
+
+  { d:"25 May 2018", k:20180525, reg:"AB", st:"yururlukte",
+    t:"GDPR — otomatik kararlar ve veri koruma temel katmanı",
+    s:"GDPR; tümüyle otomatik kararlara karşı bireye haklar (m.22), şeffaflık ve hesap verebilirlik ilkeleri getirdi. AB'de veri işleyen her ajan için temel zemin ve KVKK'nın da paralelini oluşturuyor.",
+    a:"AB verisini işleyen ajanlarda 'sadece bir algoritma karar verdi' savunması yetmez; insan gözetimi ve itiraz yolu m.22 gereği tasarıma girer (KVKK m.22 ile paralel).",
+    rel:"İlgili vaka: Air Canada chatbot sorumluluğu", relUrl:"/vakalar",
+    src:"gdpr-info.eu", url:"https://gdpr-info.eu/art-22-gdpr/" },
+];
+
+const todayK = 20260711;
+const sorted = TL.slice().sort((a, b) => b.k - a.k);
+const firstPastIdx = sorted.findIndex((x) => x.k <= todayK);
+---
+<Base title="Mevzuat Radarı — Ajan Hukukunda Ne, Ne Zaman Yürürlükte | Agent Hukuku" description="Yapay zeka ajanlarını ilgilendiren mevzuatın canlı zaman tüneli: KVKK, EU AI Act ve ABD eyalet yasaları. Durum rozetleri, filtreler, her madde için 'ajanın için ne demek' notu ve gerçek vakalarla bağlantı.">
+<Header />
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/">Ana sayfa</a> · Radar</div>
+  <span class="kicker">Mevzuat Radarı</span>
+  <h1>Ne yürürlükte, ne yolda?</h1>
+  <p class="lead">Ajan hukuku statik bir metin değil — hareketli bir hedef. Bu radar, yapay zeka ajanlarını ilgilendiren mevzuatı bir zaman tüneli olarak sunar: Türkiye (KVKK), Avrupa Birliği (AI Act) ve ABD eyaletleri. Her maddenin altında tek bir soruya yanıt var: <em>senin ajanın için ne demek?</em> Filtreleyin, yaklaşan tarihleri görün, ilgili gerçek vakalara geçin.</p>
+  <p class="src-note">Kaynak: Resmî mevzuat metinleri ve güncel hukuk yayınlarından derlenmiştir. Genel bilgilendirme amaçlıdır; hukuki tavsiye değildir. Her kart orijinal kaynağa bağlanır. Son güncelleme: 11 Temmuz 2026.</p>
+</div></section>
+
+<section class="rad-sec"><div class="wrap">
+  <div class="rad-filters">
+    <div class="rad-fgroup">
+      <span class="rad-flabel">Bölge</span>
+      <button class="rad-chip on" data-k="reg" data-v="all">Tümü</button>
+      <button class="rad-chip" data-k="reg" data-v="TR">Türkiye</button>
+      <button class="rad-chip" data-k="reg" data-v="AB">Avrupa Birliği</button>
+      <button class="rad-chip" data-k="reg" data-v="ABD">ABD</button>
+    </div>
+    <div class="rad-fgroup">
+      <span class="rad-flabel">Durum</span>
+      <button class="rad-chip on" data-k="st" data-v="all">Tümü</button>
+      <button class="rad-chip" data-k="st" data-v="yururlukte">Yürürlükte</button>
+      <button class="rad-chip" data-k="st" data-v="yaklasan">Yaklaşan</button>
+      <button class="rad-chip" data-k="st" data-v="taslak">Taslak</button>
+      <button class="rad-chip" data-k="st" data-v="revize">Ertelendi / revize</button>
+    </div>
+    <p class="rad-count"><strong id="radCount">{sorted.length}</strong> / {sorted.length} kayıt</p>
+  </div>
+
+  <div class="rad-tl">
+    {sorted.map((i, idx) => (
+      <Fragment>
+        {idx === firstPastIdx && (
+          <div class="rad-now" id="radNow"><span class="rad-now-dot"></span><span class="rad-now-l">Bugün · 11 Temmuz 2026</span></div>
+        )}
+        <div class="rad-item" data-reg={i.reg} data-st={i.st} style={`--sc:${ST[i.st].c};--rc:${REG[i.reg].c}`}>
+          <span class="rad-dot"></span>
+          <div class="rad-date">{i.d}</div>
+          <article class="rad-card">
+            <div class="rad-badges">
+              <span class="rad-b rad-reg">{REG[i.reg].l}</span>
+              <span class="rad-b rad-st">{ST[i.st].l}</span>
+            </div>
+            <h3>{i.t}</h3>
+            <p class="rad-s">{i.s}</p>
+            <div class="rad-impact"><span>Ajanın için ne demek?</span>{i.a}</div>
+            <div class="rad-foot">
+              <a class="rad-src" href={i.url} target="_blank" rel="noopener">Kaynak: {i.src} ↗</a>
+              {i.rel && <a class="rad-rel" href={i.relUrl}>{i.rel} →</a>}
+            </div>
+          </article>
+        </div>
+      </Fragment>
+    ))}
+  </div>
+
+  <p class="rad-empty" id="radEmpty" hidden>Bu filtreyle eşleşen kayıt yok.</p>
+</div></section>
+
+<section class="about-cta"><div class="wrap"><div class="cta">
+  <span class="kicker" style="color:#7fb6e0">Takvimi değil, tasarımı yönetin</span>
+  <h2>Tarihler değişir; ilkeler kalır</h2>
+  <p>Envanter, insan onayı, korkuluk, izleme ve durdurma — hangi yasa ne zaman yürürlüğe girerse girsin, uyumun çekirdeği bu beş şeyde. Olgunluk testiyle nerede durduğunuzu görün, araçlarla belgelerinizi dakikalar içinde çıkarın.</p>
+  <div class="hero-cta" style="justify-content:center"><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a><a class="btn btn-ghost" href="/araclar">Araçlara git</a></div>
+</div></div></section>
+</main>
+<Footer />
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var f = { reg:'all', st:'all' };
+  var items = Array.prototype.slice.call(document.querySelectorAll('.rad-item'));
+  var now = document.getElementById('radNow');
+  var countEl = document.getElementById('radCount');
+  var emptyEl = document.getElementById('radEmpty');
+  function apply(){
+    var n = 0;
+    items.forEach(function(el){
+      var ok = (f.reg==='all' || el.getAttribute('data-reg')===f.reg) &&
+               (f.st==='all'  || el.getAttribute('data-st')===f.st);
+      el.style.display = ok ? '' : 'none';
+      if(ok) n++;
+    });
+    if(now) now.style.display = (f.reg==='all' && f.st==='all') ? '' : 'none';
+    if(countEl) countEl.textContent = n;
+    if(emptyEl) emptyEl.hidden = n>0;
+  }
+  document.querySelectorAll('.rad-chip').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var k = btn.getAttribute('data-k'), v = btn.getAttribute('data-v');
+      f[k] = v;
+      document.querySelectorAll('.rad-chip[data-k="'+k+'"]').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      apply();
+    });
+  });
+})();
+</script>
+
+<style>
+  .src-note{font-size:.9rem;color:var(--muted);margin-top:14px;max-width:680px}
+  .src-note a{color:var(--accent)}
+  .page-hero em{font-style:italic;color:var(--accent)}
+
+  .rad-sec{padding-top:6px}
+  /* Filters */
+  .rad-filters{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:0 0 30px;padding:16px 18px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh-sm)}
+  .rad-fgroup{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .rad-flabel{font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-right:2px}
+  .rad-chip{font:600 .84rem var(--sans);color:var(--slate);background:var(--bg-2);border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .15s}
+  .rad-chip:hover{border-color:var(--accent);color:var(--accent)}
+  .rad-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .rad-count{width:100%;margin:2px 0 0;font-size:.85rem;color:var(--muted)}
+  .rad-count strong{color:var(--ink)}
+
+  /* Timeline */
+  .rad-tl{position:relative;padding-left:0}
+  .rad-tl::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--line),var(--line));}
+  .rad-item{position:relative;padding:0 0 22px 42px}
+  .rad-dot{position:absolute;left:2px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--card);border:3px solid var(--sc);box-shadow:0 0 0 3px var(--bg)}
+  .rad-date{font-family:var(--serif);font-weight:700;color:var(--ink);font-size:.98rem;margin-bottom:8px}
+  .rad-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px 16px;box-shadow:var(--sh-sm)}
+  .rad-badges{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .rad-b{font:600 11px var(--sans);letter-spacing:.03em;padding:3px 10px;border-radius:20px;border:1px solid transparent}
+  .rad-reg{color:var(--rc);border-color:color-mix(in srgb,var(--rc) 35%,transparent);background:color-mix(in srgb,var(--rc) 9%,transparent)}
+  .rad-st{color:var(--sc);border-color:color-mix(in srgb,var(--sc) 40%,transparent);background:color-mix(in srgb,var(--sc) 11%,transparent)}
+  .rad-card h3{font-family:var(--serif);font-size:1.16rem;line-height:1.3;color:var(--ink);margin:0 0 .5rem}
+  .rad-s{color:var(--slate);line-height:1.6;font-size:.95rem;margin:0 0 12px}
+  .rad-impact{background:var(--bg-2);border-left:3px solid var(--sc);border-radius:0 10px 10px 0;padding:11px 15px;font-size:.92rem;color:var(--ink-2);line-height:1.55}
+  .rad-impact span{display:block;font:700 11px var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--sc);margin-bottom:4px}
+  .rad-foot{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;margin-top:13px;padding-top:12px;border-top:1px solid var(--line)}
+  .rad-src{font-size:.85rem;color:var(--muted);text-decoration:none}
+  .rad-src:hover{color:var(--accent)}
+  .rad-rel{font-size:.85rem;font-weight:600;color:var(--accent);text-decoration:none;margin-left:auto}
+  .rad-rel:hover{text-decoration:underline}
+
+  /* Today marker */
+  .rad-now{position:relative;display:flex;align-items:center;gap:12px;padding:0 0 22px 42px}
+  .rad-now-dot{position:absolute;left:-1px;top:2px;width:22px;height:22px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+  .rad-now-l{font:700 .8rem var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);padding:5px 13px;border-radius:20px}
+
+  .rad-empty{text-align:center;color:var(--muted);padding:20px}
+  .about-cta{margin-top:12px}
+  @media(max-width:600px){
+    .rad-foot{gap:8px}
+    .rad-rel{margin-left:0}
+  }
+</style>
+</Base>
