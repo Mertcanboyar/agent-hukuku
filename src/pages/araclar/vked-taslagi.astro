@@ -1,7 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import AppShell from "../../components/AppShell.astro";
 
 const faq = [
   { q: "VKED (DPIA) nedir ve ne zaman gerekir?", a: "Veri Koruma Etki Değerlendirmesi (DPIA), yüksek riskli işleme faaliyetlerinin risklerini önceden değerlendiren bir belgedir. Geniş kapsamlı veya yüksek etkili bir ajanı devreye almadan önce hazırlanması önerilir." },
@@ -13,8 +12,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
 ---
 <Base title="VKED (DPIA) Taslağı Üretici — Yapay Zeka Ajanı | Agent Hukuku" description="Yüksek riskli bir ajanı kurmadan önce bir sayfalık veri koruma etki değerlendirmesi (VKED / DPIA) taslağını hızlıca oluşturun. Ücretsiz, tarayıcıda çalışır.">
 <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
-<Header />
-<main>
+<AppShell active="vked" title="VKED (DPIA) Taslağı">
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/araclar">Araçlar</a> · VKED taslağı</div>
   <span class="kicker">Araç</span>
@@ -56,7 +54,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
     </form>
 
     <div class="tool-out">
-      <div class="tool-out-head"><span class="t">VKED taslağı</span><div class="acts"><button type="button" class="tool-btn" id="copy">Kopyala</button><button type="button" class="tool-btn" id="dl">İndir</button></div></div>
+      <div class="tool-out-head"><span class="t">VKED taslağı</span><div class="acts"><button type="button" class="tool-btn" id="copy">Kopyala</button><button type="button" class="tool-btn" id="dl" data-gate="vked">İndir</button></div></div>
       <div class="tool-doc" id="out"></div>
     </div>
   </div>
@@ -70,8 +68,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
     ))}
   </div>
 </div></section>
-</main>
-<Footer />
+</AppShell>
 
 <script>
   const $ = (id) => document.getElementById(id);

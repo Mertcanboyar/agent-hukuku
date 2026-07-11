@@ -1,0 +1,182 @@
+---
+// SaaS uygulama kabuğu: sol modül menüsü + üst bar + paylaşılan e-posta kapısı.
+// Kullanım: <Base ...><AppShell active="envanter" title="Ajan Envanteri"> ...modül... </AppShell></Base>
+const { active = "genel", title = "Araçlar" } = Astro.props;
+
+const modules = [
+  { key: "genel", t: "Genel bakış", href: "/araclar",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>' },
+  { key: "envanter", t: "Ajan Envanteri", href: "/araclar/ajan-envanteri", tag: "Word",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>' },
+  { key: "aydinlatma", t: "Aydınlatma Metni", href: "/araclar/aydinlatma-olusturucu",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/><path d="M9 13h6M9 17h4"/></svg>' },
+  { key: "isleme", t: "İşleme Şartı Seçici", href: "/araclar/isleme-sarti-secici",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><circle cx="6" cy="12" r="2.3"/><circle cx="18" cy="12" r="2.3"/><circle cx="12" cy="20" r="2.3"/><path d="M8 12h8M12 14.5V17M12 6l-4 3.7M12 6l4 3.7"/></svg>' },
+  { key: "vked", t: "VKED Taslağı", href: "/araclar/vked-taslagi",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>' },
+  { key: "politika", t: "Ajan Politikası", href: "/araclar/agent-politikasi",
+    svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h9"/><path d="M3 6h.01M3 12h.01M3 18h.01"/><path d="M17 16l2 2 3-3"/></svg>' },
+];
+---
+<div class="app">
+  <aside class="app-side" id="appSide">
+    <a class="app-brand" href="/"><span class="mark"></span><span class="ab-txt"><b>Agent Hukuku</b><small>Araç Stüdyosu</small></span></a>
+    <div class="app-navlabel">Modüller</div>
+    <nav class="app-nav">
+      {modules.map((m) => (
+        <a class={"app-link" + (m.key === active ? " on" : "")} href={m.href} aria-current={m.key === active ? "page" : undefined}>
+          <span class="ai" set:html={m.svg} />
+          <span class="al">{m.t}</span>
+          {m.tag && <span class="atag">{m.tag}</span>}
+        </a>
+      ))}
+    </nav>
+    <div class="app-side-foot">
+      <p class="app-priv"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Verileriniz tarayıcınızdan çıkmaz</p>
+      <a class="app-back" href="/">← Siteye dön</a>
+    </div>
+  </aside>
+
+  <div class="app-backdrop" id="appBackdrop"></div>
+
+  <div class="app-main">
+    <header class="app-top">
+      <button class="app-burger" id="appBurger" aria-label="Modül menüsü">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="app-top-t">{title}</div>
+      <a class="app-top-back" href="/">Siteye dön</a>
+    </header>
+    <div class="app-body"><slot /></div>
+  </div>
+
+  <!-- Paylaşılan e-posta kapısı -->
+  <div class="tg-modal" id="tgModal" hidden>
+    <div class="tg-box" role="dialog" aria-modal="true" aria-labelledby="tgTitle">
+      <button class="tg-x" id="tgClose" aria-label="Kapat">✕</button>
+      <h3 id="tgTitle">Sonucu alın</h3>
+      <p>İndirmeden önce e-postanızı bırakın; bir kopyasını da gönderelim. Girdiğiniz içerik gönderilmez — yalnızca e-postanız.</p>
+      <form id="tgForm" novalidate>
+        <input type="email" id="tgEmail" placeholder="Çalışma e-postanız" required>
+        <label class="consent"><input type="checkbox" id="tgConsent" class="cbox" required><span>KVKK kapsamında e-postamın işlenmesine ve tarafıma bilgilendirme/pazarlama iletisi gönderilmesine <a href="/aydinlatma" target="_blank">Aydınlatma Metni</a> uyarınca açık rıza veriyorum.</span></label>
+        <button type="submit" class="btn btn-primary" id="tgSubmit">Gönder ve indir</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  // Mobil menü
+  var app = document.querySelector(".app");
+  var burger = document.getElementById("appBurger");
+  var backdrop = document.getElementById("appBackdrop");
+  function closeNav(){ app && app.classList.remove("nav-open"); }
+  if (burger) burger.addEventListener("click", function(){ app.classList.toggle("nav-open"); });
+  if (backdrop) backdrop.addEventListener("click", closeNav);
+
+  // Paylaşılan e-posta kapısı (her modülde tutarlı akış)
+  var unlocked = false, pending = null, pendType = "arac";
+  var modal = document.getElementById("tgModal");
+  var form = document.getElementById("tgForm");
+  var emailEl = document.getElementById("tgEmail");
+  var consentEl = document.getElementById("tgConsent");
+  var submitEl = document.getElementById("tgSubmit");
+
+  function openModal(){ modal.hidden = false; setTimeout(function(){ emailEl.focus(); }, 30); }
+  function closeModal(){ modal.hidden = true; }
+  document.getElementById("tgClose").addEventListener("click", closeModal);
+  modal.addEventListener("click", function(e){ if (e.target === modal) closeModal(); });
+
+  // Capture fazında [data-gate] tıklamalarını yakala — aracın kendi handler'ından önce.
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest("[data-gate]");
+    if (!el) return;
+    if (unlocked) return;              // kilit açıksa serbest bırak (yeniden tıklama buradan geçer)
+    e.preventDefault();
+    e.stopPropagation();
+    pending = el;
+    pendType = el.getAttribute("data-gate") || "arac";
+    openModal();
+  }, true);
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = (emailEl.value || "").trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { emailEl.focus(); return; }
+    if (!consentEl.checked) { consentEl.focus(); return; }
+    submitEl.disabled = true; var old = submitEl.textContent; submitEl.textContent = "Hazırlanıyor…";
+    try {
+      fetch("/api/lead", { method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, type: pendType, consent: true }) }).catch(function(){});
+    } catch (err) {}
+    unlocked = true;
+    submitEl.disabled = false; submitEl.textContent = old;
+    closeModal();
+    if (pending) { var el = pending; pending = null; el.click(); } // kilit açık; bu kez aracın kendi handler'ı çalışır
+  });
+})();
+</script>
+
+<style is:global>
+  :root { --app-side-w: 264px; }
+  .app { display: grid; grid-template-columns: var(--app-side-w) 1fr; min-height: 100vh; background: var(--bg); }
+
+  .app-side { grid-column: 1; position: sticky; top: 0; align-self: start; height: 100vh; overflow-y: auto;
+    background: var(--card); border-right: 1px solid var(--line); display: flex; flex-direction: column; padding: 18px 14px; z-index: 40; }
+  .app-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; padding: 6px 8px 14px; }
+  .app-brand .mark { width: 26px; height: 26px; border-radius: 8px; background: var(--grad); flex: 0 0 auto; }
+  .app-brand .ab-txt { display: flex; flex-direction: column; line-height: 1.1; }
+  .app-brand b { font-family: var(--serif); font-size: 1rem; color: var(--ink); }
+  .app-brand small { font-size: .72rem; color: var(--muted); letter-spacing: .02em; }
+  .app-navlabel { font: 700 .68rem var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding: 8px 10px 6px; }
+  .app-nav { display: flex; flex-direction: column; gap: 2px; }
+  .app-link { display: flex; align-items: center; gap: 11px; padding: 10px 11px; border-radius: 10px; text-decoration: none; color: var(--slate); font-weight: 600; font-size: .92rem; transition: background .12s, color .12s; }
+  .app-link .ai { display: inline-flex; color: var(--muted); }
+  .app-link .ai svg { width: 19px; height: 19px; }
+  .app-link .al { flex: 1; min-width: 0; }
+  .app-link .atag { font: 700 .58rem var(--sans); letter-spacing: .04em; text-transform: uppercase; color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); padding: 2px 7px; border-radius: 20px; }
+  .app-link:hover { background: var(--bg-2); color: var(--ink); }
+  .app-link:hover .ai { color: var(--accent); }
+  .app-link.on { background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-dk, var(--accent)); }
+  .app-link.on .ai { color: var(--accent); }
+  .app-side-foot { margin-top: auto; padding: 14px 10px 4px; }
+  .app-priv { display: flex; align-items: center; gap: 7px; font-size: .76rem; color: #2E7D5B; margin: 0 0 10px; line-height: 1.3; }
+  .app-back { font-size: .85rem; font-weight: 600; color: var(--muted); text-decoration: none; }
+  .app-back:hover { color: var(--accent); }
+
+  .app-main { grid-column: 2; min-width: 0; display: flex; flex-direction: column; }
+  .app-top { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 22px;
+    background: color-mix(in srgb, var(--card) 88%, transparent); backdrop-filter: saturate(1.2) blur(8px); border-bottom: 1px solid var(--line); }
+  .app-burger { display: none; background: none; border: 0; color: var(--ink); cursor: pointer; padding: 4px; }
+  .app-top-t { font-family: var(--serif); font-weight: 600; font-size: 1.02rem; color: var(--ink); flex: 1; min-width: 0; }
+  .app-top-back { font-size: .85rem; font-weight: 600; color: var(--muted); text-decoration: none; }
+  .app-top-back:hover { color: var(--accent); }
+  .app-body { padding: 8px 22px 40px; }
+  /* Uygulama içinde hero'ları kompaktlaştır */
+  .app-body .page-hero { padding-top: 20px; }
+  .app-body .page-hero .breadcrumb { display: none; }
+
+  .app-backdrop { display: none; }
+
+  @media (max-width: 860px) {
+    .app { display: block; }
+    .app-side { position: fixed; top: 0; left: 0; bottom: 0; width: 280px; height: 100%; transform: translateX(-100%); transition: transform .25s ease; box-shadow: 0 10px 40px rgba(0,0,0,.25); }
+    .app.nav-open .app-side { transform: none; }
+    .app.nav-open .app-backdrop { display: block; position: fixed; inset: 0; background: rgba(15,23,42,.4); z-index: 35; }
+    .app-burger { display: inline-flex; }
+    .app-top-back { display: none; }
+  }
+
+  /* E-posta kapısı modalı */
+  .tg-modal { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(15,23,42,.5); }
+  .tg-modal[hidden] { display: none; }
+  .tg-box { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 20px 60px rgba(0,0,0,.25); padding: 26px 24px 24px; max-width: 420px; width: 100%; }
+  .tg-x { position: absolute; top: 12px; right: 14px; background: none; border: 0; color: var(--muted); font-size: 1.1rem; cursor: pointer; }
+  .tg-box h3 { font-family: var(--serif); font-size: 1.25rem; color: var(--ink); margin: 0 0 6px; }
+  .tg-box p { font-size: .9rem; color: var(--slate); line-height: 1.55; margin: 0 0 16px; }
+  .tg-box input[type=email] { width: 100%; font: 400 .95rem var(--sans); border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; margin-bottom: 12px; }
+  .tg-box .consent { display: flex; gap: 9px; font-size: .82rem; color: var(--slate); line-height: 1.45; margin-bottom: 16px; }
+  .tg-box .consent a { color: var(--accent); }
+  .tg-box .btn { width: 100%; }
+</style>

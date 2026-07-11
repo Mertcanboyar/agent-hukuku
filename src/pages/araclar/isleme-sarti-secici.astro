@@ -1,7 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import AppShell from "../../components/AppShell.astro";
 
 const faq = [
   { q: "Bu araç hangi soruya yanıt verir?", a: "Ajanınızın işlediği kişisel veri için KVKK m.5'teki uygun hukuki sebebi — sözleşmenin ifası, hukuki yükümlülük, meşru menfaat veya açık rıza gibi — belirlemenize yardımcı olur." },
@@ -13,8 +12,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
 ---
 <Base title="İşleme Şartı Seçici — KVKK m.5 Karar Aracı | Agent Hukuku" description="Birkaç soruda ajanınızın işlediği kişisel veri için doğru KVKK m.5 hukuki sebebini bulun: sözleşmenin ifası, hukuki yükümlülük, meşru menfaat veya açık rıza.">
 <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
-<Header />
-<main>
+<AppShell active="isleme" title="İşleme Şartı Seçici">
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/araclar">Araçlar</a> · İşleme şartı seçici</div>
   <span class="kicker">Araç</span>
@@ -38,8 +36,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
     ))}
   </div>
 </div></section>
-</main>
-<Footer />
+</AppShell>
 
 <script>
   const nodes = {

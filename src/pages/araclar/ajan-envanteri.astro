@@ -1,20 +1,18 @@
 ---
 import Base from "../../layouts/Base.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import AppShell from "../../components/AppShell.astro";
 ---
 <Base title="Ajan Envanteri Üreteci — Word Belgesi | Agent Hukuku" description="Yapay zeka ajanı envanterinizi tarayıcıda doldurun, tek tıkla Word belgesi olarak indirin. Verileriniz tarayıcınızdan çıkmaz; her şey istemci tarafında çalışır. Ücretsiz.">
-<Header />
-<main>
+<AppShell active="envanter" title="Ajan Envanteri">
 <section class="page-hero"><div class="wrap">
-  <div class="breadcrumb"><a href="/">Ana sayfa</a> · <a href="/sablonlar">Şablonlar</a> · Ajan Envanteri Üreteci</div>
+  <div class="breadcrumb"><a href="/araclar">Araçlar</a> · Ajan Envanteri</div>
   <span class="kicker">Belge üreteci</span>
   <h1>Ajan envanterinizi dakikalar içinde çıkarın</h1>
   <p class="lead">Ajanlarınızı tek tek ekleyin, sağdaki belge canlı oluşsun, hazır olduğunda Word olarak indirin. Yönetişimin ilk adımı görünürlüktür — göremediğinizi yönetemezsiniz.</p>
   <div class="gen-chips">
     <span class="gen-chip gen-chip-ok"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Verileriniz tarayıcınızdan çıkmaz</span>
     <span class="gen-chip"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4"/><path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"/></svg> Word (.doc) çıktısı</span>
-    <span class="gen-chip">Ücretsiz · kayıt yok</span>
+    <span class="gen-chip">Ücretsiz</span>
   </div>
 </div></section>
 
@@ -78,8 +76,7 @@ import Footer from "../../components/Footer.astro";
 
   <p class="tool-note" style="max-width:900px;margin-top:26px">Bu araç genel bilgilendirme amaçlı bir belge üretir ve hukuki tavsiye niteliği taşımaz. Üretilen envanteri şirketinizin gerçek durumuna göre doldurun, düzenli olarak güncelleyin ve gerektiğinde bir hukukçuya danışın. Belge, Kasım 2025 tarihli KVKK Üretken Yapay Zekâ Rehberi çerçevesinde hazırlanmıştır (sürüm v1.0).</p>
 </div></section>
-</main>
-<Footer />
+</AppShell>
 
 <script is:inline>
 (function () {

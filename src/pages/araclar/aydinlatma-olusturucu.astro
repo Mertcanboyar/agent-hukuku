@@ -1,7 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
+import AppShell from "../../components/AppShell.astro";
 
 const faq = [
   { q: "Bu araç KVKK m.10'a uygun bir aydınlatma metni mi üretir?", a: "Seçimlerinize göre m.10'daki temel unsurları — veri sorumlusunun kimliği, işleme amacı, aktarım ve ilgili kişinin hakları — içeren bir taslak üretir. Taslağı kendi sürecinize göre uyarlamanız gerekir." },
@@ -13,8 +12,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
 ---
 <Base title="Aydınlatma Metni Oluşturucu (Yapay Zeka Ajanı) | Agent Hukuku" description="Ajan kullandığınızı söyleyen, KVKK m.10'a uygun bir aydınlatma metnini birkaç seçimle üretin. E-posta, sohbet ve telefon için kısa bildirimlerle. Ücretsiz.">
 <Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
-<Header />
-<main>
+<AppShell active="aydinlatma" title="Aydınlatma Metni Oluşturucu">
 <section class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="/araclar">Araçlar</a> · Aydınlatma metni oluşturucu</div>
   <span class="kicker">Araç</span>
@@ -63,7 +61,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
     </form>
 
     <div class="tool-out">
-      <div class="tool-out-head"><span class="t">Oluşturulan metin</span><div class="acts"><button type="button" class="tool-btn" id="copy">Kopyala</button><button type="button" class="tool-btn" id="dl">İndir</button></div></div>
+      <div class="tool-out-head"><span class="t">Oluşturulan metin</span><div class="acts"><button type="button" class="tool-btn" id="copy">Kopyala</button><button type="button" class="tool-btn" id="dl" data-gate="aydinlatma">İndir</button></div></div>
       <div class="tool-doc" id="out"></div>
     </div>
   </div>
@@ -77,8 +75,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
     ))}
   </div>
 </div></section>
-</main>
-<Footer />
+</AppShell>
 
 <script>
   const $ = (id) => document.getElementById(id);
