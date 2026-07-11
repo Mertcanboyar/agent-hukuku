@@ -1,0 +1,66 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import SlideDeck from "../../components/SlideDeck.astro";
+
+const slides = [
+  { d: true, k: "Ders 1.4 · Temeller", t: "Yapay Zeka Okuryazarlığı", h: "<p class='big'>Onay veren, izleyen, durduran insan…</p><p>…ajanı ancak <strong>anladığı kadar</strong> koruyabilir.</p>" },
+  { t: "Vaka: onaya basan ama anlamayan", h: "<p>Bir ajan, hassas bir işlemi “onaylıyor musunuz?” diye sordu. Ekranı gören çalışan, ne olduğunu tam çözemeden <strong>Onayla</strong>'ya bastı — çünkü “sistem biliyordur” diye düşündü. Döngüdeki insan oradaydı; ama <strong>okuryazar</strong> değildi.</p>" },
+  { t: "Okuryazarlık kod yazmak değildir", h: "<p>Yapay zeka okuryazarlığı; bir ajanın <strong>neyi yapabildiğini, nerede yanıldığını, hangi riski taşıdığını</strong> ve çıktısını ne zaman sorgulamak gerektiğini bilmektir. Python bilmek değil — <strong>ne zaman durup soru soracağını</strong> bilmektir.</p>" },
+  { t: "Yönetişimin görünmez ön koşulu", h: "<p>Envanter, onay, izleme, durdurma… Hepsi tek bir insan yeteneğine dayanır: “<strong>Bu normal mi?</strong>” diyebilmek. Okuryazar olmayan bir ekipte en iyi korkuluk bile <strong>boş bir tören</strong>e döner.</p>" },
+  { t: "Artık yasa: EU AI Act m.4", h: "<p>AI Act'in 4. maddesi, <strong>2 Şubat 2025'ten</strong> beri sağlayıcı ve uygulayıcıların personelinin <strong>yeterli yapay zeka okuryazarlığını</strong> sağlamasını zorunlu kılıyor. Okuryazarlık artık iyi niyet değil, bir <strong>uyum yükümlülüğü</strong>.</p>" },
+  { t: "KVKK tarafı: anlamadığını açıklayamazsın", h: "<p>Aydınlatma metni ve açık rıza ancak kurum <strong>ne yaptığını gerçekten anlıyorsa</strong> anlam taşır. İlgili kişiye “ajan verinizi şöyle işliyor” demek için, önce kurumun kendisinin bunu bilmesi gerekir.</p>" },
+  { t: "Herkes aynı derinlikte değil", h: "<p>Katmanlı bir program: <strong>yönetim</strong> riski ve stratejiyi, <strong>operasyon</strong> günlük kullanımı ve onay anlarını, <strong>hukuk/uyum</strong> yükümlülükleri, <strong>herkes</strong> ise temel farkındalığı öğrenir. Tek beden herkese olmaz.</p>" },
+  { d: true, t: "Okuryazarlık = gerçek korkuluk", h: "<p class='big'>İnsan onayını bir “kauçuk damga”dan gerçek bir korkuluğa çeviren tek şey, o insanın <strong>okuryazarlığıdır</strong>.</p><p>En ucuz yönetişim yatırımı; en pahalı hataları önler.</p>" },
+];
+---
+<Base title="Ders 1.4 — Yapay Zeka Okuryazarlığı: Neden Herkes Anlamalı? | Agent Hukuku Akademi" description="Yapay zeka okuryazarlığı nedir, neden ajan yönetişiminin ön koşuludur ve EU AI Act m.4 ile nasıl bir yükümlülüğe dönüştü? Rol bazlı okuryazarlık programının temelleri.">
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/akademi">Akademi</a> · Seviye 1 — Temeller</div><span class="tag">Ders 1.4</span>
+    <h1>Yapay zeka okuryazarlığı: neden herkes anlamalı?</h1>
+    <div class="article-meta"><span class="av">MB</span> Slaytlı ders · ~8 dk · Mert Can Boyar</div></div></div>
+  <div class="wrap">
+    <p class="lesson-intro">Bir ajanı denetleyen zincirin her halkasında bir insan var: onay veren, izleyen, durduran. Bu ders, o insanların ajanı “anlaması”nın neden yönetişimin görünmez ön koşulu olduğunu, yapay zeka okuryazarlığının EU AI Act ile nasıl bir yükümlülüğe döndüğünü ve kurumda rol bazlı bir okuryazarlık programının nasıl kurulacağını anlatır.</p>
+    <SlideDeck slides={slides} />
+  </div>
+  <div class="prose">
+    <h2>Okuryazarlık nedir, ne değildir?</h2>
+    <p>Yapay zeka okuryazarlığı, bir ajanın <strong>ne yapabildiğini, nerede ve neden yanıldığını, hangi riskleri taşıdığını ve çıktısına ne zaman güvenilmeyeceğini</strong> anlama yeteneğidir. Kod yazmayı, model eğitmeyi ya da teknik derinliği gerektirmez. Gerektirdiği şey daha temeldir: bir ajanın önerisine bakıp “bu makul mü, bunu neye dayanarak söylüyor, burada durup sormalı mıyım?” diyebilmek. Okuryazarlık bir mühendislik becerisi değil, bir <strong>muhakeme</strong> becerisidir; ve tam da bu yüzden kurumdaki herkesi ilgilendirir.</p>
+    <h2>Neden ajan yönetişiminin ön koşulu?</h2>
+    <p>Bu akademideki her mekanizma — envanter, en az yetki, insan onayı, izleme, acil durdurma — nihayetinde bir insanın “bu normal değil” diyebilmesine bağlıdır. Döngüde bir insan bulundurmak (human-in-the-loop) tek başına yeterli değildir; o insan <strong>anlamıyorsa</strong>, onay adımı bir güvenlik önlemi değil, yalnızca bir tıklamadır. Ajanların yol açtığı gerçek olayların çoğunda korkuluk kâğıt üzerinde vardı; eksik olan, o an ekranın başındaki kişinin neye baktığını anlamasıydı.</p>
+    <div class="callout remember"><div class="cl">Unutmayın</div>İnsan onayı, ancak onaylayan kişi ne onayladığını anlıyorsa bir korkuluktur. Okuryazarlık olmadan “döngüdeki insan”, sistemin en zayıf halkasına dönüşür.</div>
+    <h2>Artık bir yükümlülük: EU AI Act m.4</h2>
+    <p>Yapay zeka okuryazarlığı bir “iyi olurdu” konusu olmaktan çıktı. EU AI Act'in 4. maddesi, <strong>2 Şubat 2025'ten</strong> itibaren yapay zeka sistemlerini geliştiren (sağlayıcı) ve kullanan (uygulayıcı) kuruluşların, sistemle çalışan personelinin ve sistemi onların adına işleten kişilerin <strong>yeterli düzeyde yapay zeka okuryazarlığına</strong> sahip olmasını sağlamak için gerekli önlemleri almasını zorunlu kılar. Türkiye tarafında KVKK'nın üretken yapay zeka rehberleri de kurumların ne işlediğini bilmesini ve şeffaf biçimde anlatmasını bekler — ki bu da ancak okuryazar bir organizasyonda mümkündür. Bu tarih ve yükümlülüklerin nereye doğru gittiğini <a href="/radar">Mevzuat Radarı</a>'ndan takip edebilirsiniz.</p>
+    <h2>Nasıl kurulur: rol bazlı, katmanlı bir program</h2>
+    <p>Herkese aynı eğitimi vermek hem israf hem etkisizdir. İşe yarayan yaklaşım katmanlıdır: <strong>yönetim</strong> için risk, sorumluluk ve stratejik kararlar; <strong>operasyon ekipleri</strong> için günlük kullanım, onay anlarında nelere dikkat edileceği ve nasıl durdurulacağı; <strong>hukuk ve uyum</strong> için yükümlülükler, aydınlatma ve aktarım rejimi; ve <strong>tüm çalışanlar</strong> için temel farkındalık — ajan nedir, neyi paylaşmamalı, şüpheli çıktı görünce ne yapmalı. Program bir kerelik bir sunum değil, tekrarlanan ve ajan envanteriyle güncellenen canlı bir süreçtir.</p>
+    <div class="callout warning"><div class="cl">Dikkat</div>Okuryazarlık eğitimini “bir slayt gösterip imza toplama” tatbikatına indirgemeyin. AI Act m.4'ün beklediği “<strong>yeterli</strong>” okuryazarlıktır; yani kişilerin rolleri gereği gerçekten karşılaşacakları riskleri anlayabilmesi. Ölçülmeyen, tekrarlanmayan bir program denetimde “yok” sayılır.</div>
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Bu derste öğrendikleriniz</div>
+      <ul style="margin:.4rem 0 0;padding-left:1.1em">
+        <li>Okuryazarlık kod yazmak değil, ajanı sorgulayabilme muhakemesidir.</li>
+        <li>Onay, izleme ve durdurma ancak okuryazar bir insanla gerçek korkuluğa dönüşür.</li>
+        <li>EU AI Act m.4 (2 Şubat 2025'ten beri) okuryazarlığı bir yükümlülük yaptı.</li>
+        <li>KVKK'nın şeffaflık beklentisi de kurumun ne yaptığını anlamasını gerektirir.</li>
+        <li>Program rol bazlı, katmanlı ve tekrarlanan bir süreç olmalı.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="article-cta"><div><h3>Ekibiniz ne kadar okuryazar?</h3><p>Olgunluk testi, beş ilkede — şeffaflık ve hesap verebilirlik dahil — nerede durduğunuzu ve nereye yatırım yapmanız gerektiğini gösterir.</p></div><a class="btn btn-primary" href="/degerlendirme">Olgunluk testini çöz →</a></div>
+  <div class="wrap"><div class="lesson-nav">
+    <a class="ln-back" href="/akademi/bes-ilke">← Önceki: Beş ilke</a>
+    <a class="ln-next" href="/akademi/ajan-envanteri">Sonraki ders: Ajan envanteri →</a>
+  </div></div>
+</article>
+</main>
+<Footer />
+
+<style>
+  .lesson-intro{max-width:760px;font-size:1.12rem;line-height:1.6;color:var(--ink-2);margin:0 0 4px}
+  .lesson-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:22px}
+  .ln-back{color:var(--muted);text-decoration:none;font-weight:600}
+  .ln-back:hover{color:var(--accent)}
+  .ln-next{color:var(--accent);text-decoration:none;font-weight:700}
+</style>
+</Base>

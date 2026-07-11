@@ -11,6 +11,7 @@ const modules = [
       { id: "1.1", t: "Ajan nedir? Chatbot'tan ajana", meta: "Slaytlı · ~8 dk", url: "/akademi/ajan-nedir" },
       { id: "1.2", t: "Veri sorumlusu sizsiniz", meta: "Slaytlı · ~7 dk", url: "/akademi/veri-sorumlusu" },
       { id: "1.3", t: "Beş ilke: yönetişimin omurgası", meta: "Slaytlı · ~8 dk", url: "/akademi/bes-ilke" },
+      { id: "1.4", t: "Yapay zeka okuryazarlığı: neden herkes anlamalı?", meta: "Slaytlı · ~8 dk", url: "/akademi/yapay-zeka-okuryazarligi" },
     ],
   },
   {
@@ -48,8 +49,70 @@ const modules = [
   },
 ];
 const total = modules.reduce((a, m) => a + m.lessons.length, 0);
+
+const site = Astro.site ?? new URL("https://agenthukuku.com");
+const origin = site.origin;
+const akademiUrl = new URL("/akademi", site).href;
+
+const freeOffer = { "@type": "Offer", price: "0", priceCurrency: "TRY", availability: "https://schema.org/InStock", category: "Free" };
+
+const courseSchema = {
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "@id": `${akademiUrl}#course`,
+  name: "Ajan Hukuku ve Yönetişimi Akademisi",
+  description: "Yapay zeka ajanlarının hukuku ve yönetişimini temellerden ileri konulara öğreten, slaytlı ve ücretsiz Türkçe ders serisi. KVKK uyumu, envanter, en az yetki, insan onayı, izleme ve EU AI Act dahil.",
+  url: akademiUrl,
+  inLanguage: "tr-TR",
+  isAccessibleForFree: true,
+  image: `${origin}/og/agent-hukuku-og.png`,
+  provider: { "@type": "Organization", "@id": `${origin}/#org`, name: "Agent Hukuku", url: origin },
+  educationalLevel: "Başlangıçtan ileri seviyeye",
+  teaches: [
+    "Ajan ile geleneksel yazılım ve chatbot farkını ayırt etmek",
+    "KVKK kapsamında veri sorumlusu sorumluluğunu tanımak",
+    "Yapay zeka okuryazarlığı (EU AI Act m.4)",
+    "Ajan envanteri çıkarmak ve gölge ajanları bulmak",
+    "En az yetki ilkesiyle kimlik ve erişim tasarlamak",
+    "İnsan onayı eşikleri ve acil durdurma kurmak",
+    "Aydınlatma, işleme şartı ve yurt dışı aktarım rejimini uygulamak",
+    "Kayıt, izleme ve sapma (drift) yönetimi",
+    "İstem enjeksiyonu ve çalışma zamanı korkulukları (guardrails)",
+    "EU AI Act, ISO 42001 ve çok-ajanlı sistem yönetişimi",
+  ],
+  offers: freeOffer,
+  hasCourseInstance: {
+    "@type": "CourseInstance",
+    courseMode: "online",
+    courseWorkload: "PT2H30M",
+    inLanguage: "tr-TR",
+    isAccessibleForFree: true,
+    instructor: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+    offers: freeOffer,
+  },
+  numberOfLessons: total,
+  hasPart: modules.map((m) => ({
+    "@type": "Course",
+    name: `${m.lvl} — ${m.t}`,
+    description: m.d,
+    url: akademiUrl,
+    inLanguage: "tr-TR",
+    isAccessibleForFree: true,
+    provider: { "@id": `${origin}/#org` },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "online",
+      courseWorkload: `PT${m.lessons.length * 8}M`,
+      isAccessibleForFree: true,
+      offers: freeOffer,
+    },
+  })),
+};
 ---
 <Base title="Akademi — Ajan Hukuku ve Yönetişimi Öğrenme Yolu | Agent Hukuku" description="Temellerden ileri konulara: yapay zeka ajanlarının hukuku ve yönetişimini adım adım öğrenin. Slaytlı, ücretsiz dersler.">
+<Fragment slot="head">
+  <script type="application/ld+json" set:html={JSON.stringify(courseSchema)} />
+</Fragment>
 <Header />
 <main>
 <section class="page-hero"><div class="wrap">
