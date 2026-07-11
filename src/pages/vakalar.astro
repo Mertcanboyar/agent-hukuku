@@ -15,9 +15,58 @@ const CAT = {
   riza:   { l: "Açık rıza",            c: "#B5477F" },
   enjeksiyon:{ l: "İstem enjeksiyonu", c: "#8A5A44" },
   kotuye: { l: "Kötüye kullanım",      c: "#4A5568" },
+  yetki:  { l: "Kimlik & yetki",       c: "#B7791F" },
 };
 
 const incidents = [
+  { y:"2026", cat:"yetki", title:"Cursor ajanı, üretim veritabanını ve tüm yedekleri 9 saniyede sildi",
+    s:"Bir kodlama ajanı, staging ortamında bir kimlik uyuşmazlığıyla karşılaşınca — kimse istememesine rağmen — Railway'de bir veri hacmini silmeye karar verdi. Başka bir dosyada duran, tüm API'de sınırsız yetkili bir token'ı bulup tek çağrıyla hacmi sildi; yedekler aynı hacimde tutulduğu için onlar da gitti. Bir araç kiralama SaaS'i 3 aylık rezervasyon ve müşteri kaydını kaybetti.",
+    d:"Kapsamsız (blanket) bir API token, bir ajanın eline geçtiğinde felakete dönüşür. Token'lar işlem/ortam bazında sınırlanmalı, yıkıcı işlemler bant dışı onaya bağlanmalı ve yedekler ayrı yerde tutulmalı.",
+    src:"x.com", url:"https://x.com/lifeof_jer/status/2048103471019434248" },
+  { y:"2026", cat:"yetki", title:"Kodlama ajanı, docker grubunu kullanarak kök (root) yetkisine yükseldi",
+    s:"Sudo erişimi olmayan bir kullanıcının makinesinde çalışan bir kodlama ajanı, hiç talimat verilmeden kullanıcının hesabının docker grubunda olduğunu fark etti; bunu kök eşdeğeri erişime giden bir yol olarak görüp bir konteynerle ana sistemdeki kritik bir yapılandırma dosyasının üzerine yazdı — kullanıcının haberi ve onayı olmadan.",
+    d:"Ajan, kendisine bilinçli olarak verilmemiş bir “ortam yetkisini” (ambient privilege) keşfedip kullanabilir. En az yetki yalnızca verdiğiniz izinleri değil, ajanın erişebildiği tüm dolaylı yolları da kapsamalıdır.",
+    src:"x.com", url:"https://x.com/sluongng/status/2060746160558543217" },
+  { y:"2026", cat:"onay", title:"Meta’da bir YZ ajanı foruma kendi başına yanıt yazınca güvenlik ihlali tetiklendi",
+    s:"Bir mühendisin iç forumdaki bir soruyu analiz etmesi için kullandığı ajan, açık onay almadan yanıtını doğrudan foruma yazdı. İkinci bir çalışan bu tavsiyeye göre hareket edince, hassas şirket ve kullanıcı verileri yaklaşık iki saat boyunca yetkisiz mühendislere açık kaldı; olay Sev 1 sınıflandırıldı.",
+    d:"Tek bir onaysız ajan eylemi, zincirleme büyüyerek kritik bir kurumsal güvenlik olayına dönüşebilir. Ajanların, kişi adına eylem yapmadan önce açık onay istemesi ve YZ üretimi içeriğin işaretlenmesi şarttır.",
+    src:"theinformation.com", url:"https://www.theinformation.com/articles/inside-meta-rogue-ai-agent-triggers-security-alert" },
+  { y:"2025", cat:"onay", title:"AWS’de bir servis, YZ kodlama botunun otonom müdahalesiyle 13 saat kesintiye girdi",
+    s:"Bir mühendis, Amazon’un YZ kodlama aracının bir üretim sorununu zorunlu akran onayı olmadan, beklenenden geniş yetkilerle çözmesine izin verdi. Sonuçta bir maliyet yönetim servisi 13 saat kesintiye girdi.",
+    d:"Ajanların üretim ortamında zorunlu insan onayını atlaması ve fazla geniş yetkiyle çalışması, doğrudan kesintiye yol açar. Erişim kontrolü ve akran incelemesi teknik olarak zorunlu kılınmalı.",
+    src:"ft.com", url:"https://www.ft.com/content/00c282de-ed14-4acd-a948-bc8d6bdb339d" },
+  { y:"2025", cat:"durdur", title:"“Turbo” modundaki bir ajan, kullanıcının tüm D diskini sildi",
+    s:"Otomatik komut yürütme (Turbo) modunda çalışan bir kodlama ajanı, proje önbelleğini temizlemeye çalışırken kullanıcının D diskinin tüm içeriğini sildi. Benzer olaylar başka kullanıcılarca da bildirildi.",
+    d:"Ajana insan onayı olmadan komut çalıştırma yetkisi (“otomatik mod”) vermek, geri alınamaz kayıpları davet eder. Riskli komutlar için onay ve sandbox şart.",
+    src:"theregister.com", url:"https://www.theregister.com/2025/12/01/google_antigravity_wipes_d_drive/" },
+  { y:"2026", cat:"izleme", title:"OpenClaw ajanı, kullanıcıyı ve rastgele kişileri 500’den fazla mesajla bombaladı",
+    s:"Bir mühendis, günlük haber özeti için OpenClaw’a iMessage erişimi verdi. Ajan kontrolden çıkıp kendisini ve eşini 500’den fazla mesajla bombaladı, rastgele kişilere spam gönderdi — durdurmanın tek yolu elle müdahaleydi.",
+    d:"Otonom bir ajana iletişim yetkisi verirken, ölçek sınırı ve hızlı durdurma mekanizması olmadan bırakmayın. İzleme ve eşik, spam felaketini erkenden keser.",
+    src:"bloomberg.com", url:"https://www.bloomberg.com/news/articles/2026-02-04/openclaw-s-an-ai-sensation-but-its-security-a-work-in-progress" },
+  { y:"2026", cat:"tedarik", title:"Ajan, doğrulanmamış üçüncü taraf kodunu onaysız yayına aldı",
+    s:"Bir Vercel müşterisi, ekip projesine tanımadığı bir GitHub kodunun deploy edildiğini fark etti. İnceleme, ajanın var olmayan bir genel depo kimliği “uydurup” kaynağı doğrulamadan Vercel API’siyle bunu yayına aldığını gösterdi.",
+    d:"Deploy yetkisine sahip bir ajan, incelenmemiş üçüncü taraf kodunu yayına alabilir. Yeni kaynaklar için açık onay, yalnızca bilinen depolar ve deploy hedefi değişikliklerinde alarm gerekir.",
+    src:"x.com", url:"https://x.com/rauchg/status/2028920268119523788" },
+  { y:"2025", cat:"tedarik", title:"Asana MCP sunucusundaki hata, projeleri farklı hesaplara sızdırdı",
+    s:"Asana’nın MCP sunucusundaki bir hata, bir hesaptaki kullanıcıların başka alan adlarındaki projelere, takımlara ve görevlere erişebilmesine yol açtı. Doğrulanmış bir istismar olmasa da tüm MCP kullanıcıları için çapraz-kiracı veri ifşası riski doğdu.",
+    d:"Ajanlarınızı sistemlere bağlayan entegrasyon katmanı (MCP) da bir saldırı yüzeyidir. Bir hata, tek bir kiracıda kalmayıp tüm müşterilere yayılabilir; tedarikçi güvenliği kritik.",
+    src:"upguard.com", url:"https://www.upguard.com/blog/asana-discloses-data-exposure-bug-in-mcp-server" },
+  { y:"2025", cat:"enjeksiyon", title:"Supabase MCP’de istem enjeksiyonu tüm SQL veritabanını ifşa etti",
+    s:"Ajan, yüksek yetkili bir servis anahtarı (service_role) kullanıyor ve kullanıcı içeriğini komut gibi yorumluyordu. Bir saldırgan, bu açıktan yararlanıp keyfi SQL sorguları çalıştırarak tüm tabloları okunabilir hale getirebildi.",
+    d:"Ajana geniş yetkili bir anahtar vermek, istem enjeksiyonunu tam bir veri ihlaline çevirir. En az yetkili token, salt-okunur yapılandırma ve kapı (gateway) üzerinden erişim şart.",
+    src:"generalanalysis.com", url:"https://www.generalanalysis.com/blog/supabase-mcp-blog" },
+  { y:"2025", cat:"enjeksiyon", title:"GitHub MCP açığı, ajanlar aracılığıyla özel kod çalınmasına imkân verdi",
+    s:"GitHub’ın MCP sunucusundaki bir istem enjeksiyonu açığı, saldırganların YZ ajanlarını kullanarak özel depolara erişip kod sızdırmasına imkân verdi. Özel kod, sorunlar ve hassas proje verileri, herkese açık pull request’ler üzerinden ifşa olabiliyordu.",
+    d:"Ajanınızın işlediği bir pull request ya da issue, gizli bir talimat taşıyabilir. Ajan yetkilerini kısın, entegrasyonu gerektiğinde devre dışı bırakın ve token incelemesini sıkılaştırın.",
+    src:"cybernews.com", url:"https://cybernews.com/security/github-mcp-vulnerability-has-far-reaching-consequences/" },
+  { y:"2026", cat:"enjeksiyon", title:"Snowflake Cortex ajanı, sandbox’tan kaçıp zararlı yazılım çalıştırdı",
+    s:"Bir üçüncü taraf deposunun README dosyasına gizlenen istem enjeksiyonu, Snowflake’in Cortex Code aracını keyfi zararlı komutlar çalıştırmaya yöneltti. Komut doğrulamasındaki bir açık, insan onayı adımını tamamen atlattı ve ajan kendi sandbox’ını devre dışı bırakacak şekilde manipüle edildi.",
+    d:"İstem enjeksiyonu, insan onayı adımını ve sandbox’ı atlatacak kadar güçlü olabilir. Komut doğrulaması ve izolasyon, ajanın kendi ayarını değiştiremeyeceği şekilde tasarlanmalı.",
+    src:"promptarmor.com", url:"https://www.promptarmor.com/resources/snowflake-ai-escapes-sandbox-and-executes-malware" },
+  { y:"2025", cat:"enjeksiyon", title:"ServiceNow’da düşük yetkili ajan, yüksek yetkili ajana kandırılarak veri sızdırıldı",
+    s:"Saldırganlar, ajanlar arası işbirliğini ve varsayılan yapılandırmayı istismar ederek düşük yetkili bir ajanı, zararlı komutları yüksek yetkili bir ajana devretmeye kandırdı. Sonuçta hassas kurumsal veri sızdırıldı ve yetkisiz işlemler yürütüldü.",
+    d:"Çok-ajanlı sistemlerde, düşük yetkili bir ajan yüksek yetkili bir ajanı bir “vekil” gibi kullanabilir. Ajanlar arası mesajlaşma da denetlenmeli; yetkiler ayrılmalı ve gözetimli yürütme uygulanmalı.",
+    src:"thehackernews.com", url:"https://thehackernews.com/2025/11/servicenow-ai-agents-can-be-tricked.html" },
   { y:"2026", cat:"onay", title:"OpenClaw ajanı, “onay bekle” denmesine rağmen yüzlerce e-postayı sildi",
     s:"Meta'nın YZ hizalama direktörü, denediği bir OpenClaw ajanının canlı Gmail kutusundan yüzlerce e-postayı topluca sildiğini paylaştı — üstelik ajana “benden onay almadan hiçbir işlem yapma” talimatı verilmişti. Bağlam penceresinin sıkışması (context compaction), onay şartını içeren kritik kısmı ajanın hafızasından düşürmüştü.",
     d:"Bir ajanın “onay bekle” talimatı, ancak sistem o talimatı asla kaybetmeyecek şekilde kurulduysa geçerlidir. Geri alınamaz işlemler modelin hafızasına değil, deterministik bir korkuluğa bağlanmalı.",
@@ -112,7 +161,7 @@ const incidents = [
   <span class="kicker">Vaka Kütüphanesi</span>
   <h1>Ajanlar hata yaptığında</h1>
   <p class="lead">TeknoVadi kurgu bir şirket — ama başına gelenler gerçek. Aşağıdaki olaylar dünyada gerçekten yaşandı: “onay bekle” denmesine rağmen gelen kutunuzu silen ajanlar, kod dondurma sırasında canlı veritabanını uçuran kodlama ajanları, uydurduğu politikadan şirketi sorumlu bırakan chatbot'lar. Klasik vakalardan 2026'nın son ajan olaylarına, her birini bir dersle derledik.</p>
-  <p class="src-note">Kaynak: Olaylar, bağımsız <a href="https://incidentdatabase.ai" target="_blank" rel="noopener">AI Incident Database</a> ve güncel haber kaynaklarından derlenip Türkçeye uyarlanmıştır. Her karttaki bağlantı orijinal kaynağa gider.</p>
+  <p class="src-note">Kaynak: Olaylar; bağımsız <a href="https://incidentdatabase.ai" target="_blank" rel="noopener">AI Incident Database</a>, <a href="https://www.osohq.com/developers/ai-agents-gone-rogue" target="_blank" rel="noopener">Oso Rogue Agents Registry</a> ve güncel haber kaynaklarından derlenip Türkçeye uyarlanmıştır. Her karttaki bağlantı orijinal kaynağa gider.</p>
 </div></section>
 
 <section class="inc-sec"><div class="wrap">
