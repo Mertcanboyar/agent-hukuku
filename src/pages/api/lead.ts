@@ -180,6 +180,16 @@ function buildEmail(type: string, meta: any) {
       html: shell(`Olgunluk skorunuz ${Math.round(Number(meta?.total ?? 0))}/100. İşte ilke ilke analiz ve aksiyon planınız.`, dashboard(meta)),
     };
 
+  if (type === "iletisim")
+    return {
+      subject: "✅ Mesajınızı aldık — Agent Hukuku",
+      html: shell("İletişim talebinizi aldık; en kısa sürede dönüş yapacağız.",
+        eyebrow("İLETİŞİM")
+        + h1("Mesajınızı aldık ✅")
+        + p("Bize ulaştığınız için teşekkürler. Mesajınız iletildi; en kısa sürede size dönüş yapacağız.")
+        + p(`Bu arada <a href="${SITE}/vakalar" style="color:${C.accent}">vaka kütüphanesine</a> göz atabilir ya da <a href="${SITE}/kitaplar" style="color:${C.accent}">ücretsiz e-kitapları</a> indirebilirsiniz.`)),
+    };
+
   if (type === "vakalar")
     return {
       subject: "📕 Agent Vakaları 2026 — e-kitabınız hazır",
@@ -221,7 +231,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (!import.meta.env.RESEND_API_KEY)
       return json({ ok: false, error: "Sunucu yapılandırması eksik: RESEND_API_KEY bu ortamda tanımlı değil." }, 500);
 
-    const { email, type = "bulten", meta, consent } = await request.json();
+    const { email, type = "bulten", meta, message, consent } = await request.json();
     if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
       return json({ ok: false, error: "Geçerli bir e-posta girin." }, 400);
     if (consent !== true)
@@ -249,7 +259,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (import.meta.env.NOTIFY_TO)
       await resend.emails.send({ from: FROM, to: import.meta.env.NOTIFY_TO,
         subject: `Yeni kayıt: ${type}`,
-        html: `<p><b>${email}</b></p><p>Açık rıza: ✔ ${consentRecord.at}</p>
+        html: `<p><b>${email}</b></p>${message ? `<p><b>Mesaj:</b><br>${String(message).replace(/</g, "&lt;")}</p>` : ""}<p>Açık rıza: ✔ ${consentRecord.at}</p>
         <pre>${JSON.stringify({ meta: meta || {}, consent: consentRecord }, null, 2)}</pre>` });
 
     // (opsiyonel) bülten listesine ekle

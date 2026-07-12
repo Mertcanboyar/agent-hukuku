@@ -147,7 +147,8 @@ function showResult(){
   document.getElementById('dash').innerHTML=h;
   scrollTop();
 }
-function submitLead(e){e.preventDefault();var em=document.getElementById('leadEmail').value;var t=document.getElementById('leadThanks');t.textContent='Teşekkürler! Panonuz ve kitap birazdan '+em+' adresine gelecek.';t.classList.remove('hidden');e.target.classList.add('hidden');/* TODO: POST /api/lead {email, ctx, answers} */}
+/* Panonun e-posta gönderimi, form[data-lead="degerlendirme"] üzerinden Base.astro'daki
+   global işleyiciyle /api/lead'e yapılır (meta = window.__leadMeta ile total + pillars). */
 function restart(){ans=new Array(STEPS.length).fill(null);cur=0;document.getElementById('result').classList.add('hidden');document.getElementById('intro').classList.remove('hidden');scrollTop();}
 </script>
 </Base>

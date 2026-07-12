@@ -165,9 +165,16 @@ const incidents = [
 </div></section>
 
 <section class="inc-sec"><div class="wrap">
+  <div class="vk-filters">
+    <button class="vk-chip on" data-v="all" type="button">Tümü</button>
+    {Object.entries(CAT).map(([k, v]) => (
+      <button class="vk-chip" data-v={k} type="button" style={`--c:${v.c}`}>{v.l}</button>
+    ))}
+    <span class="vk-count"><b id="vkCount">{incidents.length}</b> / {incidents.length} vaka</span>
+  </div>
   <div class="inc-grid">
     {incidents.map((i) => (
-      <article class="inc reveal">
+      <article class="inc reveal" data-cat={i.cat}>
         <div class="inc-top"><span class="inc-year">{i.y}</span><span class="inc-tag" style={`--c:${CAT[i.cat].c}`}>{CAT[i.cat].l}</span></div>
         <h3>{i.title}</h3>
         <p class="inc-s">{i.s}</p>
@@ -192,6 +199,23 @@ document.documentElement.classList.add('js');
 window.addEventListener('DOMContentLoaded',function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  var items = Array.prototype.slice.call(document.querySelectorAll('.inc'));
+  var cnt = document.getElementById('vkCount');
+  document.querySelectorAll('.vk-chip').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var v = btn.getAttribute('data-v');
+      document.querySelectorAll('.vk-chip').forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      var n = 0;
+      items.forEach(function(el){
+        var ok = v === 'all' || el.getAttribute('data-cat') === v;
+        el.style.display = ok ? '' : 'none';
+        if (ok) { el.classList.add('in'); n++; }
+      });
+      if (cnt) cnt.textContent = n;
+    });
+  });
 });
 </script>
 
@@ -210,6 +234,13 @@ window.addEventListener('DOMContentLoaded',function(){
   .inc-lesson span{display:block;font:700 11px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
   .inc-src{margin-top:auto;font-size:.86rem;color:var(--muted);text-decoration:none;border-top:1px solid var(--line);padding-top:12px}
   .inc-src:hover{color:var(--accent)}
+  .vk-filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:22px}
+  .vk-chip{font:600 .82rem var(--sans);color:var(--slate);background:var(--card);border:1px solid var(--line);border-radius:20px;padding:6px 13px;cursor:pointer;transition:all .15s}
+  .vk-chip:hover{border-color:var(--accent);color:var(--accent)}
+  .vk-chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+  .vk-chip[style].on{background:var(--c);border-color:var(--c);color:#fff}
+  .vk-count{margin-left:auto;font-size:.85rem;color:var(--muted)}
+  .vk-count b{color:var(--ink)}
   .about-cta{margin-top:10px}
   @media(max-width:760px){.inc-grid{grid-template-columns:1fr}}
 </style>
