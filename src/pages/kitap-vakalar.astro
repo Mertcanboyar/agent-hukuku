@@ -1,0 +1,71 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const bookLd = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  name: "Agent Vakaları 2026",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  inLanguage: "tr-TR",
+  numberOfPages: 20,
+  bookFormat: "https://schema.org/EBook",
+  publisher: { "@type": "Organization", name: "Agent Hukuku" },
+  url: "https://agenthukuku.com/kitap-vakalar",
+  image: "https://agenthukuku.com/kitap-vakalar-kapak.png",
+  about: "Yapay zeka ajanlarının gerçek dünyada yol açtığı olaylar ve dersleri",
+  offers: { "@type": "Offer", price: "0", priceCurrency: "TRY", availability: "https://schema.org/InStock", url: "https://agenthukuku.com/kitap-vakalar" },
+};
+
+const temalar = [
+  { l: "Onay & korkuluk", n: 4 }, { l: "Acil durdurma", n: 3 }, { l: "Otomatik karar", n: 3 },
+  { l: "Hesap verebilirlik", n: 3 }, { l: "İzleme & drift", n: 4 }, { l: "Fiziksel güvenlik", n: 1 },
+  { l: "Otonomi & hız", n: 2 }, { l: "Tedarik zinciri", n: 4 }, { l: "Açık rıza", n: 1 },
+  { l: "İstem enjeksiyonu", n: 5 }, { l: "Kötüye kullanım", n: 1 }, { l: "Kimlik & yetki", n: 2 },
+];
+---
+<Base type="book" title="Ücretsiz E-Kitap — Agent Vakaları 2026 | Agent Hukuku" description="Yapay zeka ajanlarının gerçek dünyada yol açtığı 33 olay, on iki temaya göre derlendi. Her vaka bir özet, bir ders ve kaynağıyla. Ücretsiz e-kitabı indirin.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(bookLd)} /></Fragment>
+<Header />
+<main>
+<section class="page-hero"><div class="wrap"><div class="bookpage">
+  <div class="reveal"><div class="breadcrumb"><a href="/">Ana sayfa</a> · <a href="/vakalar">Vakalar</a> · E-kitap</div>
+    <span class="kicker">Ücretsiz e-kitap · 33 vaka</span>
+    <h1>Agent Vakaları 2026</h1>
+    <div class="meta">12 tema · gerçek olaylar · Mert Can Boyar</div>
+    <p class="lead">Kurgu değil, kayıt. Ajanların gerçek dünyada yol açtığı 33 olay — “onay bekle” denmesine rağmen gelen kutusunu silen ajanlardan, tek bir README’ye gizlenmiş talimatla sandbox’ından kaçan sistemlere. On iki temaya göre bölümlendi; her vaka <strong>ne olduğu</strong>, <strong>kör noktası</strong> ve çıkarılacak <strong>dersiyle</strong> birlikte.</p>
+    <form class="gate2" data-lead="vakalar"><input type="email" placeholder="Çalışma e-postanız" required><button class="btn btn-primary" type="submit">PDF'i gönder</button><label class="consent"><input type="checkbox" class="cbox" required><span>KVKK kapsamında e-postamın işlenmesine ve tarafıma bilgilendirme/pazarlama iletisi gönderilmesine <a href="/aydinlatma" target="_blank">Aydınlatma Metni</a> uyarınca açık rıza veriyorum.</span></label></form>
+    <p class="hint">E-postanızı yalnızca kitabı ve Agent Hukuku bültenini göndermek için kullanırız.</p>
+    <div class="hero-trust" style="margin-top:1rem"><span class="chip">33 gerçek olay</span><span class="chip">Kaynaklı</span><span class="chip">Canlı listeyle bağlantılı</span></div>
+  </div>
+  <div class="cov reveal"><img src="/kitap-vakalar-kapak.png" alt="Agent Vakaları 2026 kapağı"></div>
+</div></div></section>
+
+<section class="book-inside"><div class="wrap">
+  <div class="sec-head reveal"><span class="kicker">İçinde ne var?</span><h2>33 gerçek olay, on iki tema</h2><p>Her tema bir yönetişim boşluğunu anlatıyor. Sayılar, ilgili bölümdeki vaka adedi.</p></div>
+  <div class="parts vk-parts">
+    {temalar.map((t, i) => (
+      <div class="part-card reveal"><div class="pn">{t.n} vaka</div><h3>{String(i + 1).padStart(2, "0")} · {t.l}</h3></div>
+    ))}
+  </div>
+</div></section>
+
+<section><div class="wrap"><div class="parts vk-why">
+  <div class="part-card reveal"><h3>Kurgu değil, kayıt</h3><p>Her olay dünyada gerçekten yaşandı; bağımsız kaynaklardan derlenip Türkçeye uyarlandı.</p></div>
+  <div class="part-card reveal"><h3>Her vakada bir ders</h3><p>Suçlama değil, çıkarım: aynı beş boşluk — envanter, onay, korkuluk, izleme, durdurma.</p></div>
+  <div class="part-card reveal"><h3>Canlı listeyle bağlantılı</h3><p>Kitap bir fotoğraf; <a href="/vakalar">/vakalar</a> ise büyüyen film. Yeni olaylar oraya eklenir.</p></div>
+</div></div></section>
+
+<section><div class="wrap"><div class="author reveal"><div class="ava">MB</div><div><span class="kicker">Yazar</span><h3>Mert Can Boyar</h3><p>Agent Hukuku'nun kurucusu. Türkiye'de yapay zeka ajanlarının hukuku ve yönetişimini sade dille anlatır.</p><div class="links"><a href="https://mertcanboyar.com" target="_blank" rel="noopener">mertcanboyar.com ↗</a></div></div></div></div></section>
+</main>
+<Footer />
+</Base>
+
+<style>
+  .vk-parts .part-card{padding:18px 20px}
+  .vk-parts .part-card .pn{font-family:var(--sans);font-weight:700;font-size:.78rem;color:var(--accent)}
+  .vk-parts .part-card h3{font-size:1.02rem;margin-top:4px}
+  .vk-why .part-card h3{font-size:1.12rem}
+  .vk-why .part-card a{color:var(--accent-dk,var(--accent))}
+</style>

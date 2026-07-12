@@ -11,6 +11,7 @@ function json(data: unknown, status = 200) {
 }
 
 const PDF = `${SITE}/indir/yapay-zeka-ajanlari-ve-kvkk.pdf`;
+const VAKALAR_PDF = `${SITE}/indir/agent-vakalari-2026.pdf`;
 const PILLARS = ["Sorumlu", "Güvenli", "Şeffaf", "Uyumlu", "Hesap Verebilir"];
 const RECS = [
   { t: "Görünürlüğü kurun", d: "Tüm ajanların envanterini çıkarın ve her birine isimle bir sahip atayın.", c: "Bölüm 2 & 4" },
@@ -177,6 +178,17 @@ function buildEmail(type: string, meta: any) {
     return {
       subject: `📊 Karneniz: ${Math.round(Number(meta?.total ?? 0))}/100 — Agent Hukuku`,
       html: shell(`Olgunluk skorunuz ${Math.round(Number(meta?.total ?? 0))}/100. İşte ilke ilke analiz ve aksiyon planınız.`, dashboard(meta)),
+    };
+
+  if (type === "vakalar")
+    return {
+      subject: "📕 Agent Vakaları 2026 — e-kitabınız hazır",
+      html: shell("Ajanların yol açtığı 33 gerçek olay, 12 temada — indirmeye hazır.",
+        eyebrow("ÜCRETSİZ E-KİTAP")
+        + h1("Agent Vakaları 2026 📕")
+        + p("Yapay zeka ajanlarının gerçek dünyada yol açtığı <b>33 olay</b>, on iki temaya göre derlendi. Her vaka; ne olduğu, kör noktası ve çıkarılacak <b>dersiyle</b> birlikte — kurgu değil, kayıt.")
+        + `<div style="margin:18px 0">${btn(VAKALAR_PDF, "PDF'i indir")}</div>`
+        + p(`Bu vakalar canlı ve büyüyen bir liste olarak <a href="${SITE}/vakalar" style="color:${C.accent}">agenthukuku.com/vakalar</a>'da güncelleniyor. Aynı gecelerden korunmak için <a href="${SITE}/degerlendirme" style="color:${C.accent}">olgunluk testini</a> çözün ve <a href="${SITE}/araclar" style="color:${C.accent}">belge üreteçlerini</a> kullanın.`)),
     };
 
   if (type === "envanter")
