@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const books = [
+  {
+    url: "/kitap", cover: "/kitap-kapak.png", title: "Yapay Zeka Ajanları & KVKK",
+    meta: "20 bölüm · ~200 sayfa · vaka temelli",
+    desc: "Türk şirketleri için sade dilde, uçtan uca uygulama rehberi. Kurgu şirket TeknoVadi üzerinden her bölüm bir kriz, bir karar ve onun KVKK karşılığıyla ilerler — envanterden veri ihlaline ajan yönetişiminin tamamı.",
+    tag: "Uygulama rehberi",
+  },
+  {
+    url: "/kitap-vakalar", cover: "/kitap-vakalar-kapak.png", title: "Agent Vakaları 2026",
+    meta: "33 vaka · 12 tema · gerçek olaylar",
+    desc: "Kurgu değil, kayıt. Ajanların gerçek dünyada yol açtığı 33 olay, on iki temaya göre derlendi — her vaka ne olduğu, kör noktası ve çıkarılacak dersiyle birlikte. /vakalar'daki canlı listenin kitaplaşmış hâli.",
+    tag: "Vaka derlemesi",
+  },
+];
+---
+<Base title="Ücretsiz E-Kitaplar — Ajan Hukuku ve Yönetişimi | Agent Hukuku" description="Yapay zeka ajanlarının hukuku ve yönetişimi üzerine ücretsiz e-kitaplar: 'Yapay Zeka Ajanları & KVKK' uygulama rehberi ve 'Agent Vakaları 2026' gerçek olay derlemesi.">
+<Header />
+<main>
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/">Ana sayfa</a> · Kitaplar</div>
+  <span class="kicker">Kitaplar</span>
+  <h1>Ücretsiz e-kitaplar</h1>
+  <p class="lead">İki kitap, tek çerçeve. Biri ajan yönetişimini envanterden olay müdahalesine uçtan uca kuruyor; diğeri bu ilkelerin gerçek dünyada eksik kaldığında ne olduğunu 33 olayla gösteriyor. İkisi de ücretsiz, Türkçe ve vaka temelli.</p>
+</div></section>
+
+<section class="kl-sec"><div class="wrap">
+  <div class="kl-grid">
+    {books.map((b) => (
+      <a class="kl-card reveal" href={b.url}>
+        <div class="kl-cov"><img src={b.cover} alt={`${b.title} kapağı`} /></div>
+        <div class="kl-body">
+          <span class="kl-tag">{b.tag}</span>
+          <h2>{b.title}</h2>
+          <div class="kl-meta">{b.meta}</div>
+          <p>{b.desc}</p>
+          <span class="kl-go">İncele ve indir →</span>
+        </div>
+      </a>
+    ))}
+  </div>
+  <p class="tool-note" style="max-width:760px;margin-top:26px">Her iki kitap da e-posta karşılığında ücretsiz gönderilir. E-postanızı yalnızca kitapları ve Agent Hukuku bültenini göndermek için kullanırız.</p>
+</div></section>
+
+<section><div class="wrap"><div class="author reveal"><div class="ava">MB</div><div><span class="kicker">Yazar</span><h3>Mert Can Boyar</h3><p>Agent Hukuku'nun kurucusu. Türkiye'de yapay zeka ajanlarının hukuku ve yönetişimini sade dille anlatır.</p><div class="links"><a href="https://mertcanboyar.com" target="_blank" rel="noopener">mertcanboyar.com ↗</a></div></div></div></div></section>
+</main>
+<Footer />
+
+<script>
+document.documentElement.classList.add('js');
+window.addEventListener('DOMContentLoaded',function(){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+});
+</script>
+
+<style>
+  .kl-sec{padding-top:6px}
+  .kl-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .kl-card{display:flex;flex-direction:column;background:linear-gradient(135deg,#fff,#f3f8fc);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh-sm);padding:28px;text-decoration:none;transition:transform .2s,box-shadow .2s}
+  .kl-card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+  .kl-cov{text-align:center;margin-bottom:20px}
+  .kl-cov img{max-width:190px;border-radius:8px;box-shadow:0 22px 44px rgba(17,28,46,.24);transform:rotate(-2deg);transition:.3s}
+  .kl-card:hover .kl-cov img{transform:rotate(0)}
+  .kl-tag{font:700 .64rem var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);padding:3px 10px;border-radius:20px}
+  .kl-body h2{font-family:var(--serif);font-size:1.5rem;color:var(--ink);margin:12px 0 5px}
+  .kl-meta{font-size:.85rem;color:var(--muted);margin-bottom:12px}
+  .kl-body p{color:var(--slate);line-height:1.6;font-size:.96rem;margin:0 0 16px}
+  .kl-go{margin-top:auto;font-weight:700;color:var(--accent)}
+  @media(max-width:760px){.kl-grid{grid-template-columns:1fr}}
+</style>
+</Base>
