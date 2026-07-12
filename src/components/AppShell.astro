@@ -67,6 +67,28 @@ const modules = [
 
 <script is:inline>
 (function () {
+  // Paylaşılan Word (.doc) üretici — düz metin çıktısını gerçek Word belgesine çevirir
+  window.AH = window.AH || {};
+  window.AH.downloadWord = function (filename, title, text) {
+    var esc = function (s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); };
+    var lines = String(text).split("\n"), out = "", sep = /^[═─—=_]{3,}$/;
+    for (var i = 0; i < lines.length; i++) {
+      var ln = lines[i], t = ln.trim();
+      if (t === "") { out += '<div style="height:7px"></div>'; continue; }
+      if (sep.test(t)) { out += '<hr style="border:0;border-top:1px solid #c9d3e0;margin:10px 0">'; continue; }
+      var e = esc(ln);
+      if (/^[•\-]\s/.test(t)) { out += '<p style="margin:2px 0 2px 18px;font:11pt/1.5 Calibri,Arial,sans-serif;color:#26313f">' + esc(t) + '</p>'; continue; }
+      var letters = t.replace(/[^A-Za-zÇĞİIıiÖŞÜçğöşü]/g, "");
+      if (letters.length >= 3 && t === t.toLocaleUpperCase("tr-TR") && t.length <= 90) { out += '<p style="margin:16px 0 6px;font:700 13pt Georgia,serif;color:#1B2A41">' + e + '</p>'; continue; }
+      if (/^\d+[\).]\s/.test(t)) { out += '<p style="margin:12px 0 4px;font:700 11.5pt Calibri,Arial,sans-serif;color:#1B2A41">' + e + '</p>'; continue; }
+      out += '<p style="margin:3px 0;font:11pt/1.55 Calibri,Arial,sans-serif;color:#26313f">' + e + '</p>';
+    }
+    var html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><title>' + esc(title) + '</title><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><style>@page{size:A4;margin:2cm}body{font-family:Calibri,Arial,sans-serif}</style></head><body>' + out + '</body></html>';
+    var blob = new Blob(["﻿", html], { type: "application/msword" });
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = filename;
+    document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  };
+
   // Mobil menü
   var app = document.querySelector(".app");
   var burger = document.getElementById("appBurger");

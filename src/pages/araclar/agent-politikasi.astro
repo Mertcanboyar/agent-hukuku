@@ -179,10 +179,7 @@ const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEn
   $('copy').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(build()); $('copy').textContent = "Kopyalandı ✓"; setTimeout(()=>$('copy').textContent="Kopyala",1500); } catch(e){}
   });
-  $('dl').addEventListener('click', () => {
-    const blob = new Blob([build()], {type:"text/plain;charset=utf-8"});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = "ajan-yonetisim-politikasi.txt"; a.click(); URL.revokeObjectURL(a.href);
-  });
+  $('dl').addEventListener('click', () => { window.AH.downloadWord("ajan-yonetisim-politikasi.doc", "Yapay Zeka Ajanı Kullanım ve Yönetişim Politikası", build()); });
   render();
 </script>
 </Base>
