@@ -1,0 +1,112 @@
+---
+import Base from "../../layouts/Base.astro";
+import AppShell from "../../components/AppShell.astro";
+
+const faq = [
+  { q: "Olay müdahale planı ne zaman gerekir?", a: "Kriz anından önce. Bir ajan ters gittiğinde 'kim durduracak, kim soruşturacak, kim bildirecek?' sorularının cevabı önceden yazılı ve tatbik edilmiş olmalıdır. Plan, olayı değil paniği önler." },
+  { q: "KVKK'ya bildirim süresi nedir?", a: "Kişisel veri ihlallerinde, ihlali öğrendiğiniz andan itibaren en kısa sürede — Kurul'un belirlediği çerçevede 72 saat içinde — Kurul'a bildirim yapılması ve etkilenen ilgili kişilerin bilgilendirilmesi değerlendirilmelidir. Bu araç genel bir çerçeve verir; somut yükümlülük için hukukçuya danışın." },
+  { q: "Girdiğim bilgiler bir yere gönderiliyor mu?", a: "Hayır. Araç tamamen tarayıcınızda çalışır; girdiğiniz hiçbir bilgi sunucuya gönderilmez veya saklanmaz." },
+  { q: "Üretilen plan hukuki tavsiye midir?", a: "Hayır. Üretilen plan genel bilgilendirme amaçlı bir taslaktır ve hukuki tavsiye yerine geçmez; şirketinizin süreçlerine göre uyarlayın." },
+];
+const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) };
+---
+<Base title="Olay Müdahale Planı Oluşturucu — Yapay Zeka Ajanı | Agent Hukuku" description="Bir ajan ters gittiğinde ne yapacağınızı krize girmeden önce yazın: altı adımlık, tek sayfalık olay müdahale planı. Doldurun, Word olarak indirin. Tarayıcıda çalışır.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(faqSchema)} /></Fragment>
+<AppShell active="olay" title="Olay Müdahale Planı Oluşturucu">
+<section class="page-hero"><div class="wrap">
+  <div class="breadcrumb"><a href="/araclar">Araçlar</a> · Olay müdahale planı</div>
+  <span class="kicker">Araç</span>
+  <h1>Olay müdahale planı oluşturucu</h1>
+  <p class="lead">Bir ajan ters gittiğinde ne yapacağınızı krize girmeden önce yazın. Sıra hep aynı: önce durdur, sonra öğren, belgele, bildir, düzelt, iyileştir. Sorumluları girin, planınız oluşsun.</p>
+</div></section>
+
+<section class="tex-showcase"><div class="wrap">
+  <div class="tex-head"><span class="kicker">Sonuç böyle görünür</span><span class="tex-note">Örnek — sorumluları girdikçe oluşur, Word olarak inersiniz.</span></div>
+  <div class="card-ui tex" style="max-width:760px">
+    <div class="mui-head"><div class="mui-title"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg> Olay Müdahale Planı</div><div class="mui-live">önizleme</div></div>
+    <div class="tex-doc">
+      <h4>TEKNOVADİ A.Ş. — Ajan Olay Müdahale Planı</h4>
+      <div class="dl">Kapsam: müşteri destek ve finans ajanları</div>
+      <div class="sec">1) Durdur (0–15 dk)</div>
+      <p>Ajanı ve entegrasyonlarını durdur, yetkileri iptal et. Sorumlu: A. Yılmaz.</p>
+      <div class="sec">4) Bildir</div>
+      <p>Kişisel veri ihlalinde KVKK'ya en kısa sürede (72 saat) bildirimi değerlendir. Sorumlu: Uyum Sorumlusu.</p>
+      <div class="sec">6) İyileştir</div>
+      <p>Kök nedeni gider; envanter, görev tanımı ve bu planı güncelle.</p>
+    </div>
+  </div>
+</div></section>
+
+<section style="padding-top:6px"><div class="wrap">
+  <div class="tool-grid">
+    <form class="tool-form" id="f" autocomplete="off">
+      <div class="field"><label for="sirket">Şirket adı</label><input type="text" id="sirket" placeholder="Örn. TeknoVadi A.Ş."></div>
+      <div class="field"><label for="kapsam">Kapsanan ajanlar</label><input type="text" id="kapsam" placeholder="Örn. müşteri destek ve finans ajanları"></div>
+      <div class="field"><label for="durdur">Durdurma sahibi (kim · nasıl ulaşılır)</label><input type="text" id="durdur" placeholder="Örn. A. Yılmaz · 0555… / nöbetçi kanalı"></div>
+      <div class="field"><label for="mudahale">Müdahale / soruşturma sahibi</label><input type="text" id="mudahale" placeholder="Örn. Güvenlik ekibi · B. Demir"></div>
+      <div class="field"><label for="iletisim">İletişim / bildirim sahibi</label><input type="text" id="iletisim" placeholder="Örn. Uyum Sorumlusu · kvkk@sirket.com"></div>
+      <div class="field"><label for="kritik">Kritik sistemler / veriler</label><input type="text" id="kritik" placeholder="Örn. CRM, ödeme sistemi, müşteri veritabanı"></div>
+      <div class="field"><label for="notlar">Ek notlar (opsiyonel)</label><textarea id="notlar" placeholder="Örn. yedeklerin yeri, dış hukuk müşaviri, basın/iletişim kuralı…"></textarea></div>
+    </form>
+
+    <div class="tool-out">
+      <div class="tool-out-head"><span class="t">Olay müdahale planı</span><div class="acts"><button type="button" class="tool-btn" id="copy">Kopyala</button><button type="button" class="tool-btn" id="dl" data-gate="olay">İndir</button></div></div>
+      <div class="tool-doc" id="out"></div>
+    </div>
+  </div>
+  <p class="tool-note" style="max-width:820px">Tarayıcınızda çalışır; hiçbir bilgi sunucuya gönderilmez. Üretilen plan bir taslaktır ve hukuki tavsiye niteliği taşımaz. Bildirim yükümlülükleri için mutlaka bir hukukçuya danışın.</p>
+</div></section>
+<section class="faq-sec"><div class="wrap">
+  <h2 class="faq-h">Sıkça sorulan sorular</h2>
+  <div class="faq-list">
+    {faq.map((f) => (
+      <details class="faq-item"><summary>{f.q}</summary><div class="faq-a">{f.a}</div></details>
+    ))}
+  </div>
+</div></section>
+</AppShell>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const v = (id, d) => (($(id).value || "").trim() || d);
+
+  function build(){
+    const sirket = v('sirket', "[Şirket adı]");
+    const kapsam = v('kapsam', "[kapsanan ajanlar]");
+    const durdur = v('durdur', "[durdurma sahibi]");
+    const mud = v('mudahale', "[müdahale sahibi]");
+    const ilet = v('iletisim', "[iletişim/bildirim sahibi]");
+    const kritik = v('kritik', "[kritik sistemler]");
+    const notlar = ($('notlar').value || "").trim();
+
+    let t = "";
+    t += sirket.toUpperCase() + " — YAPAY ZEKA AJANI OLAY MÜDAHALE PLANI\n";
+    t += "Kapsam: " + kapsam + "\n";
+    t += "════════════════════════════════════\n";
+    t += "Sıra: önce DURDUR → ÖĞREN → BELGELE → BİLDİR → DÜZELT → İYİLEŞTİR.\n\n";
+    t += "1) DURDUR (0–15 dk)\n  • Ajanı ve etkilenen entegrasyonları durdur; yetkileri iptal et; son işlemleri geri almayı değerlendir.\n  • Sorumlu: " + durdur + "\n\n";
+    t += "2) ÖĞREN\n  • Ne oldu, ne zaman başladı, hangi sistem ve veriye dokunuldu? Etkinin sınırını belirle.\n  • Sorumlu: " + mud + "\n\n";
+    t += "3) BELGELE\n  • Olay defterine kaydet: tarih/saat, kim ne yaptı, ilgili loglar ve kanıtlar. Kayıtları değiştirmeden sakla.\n\n";
+    t += "4) BİLDİR\n  • Kişisel veri ihlali varsa KVKK'ya en kısa sürede (72 saat) bildirimi değerlendir; etkilenen ilgili kişileri bilgilendir. Gerekiyorsa hukuk müşavirini dahil et.\n  • Sorumlu: " + ilet + "\n\n";
+    t += "5) DÜZELT\n  • Kök nedeni gider; yetki, korkuluk veya izleme boşluğunu kapat. Ajanı yalnızca güvenli olduğunda yeniden aç.\n\n";
+    t += "6) İYİLEŞTİR\n  • Olaydan ders çıkar; ajan envanterini, görev tanımını ve bu planı güncelle. Bir tatbikat planla.\n\n";
+    t += "SORUMLULUKLAR VE KRİTİK VARLIKLAR\n";
+    t += "  • Durdurma sahibi: " + durdur + "\n";
+    t += "  • Müdahale/soruşturma sahibi: " + mud + "\n";
+    t += "  • İletişim/bildirim sahibi: " + ilet + "\n";
+    t += "  • Kritik sistemler/veriler: " + kritik + "\n";
+    if (notlar) t += "  • Notlar: " + notlar + "\n";
+    t += "\n════════════════════════════════════\n";
+    t += "Bu belge bir taslaktır ve hukuki tavsiye niteliği taşımaz.";
+    return t;
+  }
+
+  function render(){ $('out').textContent = build(); }
+  $('f').addEventListener('input', render);
+  $('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(build()); $('copy').textContent = "Kopyalandı ✓"; setTimeout(()=>$('copy').textContent="Kopyala",1500); } catch(e){}
+  });
+  $('dl').addEventListener('click', () => { window.AH.downloadWord("olay-mudahale-plani.doc", "Olay Müdahale Planı", build()); });
+  render();
+</script>
+</Base>
