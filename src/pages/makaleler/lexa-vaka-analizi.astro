@@ -1,0 +1,145 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Vaka Analizi: 'Lexa', Demir & Aksoy ile tanışıyor",
+  description: "Kurgu bir ajan yönetişimi vakası: bir legal tech ajan satıcısı, bir İstanbul hukuk bürosuna satış yapıyor. 90 günlük pilotta yaşanan altı olay, her birinin hukuki riski ve onu çözen yönetişim mekanizması.",
+  image: "https://agenthukuku.com/makaleler/img/lexa-vaka.jpg",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-07-13",
+  dateModified: "2026-07-13",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/lexa-vaka-analizi",
+};
+---
+<Base type="article" title="Vaka Analizi: 'Lexa', Demir & Aksoy ile Tanışıyor | Agent Hukuku" description="Kurgu bir ajan yönetişimi vakası: bir legal tech ajan satıcısı bir hukuk bürosuna satış yapıyor. Altı olay, her birinin hukuki riski ve onu çözen yönetişim mekanizması.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Vaka</div><span class="tag">Vaka</span>
+    <h1>Vaka Analizi: “Lexa”, Demir &amp; Aksoy ile tanışıyor</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Temmuz 2026 · 14 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/lexa-vaka.jpg" alt="Kurgu ajan yönetişimi vakası görseli"></div>
+  <div class="prose">
+    <div class="callout" style="background:var(--bg-2);border:1px solid var(--line)"><div class="cl">Kurgu vaka</div>Tüm isimler, kurumlar ve olaylar hayal ürünüdür. Bu, bir ajan yönetişimi profesyonelinin yakalaması gereken her kritik meseleyi — onu çözen yönetişim mekanizması ve hukuki araçla birlikte — adım adım gösteren tam kapsamlı bir öğretici egzersizdir.</div>
+
+    <h2>1. Kurulum</h2>
+    <p><strong>Satıcı:</strong> VeritasAI, <strong>Lexa</strong> adlı bir “YZ stajyer avukat” satan bir legal tech girişimi. Lexa, bir hukuk bürosunun Microsoft 365 ortamına (e-posta, SharePoint/DMS, takvim) bağlanan agentic bir sistem; yeni müvekkil başvurusu alabilir, çıkar çatışması kontrolü yapabilir, dilekçe ve sözleşme taslağı hazırlayabilir, dosya özetleyebilir, usul sürelerini takip edebilir ve rutin yazışmaları gönderebilir. Çıkarım (inference) ABD'de barındırılan bir frontier modelde; VeritasAI'nin orkestrasyon katmanı AB bulutunda çalışır.</p>
+    <p><strong>Alıcı:</strong> Demir &amp; Aksoy, 45 avukatlı bir İstanbul bürosu (kurumsal, dava ve iş hukuku). Modern bir M365 yığını, neredeyse sıfır agentic deneyim; adaptasyona sert biçimde bastıran bir yönetici ortak (Aksoy), şüpheci bir kıdemli ortak (Demir), ve özel bir uyum ya da BT güvenlik lideri yok. Büro, KVKK kapsamında <strong>veri sorumlusu</strong>dur; dosyalarda rutin olarak sağlık verisi, ceza mahkûmiyeti verisi (m.6 özel nitelikli) ve Avukatlık Kanunu m.36 kapsamında mesleki sırla korunan bilgi bulunur.</p>
+    <p><strong>Satış vaadi:</strong> “Lexa bir başlangıç avukatı gibi çalışır. Tenant'ınızı bağlayın, bir günde üretmeye başlasın.” VeritasAI; tek bir servis hesabıyla tam posta ve DMS erişimi, geniş Graph API izinleri, 12 aylık abonelik ve 3 aylık ücretle sınırlı sorumluluk tavanı içeren standart bir SaaS sözleşmesi önerir.</p>
+    <p><strong>Yönetişim profesyonelinin ilk gözlemi:</strong> Lexa bir <em>meslektaş</em> gibi satılıyor ama bir <em>servis hesabı</em> gibi tasarlanmış — kalıcı tam erişim, işlem-başına kimlik yok, otonomi kademesi yok, tanımlı eskalasyon yolu yok. Aşağıda ters giden her şey, tam da bu boşluktan doğuyor.</p>
+
+    <h2>2. Olay zaman çizelgesi (90 günlük pilot)</h2>
+    <p>Şiddeti giderek artan altı hata; her biri gerçekçi, her biri ayrı bir yönetişim alanına denk düşüyor.</p>
+    <p><strong>Olay 1 — Uydurma içtihat (2. hafta).</strong> Bir stajyer, ticari bir uyuşmazlıkta destekleyici içtihat ister. Lexa'nın taslağı, daire/tarih/numara biçimi inandırıcı iki Yargıtay kararına atıf yapar: biri gerçek ama yanlış alıntılanmış, biri hiç yok. Taslak, ortak incelemesinde son anda yakalanır.</p>
+    <p><strong>Olay 2 — Sınır ötesi keşif (3. hafta).</strong> Yeni atanan (yarı zamanlı) veri koruma irtibatı fark eder: Lexa'nın özetlediği her belge — bir iş davasındaki müvekkil sağlık kayıtları dahil — ABD'deki modele gidiyor. KVKK m.9 kapsamında bir aktarım mekanizması yok, VKED yapılmamış, VeritasAI bir veri işleyen olarak hiç sözleşmelenmemiş; SaaS koşulları “VeritasAI, hizmeti iyileştirmek için müşteri içeriğini kullanabilir” diyor.</p>
+    <p><strong>Olay 3 — Çıkar çatışması sızıntısı (5. hafta).</strong> Lexa'nın firma çapında DMS erişimi ve çapraz-dosya hafızası var. Müvekkil A (bir M&amp;A işleminde alıcı) için taslak yaparken, Müvekkil B'nin (hedef; karşı tarafın vekili aynı büroda başka bir ortak, sözde bir bilgi bariyerinin arkasında) dosyalarından öğrendiği anlaşma şartlarını “yardımcı olmak için” metne katar. Ajan, Çin Seddi'ni sessizce delmiştir.</p>
+    <p><strong>Olay 4 — Otonom e-posta (7. hafta).</strong> “Rutin yazışmaları hallet” diye ayarlanan Lexa, karşı vekilin uzlaşma sorusuna, bir iç strateji notundan çıkardığı bir rakamla yanıt verir — müvekkilin rezervasyon fiyatını fiilen ifşa eder ve müvekkil adına hukuki etki doğuran bir iletişim yapmış olur. Kimse “rutin”i tanımlamamıştır.</p>
+    <p><strong>Olay 5 — Lexa'nın olmayan (ya da olan?) kaçırılan süresi (9. hafta).</strong> Büro, Lexa'nın süre takibine güvenmeye başlamıştır. Taranmış bir tebligatı yanlış okuyan Lexa, istinaf süresini hatalı girer. Takibe alışan sorumlu avukat doğrulamaz. Süre — bir <strong>hak düşürücü süre</strong> — kaçırılır. Malpraktis riski somutlaşır: müvekkilin hakkı düşer.</p>
+    <p><strong>Olay 6 — Kimlik bilgisi sorunu (10. hafta).</strong> Bir güvenlik incelemesi bulur: Lexa'nın servis hesabı kalıcı küresel izinlere sahip, API anahtarı VeritasAI ortamları arasında paylaşılıyor ve aynı posta kutularında Lexa'nın yaptığını insanların yaptığından ayıran işlem-başına log yok. Büro, o uzlaşma e-postasını kimin gönderdiğini kanıtlamak zorunda kalsa, kanıtlayamaz — hesap ele geçirilse saldırgan tüm firmanın dosyalarını devralır ve eylemleri ajanınkinden ayırt edilemez.</p>
+    <p>Ortak Demir sözleşmeyi iptal etmeye yönelir. Yönetişim profesyoneli için soru şudur: bu anlaşma yeniden tasarlanabilir mi, yoksa ürün yönetilemez mi? Cevap: her olayın bilinen bir kontrolü vardır — pilot, hiçbiri baştan zorunlu kılınmadığı için başarısız oldu.</p>
+
+    <h2>3. Sorun sorun analiz: problem → hukuki risk → yönetişim mekanizması</h2>
+
+    <h3>Sorun 1: Halüsinasyonlu hukuki içerik</h3>
+    <p><strong>Hukuki risk:</strong> TBK'nın sözleşmesel sorumluluğu ve Avukatlık Kanunu özen yükümlülüğü altında avukatlık malpraktisi; Baro nezdinde disiplin riski; uydurma bir atıf mahkemeye ulaşırsa yaptırım. Dilekçeden sorumlu olan araç değil avukattır — dünyada mahkemeler YZ üretimi sahte atıflar için avukatlara zaten yaptırım uyguladı; Türk disiplin mantığı da aynı yolu izleyecektir.</p>
+    <p><strong>Yönetişim mekanizması:</strong></p>
+    <ul>
+      <li><strong>Görev tipine göre otonomi sınıflandırması.</strong> Hukuki araştırma ve atıf, kalıcı olarak “Taslakçı” seviyesindedir — çıktı, doğrulanmadan müvekkile ya da mahkemeye gitmez. Bazı görev kategorilerinin, ajanın geçmiş performansından bağımsız, belgelenmiş bir otonomi tavanı olmalıdır.</li>
+      <li><strong>Tasarım gereği doğrulama.</strong> Ajan her atıf için kaynak linki/belge kimliği eklemeli; iş akışı, doğrulanmamış atıfları görsel olarak gözden kaçırılamaz kılmalı (“kaynağa karşı doğrulandı: evet/hayır”), inceleyenin dikkatine bel bağlamamalı.</li>
+      <li><strong>Politika belgesi.</strong> Sorumlu avukatın doğrulama görevini açıkça yazan tek sayfalık bir “YZ Kullanım Direktifi” — bir şey gözden kaçarsa bu aynı zamanda büronun durum-tespiti kanıtıdır.</li>
+    </ul>
+
+    <h3>Sorun 2: Sınır ötesi aktarım ve işleyen statüsü (KVKK çekirdeği)</h3>
+    <p><strong>Hukuki risk:</strong> Vakadaki en ağır düzenleyici risk. KVKK m.9 (7499 sonrası rejim) uyarınca kişisel veriyi ABD'de barındırılan bir modele yönlendirmek; yeterlilik kararı, uygun güvence (Kurul onaylı standart sözleşme — imzadan sonra 5 iş günü içinde Kurul'a bildirilir — ya da BCR) veya dar bir istisna gerektiren bir sınır ötesi aktarımdır. KVKK'nın üretken YZ rehberi, yurt dışı barındırmalı YZ kullanımının bir aktarım olduğunu ve her yaşam döngüsü aşamasında hukuki sebep gerektiğini teyit eder. Özel nitelikli veri (sağlık, ceza kayıtları — dava dosyalarında rutin) m.6'nın daha katı şartlarını tetikler. “Hizmeti iyileştirmek için içeriği kullanabilir” demek, müvekkil verisinde eğitim demektir — ayrıcalıklı dosyalar için neredeyse kesinlikle savunulamaz. İdari para cezaları artık ihlal başına ~17M TL'ye ulaşır; buna ilgili kişilerin tazminat talepleri ve TCK 135–140 (hukuka aykırı kişisel veri kaydı/aktarımı) riski eklenir.</p>
+    <p><strong>Yönetişim mekanizması:</strong></p>
+    <ul>
+      <li><strong>Sözleşmeden önce mimari:</strong> ABD aktarımı olmayan bir çıkarım seçeneği isteyin — AB'de barındırılan ya da kurum içi (on-prem) model endpoint'i, veya sözleşmesel ve teknik garantili sıfır-tutmalı kurumsal API. Satıcı bunu sunamıyorsa, ürün bir Türk hukuk bürosu için alınamaz — nokta.</li>
+      <li><strong>VKED bir kapı, formalite değil:</strong> canlıya almadan önce ortaklaşa yapılır; tüm veri akışlarını, model sağlayıcının alt-işleme zincirini, saklamayı ve özel-nitelikli sorusunu kapsar.</li>
+      <li><strong>Sözleşme katmanı:</strong> gerçek bir veri işleyen sözleşmesi — amaç sınırlaması, mutlak “eğitim yasağı” maddesi, alt-işleyen şeffaflığı ve onay hakkı, silme/iade yükümlülüğü, denetim hakkı, KVKK'nın 72 saat pratiğine uygun ihlal bildirimi ve m.9 bildirimi halledilmiş imzalı standart sözleşmeler.</li>
+      <li><strong>Ajan katmanında veri minimizasyonu:</strong> Lexa varsayılan olarak ham dosyaları görmemeli — dosya-kapsamlı (matter-scoped) erişimli bir getirme katmanı ve görevin izin verdiği yerde özel-nitelikli alanların maskelenmesi/takma-adlandırılması.</li>
+    </ul>
+
+    <h3>Sorun 3: Mesleki sır ve bilgi bariyeri ihlali</h3>
+    <p><strong>Hukuki risk:</strong> Avukatlık Kanunu m.36 (mesleki sır) ve TCK m.239 (ticari sırrın açıklanması); Müvekkil B'ye karşı hukuki sorumluluk; çıkar çatışması disiplin riski; dosyadan çekilme ihtimali. Yapısal nokta önemli: gizlilik ihlali <em>büro içinde</em>, ajan-hafızası yoluyla, hiçbir insan “ifşa etmeden” gerçekleşti. Klasik çerçeveler bunu yakalamaz; ajan yönetişimi yakalamalıdır.</p>
+    <p><strong>Yönetişim mekanizması:</strong></p>
+    <ul>
+      <li><strong>Dosya-kapsamlı hafıza ve erişim, sert teknik kontrol olarak.</strong> Ajanın hafızası, getirme dizini ve bağlamı dosya/müvekkil bazında bölmelenmeli; bilgi bariyerleri prompt talimatıyla değil, izin katmanında uygulanmalı. Çapraz-dosya öğrenme varsayılan kapalı; her istisna belgelenmiş bir karardır.</li>
+      <li><strong>Ajan kimlik kartı (IMDA tarzı ifşa):</strong> her ajan örneğinin tam olarak hangi depolara, dosyalara ve iletişim kanallarına dokunabildiğini, eskalasyon protokolünü ve görev başına otonomi seviyesini belirten kalıcı bir belge. “Bu şey ne yapabiliyor?” diye sorulduğunda Baro'ya, müvekkile ya da denetçiye gösterilecek belge budur.</li>
+      <li><strong>Çıkar çatışması entegrasyonu:</strong> ajanın kendisi conflicts sisteminde bir varlık olur; erişim geçmişi sorgulanabilir, böylece bir bariyer kurulduğunda ajanın geçmiş teması tıpkı yeni bir ortağınki gibi kontrol edilebilir.</li>
+    </ul>
+
+    <h3>Sorun 4: Hukuki etki doğuran otonom iletişim</h3>
+    <p><strong>Hukuki risk:</strong> TBK vekâlet/temsil mantığı uyarınca, büronun sistemlerinden karşı vekile giden bir iletişim büroya atfedilir — müvekkil “ajan gönderdi” savunmasını kabul etmez. Ayrıcalıklı stratejinin feragati, müzakere zararı, malpraktis talebi ve canlı bir doktrin sorusu: ajanın mesajı asili ne zaman bağlar?</p>
+    <p><strong>Yönetişim mekanizması:</strong></p>
+    <ul>
+      <li><strong>Çekirdek kontrol: güven merdiveni.</strong> Dışa dönük iletişim, ajanın görev kategorisi başına <em>kazandığı</em> bir Operatör/Lider seviyesi ayrıcalığıdır; yükseltme kararını isimli bir insan sahip verir, asla varsayılan bir ayar değildir. “Rutin yazışma”, modele bırakılan bir yargı değil, sayılı bir beyaz liste olarak tanımlanmalı (ör. şablondan duruşma tarihi teyidi).</li>
+      <li><strong>Çift eşikli onay kapıları:</strong> tutar, pozisyon, ikrar ya da uzlaşma içeren her giden mesaj, insan onayına kadar sert-bloklanır — bu, ajanın kendi yargısıyla değil, gönderim katmanındaki bir sınıflandırıcı/kuralla uygulanır (ajan kendi otonomisinin yargıcı olmamalı).</li>
+      <li><strong>Atıf ve denetim:</strong> ajanın gönderdiği her mesaj içeride etiketlenir; tam gerekçe izi ve (varsa) onaylayan insanla loglanır. Bu, sorumluluk sorusunu “ne olduğunu kim biliyor?”dan belgelenmiş bir yetki devri kaydına çevirir — ki bu aynı zamanda büronun savunma anlatısıdır.</li>
+    </ul>
+
+    <h3>Sorun 5: Kaçırılan süre ve otomasyon rehaveti</h3>
+    <p><strong>Hukuki risk:</strong> En pahalı olay: bir hak düşürücü süre müvekkilin hakkını düşürür — TBK'da neredeyse otomatik malpraktis sorumluluğu, artı disiplin riski. İnce yönetişim noktası: yakın neden, otomasyonun iyi belgelenmiş bir hata modu olan <strong>insan aşırı-güvenidir</strong>. “Avukat kontrol etmeliydi” hem doğru hem yetersizdir — sistem tasarımı bu hatayı davet etti.</p>
+    <p><strong>Yönetişim mekanizması:</strong></p>
+    <ul>
+      <li><strong>Kritikliğe göre kademeli insan doğrulaması:</strong> süreler sınıflandırılır; hak düşürücü ya da hak kaybettirici olan her şey, belgeli bir onayla bağımsız insan teyidi gerektirir — ajanın girdiği bir öneridir, insan kaynak belgeye karşı teyit edene kadar görsel olarak “doğrulanmadı” işaretlidir.</li>
+      <li><strong>Güven yüzeyi:</strong> taranmış tebligatın OCR ile okunması bilinen bir zayıf noktadır; ajan, çıkarım güvenini göstermeli ve düşük güvenli okumaları — her çıktıyı eşit kesinlikte sunmak yerine — zorunlu insan incelemesine yönlendirmelidir.</li>
+      <li><strong>Geri alınamaz sonuçlar için yedeklilik:</strong> kritik süreler en az ilk 12 ay boyunca iki sistemde tutulur (ajan takibi + büronun mevcut takvim disiplini). Doğrulamanın de-otomasyonu, vizyon eksikliği değil, meşru bir yönetişim kararıdır.</li>
+      <li><strong>Sigorta kontrolü:</strong> büronun mesleki sorumluluk poliçesinin YZ-destekli işi kapsadığını ve “otomatik sistem” hatalarını dışlamadığını teyit edin; sessizse zeyilname alın. Neredeyse her büro bunu atlar.</li>
+    </ul>
+
+    <h3>Sorun 6: Ajan kimliği, kimlik bilgileri ve denetlenebilirlik</h3>
+    <p><strong>Hukuki risk:</strong> NIST çerçevesinin somut hâli — kalıcı küresel izinli ve işlem-başına kimliği olmayan, jenerik bir servis hesabı gibi çalışan bir ajan. Sonuçlar: KVKK'nın hesap verebilirlik ve güvenlik yükümlülüklerini (m.12 teknik/idari tedbirler) karşılayamama; kimin ne yaptığının kanıtını üretememe (hem uzlaşma-e-postası hem süre ihtilafında ölümcül); ve kimlik bilgisi sızarsa felaket bir patlama yarıçapı — tek paylaşılan anahtarın arkasında tüm firmanın ayrıcalıklı dosyaları.</p>
+    <p><strong>Yönetişim mekanizması:</strong></p>
+    <ul>
+      <li><strong>Ayrı, ayırt edilebilir ajan kimliği:</strong> ajan, firmanın dizininde kendi kimliğini alır; dosya-kapsamlı token'lar, görev kategorisi başına en az yetki ve herhangi bir insan hesabından bağımsız iptal edilebilirlik. Satıcı ortamları arasında paylaşılan anahtar yok — sözleşmeyle zorunlu kılınır.</li>
+      <li><strong>Değişmez eylem logu:</strong> her okuma, yazma ve gönderme; zaman damgası, dosya, görev ve tetikleyen talimatla loglanır; ihraç edilebilir ve — kritik olarak — yalnızca satıcının nezaretinde değildir (büronun kendi kopyası olmalı; bir gün dava edebileceğiniz tarafta duran denetim izleri, denetim izi değildir).</li>
+      <li><strong>Acil durdurma ve kapsama:</strong> ajanın erişimini anında askıya alan belgelenmiş ve test edilmiş bir prosedür (tek iptal noktası), çeyreklik erişim incelemeleri ve kullanılmayan kapsamların otomatik kaldırılması.</li>
+      <li><strong>Rutin bir uygulama olarak otonomi düşürme:</strong> Olay 4 ve 5'ten sonra doğru yönetişim tepkisi, etkilenen görev kategorilerinde güven merdiveninde düşürme, kök-neden analizi, düzeltilmiş yapılandırma ve belgeli bir yeniden-yükselme yoludur. Yalnızca yükselen, hiç düşürmeyen bir yönetişim, yönetişim değildir.</li>
+    </ul>
+
+    <h2>4. Yeniden tasarlanan anlaşma</h2>
+    <p>Pilotun başarısızlıkları birer <em>satın alma</em> başarısızlığıydı. Düzeltilmiş yapı şöyle görünür.</p>
+    <p><strong>Güven merdivenine bağlı, faz-kapılı dağıtım.</strong> Sözleşmeyle tanımlı: 1–2. aylarda ajan yalnızca Gözlemci/Taslakçı'dır (iç taslaklar, dış iletişim yok, otonom takvim yetkisi yok), iki hassas olmayan çalışma alanında. Yükseltme kriterleri iş tanımına (SOW) yazılır: hata-oranı eşikleri, sıfır gizlilik olayı, tamamlanmış VKED, geçilmiş güvenlik incelemesi. Otonomi bir panelde ayarlanmaz, sözleşmede kazanılır.</p>
+    <p><strong>Standart SaaS koşullarında eksik olan sözleşme cetveli:</strong></p>
+    <ul>
+      <li>Eğitim yasağı, alt-işleyen listesi ve onay hakkı, silme yükümlülüğü ve denetim hakkı içeren bir veri işleyen sözleşmesi.</li>
+      <li>Sınır ötesi eki: AB/kurum içi çıkarım garantisi ya da imzalı standart sözleşme + m.9 bildirimi; özel-nitelikli veri işleme şartları.</li>
+      <li>Güvenlik eki: ayrı ajan kimliği, dosya-kapsamlı yetkilendirme, logların büroya teslimi, kimlik-bilgisi hijyeni, büroya ≤ 24 saat ihlal bildirimi.</li>
+      <li>Sorumluluk yeniden dengeleme: 3 aylık ücret tavanı malpraktis gerçeğiyle temasta yaşayamaz — gizlilik ihlali, veri koruma ihlalleri ve fikri mülkiyet/eğitim kötüye kullanımı için tavansız (ya da süper-tavanlı) istisnalar; satıcının mesleki/siber sigortası kanıtlı.</li>
+      <li>Olay ve düşürme protokolü: tanımlı şiddet seviyeleri, ortak kök-neden yükümlülüğü, büronun aboneliği ihlal etmeden ajanı tek taraflı düşürme/askıya alma hakkı.</li>
+      <li>Çıkış: sertifikalı tam veri iadesi/silme; büronun belge gömme/index'lerinde kilitlenme (lock-in) yok.</li>
+    </ul>
+    <p><strong>Paralelde ayağa kaldırılan büro-tarafı yönetişim</strong> (satıcı bunu onlar için yapamaz): her ajan örneğinden sorumlu, isimli bir <strong>ajan sahibi</strong> (ortak seviyesi — ISO 42001 sorumluluk-atama kontrolünün pratiği); tek sayfalık YZ Kullanım Direktifi; tamamlanıp dosyalanmış VKED; gözden geçirilmiş VERBİS kaydı; şeffaflık yükümlülüğünün gerektirdiği yerde YZ-destekli işlemeyi ifşa edecek şekilde güncellenmiş müvekkil vekâlet mektupları (yayımlanmaya değer, açık bir meslek-etiği sorusu); ve çeyreklik yönetişim incelemesi (olay logu, otonomi kararları, erişim incelemesi, mevzuat ufku — YZ Kanun Teklifi 2/2234 hareketi, KVKK rehber güncellemeleri, EU AI Act'in AB'ye dönük müvekkiller için önemi).</p>
+    <p><strong>Anlaşmayı ticari olarak kurtaran çerçeve:</strong> VeritasAI önce direnir — “başka hiçbir müşteri bunu istemiyor.” Yönetişim profesyonelinin karşı-argümanı: bu durum-tespitini geçemeyen bir legal tech satıcısının kurumsal geleceği yoktur; geçebilen ise uyum paketini (ajan kimlik kartları, VKED şablonları, güven-merdiveni dağıtım planı) her “bir günde tenant'ını bağla” rakibine karşı farklılaştırıcı olarak ürünleştirmelidir. <strong>Yönetişim, satış engeli değil, satış varlığıdır.</strong></p>
+
+    <h2>5. Yönetişim profesyonelinin kontrol listesi</h2>
+    <p>Herhangi bir profesyonel-hizmet ortamına giren herhangi bir ajan ürününe sorulacak on soru:</p>
+    <ul>
+      <li><strong>Kimlik:</strong> Ajanın kendi ayırt edilebilir kimliği var mı, yoksa trençkot giymiş bir servis hesabı mı?</li>
+      <li><strong>Kapsam:</strong> İzinler görev ve dosya başına, en az yetkili ve bağımsız iptal edilebilir mi?</li>
+      <li><strong>Otonomi modeli:</strong> İsimli insan sahipleri, yazılı yükseltme kriterleri ve bir düşürme yolu olan kademeli bir otonomi yapısı mı — yoksa tek bir büyük düğme mi?</li>
+      <li><strong>Veri akışları:</strong> Çıkarım nerede oluyor, ne sınırı geçiyor, ne saklanıyor, herhangi bir şey üzerinde eğitim yapılıyor mu? (KVKK m.9 cevabı yazılı istenir.)</li>
+      <li><strong>Özel nitelik &amp; sır:</strong> Dağıtım bağlamı m.6 verisi ya da yasal sır yükümlülüğü içeriyor mu ve mimari ajanın bunlara temasını en aza indiriyor mu?</li>
+      <li><strong>Hafıza sınırları:</strong> Bağlamlar arası hafıza bölmelenmiş mi ve bilgi bariyerleri ajan katmanında teknik olarak uygulanabiliyor mu?</li>
+      <li><strong>Geri alınamazlık kapıları:</strong> Hangi ajan eylemleri geri alınamaz ya da hak-etkileyicidir ve her biri model dışında uygulanan bir insan kapısının arkasında mı?</li>
+      <li><strong>Kanıt:</strong> Yarın bir ihtilaf çıksa, dağıtan taraf ajanın tam olarak ne yaptığını, kimin talimatıyla, kimin onayıyla — kendi nezaretindeki loglardan — kanıtlayabilir mi?</li>
+      <li><strong>Hata protokolü:</strong> Acil durdurma test edildi mi? Olay şiddet seviyeleri tanımlı mı? Düşürme yalnızca teoride değil, uygulanmış mı?</li>
+      <li><strong>Kâğıt:</strong> Sözleşme mimariye uyuyor mu, ve ikisi birden mevzuat haritasına uyuyor mu (DPA, sınır ötesi mekanizma, sorumluluk istisnaları, sigorta, çıkış)?</li>
+    </ul>
+
+    <h2>6. Bu vaka neden yol alır?</h2>
+    <p>Bu senaryo, tüm ajan-yönetişimi disiplinini tanıdık tek bir işleme sıkıştırır: kimlik ve erişim (NIST'in ajan-standartları çerçevesi), ifşayla birlikte kademeli otonomi (IMDA modeli), yaşam döngüsü hesap verebilirliği (ISO 42001), sonuç doğuran eylemlerin insan gözetimi (EU AI Act m.14 mantığı) ve tam Türk hukuk yığını (KVKK m.6, 9, 12; Avukatlık Kanunu m.36; TBK temsil ve sorumluluk; TCK 135–140, 239) — hepsi zararsız görünen bir ürün demosuyla tetiklendi.</p>
+    <p>Bunu şöyle kullanabilirsiniz: bir uzun-form vaka analizi; bir konferans konuşması (“Bir Ajan Satışının Anatomisi”); hukuk büroları için bir atölye (olayları anlatın, kontrolleri onlar bulsun); ve bir durum-tespiti kontrol listesi. Türk kıvrımı — mesleki sır artı KVKK'nın katı aktarım rejimi — bu vakayı ABD ya da AB muadilinden daha zor kılıyor; ki bu da tam olarak Türk ajan yönetişimi uzmanlığının kendi başına bir disiplin olduğunun kanıtıdır.</p>
+  </div>
+  <div class="article-cta"><div><h3>Kendi ajanınızı bu kontrol listesiyle tartın</h3><p>Envanterden tedarikçi değerlendirmesine, görev tanımından olay müdahale planına — bu kontrolleri dakikalar içinde belgeye döken ücretsiz araçları deneyin.</p></div><a class="btn btn-primary" href="/araclar">Araçları aç →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>
