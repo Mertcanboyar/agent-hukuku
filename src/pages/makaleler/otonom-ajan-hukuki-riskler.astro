@@ -1,0 +1,71 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Otonom yapay zeka ajanlarının yarattığı hukuki riskler",
+  description: "Kendi başına karar alıp eyleme geçen ajanlar, eski teknoloji sözleşmelerinin kapsamadığı bir 'sorumluluk boşluğu' yaratıyor. Temsil hukukunun çöküşü, sözleşme tuzakları ve yönetişim çözümü.",
+  image: "https://agenthukuku.com/makaleler/img/hukuki-risk.jpg",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-07-13",
+  dateModified: "2026-07-13",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/otonom-ajan-hukuki-riskler",
+};
+---
+<Base type="article" title="Otonom Yapay Zeka Ajanlarının Yarattığı Hukuki Riskler | Agent Hukuku" description="Kendi başına karar alıp eyleme geçen ajanlar, eski teknoloji sözleşmelerinin kapsamadığı bir 'sorumluluk boşluğu' yaratıyor. Temsil hukukunun çöküşü, sözleşme tuzakları ve yönetişim çözümü.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Hukuk &amp; Uyum</div><span class="tag">Hukuk &amp; Uyum</span>
+    <h1>Otonom yapay zeka ajanlarının yarattığı hukuki riskler</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Temmuz 2026 · 6 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/hukuki-risk.jpg" alt="Otonom ajan mimarisi ve hukuki sorumluluk görseli"></div>
+  <div class="prose">
+    <p>Üretken yapay zekadan (GenAI) kendi başına karar alıp eyleme geçen ajan tabanlı sistemlere (Agentic AI) geçiş, işletmelerin operasyonlarını temelden dönüştürüyor. Üretken yapay zeka yalnızca komuta dayalı içerik üretirken, ajan tabanlı sistemler doğrudan ve sürekli insan girdisi olmadan bilgi işlemek, karar vermek ve <strong>harekete geçmek</strong> için tasarlanmış çok daha gelişmiş bir formdur.</p>
+    <p>Bir orkestra düşünün: bireysel ajanlar belirli enstrümanları çalan müzisyenlerse, ajan tabanlı sistem (Agentic AI) onları koordine eden, yöneten ve vizyonu belirleyen orkestra şefidir. Ne var ki bu otonomi, şirketler için eski teknoloji sözleşmelerinin kapsamadığı yepyeni bir hukuki <strong>“sorumluluk boşluğu”</strong> yaratır.</p>
+
+    <h2>7/24 ölçeklenen risk ve temsil hukukunun çöküşü</h2>
+    <p>Geleneksel hukuk, insan çalışanların (temsilcilerin) yetki sınırlarını aştığı durumlarda şirketlere çeşitli savunma imkânları tanır. Ancak ajanların hukuku henüz belirsizdir ve şirketler, öngörülsün ya da öngörülmesin, tüm ajan davranışlarından kusursuz sorumlu tutulabilir.</p>
+    <ul>
+      <li>Ajanlar 7/24 ve dağıtık çalıştığı için hukuki ve uyum risklerini devasa boyutlarda <strong>ölçeklendirir</strong>.</li>
+      <li>Bu, şirket hedefleriyle uyuşmazlıkları ve olası hataları tespit etmeyi zorlaştırırken istenmeyen sonuç ihtimalini artırır.</li>
+      <li>Üretilen sonuç ile baştaki insan talimatı arasındaki mesafe açıldıkça sorumluluğu insana atfetmek zorlaşır; buna akademide <strong>“yapay zeka hesap verebilirlik boşluğu”</strong> denir.</li>
+    </ul>
+    <p>Mahkemeler ve yasa koyucular bu yapıyı mevcut hukuka uyarlamaya başladı. Kanada'daki <em>Moffatt v. Air Canada</em> (2024) davasında, destek botunun yolcuya yanıltıcı bilgi vermesi üzerine mahkeme havayolunu doğrudan sorumlu tuttu. Avrupa Parlamentosu, yapay zekaya ayrı bir hukuki kişilik tanıma fikrini — sistemlerin hukuki kişiliği veya insan bilinci olmadığını belirterek — açıkça reddetti. <em>Quoine Pte Ltd v. B2C2 Ltd</em> davasında ise algoritmik bir yazılım hatasıyla kripto varlıkların ciddi değer düşüklüğüyle satılması, otomatik sistemlerin sözleşme boyutundaki riskini gözler önüne serdi.</p>
+
+    <h2>Eski nesil sözleşmelerdeki tuzağın boyutları</h2>
+    <p>Şirketler bu yüksek otonomili sistemleri çoğu zaman, insan kontrolündeki pasif ve öngörülebilir yazılımlar için yazılmış eski sözleşmelerle canlıya alıyor. Sonuç, işletme aleyhine büyük bir risk asimetrisidir.</p>
+    <ul>
+      <li><strong>Zarar sorumluluğunun müşteriye itilmesi:</strong> Yazılımlar “olduğu gibi” sağlanır; tedarikçi doğruluk ve amaca uygunluk için sorumluluk reddeder. Ajan hatalı bir ödeme onaylar, yanlış fiyatlar ya da yanıltıcı iletişim kurarsa sorumluluk tümüyle satın alan müşteride kalır.</li>
+      <li><strong>Dolaylı zararların kapsam dışı bırakılması:</strong> Sözleşmeler “kâr kaybı”, “veri kaybı” ve “dolaylı/arızi/cezai zararlar”ı hariç tutar — oysa yanlış fiyatlandırma kaynaklı kâr kaybı ya da bir kodlama ajanının veritabanını silmesi tam da bu kalemlere girer.</li>
+      <li><strong>Üçüncü taraf davaları:</strong> Kusurlu bir ajan; önyargılı işe alım reddi, müşteriye yanıltıcı bilgi ya da kişisel verilerin yasa dışı kullanımı gibi üçüncü taraflara zarar verebilir. Standart tazminat maddeleri bunları çoğu kez kapsamaz.</li>
+      <li><strong>Şeffaflık ve denetim eksikliği:</strong> Eski sözleşmeler; ajanın neden böyle davrandığını anlama, karar loglarına erişme veya ajanı gerçek zamanlı askıya alma hakkı tanımaz. Bu, KVKK gibi açıklanabilirlik zorunluluğu getiren düzenlemeler altında kurumu savunmasız bırakır.</li>
+    </ul>
+
+    <h2>Etkileşim riskleri ve “açıkla ama doğrula” ilkesi</h2>
+    <p>Ajanların diğer ajanlarla veya insanlarla otonom etkileşimi, öngörülmesi zor dinamikler yaratır.</p>
+    <ul>
+      <li>Ajan-insan etkileşimleri temsil uyuşmazlıklarını tetikleyebilir ve sistemin şirketi bağlama yetkisini hukuki tartışmaya açabilir.</li>
+      <li>Ajanlar arası iletişim hızla büyüyüp karmaşıklaşabilir; fiyatlandırma, rekabet hukuku (antitrust), önyargı ve aldatma açısından gözetilip net kurallara bağlanmalıdır.</li>
+      <li>Ajanlar kararlarını açıklayabilmeli; ama kendi açıklamalarında bile halüsinasyon görebilecekleri için <strong>“açıkla ama doğrula”</strong> yaklaşımı uygulanmalıdır.</li>
+    </ul>
+
+    <h2>Çözüm: ajan mimarisine özel yönetişim</h2>
+    <p>Bu boşluğu kapatmak için işletmeler teknoloji sözleşmelerini yeniden gözden geçirmeli ve operasyonel kontrolleri devreye almalıdır. Ajanların yasal, finansal veya düzenleyici sonuç doğurabilecek yüksek etkili kararlar alması engellenmeli; bu süreçler mutlaka <strong>insan incelemesine</strong> (human review) tabi tutulmalıdır.</p>
+    <p>Güvenli bir altyapı için sisteme sınırları net çizilmiş devre kesiciler (circuit breakers), kapsamlı loglama ve önceden programlanmış etik çerçeveler entegre edilmelidir. Kurumlar; bir “Yapay Zeka Yöneticisi” atamayı, zararlı çıktılara karşı itiraz mekanizmaları kurmayı ve yapay zeka risklerine özel sigorta poliçelerini değerlendirmeyi düşünmelidir. Büyüyen bu otonom iş gücünü yönetmek için şirketlerin vakit kaybetmeden kendi ajan altyapılarını kurup test etmesi ve geleceğe dönük yönetişim önlemlerini (otorite seviyesi protokolleri, etkileşim beyanları) hazırlaması gerekir.</p>
+
+    <div class="callout remember"><div class="cl">Unutmayın</div>“Yazılım öyle karar verdi” bir savunma değil, bir sorumluluktur. Ajanı siz konuşlandırdıysanız onun yaptıkları sizi bağlar. Sorumluluk boşluğunu kapatan şey yeni bir hukuk değil; envanter, insan onayı, devre kesici, log ve doğru yazılmış bir sözleşmedir.</div>
+
+    <p>Aynı olayların gerçekte nasıl yaşandığını <a href="/vakalar">vaka kütüphanesinde</a> görebilir; bu tedbirleri belgeye dökmek için <a href="/araclar">ücretsiz araçları</a> kullanabilirsiniz.</p>
+  </div>
+  <div class="article-cta"><div><h3>Sorumluluk boşluğunu kapatın</h3><p>Envanterden olay müdahale planına, görev tanımından tedarikçi değerlendirmesine — bu tedbirleri dakikalar içinde belgeye döken ücretsiz araçları deneyin.</p></div><a class="btn btn-primary" href="/araclar">Araçları aç →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>

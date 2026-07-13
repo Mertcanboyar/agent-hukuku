@@ -1,0 +1,92 @@
+---
+import Base from "../../layouts/Base.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Legal tech ajanlarını bir hukuk bürosuna satabilmek için gerekli altyapı ve yönetişim",
+  description: "Agentic legal tech ürünleri hukuk bürosunun her yerine erişir — bu da müvekkil gizliliği ve KVKK riskini zirveye taşır. Bu ürünleri satabilmek için kurulması gereken güvenlik altyapısı ve yönetişim yol haritası.",
+  image: "https://agenthukuku.com/makaleler/img/legaltech.jpg",
+  author: { "@type": "Person", name: "Mert Can Boyar", url: "https://mertcanboyar.com" },
+  publisher: { "@type": "Organization", name: "Agent Hukuku", logo: { "@type": "ImageObject", url: "https://agenthukuku.com/og/agent-hukuku-og.png" } },
+  datePublished: "2026-07-13",
+  dateModified: "2026-07-13",
+  inLanguage: "tr-TR",
+  mainEntityOfPage: "https://agenthukuku.com/makaleler/legal-tech-ajan-satis-yonetisim",
+};
+---
+<Base type="article" title="Legal Tech Ajanlarını Bir Hukuk Bürosuna Satabilmek İçin Gerekli Altyapı ve Yönetişim | Agent Hukuku" description="Agentic legal tech ürünleri hukuk bürosunun her yerine erişir; bu da müvekkil gizliliği ve KVKK riskini zirveye taşır. Bu ürünleri satabilmek için gereken güvenlik altyapısı ve yönetişim yol haritası.">
+<Fragment slot="head"><script type="application/ld+json" set:html={JSON.stringify(articleLd)} /></Fragment>
+<Header />
+<main>
+<article>
+  <div class="article-head"><div class="wrap"><div class="breadcrumb"><a href="/makaleler">Makaleler</a> · Hukuk &amp; Uyum</div><span class="tag">Hukuk &amp; Uyum</span>
+    <h1>Legal tech ajanlarını bir hukuk bürosuna satabilmek için gerekli altyapı ve yönetişim</h1>
+    <div class="article-meta"><span class="av">MB</span> Mert Can Boyar · Temmuz 2026 · 10 dk okuma</div></div></div>
+  <div class="wrap"><img class="article-hero-img" src="/makaleler/img/legaltech.jpg" alt="Hukuk bürosu için legal tech yazılımı ve güvenlik görseli"></div>
+  <div class="prose">
+    <p>Hukuk sektörü, özellikle Türkiye'de, legal tech özelinde adaptasyonu ve giriş bariyerleri çok yüksek bir alandır. Yıllardır piyasaya derinlemesine girebilen ürünler; içtihat araması, dilekçe araması gibi <strong>müvekkil bilgisi içermeyen</strong> araçlar oldu. Nedeni basit: bu araçlar bir hassas veri kasasına dokunmadığı için müvekkil gizliliği açısından ciddi bir risk taşımaz.</p>
+    <p>Son bir yılda ise tablo değişti. Agentic (ajan tabanlı) hukuk bürosu çözümleri ortaya çıkmaya başladı — ve satışta ciddi itirazlarla karşılaşıyorlar. Çünkü bir ajan artık avukatın <strong>çalıştığı e-postadan drive'ına, dava dosyalarından arşivlere kadar her yere</strong> erişebiliyor. Bu erişim, müvekkil gizliliği ve buna bağlı riskleri hiç olmadığı kadar yükseğe taşıyor. Üstelik bu ürünlerin çoğu arka planda yurt dışı LLM'lere veri aktardığı için, KVKK kapsamında ayrı bir risk katmanı daha ekliyor.</p>
+    <p>Bu yazı, bir legal tech ajanını bir hukuk bürosuna satabilmek için kurmanız gereken güvenlik altyapısını ve yönetişim yol haritasını ele alıyor: alıcının gerçek itirazlarından, bu itirazları yapısal olarak yanıtlayan mimariye ve “SOC 2'den önce başlayan” güven sinyallerine kadar.</p>
+
+    <h2>Ajan, hukuk bürosunda neden farklı bir risk yaratır?</h2>
+    <p>Üretken yapay zeka (chatbot) döneminde risk yüzeyi darlıkla tanımlanabiliyordu: veri ifşası, istem manipülasyonu, güvenilmez çıktı. Sorunların çoğu, modelin <em>ne söylediğiyle</em> ilgiliydi. Ajanlar bu tabloyu kökten değiştirir: planlar, araç çağırır, veritabanına erişir, kod çalıştırır, dosya açar, form doldurur ve işi başka bir ajana devreder. Yani risk, “bilgi problemi” olmaktan çıkıp “<strong>eylem problemi</strong>”ne dönüşür.</p>
+    <p>Fark şurada keskinleşir: üretken bir model hatalı bir sözleşme maddesi <em>yazabilir</em>; agentic bir sistem aynı maddeyi yazar <strong>ve</strong> müvekkile e-postayla gönderir, mahkemeye sunar, hatta karşı tarafa iletir. Bir hukuk bürosunda küçük bir sapma bile büyür: kaçırılan bir süre, loglanmamış bir değişiklik, yanlış adrese giden bir belge zincirleme risk doğurur. Bu yüzden ajanlar, hukuk mesleğinin dört temel direğiyle doğrudan çarpışır: <strong>denetlenebilirlik, hesap verebilirlik, gizlilik ve kontrol</strong>.</p>
+
+    <h2>Alıcının gerçek itirazları</h2>
+    <p>Bir büroya satış görüşmesinde masaya oturan CISO ya da uyum sorumlusu, ürünün özelliklerini değil bu soruları sorar. Her biri bir satış engelidir ve her biri yapısal bir cevap bekler.</p>
+    <ul>
+      <li><strong>Müvekkil sırrı ve sır saklama yükümlülüğü:</strong> Avukatın sır saklama yükümlülüğü (Avukatlık Kanunu m.36) devredilemez. Ajanın müvekkil dosyalarına erişimi, bu yükümlülüğü teknik bir soruya dönüştürür: veri kimin elinde, nereye gidiyor, kim görebiliyor?</li>
+      <li><strong>Yurt dışı veri aktarımı (KVKK m.9):</strong> Ajanın kullandığı model nerede çalışıyor? Müvekkil verisinin yurt dışındaki bir LLM'e çıkması, uygun bir aktarım mekanizması (genelde standart sözleşme) olmadan başlı başına bir ihlal riskidir.</li>
+      <li><strong>Hafıza ve dosya karışması:</strong> Uzun süreli hafıza ajanı daha yararlı yapar; ama bir müvekkilin dosyasından öğrendiğini başka bir müvekkilin işinde kullanması, gizliliği, vekâlet sırrını ve etik duvarları (ethical walls) ihlal eder. Bölmelenme üzerine kurulu bir meslekte hafızanın kendisi bir risk vektörüdür.</li>
+      <li><strong>Veri ile talimatı ayıramama:</strong> Avukat, karşı taraftan gelen bir e-postanın <em>veri</em> olduğunu, bir <em>talimat</em> olmadığını bilir. Ajan her zaman bilmez. Bir dilekçeye, PDF'e ya da e-postaya gizlenmiş bir satır, ajana “bunu yap” komutu gibi gelebilir — dava dosyaları ve keşif belgeleri hep dışarıdan geldiği için bu yeni ve güçlü bir saldırı yüzeyidir.</li>
+      <li><strong>Kimlik ve yetki — “dijital içeriden” riski:</strong> Ajan yararlı olsun diye ona geniş yetki vermek caziptir: tüm dosyalar, takvim, faturalama, bulut sürücü. O an ajan bir dijital içeridene dönüşür; yanlış hizalandığında ya da manipüle edildiğinde <em>yetkili</em> erişimle zarar verir. Tehdit her zaman dışarıdaki hacker değil; “teknik olarak izinli” ama hiç istenmeyen eylemdir.</li>
+      <li><strong>Katlanan ve zincirleme hatalar:</strong> Bir chatbot'un halüsinasyonunu, dilekçedeki atıfı elle kontrol ederek yakalayabilirsiniz. Ajanda erken bir adımdaki hata, sonraki her adıma taşınır; üstelik sistem kendi içinde tutarlı göründüğü için sonucu sorgulamak zorlaşır. Ara kontrol noktaları olmadan hatanın nerede başladığını bulmak güçtür.</li>
+      <li><strong>Gölge YZ (Shadow AI):</strong> Avukatlar, onaylı sistem yavaş ya da hantal geldiğinde kendi araçlarını gizlice kullanır: bir ortağın evde denediği tarayıcı-tabanlı ajan, bir stajyerin müvekkil belgesini genel bir chatbot'a yapıştırması. Gölge YZ; loglama, gizlilik kontrolleri, tedarikçi denetimi ve yönetişimin tamamen dışında kaldığı için sadece bir BT sorunu değil, bir yetkinlik, gizlilik ve gözetim sorunudur.</li>
+    </ul>
+
+    <h2>Satabilmek için kurmanız gereken altyapı</h2>
+    <p>Bu itirazların hiçbiri bir slaytla kapanmaz; her biri mimariyle yanıtlanır. Bir büronun “evet” demesi için ürününüzün aşağıdaki yapısal cevapları taşıması gerekir.</p>
+
+    <h3>1. Konuşlandırma: veri binadan çıkmasın</h3>
+    <ul>
+      <li><strong>Private AI (kurum içi / air-gapped):</strong> Modelin firma sunucularında, dış dünyadan yalıtılmış çalıştığı, verinin tesisten hiç çıkmadığı kurulum. En yüksek güven, en yüksek teknik yük.</li>
+      <li><strong>Kapalı sistem (firewall içi + RAG):</strong> Verinin genel modellere ifşa edilmeden, kurumun güvenlik duvarı içinde işlendiği ara adım. Tedarikçiyi dikkatle denetleyin.</li>
+      <li><strong>VPC (özel bulut) kurulumu:</strong> Ajanın kurumun özel bulut ağında, genel internetten yalıtılmış barındırıldığı teknik uygulama.</li>
+    </ul>
+
+    <h3>2. En az yetki (least privilege)</h3>
+    <p>Hiçbir ajan, yalnızca “kolay olduğu için” her şeyi yapabilme kapasitesine sahip olmamalı. Belge özetleyen bir ajanın e-posta gönderme, kayıt değiştirme ya da tüm dosyalara erişme yetkisi olmamalı. Salt-okunur gerekiyorsa yazma verme; bir klasör yetiyorsa tüm sürücüyü açma. Avukatlar bu ilkeyi zaten insan çalışanlar için uygular — aynı kural dijital çalışana da geçmeli.</p>
+
+    <h3>3. Sıfır güven (Zero Trust) ve döngüde insan</h3>
+    <p>Her kullanıcı, ajan ve uygulama kimlik doğrulamadan ve yetkilendirilmeden iş göremez; bu, kontrolden çıkmış ajanı ya da kötü niyetli kullanıcıyı durdurur. Bunun üzerine anlamlı bir <strong>uzman gözetimi</strong> gelir: dosya/dilekçe sunma, süre değişikliği, dış iletişim, uzlaşma şartları, ayrıcalıklı (privileged) materyal ya da geri alınamaz sistem değişikliği gibi yüksek etkili eylemler otonom bırakılmamalı. İnsan onayı gerçek bir kontrol noktası olmalı — bir “tören tıklaması” değil. Soru “sistem bunu yapabilir mi?” değil, “meslek sorumluluğu bunu insan onayı olmadan yapmasına izin verir mi?”dir.</p>
+
+    <h3>4. Gözlemlenebilirlik ve etik duvarlar</h3>
+    <p>Göremediğiniz bir ajanı yetkinlikle denetleyemezsiniz. Model seçiminden dağıtıma, izinlerden bağlayıcılara, çalışma-zamanı eylemlerinden loglamaya kadar tüm akışta görünürlük gerekir (kimileri buna “AI Security Posture Management” diyor). Ajanın her eylemi — hangi dosyaya dokundu, kimin adına, hangi yetkiyle — loglanmalı; bu loglar da kişisel veri içerdiği için maskelenmeli ve erişimi sınırlanmalı. Müvekkil bazında yalıtım (matter isolation) ve etik duvarlar, bir dosyanın diğerine sızmasını teknik olarak imkânsız kılmalı.</p>
+
+    <h2>Yönetişim ve güven sinyalleri: SOC 2'den önce başlar</h2>
+    <p>Büyük bürolar, küçük bir ekibin bir gün ortadan kaybolmasından, bir şeyi bozmasından, veriyi yanlış yönetmesinden ya da ölçeklenememesinden endişe eder. Birçok kurucu bu tuhaf aşamaya gelir: ürün gerçektir, müşteri ilgilidir, ama şirket alıcı için hâlâ “fazla erken” görünür. Alıcının aradığı şey, güvenlik ve mahremiyetin <strong>tasarımın en başından</strong> düşünüldüğüne dair kanıttır.</p>
+    <p>Birçok girişim, konuşmanın SOC 2 ile başladığını sanır. Oysa güven çok daha erken başlar: <strong>yapı, şeffaflık ve olgunluk sinyalleriyle</strong>. Gerçekçi bir yol haritası şöyledir:</p>
+    <ul>
+      <li>Resmî mimariyi ve veri akışlarını gösterin (diyagramlarla).</li>
+      <li>Politika ve yönetişim dokümantasyonunu sunun.</li>
+      <li>Güvenlik kontrollerinizi ve güvenli yazılım geliştirme (SDLC) pratiklerinizi belgeleyin.</li>
+      <li>6–12 ay içinde SOC 2 Type I için sözleşmesel bir taahhüt verin.</li>
+      <li>Programı resmî denetimlere ve sürekli uyuma doğru olgunlaştırın (ISO 27001/27701 ve YZ yönetişimi için ISO 42001).</li>
+    </ul>
+    <p>Bu sinyaller aynı zamanda büronun KVKK m.12 (uygun güvenlik düzeyi) yükümlülüğünü karşılamasını mümkün kılar — yani sizin olgunluğunuz, alıcının hukuki uyumunun da parçası olur.</p>
+
+    <h2>KVKK boyutu: bu bir “dış hizmet alımı”dır</h2>
+    <p>Hukuki çerçeve nettir: müvekkil verisi üzerinde <strong>veri sorumlusu</strong> hukuk bürosudur; legal tech firması ise onun adına işleyen <strong>veri işleyen</strong>dir. Bu, üç şeyi zorunlu kılar: imzalı bir <a href="/akademi/verbis-sozlesmeler">veri işleme sözleşmesi</a> (DPA — “kullanım koşulları” yetmez), yurt dışı aktarım için m.9 mekanizması ve müvekkile/çalışana yönelik güncel aydınlatma. Ajan otomatik kararlar veriyorsa ilgili kişinin KVKK m.11 kapsamındaki haklarına ve bir insan incelemesine erişimi de teknik olarak var olmalı. Kısacası bir ajanı bir büroya satmak, tıpkı bankacılıktaki gibi titiz bir dış hizmet alımı sürecidir.</p>
+
+    <div class="callout remember"><div class="cl">Unutmayın</div>Bir legal tech ajanını satış görüşmesinde kazandıran şey özellik listesi değildir; güvenlik ve mahremiyetin ilk günden mimariye gömüldüğünü <strong>kanıtlayabilmektir</strong>. Türkiye'de bu kapının adı müvekkil gizliliğidir: kurum içi/VPC konuşlandırma, en az yetki, döngüde insan, loglama, etik duvarlar ve imzalı bir DPA — bunlar giriş bileti, seçenek değil.</div>
+
+    <p>Aynı çerçeveyi bir hukuk bürosu, tedarikçisini tartmak için de kullanabilir. Veri yeri, DPA, sertifikalar, durdurma ve olay bildirimi gibi başlıkları tek sayfaya dökmek için <a href="/araclar/tedarikci-degerlendirme">tedarikçi değerlendirme aracını</a> deneyin.</p>
+  </div>
+  <div class="article-cta"><div><h3>Tedarikçiyi (ya da kendinizi) bu kriterlerle tartın</h3><p>Bir ajanı satın almadan — ya da satmaya çalışmadan — önce doğru soruları sorun. Ücretsiz tedarikçi değerlendirme aracıyla tek sayfalık due diligence belgenizi çıkarın.</p></div><a class="btn btn-primary" href="/araclar/tedarikci-degerlendirme">Aracı aç →</a></div>
+  <div class="wrap"><div class="article-author"><div class="av">MB</div><div><div class="nm">Mert Can Boyar</div><p>Agent Hukuku'nun kurucusu ve “Yapay Zeka Ajanları &amp; KVKK” kitabının yazarı.</p></div></div></div>
+</article>
+</main>
+<Footer />
+</Base>
